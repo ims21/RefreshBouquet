@@ -205,7 +205,7 @@ msgstr "Ve zdroji zobrazit pouze jména s 'HD'"
 msgid "Preview on selection"
 msgstr "Náhled při výběru"
 
-msgid "Auto toggle in manual replacing"
+msgid "Auto toggle in manually replacing"
 msgstr "Automatické přepínání pro ruční nahrazování"
 
 msgid "Display in Channellist context menu"

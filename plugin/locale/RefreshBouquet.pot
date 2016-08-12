@@ -201,7 +201,7 @@ msgstr ""
 msgid "Preview on selection"
 msgstr ""
 
-msgid "Auto toggle in manual replacing"
+msgid "Auto toggle in manually replacing"
 msgstr ""
 
 msgid "Display in Channellist context menu"

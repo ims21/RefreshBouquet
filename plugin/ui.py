@@ -1103,7 +1103,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Missing source services for manually replace only"), cfg.diff))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Programs with 'HD' in name only for source"), cfg.hd))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Preview on selection"), cfg.preview))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Auto toggle in manual replacing"), cfg.autotoggle))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Auto toggle in manually replacing"), cfg.autotoggle))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Display in Channellist context menu"), cfg.channel_context_menu))
 #		refreshBouquetCfglist.append(getConfigListEntry(_("Save log for manual replace"), cfg.log))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Debug info"), cfg.debug))
