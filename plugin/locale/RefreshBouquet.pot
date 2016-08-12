@@ -1,0 +1,211 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-11 20:38+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "RefreshBouquet"
+msgstr ""
+
+msgid "Actualize services in bouquets"
+msgstr ""
+
+#, python-format
+msgid "RefreshBouquet v. %s"
+msgstr ""
+
+msgid "exit plugin"
+msgstr ""
+
+msgid "select action"
+msgstr ""
+
+msgid "select source bouquet "
+msgstr ""
+
+msgid "select target bouquet "
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Run"
+msgstr ""
+
+msgid "Set source"
+msgstr ""
+
+msgid "Set target"
+msgstr ""
+
+msgid "Source bouquet:"
+msgstr ""
+
+msgid "Target bouquet:"
+msgstr ""
+
+msgid "Select or source or source and target bouquets !"
+msgstr ""
+
+msgid "Select action for bouquet:"
+msgstr ""
+
+msgid "Remove selected services from source bouquet"
+msgstr ""
+
+msgid "Manually replace services"
+msgstr ""
+
+msgid "Add selected services to target bouquet"
+msgstr ""
+
+msgid "Add selected missing services to target bouquet"
+msgstr ""
+
+msgid "Remove selected services in source bouquet"
+msgstr ""
+
+msgid "Test 'Refresh services in target bouquet'"
+msgstr ""
+
+msgid "Refresh services in target bouquet"
+msgstr ""
+
+msgid "Settings..."
+msgstr ""
+
+msgid "Wrong selection!"
+msgstr ""
+
+msgid "Service name"
+msgstr ""
+
+msgid "Bouquet position"
+msgstr ""
+
+msgid "Target bouquet is empty !"
+msgstr ""
+
+msgid "Source bouquet is empty !"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"Refreshed %d services"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"%d services for refresh"
+msgstr ""
+
+msgid "No services in source bouquet !"
+msgstr ""
+
+msgid "- select service for replace with OK"
+msgstr ""
+
+#, python-format
+msgid "RefreshBouquet %s"
+msgstr ""
+
+msgid "Apply and close"
+msgstr ""
+
+msgid ""
+"Toggle source and target lists with Bouq +/-\n"
+"\n"
+"Select with OK"
+msgstr ""
+
+msgid "Replace"
+msgstr ""
+
+msgid "Preview"
+msgstr ""
+
+#, python-format
+msgid "Are you sure to apply all %d changes and close?"
+msgstr ""
+
+#, python-format
+msgid "Are you sure to close and lost all %d changes?"
+msgstr ""
+
+msgid "- results"
+msgstr ""
+
+msgid "- select service(s) for adding with OK"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Inversion"
+msgstr ""
+
+#, python-format
+msgid "Are you sure to copy this %d service(s)?"
+msgstr ""
+
+#, python-format
+msgid "Are you sure to close and lost all %d selections?"
+msgstr ""
+
+msgid "- select service(s) for remove with OK"
+msgstr ""
+
+msgid "Remove selected"
+msgstr ""
+
+#, python-format
+msgid "Are you sure to remove this %d service(s)?"
+msgstr ""
+
+msgid "RefreshBouquet Setup"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Compare case sensitive"
+msgstr ""
+
+msgid "Skip 1st nonstandard char in name"
+msgstr ""
+
+msgid "Sort services in source bouquets"
+msgstr ""
+
+msgid "Missing source services for manually replace only"
+msgstr ""
+
+msgid "Programs with 'HD' in name only for source"
+msgstr ""
+
+msgid "Preview on selection"
+msgstr ""
+
+msgid "Auto toggle in manual replacing"
+msgstr ""
+
+msgid "Display in Channellist context menu"
+msgstr ""
+
+msgid "Debug info"
+msgstr ""

@@ -1,0 +1,18 @@
+<keymap>
+<map context="RefreshBouquetActions">
+	<key id="KEY_MENU" mapto="menu" flags="m" />
+	<key id="KEY_SPACE" mapto="menu" flags="m" />
+
+	<key id="KEY_RED" mapto="red" flags="m" />
+	<key id="KEY_GREEN" mapto="green" flags="m" />
+	<key id="KEY_YELLOW" mapto="yellow" flags="m" />
+	<key id="KEY_BLUE" mapto="blue" flags="m" />
+	
+	<key id="KEY_PLAYPAUSE" mapto="play" flags="m"/>
+	<key id="KEY_PLAY" mapto="play" flags="m"/>
+	
+	<key id="KEY_CHANNELUP" mapto="nextBouquet" flags="m"/>
+	<key id="KEY_CHANNELDOWN" mapto="prevBouquet" flags="m"/>
+	
+</map>
+</keymap>

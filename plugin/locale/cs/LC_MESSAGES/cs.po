@@ -1,0 +1,427 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-11 20:38+0200\n"
+"PO-Revision-Date: 2016-08-12 14:30+0100\n"
+"Last-Translator: ims <ims21@users.sourceforge.net>\n"
+"Language-Team: PLi <ims21@users.sourceforge.net>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+msgid "RefreshBouquet"
+msgstr ""
+
+msgid "Actualize services in bouquets"
+msgstr "Aktualizace programů v přehledech"
+
+#, python-format
+msgid "RefreshBouquet v. %s"
+msgstr ""
+
+msgid "exit plugin"
+msgstr "ukončit plugin"
+
+msgid "select action"
+msgstr "Vyberte akci"
+
+msgid "select source bouquet "
+msgstr "výběr zdrojového přehledu"
+
+msgid "select target bouquet "
+msgstr "výběr cílového přehledu"
+
+msgid "Cancel"
+msgstr "Zavřít"
+
+msgid "Run"
+msgstr "Výběr akce"
+
+msgid "Set source"
+msgstr "Zdroj"
+
+msgid "Set target"
+msgstr "Cíl"
+
+msgid "Source bouquet:"
+msgstr "Zdrojový přehled:"
+
+msgid "Target bouquet:"
+msgstr "Cílový přehled:"
+
+msgid "Select or source or source and target bouquets !"
+msgstr "Vyberte zdrojový nebo zdrojový a cílový přehled!"
+
+msgid "Select action for bouquet:"
+msgstr "Zvolte akci:"
+
+msgid "Remove selected services from source bouquet"
+msgstr "Odstranit vybrané programy ze zdroje"
+
+msgid "Manually replace services"
+msgstr "Ruční nahrazování programů"
+
+msgid "Add selected services to target bouquet"
+msgstr "Přidat vybrané programy do cílového přehledu"
+
+msgid "Add selected missing services to target bouquet"
+msgstr "Přidat vybrané chybějící programy do cílového přehledu"
+
+msgid "Remove selected services in source bouquet"
+msgstr "Odstranit vybrané programy ze zdroje"
+
+msgid "Test 'Refresh services in target bouquet'"
+msgstr "Test 'Aktualizovat programy v cílovém přehledu'"
+
+msgid "Refresh services in target bouquet"
+msgstr "Aktualizovat programy v cílovém přehledu"
+
+msgid "Settings..."
+msgstr "Nastavení..."
+
+msgid "Wrong selection!"
+msgstr "Neplatná volba!"
+
+msgid "Service name"
+msgstr "Program"
+
+msgid "Bouquet position"
+msgstr "Pozice v přehledu"
+
+msgid "Target bouquet is empty !"
+msgstr "Cílový přehled je prázdný!"
+
+msgid "Source bouquet is empty !"
+msgstr "Zdrojový přehled je prázdný!"
+
+#, python-format
+msgid ""
+"\n"
+"Refreshed %d services"
+msgstr ""
+"\n"
+"Aktualizováno %d programů"
+
+#, python-format
+msgid ""
+"\n"
+"%d services for refresh"
+msgstr ""
+"\n"
+"%d programů pro aktualizaci"
+
+msgid "No services in source bouquet !"
+msgstr "Ve zdrojovém přehledu nejsou programy!"
+
+msgid "- select service for replace with OK"
+msgstr "- označte program(y) pro nahrazení pomocí OK"
+
+#, python-format
+msgid "RefreshBouquet %s"
+msgstr ""
+
+msgid "Apply and close"
+msgstr "Provést a zavřít"
+
+msgid ""
+"Toggle source and target lists with Bouq +/-\n"
+"\n"
+"Select with OK"
+msgstr ""
+"Mezi přehledy přepínejte pomocí Bouq +/-\n"
+"\n"
+"Výběr proveďte pomocí OK"
+
+msgid "Replace"
+msgstr "Nahradit"
+
+msgid "Preview"
+msgstr "Náhled"
+
+#, python-format
+msgid "Are you sure to apply all %d changes and close?"
+msgstr "Opravdu chcete provést %d změny a zavřít?"
+
+#, python-format
+msgid "Are you sure to close and lost all %d changes?"
+msgstr "Opravdu chcete zavřít a zapomenout %d změny?"
+
+msgid "- results"
+msgstr "- výsledky"
+
+msgid "- select service(s) for adding with OK"
+msgstr "- označte program(y) pro přidání pomocí OK"
+
+msgid "Copy"
+msgstr "Kopírovat"
+
+msgid "Inversion"
+msgstr "Invertovat"
+
+#, python-format
+msgid "Are you sure to copy this %d service(s)?"
+msgstr "Opravdu chcete zkopírovat zvolené %d programy?"
+
+#, python-format
+msgid "Are you sure to close and lost all %d selections?"
+msgstr "Opravdu chcete zavřít a zapomenout %d změny?"
+
+msgid "- select service(s) for remove with OK"
+msgstr "- označte program(y) pro smazání pomocí OK"
+
+msgid "Remove selected"
+msgstr "Odstranit vybrané"
+
+#, python-format
+msgid "Are you sure to remove this %d service(s)?"
+msgstr "Opravdu chcete smazat %d zvolené programy?"
+
+msgid "RefreshBouquet Setup"
+msgstr "RefreshBouquet Nastavení"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Compare case sensitive"
+msgstr "Rozlišovat velikost písmen"
+
+msgid "Skip 1st nonstandard char in name"
+msgstr "Přeskočit počáteční nestandardní znak v názvu "
+
+msgid "Sort services in source bouquets"
+msgstr "Třídit programy ve zdrojových přehledech"
+
+msgid "Missing source services for manually replace only"
+msgstr "Pouze chybějící programy ve zdrojích pro ruční nahrazování"
+
+msgid "Programs with 'HD' in name only for source"
+msgstr "Ve zdroji zobrazit pouze jména s 'HD'"
+
+msgid "Preview on selection"
+msgstr "Náhled při výběru"
+
+msgid "Auto toggle in manual replacing"
+msgstr "Automatické přepínání pro ruční nahrazování"
+
+msgid "Display in Channellist context menu"
+msgstr "Zobrazovat v kontextovém menu přehledu programů"
+
+msgid "Debug info"
+msgstr ""
+
+#~ msgid "options"
+#~ msgstr "nastavení"
+
+#~ msgid "Bouquets cannot be same!"
+#~ msgstr "Přehledy nemohou být stejné!"
+
+#~ msgid "Save"
+#~ msgstr "Uložit"
+
+#~ msgid "New Search"
+#~ msgstr "Nové hledání"
+
+#~ msgid "History"
+#~ msgstr "Historie"
+
+#~ msgid "Add timer"
+#~ msgstr "Přidat časovač"
+
+#~ msgid "Choice list"
+#~ msgstr "Seznam voleb"
+
+#~ msgid "Lookup in TMBD"
+#~ msgstr "Hledat v TMDB"
+
+#~ msgid "EPG Search"
+#~ msgstr "EPG Search"
+
+#~ msgid "Partnerbox Entries"
+#~ msgstr "Položky Partnerboxu"
+
+#~ msgid "Choice list RED Button"
+#~ msgstr "Seznam předvoleb Červeného tlačítka"
+
+#~ msgid "Enter text to search for"
+#~ msgstr "Zadejte text pro hledání"
+
+#~ msgid "Import from Timer"
+#~ msgstr "Import z Časovače"
+
+#~ msgid "Import from EPG"
+#~ msgstr "Import z EPG"
+
+#~ msgid "Zap to selected service"
+#~ msgstr "Přepnout na zvolený program"
+
+#~ msgid "Import from AutoTimer"
+#~ msgstr "Import z AutoTimeru"
+
+#~ msgid "Save search as AutoTimer"
+#~ msgstr "Uložit hledání jako AutoTimer"
+
+#~ msgid "Export selected as AutoTimer"
+#~ msgstr "Exportovat vybrané jako AutoTimer"
+
+#~ msgid "Search for TMDb info"
+#~ msgstr "Hledat TMDb info"
+
+#~ msgid "Open selected in IMDb"
+#~ msgstr "Otevřít vybrané v IMDb"
+
+#~ msgid "Clear history"
+#~ msgstr "Smazat historii"
+
+#~ msgid "Timers list"
+#~ msgstr "Seznam časovačů"
+
+#~ msgid "Setup"
+#~ msgstr "Nastavení..."
+
+#~ msgid "Could not read AutoTimer timer list: %s"
+#~ msgstr "Nepodařilo se načíst seznam časovačů AutoTimeru: %s"
+
+#~ msgid "Select text to search for"
+#~ msgstr "Výběr textu pro hledání"
+
+#~ msgid "List of history is cleared !"
+#~ msgstr "Seznam historie je prázdný!"
+
+#~ msgid "No history !"
+#~ msgstr "Žádná historie !"
+
+#~ msgid "Select a timer to search"
+#~ msgstr "Výběr časovače pro hledání"
+
+#~ msgid "only Search"
+#~ msgstr "pouze hledat"
+
+#~ msgid "choice (Search and standard)"
+#~ msgstr "zvolit (Hledat a standard)"
+
+#~ msgid "partial match"
+#~ msgstr "částečně odpovídá"
+
+#~ msgid "exact match"
+#~ msgstr "přesně odpovídá"
+
+#~ msgid "case-insensitive search"
+#~ msgstr "nerozlišovat velikost písmen"
+
+#~ msgid "title starts with"
+#~ msgstr "název začíná na"
+
+#~ msgid "Search"
+#~ msgstr "Hledat"
+
+#~ msgid "Select channel"
+#~ msgstr "Vybrat kanál"
+
+#~ msgid "Choice list EPGSearch"
+#~ msgstr "Seznam voleb EPGSearch"
+
+#~ msgid "EPGSearch"
+#~ msgstr "EPG Search"
+
+#~ msgid "Search EPG by title event"
+#~ msgstr "Vyhledávání v EPG podle názvu události"
+
+#~ msgid "search EPG..."
+#~ msgstr "hledat v EPG..."
+
+#~ msgid "search EPG"
+#~ msgstr "Prohledat EPG"
+
+#~ msgid "Search event in EPG"
+#~ msgstr "Najít událost v EPG"
+
+#~ msgid "EPGSearch Setup"
+#~ msgstr "Nastavení EPGSearch"
+
+#~ msgid "Length of History"
+#~ msgstr "Délka historie"
+
+#~ msgid ""
+#~ "How many entries to keep in the search history at most. 0 disables "
+#~ "history entirely!"
+#~ msgstr ""
+#~ "Kolik položek je udržováno v historii hledání. 0 zakáže historii úplně! "
+
+#~ msgid "Add \"Search\" Button to EPG"
+#~ msgstr "Přidat tlačítko \"Hledat\" do EPG"
+
+#~ msgid ""
+#~ "If this setting is enabled, the plugin adds a \"Search\" Button to the "
+#~ "regular EPG."
+#~ msgstr "Jestliže je povoleno, plugin přidá tlačítko \"EPG Search\" do EPG."
+
+#~ msgid "Type blue Button"
+#~ msgstr "Stiknutím modrého tlačítka"
+
+#~ msgid "Select type: 'Search and Select channel' or 'Search'."
+#~ msgstr "Vyberte: 'Hledat a zvolit kanál' nebo 'Hledat'."
+
+#~ msgid "Use Picons"
+#~ msgstr "Používat pikony"
+
+#~ msgid "If this setting is enabled, the plugin adds picons."
+#~ msgstr "Jestliže je povoleno, plugin přidá tpikony."
+
+#~ msgid "Encoding Search to EPG"
+#~ msgstr "Kódování pro vyhledávání"
+
+#~ msgid "Choosing an encoding. \"UTF-8\" to search for EPG cyrillic."
+#~ msgstr "Volba kódování. \"UTF-8\" pro hledání v EPG s cyrillicí."
+
+#~ msgid "Search type"
+#~ msgstr "Hledaný název"
+
+#~ msgid ""
+#~ "Select type for search, \"partial match\" for the most extensive search."
+#~ msgstr ""
+#~ "Zvolte způsob hledání, \"částečně odpovídá\" znamená rozsáhlejší hledání."
+
+#~ msgid "Add \"Search event in EPG\" to event menu"
+#~ msgstr "Přidat \"Najít událost v EPG\" do Event menu"
+
+#~ msgid ""
+#~ "Adds \"Search event in EPG\" item into the event menu (needs restart GUI)"
+#~ msgstr ""
+#~ "Přidá položku \"Najít událost v EPG\" do menu událostí - Event menu "
+#~ "(potřeba restartovat Enigma)."
+
+#~ msgid "Add \"Search event in EPG\" to channel menu"
+#~ msgstr "Přidat \"Najít událost v EPG\" do menu kanálů"
+
+#~ msgid ""
+#~ "Adds \"Search event in EPG\" item into the channel selection context menu "
+#~ "(needs restart GUI)"
+#~ msgstr "Přidá položku \"Najít událost v EPG\" do menu přehledu kanálů."
+
+#~ msgid "Search strictness"
+#~ msgstr "Velikost písmen při hledání"
+
+#~ msgid ""
+#~ "If this setting is enabled, searching EPG in only services in user "
+#~ "bouquets."
+#~ msgstr ""
+#~ "Pokud je povoleno, prohledává EPG pouze v programech v uživatelských "
+#~ "přehledech."
+
+#~ msgid ""
+#~ "If 'Search only bouquets' is enabled, show service name as in bouquets "
+#~ "for renamed services."
+#~ msgstr ""
+#~ "Pokud je povoleno, zobrazuje název programu jako v přehledech pro "
+#~ "přejmenování programů."
+
+#~ msgid "Search EPG"
+#~ msgstr "Prohledat EPG"
+
+#~ msgid "Adds \"Search event in EPG\" item into the event menu."
+#~ msgstr "Přidá \"Najít událost v EPG\" do menu události."
