@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-11 20:38+0200\n"
-"PO-Revision-Date: 2016-08-13 11:02+0100\n"
+"POT-Creation-Date: 2016-08-13 22:36+0200\n"
+"PO-Revision-Date: 2016-08-13 22:46+0100\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims21@users.sourceforge.net>\n"
 "Language: \n"
@@ -128,14 +128,28 @@ msgstr ""
 msgid "Apply and close"
 msgstr "Provést a zavřít"
 
+msgid "source bouquet"
+msgstr "zdrojový přehled"
+
+msgid "target bouquet"
+msgstr "cílový přehled"
+
 msgid ""
-"Toggle source and target lists with Bouq +/-\n"
-"\n"
+"Toggle source and target bouquets with Bouq +/-\n"
 "Select with OK"
 msgstr ""
 "Mezi přehledy přepínejte pomocí Bouq +/-\n"
 "\n"
 "Výběr proveďte pomocí OK"
+
+msgid ""
+"\n"
+"\n"
+"Prepare replacement target's service by service in source bouquet (both set with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'"
+msgstr ""
+"\n"
+"\n"
+"Připravte nahrazení programu programem ze zdrojového přehledu (oba označte pomocí 'OK') a nahraďte tlačítkem 'Nahradit'. Opakujte jak potřebujete. Dokončete pomocí 'Provést a zavřít'."
 
 msgid "Replace"
 msgstr "Nahradit"
@@ -157,11 +171,14 @@ msgstr "- výsledky"
 msgid "- select service(s) for adding with OK"
 msgstr "- označte program(y) pro přidání pomocí OK"
 
-msgid "Copy"
-msgstr "Kopírovat"
+msgid "Copy selected"
+msgstr "Zkopírovat vybrané"
 
 msgid "Inversion"
 msgstr "Invertovat"
+
+msgid "Mark several services with OK button and then copy them with 'Copy selected'"
+msgstr "Označte několik programů pomocí 'OK' a zkopírujte  tlačítkem 'Zkopírovat vybrané'."
 
 #, python-format
 msgid "Are you sure to copy this %d service(s)?"
@@ -176,6 +193,9 @@ msgstr "- označte program(y) pro smazání pomocí OK"
 
 msgid "Remove selected"
 msgstr "Odstranit vybrané"
+
+msgid "Mark several services with OK button and then remove them with 'Remove selected'"
+msgstr "Označte několik programů pomocí 'OK' a odstraňte tlačítkem 'Odstranit vybrané'."
 
 #, python-format
 msgid "Are you sure to remove this %d service(s)?"
@@ -217,3 +237,5 @@ msgstr "Po skončení návrat na předchozí  program"
 msgid "Debug info"
 msgstr ""
 
+#~ msgid "Copy"
+#~ msgstr "Kopírovat"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-11 20:38+0200\n"
+"POT-Creation-Date: 2016-08-13 22:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -127,10 +127,23 @@ msgstr ""
 msgid "Apply and close"
 msgstr ""
 
+msgid "source bouquet"
+msgstr ""
+
+msgid "target bouquet"
+msgstr ""
+
 msgid ""
-"Toggle source and target lists with Bouq +/-\n"
-"\n"
+"Toggle source and target bouquets with Bouq +/-\n"
 "Select with OK"
+msgstr ""
+
+msgid ""
+"\n"
+"\n"
+"Prepare replacement target's service by service in source bouquet (both set "
+"with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all "
+"with 'Apply and close'"
 msgstr ""
 
 msgid "Replace"
@@ -153,10 +166,14 @@ msgstr ""
 msgid "- select service(s) for adding with OK"
 msgstr ""
 
-msgid "Copy"
+msgid "Copy selected"
 msgstr ""
 
 msgid "Inversion"
+msgstr ""
+
+msgid ""
+"Mark several services with OK button and then copy them with 'Copy selected'"
 msgstr ""
 
 #, python-format
@@ -171,6 +188,11 @@ msgid "- select service(s) for remove with OK"
 msgstr ""
 
 msgid "Remove selected"
+msgstr ""
+
+msgid ""
+"Mark several services with OK button and then remove them with 'Remove "
+"selected'"
 msgstr ""
 
 #, python-format
