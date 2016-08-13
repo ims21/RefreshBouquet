@@ -2,7 +2,7 @@
 from . import _
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.39"
+VERSION = "1.41"
 #  by ims (c) 2016 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -44,6 +44,7 @@ config.plugins.refreshbouquet.hd = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.diff = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.preview = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.autotoggle = ConfigYesNo(default = True)
+config.plugins.refreshbouquet.on_end = ConfigYesNo(default = True)
 cfg = config.plugins.refreshbouquet
 
 TV = (1, 17, 22, 25, 31, 134, 195)
@@ -125,15 +126,18 @@ class refreshBouquet(Screen, HelpableScreen):
 
 	def exit(self):
 		self.Servicelist.servicelist.resetRoot()
-		self.session.nav.playService(self.playingRef)
+		if cfg.on_end.value:
+			self.session.nav.playService(self.playingRef)
 		self.close()
 
 	def showMenu(self):
 		text = _("Select action for bouquet:")
+		buttons = []
 		menu = []
 		if self.sourceItem and self.targetItem:
 			if self.sourceItem == self.targetItem:
 				menu.append((_("Remove selected services from source bouquet"),3))
+				buttons = ["4"]
 			else:
 				menu.append((_("Manually replace services"),0))
 				menu.append((_("Add selected services to target bouquet"),1))
@@ -141,14 +145,16 @@ class refreshBouquet(Screen, HelpableScreen):
 				menu.append((_("Remove selected services in source bouquet"),3))
 				menu.append((_("Test 'Refresh services in target bouquet'"),4))
 				menu.append((_("Refresh services in target bouquet"),5))
+				buttons = ["1","2","3","4","5","6"]
 		elif self.sourceItem:
 			menu.append((_("Remove selected services from source bouquet"),3))
+			buttons = ["4"]
 		else:
 			self["info"].setText(_("Select or source or source and target bouquets !"))
 			text = _("Select or source or source and target bouquets !")
 		menu.append((_("Settings..."),10))
-
-		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=text, list=menu)	
+		buttons.append("menu")
+		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=text, list=menu, keys=buttons)
 
 	def menuCallback(self, choice):
 		if choice is None:
@@ -1105,6 +1111,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Preview on selection"), cfg.preview))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Auto toggle in manually replacing"), cfg.autotoggle))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Display in Channellist context menu"), cfg.channel_context_menu))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Return to previous service on end"), cfg.on_end))
 #		refreshBouquetCfglist.append(getConfigListEntry(_("Save log for manual replace"), cfg.log))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Debug info"), cfg.debug))
 		ConfigListScreen.__init__(self, refreshBouquetCfglist, session, on_change = self.changedEntry)

@@ -207,5 +207,8 @@ msgstr ""
 msgid "Display in Channellist context menu"
 msgstr ""
 
+msgid "Return to previous service on end"
+msgstr ""
+
 msgid "Debug info"
 msgstr ""

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-11 20:38+0200\n"
-"PO-Revision-Date: 2016-08-12 18:45+0100\n"
+"PO-Revision-Date: 2016-08-13 11:02+0100\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims21@users.sourceforge.net>\n"
 "Language: \n"
@@ -210,6 +210,9 @@ msgstr "Automatické přepínání pro ruční nahrazování"
 
 msgid "Display in Channellist context menu"
 msgstr "Zobrazovat v kontextovém menu přehledu programů"
+
+msgid "Return to previous service on end"
+msgstr "Po skončení návrat na předchozí  program"
 
 msgid "Debug info"
 msgstr ""
