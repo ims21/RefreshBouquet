@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-13 22:36+0200\n"
-"PO-Revision-Date: 2016-08-13 22:46+0100\n"
+"POT-Creation-Date: 2016-08-14 18:38+0200\n"
+"PO-Revision-Date: 2016-08-14 18:43+0100\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims21@users.sourceforge.net>\n"
 "Language: \n"
@@ -75,9 +75,6 @@ msgstr "Přidat vybrané chybějící programy do cílového přehledu"
 msgid "Remove selected services in source bouquet"
 msgstr "Odstranit vybrané programy ze zdroje"
 
-msgid "Test 'Refresh services in target bouquet'"
-msgstr "Test 'Aktualizovat programy v cílovém přehledu'"
-
 msgid "Refresh services in target bouquet"
 msgstr "Aktualizovat programy v cílovém přehledu"
 
@@ -87,33 +84,14 @@ msgstr "Nastavení..."
 msgid "Wrong selection!"
 msgstr "Neplatná volba!"
 
-msgid "Service name"
-msgstr "Program"
-
-msgid "Bouquet position"
-msgstr "Pozice v přehledu"
-
 msgid "Target bouquet is empty !"
 msgstr "Cílový přehled je prázdný!"
 
 msgid "Source bouquet is empty !"
 msgstr "Zdrojový přehled je prázdný!"
 
-#, python-format
-msgid ""
-"\n"
-"Refreshed %d services"
-msgstr ""
-"\n"
-"Aktualizováno %d programů"
-
-#, python-format
-msgid ""
-"\n"
-"%d services for refresh"
-msgstr ""
-"\n"
-"%d programů pro aktualizaci"
+msgid "No differences found"
+msgstr "Nenalezeny žádné rozdíly"
 
 msgid "No services in source bouquet !"
 msgstr "Ve zdrojovém přehledu nejsou programy!"
@@ -168,14 +146,34 @@ msgstr "Opravdu chcete zavřít a zapomenout %d změny?"
 msgid "- results"
 msgstr "- výsledky"
 
+msgid "Refresh selected"
+msgstr "Aktualizovat vybrané"
+
+msgid "Inversion"
+msgstr "Invertovat"
+
+msgid "This feature looking diferences in service parameters for same service names in source and target bouquet and can replace it\n"
+msgstr "Tato funkce vyhledá odlišnosti v parametrech programů se stejným názvem ve zdrojovém a cílovém přehledu a může je nahradit\n"
+
+msgid "It can be usefull for bouquets builded with services gained by Fastscan searching."
+msgstr "Využitelné hlavně pro přehledy používající programy získané z Fastscan vyhledávání."
+
+msgid "Position"
+msgstr "Pozice"
+
+#, python-format
+msgid "Are you sure to refresh this %d service(s)?"
+msgstr "Opravdu chcete aktualizovat %d zvolené programy?"
+
+#, python-format
+msgid "Are you sure to close and lost all %d selections?"
+msgstr "Opravdu chcete zavřít a zapomenout %d změny?"
+
 msgid "- select service(s) for adding with OK"
 msgstr "- označte program(y) pro přidání pomocí OK"
 
 msgid "Copy selected"
 msgstr "Zkopírovat vybrané"
-
-msgid "Inversion"
-msgstr "Invertovat"
 
 msgid "Mark several services with OK button and then copy them with 'Copy selected'"
 msgstr "Označte několik programů pomocí 'OK' a zkopírujte  tlačítkem 'Zkopírovat vybrané'."
@@ -183,10 +181,6 @@ msgstr "Označte několik programů pomocí 'OK' a zkopírujte  tlačítkem 'Zko
 #, python-format
 msgid "Are you sure to copy this %d service(s)?"
 msgstr "Opravdu chcete zkopírovat zvolené %d programy?"
-
-#, python-format
-msgid "Are you sure to close and lost all %d selections?"
-msgstr "Opravdu chcete zavřít a zapomenout %d změny?"
 
 msgid "- select service(s) for remove with OK"
 msgstr "- označte program(y) pro smazání pomocí OK"
@@ -236,6 +230,29 @@ msgstr "Po skončení návrat na předchozí  program"
 
 msgid "Debug info"
 msgstr ""
+
+#~ msgid "Test 'Refresh services in target bouquet'"
+#~ msgstr "Test 'Aktualizovat programy v cílovém přehledu'"
+
+#~ msgid "Service name"
+#~ msgstr "Program"
+
+#~ msgid "Bouquet position"
+#~ msgstr "Pozice v přehledu"
+
+#~ msgid ""
+#~ "\n"
+#~ "Refreshed %d services"
+#~ msgstr ""
+#~ "\n"
+#~ "Aktualizováno %d programů"
+
+#~ msgid ""
+#~ "\n"
+#~ "%d services for refresh"
+#~ msgstr ""
+#~ "\n"
+#~ "%d programů pro aktualizaci"
 
 #~ msgid "Copy"
 #~ msgstr "Kopírovat"

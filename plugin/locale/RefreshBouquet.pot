@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-13 22:36+0200\n"
+"POT-Creation-Date: 2016-08-14 18:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,9 +78,6 @@ msgstr ""
 msgid "Remove selected services in source bouquet"
 msgstr ""
 
-msgid "Test 'Refresh services in target bouquet'"
-msgstr ""
-
 msgid "Refresh services in target bouquet"
 msgstr ""
 
@@ -90,28 +87,13 @@ msgstr ""
 msgid "Wrong selection!"
 msgstr ""
 
-msgid "Service name"
-msgstr ""
-
-msgid "Bouquet position"
-msgstr ""
-
 msgid "Target bouquet is empty !"
 msgstr ""
 
 msgid "Source bouquet is empty !"
 msgstr ""
 
-#, python-format
-msgid ""
-"\n"
-"Refreshed %d services"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"%d services for refresh"
+msgid "No differences found"
 msgstr ""
 
 msgid "No services in source bouquet !"
@@ -163,13 +145,37 @@ msgstr ""
 msgid "- results"
 msgstr ""
 
+msgid "Refresh selected"
+msgstr ""
+
+msgid "Inversion"
+msgstr ""
+
+msgid ""
+"This feature looking diferences in service parameters for same service names "
+"in source and target bouquet and can replace it\n"
+msgstr ""
+
+msgid ""
+"It can be usefull for bouquets builded with services gained by Fastscan "
+"searching."
+msgstr ""
+
+msgid "Position"
+msgstr ""
+
+#, python-format
+msgid "Are you sure to refresh this %d service(s)?"
+msgstr ""
+
+#, python-format
+msgid "Are you sure to close and lost all %d selections?"
+msgstr ""
+
 msgid "- select service(s) for adding with OK"
 msgstr ""
 
 msgid "Copy selected"
-msgstr ""
-
-msgid "Inversion"
 msgstr ""
 
 msgid ""
@@ -178,10 +184,6 @@ msgstr ""
 
 #, python-format
 msgid "Are you sure to copy this %d service(s)?"
-msgstr ""
-
-#, python-format
-msgid "Are you sure to close and lost all %d selections?"
 msgstr ""
 
 msgid "- select service(s) for remove with OK"

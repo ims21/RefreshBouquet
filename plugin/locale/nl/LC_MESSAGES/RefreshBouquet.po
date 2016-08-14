@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-13 22:36+0200\n"
-"PO-Revision-Date: 2016-08-13 22:48+0100\n"
+"POT-Creation-Date: 2016-08-14 18:38+0200\n"
+"PO-Revision-Date: 2016-08-14 18:44+0100\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims21@users.sourceforge.net>\n"
 "Language: \n"
@@ -75,9 +75,6 @@ msgstr "Voeg de geselecteerde ontbrekende kanalen toe aan doel boeket "
 msgid "Remove selected services in source bouquet"
 msgstr "Verwijder de geselecteerde kanalen in bron boeket"
 
-msgid "Test 'Refresh services in target bouquet'"
-msgstr "Test 'Ververs kanalen in doel boeket'"
-
 msgid "Refresh services in target bouquet"
 msgstr "Ververs kanalen in doel boeket"
 
@@ -87,33 +84,14 @@ msgstr "Instellingen..."
 msgid "Wrong selection!"
 msgstr "Verkeerde keus!"
 
-msgid "Service name"
-msgstr "Kanaal naam"
-
-msgid "Bouquet position"
-msgstr "Positie van boeket"
-
 msgid "Target bouquet is empty !"
 msgstr "Doel boeket is leeg!"
 
 msgid "Source bouquet is empty !"
 msgstr "Bron boeker is leeg!"
 
-#, python-format
-msgid ""
-"\n"
-"Refreshed %d services"
+msgid "No differences found"
 msgstr ""
-"\n"
-"%d Kanalen verversd"
-
-#, python-format
-msgid ""
-"\n"
-"%d services for refresh"
-msgstr ""
-"\n"
-"%d te verversen kanalen"
 
 msgid "No services in source bouquet !"
 msgstr "Geen kanalen in bron boeket !"
@@ -165,6 +143,30 @@ msgstr "Ben je zeker dan je wilt afsluiten en alle %d wijzigingen wilt annuleren
 msgid "- results"
 msgstr "- resultaat"
 
+#, fuzzy
+msgid "Refresh selected"
+msgstr "Selectie verwijderen"
+
+msgid "Inversion"
+msgstr "Inverteer"
+
+msgid "This feature looking diferences in service parameters for same service names in source and target bouquet and can replace it\n"
+msgstr ""
+
+msgid "It can be usefull for bouquets builded with services gained by Fastscan searching."
+msgstr ""
+
+msgid "Position"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Are you sure to refresh this %d service(s)?"
+msgstr "Ben je zeker dat je deze %d kana(a)l(en) wilt verwijderen?"
+
+#, python-format
+msgid "Are you sure to close and lost all %d selections?"
+msgstr "Ben je zeker dat je deze %d kanalen na het afsluiten wilt verliezen?"
+
 msgid "- select service(s) for adding with OK"
 msgstr "- Kies de toe te voegen kanalen met OK"
 
@@ -172,19 +174,12 @@ msgstr "- Kies de toe te voegen kanalen met OK"
 msgid "Copy selected"
 msgstr "Selectie verwijderen"
 
-msgid "Inversion"
-msgstr "Inverteer"
-
 msgid "Mark several services with OK button and then copy them with 'Copy selected'"
 msgstr ""
 
 #, python-format
 msgid "Are you sure to copy this %d service(s)?"
 msgstr "Deze %d kanalen kopiëren?"
-
-#, python-format
-msgid "Are you sure to close and lost all %d selections?"
-msgstr "Ben je zeker dat je deze %d kanalen na het afsluiten wilt verliezen?"
 
 msgid "- select service(s) for remove with OK"
 msgstr "- selecteer de te verwijderen kanalen met OK"
@@ -234,6 +229,29 @@ msgstr ""
 
 msgid "Debug info"
 msgstr ""
+
+#~ msgid "Test 'Refresh services in target bouquet'"
+#~ msgstr "Test 'Ververs kanalen in doel boeket'"
+
+#~ msgid "Service name"
+#~ msgstr "Kanaal naam"
+
+#~ msgid "Bouquet position"
+#~ msgstr "Positie van boeket"
+
+#~ msgid ""
+#~ "\n"
+#~ "Refreshed %d services"
+#~ msgstr ""
+#~ "\n"
+#~ "%d Kanalen verversd"
+
+#~ msgid ""
+#~ "\n"
+#~ "%d services for refresh"
+#~ msgstr ""
+#~ "\n"
+#~ "%d te verversen kanalen"
 
 #~ msgid "Copy"
 #~ msgstr "Kopieer"

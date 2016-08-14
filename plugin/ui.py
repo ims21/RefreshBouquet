@@ -2,7 +2,7 @@
 from . import _
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.42"
+VERSION = "1.44"
 #  by ims (c) 2016 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -143,15 +143,15 @@ class refreshBouquet(Screen, HelpableScreen):
 				menu.append((_("Add selected services to target bouquet"),1))
 				menu.append((_("Add selected missing services to target bouquet"),2))
 				menu.append((_("Remove selected services in source bouquet"),3))
-				menu.append((_("Test 'Refresh services in target bouquet'"),4))
-				menu.append((_("Refresh services in target bouquet"),5))
-				buttons = ["1","2","3","4","5","6"]
+				menu.append((_("Refresh services in target bouquet"),4))
+				buttons = ["1","2","3","4","5"]
 		elif self.sourceItem:
 			menu.append((_("Remove selected services from source bouquet"),3))
 			buttons = ["4"]
 		else:
-			self["info"].setText(_("Select or source or source and target bouquets !"))
 			text = _("Select or source or source and target bouquets !")
+			self["info"].setText(text)
+
 		menu.append((_("Settings..."),10))
 		buttons.append("menu")
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=text, list=menu, keys=buttons)
@@ -169,8 +169,6 @@ class refreshBouquet(Screen, HelpableScreen):
 		elif choice[1] == 3:
 			self.removeServices()
 		elif choice[1] == 4:
-			self.refreshServicesTest()
-		elif choice[1] == 5:
 			self.refreshServices()
 		elif choice[1] == 10:
 			self.options()
@@ -191,21 +189,15 @@ class refreshBouquet(Screen, HelpableScreen):
 		self["target_name"].setText(current[0])
 		self.targetItem = current
 
-
-# call refreshService as test
-	def refreshServicesTest(self):
-		self.actualizeServices()
-
 # call refreshService as replace		
 	def refreshServices(self):
-		self.actualizeServices(True)
+		self.actualizeServices()
 
 #
-# Replace service-reference for services with same name
+# Replace service-reference for services in target with same name as in source
 #
-
-	def actualizeServices(self, make_changes=False):
-		log = ("%s:%s\n\n" % (_("Service name"), _("Bouquet position")))
+	def actualizeServices(self):
+		data = SelectionList([])
 		if self.sourceItem and self.targetItem:
 			target = self.getServices(self.targetItem[0])
 			source = self.getServices(self.sourceItem[0])
@@ -215,48 +207,40 @@ class refreshBouquet(Screen, HelpableScreen):
 			if not len(source):
 				self["info"].setText(_("Source bouquet is empty !"))
 				return
-			forReplace = self.compareServices(source, target)
-			nr = 0
-			self.debug(">>> Diferences <<<")
-			for i in forReplace:
-				nr +=1
-										# nr, index, old ref, new ref, old name
-				self.debug("nr: %s  index: %s\t%s <- %s  %s" % (nr, i[3], i[1], i[2], i[0]))
-				# name:position in bouquet (=index in bouquet + 1), note: ":" is for divide in ScrollLabel
-				log += "%s:%s\n" % (i[0], i[3] + 1)
-				if make_changes:
-					self.replaceService(i)
-			if make_changes:
-				log += _("\nRefreshed %d services") % nr
+			(data, length) = self.compareServices(source, target)
+			if length:
+				self.session.open(refreshBouquetRefreshServices, data, self.targetItem)
 			else:
-				log += _("\n%d services for refresh") % nr
-			self.session.open(refreshBouquetDisplayServices, log)
+				from Tools import Notifications
+				Notifications.AddPopup(text = _("No differences found"), type = MessageBox.TYPE_INFO, timeout = 5)
 
 # looking new service reference for target service - returns service name, old service reference, new service reference and position in target bouquet
 
 	def compareServices(self, source, target):
-		diferences = []
+		diferences = SelectionList([])
 		i = 0 # index
+		length = 0
 		for t in target: # bouquet for refresh
 			if self.isNotService(t[1]):
 				i += 1
 				continue
 			t_name = self.prepareStr(t[0])
 			t_splited = t[1].split(':') # split ref
+			t_core = ":".join((t_splited[3],t_splited[4],t_splited[5],t_splited[6]))
 			for s in source: # source bouquet - with lastest scan - f.eg. created by Fastscan
 				if self.isNotService(s[1]):
 					continue
 				s_splited = s[1].split(':') # split ref
+				s_core = ":".join((s_splited[3],s_splited[4],s_splited[5],s_splited[6]))
 				if t_name == self.prepareStr(s[0]): # services with same name founded
 					s_splited = s[1].split(':') # split ref
-					if t[1] != s[1] and not t_splited[10] and not s_splited[10]: # is different ref and is not stream
-						orb_t = t_splited[6]
-						orb_s = s_splited[6]
-						if orb_t == orb_s: # for same orbital position only
-							#name, old ref, new ref, index in target bouquet
-							diferences.append((s[0], t[1], s[1], i))
+					if t_splited[6] == s_splited[6]: # same orbital position only
+						if t_core != s_core and not t_splited[10] and not s_splited[10]: # is different ref ([3]-[6])and is not stream
+							# name, [new ref, old ref], index, selected
+							length += 1
+							diferences.addSelection(s[0], [s[1], t[1]], i, True)
 			i += 1
-		return diferences
+		return diferences, length
 ###
 # Add missing services to source bouquet or all services to empty bouquet
 ###
@@ -397,29 +381,6 @@ class refreshBouquet(Screen, HelpableScreen):
 			else:
 				self.debug("Dropped stream: %s" % s[1])
 		return new
-
-# replace service reference for old service in target
-
-	def replaceService(self, data): # data: [0] - source name, [1] - old ref, [2] - new ref, [3] - index,
-		index = data[3]
-		old = eServiceReference(data[1])
-		new = eServiceReference(data[2])
-		if cfg.case_sensitive.value == False: # trick for changing name - it cannot be made in one step
-			old.setName(data[0])
-		serviceHandler = eServiceCenter.getInstance()
-		list = self.targetItem[1] and serviceHandler.list(self.targetItem[1])
-		if list is not None:
-			mutableList = list.startEdit()
-			if cfg.case_sensitive.value == False: # trick for changing name - it cannot be made in one step
-				mutableList.removeService(old, False)
-				mutableList.addService(old)
-				mutableList.moveService(old, index)
-				mutableList.flushChanges()
-			
-			mutableList.removeService(old, False)
-			mutableList.addService(new)
-			mutableList.moveService(new, index)
-			mutableList.flushChanges()
 
 # optionaly uppercase or remove control character in servicename ( removed for testing only)
 
@@ -626,8 +587,6 @@ class refreshBouquetManualSelection(Screen):
 
 		self.setTitle(_("RefreshBouquet %s" % _("- select service for replace with OK")))
 		self.session = session
-
-		
 
 		( self.target_bouquetname, self.target ) = target
 
@@ -842,47 +801,122 @@ class refreshBouquetManualSelection(Screen):
 		if answer == True:
 			self.close()
 
-# display results of refresh services
-class refreshBouquetDisplayServices(Screen):
-	skin = """
-	<screen name="refreshBouquetDisplayServices" position="center,center" size="710,505" title="RefreshBouquet - results">
-		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap name="green"  position="140,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap name="blue"   position="420,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" /> 
-		<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" /> 
-		<widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-		<widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-		<widget name="services" position="5,50" zPosition="2" size="705,450"  split="1" dividechar=":" colposition="300" font="Regular;22" foregroundColor="white" />
-		<widget name="info" position="0,0" zPosition="2" size="0,0" valign="center" halign="left" font="Regular;22" foregroundColor="white" />
-	</screen>"""
-
-	def __init__(self, session, log):
-		self.skin = refreshBouquetDisplayServices.skin
+# display and refresh services with different service references
+class refreshBouquetRefreshServices(Screen):
+	def __init__(self, session, list, target):
+		self.skin = refreshBouquetCopyServices.skin
 		Screen.__init__(self, session)
-		self.setTitle(_("RefreshBouquet %s" % _("- results")))
+		self.skinName = ["refreshBouquetRefreshServices", "refreshBouquetCopyServices"]
 
-		self["services"] = ScrollLabel(log)
+		self.texttitle = _("RefreshBouquet %s") % _("- results")
+		self.setTitle(self.texttitle)
 
-		self["info"] = Label()
+		( self.target_bouquetname, self.target ) = target
 
-		self["actions"] = ActionMap(["SetupActions", "DirectionActions"],
+		self["Service"] = ServiceEvent()
+
+		self.list = list
+		if cfg.sort.value:
+			self.list.sort()
+		self["services"] = SelectionList()
+		self["services"] = self.list
+
+		self["actions"] = ActionMap(["OkCancelActions", "RefreshBouquetActions"],
 			{
-				"cancel": self.close,
-				"ok": self.close,
-				"up": self["services"].pageUp,
-				"down": self["services"].pageDown,
-				"upRepeated": self["services"].pageUp,
-				"downRepeated": self["services"].pageDown,
-				"leftUp": self["services"].pageUp,
-				"rightUp": self["services"].pageDown,
+				"cancel": self.exit,
+				"red": self.exit,
+				"ok": self.list.toggleSelection,
+				"green": self.replaceSelectedEntries,
+				"yellow": self.previewService,
+				"blue": self.list.toggleAllSelection,
+
+				"play": self.previewService,
 			})
 
 		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button()
+		self["key_green"] = Button(_("Refresh selected"))
 		self["key_yellow"] = Button()
-		self["key_blue"] = Button()
+		self["key_blue"] = Button(_("Inversion"))
+
+		self["info"] = Label()
+
+		text = _("This feature looking diferences in service parameters for same service names in source and target bouquet and can replace it\n")
+		text += _("It can be usefull for bouquets builded with services gained by Fastscan searching.")
+		self["info"].setText(text)
+
+		self.onSelectionChanged = []
+		self["services"].onSelectionChanged.append(self.displayService)
+		self.onLayoutFinish.append(self.displayService)
+
+	def displayService(self):
+		ref = self["services"].getCurrent()[0][1][0]
+		index = self["services"].getCurrent()[0][2] + 1
+		self.setTitle("%s\t%s: %s" % (self.texttitle, _("Position"), index))
+		if not self.isNotService(ref):
+			self["Service"].newService(eServiceReference(ref))
+			if cfg.preview.value:
+				self.previewService()
+			else:
+				self["key_yellow"].setText(_("Preview"))
+		else:
+			self["key_yellow"].setText("")
+			self["Service"].newService(None)
+
+	def previewService(self):
+		ref = self["services"].getCurrent()[0][1][0]
+		if not self.isNotService(ref):
+			self.session.nav.playService(eServiceReference(ref))
+
+	def replaceSelectedEntries(self):
+		nr_items = len(self.list.getSelectionsList())
+		self.session.openWithCallback(self.replaceService, MessageBox, (_("Are you sure to refresh this %d service(s)?") % nr_items), MessageBox.TYPE_YESNO, default=False )
+
+	def replaceService(self, answer):
+		if answer == True:
+			refresh = self.list.getSelectionsList() # data: [0] - name, [1][0] - new ref, [1][1] - old ref, [2] - index,
+			if cfg.debug.value:
+				for data in refresh:
+					self.debug("name: %s new ref: %s old ref: %s index: %s" % (data[0], data[1][0], data[1][1], data[2]))
+			serviceHandler = eServiceCenter.getInstance()
+			list = self.target and serviceHandler.list(self.target)
+			if list is not None:
+				mutableList = list.startEdit()
+				for data in refresh:
+					index = data[2]
+					old = eServiceReference(data[1][1])
+					new = eServiceReference(data[1][0])
+					if cfg.case_sensitive.value == False: # trick for changing name - it cannot be made in one step
+						old.setName(data[0])
+						mutableList.removeService(old, False)
+						mutableList.addService(old)
+						mutableList.moveService(old, index)
+						mutableList.flushChanges()
+					mutableList.removeService(old, False)
+					mutableList.addService(new)
+					mutableList.moveService(new, index)
+					mutableList.flushChanges()
+			self.close()
+		return
+
+	def isNotService(self, refstr):
+		if eServiceReference(refstr).flags & (eServiceReference.isDirectory | eServiceReference.isMarker | eServiceReference.isGroup | eServiceReference.isNumberedMarker):
+			return True
+		return False
+
+	def debug(self, message):
+		if cfg.debug.value:
+			print "[RefreshBouquet] %s" % message
+
+	def exit(self):
+		nr_items = len(self.list.getSelectionsList())
+		if nr_items:
+			self.session.openWithCallback(self.callBackExit, MessageBox, (_("Are you sure to close and lost all %d selections?") % nr_items), MessageBox.TYPE_YESNO, default=False )
+		else:
+			self.close()
+
+	def callBackExit(self, answer):
+		if answer == True:
+			self.close()
 
 # copy services from source list
 class refreshBouquetCopyServices(Screen):
