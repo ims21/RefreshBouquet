@@ -2,7 +2,7 @@
 from . import _
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.44"
+VERSION = "1.45"
 #  by ims (c) 2016 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -211,8 +211,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			if length:
 				self.session.open(refreshBouquetRefreshServices, data, self.targetItem)
 			else:
-				from Tools import Notifications
-				Notifications.AddPopup(text = _("No differences found"), type = MessageBox.TYPE_INFO, timeout = 5)
+				self.session.open(MessageBox, _("No differences found"), type = MessageBox.TYPE_INFO, timeout = 5)
 
 # looking new service reference for target service - returns service name, old service reference, new service reference and position in target bouquet
 
@@ -236,9 +235,11 @@ class refreshBouquet(Screen, HelpableScreen):
 					s_splited = s[1].split(':') # split ref
 					if t_splited[6] == s_splited[6]: # same orbital position only
 						if t_core != s_core and not t_splited[10] and not s_splited[10]: # is different ref ([3]-[6])and is not stream
+							new = ":".join((t_splited[0],t_splited[1],t_splited[2],s_splited[3],s_splited[4],s_splited[5],s_splited[6],t_splited[7],t_splited[8],t_splited[9],t_splited[10]))
 							# name, [new ref, old ref], index, selected
 							length += 1
-							diferences.addSelection(s[0], [s[1], t[1]], i, True)
+#							diferences.addSelection(s[0], [s[1], t[1]], i, True)
+							diferences.addSelection(s[0], [new, t[1]], i, True)
 			i += 1
 		return diferences, length
 ###
@@ -263,10 +264,10 @@ class refreshBouquet(Screen, HelpableScreen):
 				self["info"].setText(_("No services in source bouquet !"))
 				return
 			nr = 0
-			self.debug(">>> New <<<")
+			debug(">>> New <<<")
 			for i in new:
 				nr +=1
-				self.debug("nr:\t%s %s\t\t%s" % (nr, i[0],i[1]))
+				debug("nr:\t%s %s\t\t%s" % (nr, i[0],i[1]))
 				# service name, service reference, index, selected
 				data.addSelection(i[0], i[1], nr, False)
 			self.session.open(refreshBouquetCopyServices, data, self.targetItem)
@@ -278,19 +279,19 @@ class refreshBouquet(Screen, HelpableScreen):
 		diferences = []
 		for s in source: # services in source bouquet
 			if self.isNotService(s[1]):
-				self.debug("Drop: %s" % s[1])
+				debug("Drop: %s" % s[1])
 				continue
 			if cfg.hd.value:
 				if not self.isHDinName(s[0]):
-					self.debug("Drop (no HD): %s" % s[1])
+					debug("Drop (SD): %s" % s[1])
 					continue
 			add = 1
 			for t in target: # services in target bouquet
 				if self.isNotService(t[1]):
-					self.debug("Drop: %s" % t[1])
+					debug("Drop: %s" % t[1])
 					continue
 				if self.prepareStr(s[0]) == self.prepareStr(t[0]): # service exist in target (test by service name)
-					self.debug("Drop: %s %s" % (s[0], t[0]))
+					debug("Drop: %s %s" % (s[0], t[0]))
 					add = 0
 					break
 			if add:
@@ -321,10 +322,10 @@ class refreshBouquet(Screen, HelpableScreen):
 				self["info"].setText(_("No services in source bouquet !"))
 				return
 			nr = 0
-			self.debug(">>> Read bouquet <<<")
+			debug(">>> Read bouquet <<<")
 			for i in new:
 				nr +=1
-				self.debug("nr: %s %s\t\t%s" % (nr, i[0],i[1]))
+				debug("nr: %s %s\t\t%s" % (nr, i[0],i[1]))
 				# service name, service reference, index, selected
 				data.addSelection(i[0], i[1], nr, False)
 			self.session.open(refreshBouquetRemoveServices, data, self.sourceItem)
@@ -379,7 +380,7 @@ class refreshBouquet(Screen, HelpableScreen):
 						new.append((s[0], s[1], index))
 						index += 1
 			else:
-				self.debug("Dropped stream: %s" % s[1])
+				debug("Dropped stream: %s" % s[1])
 		return new
 
 # optionaly uppercase or remove control character in servicename ( removed for testing only)
@@ -409,10 +410,10 @@ class refreshBouquet(Screen, HelpableScreen):
 				self["info"].setText(_("No services in source bouquet !"))
 				return
 			nr = 0
-			self.debug(">>> All <<<")
+			debug(">>> All <<<")
 			for i in new:
 				nr +=1
-				self.debug("nr:\t%s %s\t\t%s" % (nr, i[0],i[1]))
+				debug("nr:\t%s %s\t\t%s" % (nr, i[0],i[1]))
 				# service name, service reference, index, selected
 				data.addSelection(i[0], i[1], nr, False)
 			self.session.open(refreshBouquetCopyServices, data, self.targetItem)
@@ -426,11 +427,11 @@ class refreshBouquet(Screen, HelpableScreen):
 		new = []
 		for s in source: # source bouquet
 			if self.isNotService(s[1]):
-				self.debug("Drop: %s" % s[1])
+				debug("Drop: %s" % s[1])
 				continue
 			if cfg.hd.value:
 				if not self.isHDinName(s[0]):
-					self.debug("Drop (no HD): %s" % s[1])
+					debug("Drop (SD): %s" % s[1])
 					continue
 			s_splited = s[1].split(':') # split ref
 			if s_splited[10] == '': # it is not stream
@@ -441,7 +442,7 @@ class refreshBouquet(Screen, HelpableScreen):
 					if int(s_splited[2],16) in RADIO:
 						new.append((s[0], s[1]))
 			else:
-				self.debug("Dropped stream: %s" % s[1])
+				debug("Dropped stream: %s" % s[1])
 		return new
 
 # test for "noplayable" service
@@ -451,12 +452,14 @@ class refreshBouquet(Screen, HelpableScreen):
 			return True
 		return False
 
+# test if is 'HD' in name
+
 	def isHDinName(self, name):
 		if name.find('HD') != -1:
 			return True
 		return False
-#
 
+#
 	def getRoot(self):
 		from Screens.ChannelSelection import service_types_tv, service_types_radio
 
@@ -543,16 +546,12 @@ class refreshBouquet(Screen, HelpableScreen):
 #				print ">>>>>>", service[0], "\t\t", service[1]
 			return services
 
-# enable debug to telnet
-
-	def debug(self, message):
-		if cfg.debug.value:
-			print "[RefreshBouquet] %s" % message
 # call Options
 
 	def options(self):
 		self.session.openWithCallback(self.afterConfig, refreshBouquetCfg)
-#		
+
+# callBack for CFG
 	def afterConfig(self, data=None):
 		self.showMenu()
 
@@ -647,8 +646,7 @@ class refreshBouquetManualSelection(Screen):
 		self.currLabel = "source"
 		self.changedTargetdata = []
 
-		if cfg.debug.value:
-			print "[RefreshBouquet] current bouquet: %s  changed bouquet: %s" % (self.current_bouquetname, self.target_bouquetname)
+		debug("changed bouquet: %s" % self.target_bouquetname)
 		self.onLayoutFinish.append(self.switchLists)
 
 	def ok(self): # get source and target items
@@ -874,17 +872,15 @@ class refreshBouquetRefreshServices(Screen):
 	def replaceService(self, answer):
 		if answer == True:
 			refresh = self.list.getSelectionsList() # data: [0] - name, [1][0] - new ref, [1][1] - old ref, [2] - index,
-			if cfg.debug.value:
-				for data in refresh:
-					self.debug("name: %s new ref: %s old ref: %s index: %s" % (data[0], data[1][0], data[1][1], data[2]))
 			serviceHandler = eServiceCenter.getInstance()
 			list = self.target and serviceHandler.list(self.target)
 			if list is not None:
-				mutableList = list.startEdit()
 				for data in refresh:
+					mutableList = list.startEdit()
 					index = data[2]
 					old = eServiceReference(data[1][1])
 					new = eServiceReference(data[1][0])
+					debug("Replace - name: %s new ref: %s old ref: %s index: %s" % (data[0], data[1][0], data[1][1], data[2]))
 					if cfg.case_sensitive.value == False: # trick for changing name - it cannot be made in one step
 						old.setName(data[0])
 						mutableList.removeService(old, False)
@@ -902,10 +898,6 @@ class refreshBouquetRefreshServices(Screen):
 		if eServiceReference(refstr).flags & (eServiceReference.isDirectory | eServiceReference.isMarker | eServiceReference.isGroup | eServiceReference.isNumberedMarker):
 			return True
 		return False
-
-	def debug(self, message):
-		if cfg.debug.value:
-			print "[RefreshBouquet] %s" % message
 
 	def exit(self):
 		nr_items = len(self.list.getSelectionsList())
@@ -974,8 +966,7 @@ class refreshBouquetCopyServices(Screen):
 		self["services"].onSelectionChanged.append(self.displayService)
 		self.onLayoutFinish.append(self.displayService)
 
-		if cfg.debug.value:
-			print "[RefreshBouquet] current bouquet: %s  changed bouquet: %s" % (self.current_bouquetname, self.target_bouquetname)
+		debug("changed bouquet: %s" % self.target_bouquetname)
 
 	def displayService(self):
 		ref = self["services"].getCurrent()[0][1]
@@ -1071,8 +1062,7 @@ class refreshBouquetRemoveServices(Screen):
 		self["services"].onSelectionChanged.append(self.displayService)
 		self.onLayoutFinish.append(self.displayService)
 
-		if cfg.debug.value:
-			print "[RefreshBouquet] current bouquet: %s  changed bouquet: %s" % (self.current_bouquetname, self.source_bouquetname)
+		debug("changed bouquet: %s" % self.source_bouquetname)
 
 	def displayService(self):
 		ref = self["services"].getCurrent()[0][1]
@@ -1150,10 +1140,12 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		self.skin = refreshBouquetCfg.skin
 		self.skinName = ["Setup", "refreshBouquetCfg"]
 		self.setup_title = _("RefreshBouquet Setup")
-			
-		self["key_green"] = Label(_("OK"))
+
 		self["key_red"] = Label(_("Cancel"))
+		self["key_green"] = Label(_("OK"))
+
 		self["statusbar"] = Label("ims (c) 2016. v%s" % VERSION)
+
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"green": self.save,
@@ -1199,6 +1191,10 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 
 	def exit(self):
 		self.keyCancel()
+
+def debug(message):
+	if cfg.debug.value:
+		print "[RefreshBouquet] %s" % message
 
 def freeMemory():
 	import os
