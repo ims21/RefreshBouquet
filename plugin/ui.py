@@ -2,7 +2,7 @@
 from . import _
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.45"
+VERSION = "1.46"
 #  by ims (c) 2016 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -45,6 +45,7 @@ config.plugins.refreshbouquet.diff = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.preview = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.autotoggle = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.on_end = ConfigYesNo(default = True)
+#config.plugins.refreshbouquet.replace36only = ConfigYesNo(default = False)
 cfg = config.plugins.refreshbouquet
 
 TV = (1, 17, 22, 25, 31, 134, 195)
@@ -61,26 +62,23 @@ class refreshBouquet(Screen, HelpableScreen):
 		<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" /> 
 		<widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
 		<widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-
-		<widget name="source_text" position="10,50" zPosition="2" size="200,25" valign="center" halign="left" font="Regular;22" foregroundColor="white" />
-		<widget name="target_text" position="10,75" zPosition="2" size="200,25" valign="center" halign="left" font="Regular;22" foregroundColor="white" />
+		<widget name="source_text" position="10,50" zPosition="2" size="200,25" valign="center" halign="left" font="Regular;22" foregroundColor="yellow" />
+		<widget name="target_text" position="10,75" zPosition="2" size="200,25" valign="center" halign="left" font="Regular;22" foregroundColor="blue" />
 		<widget name="source_name" position="220,50" zPosition="2" size="330,25" valign="center" halign="left" font="Regular;22" foregroundColor="white" />
 		<widget name="target_name" position="220,75" zPosition="2" size="330,25" valign="center" halign="left" font="Regular;22" foregroundColor="white" />
-
-		<ePixmap pixmap="skin_default/div-h.png" position="10,102" zPosition="2" size="540,2" />
-		<widget source="config" render="Listbox" position="10,112" size="540,250" scrollbarMode="showOnDemand">
+		<ePixmap pixmap="skin_default/div-h.png" position="5,102" zPosition="2" size="550,2" />
+		<widget source="config" render="Listbox" position="5,112" size="550,250" scrollbarMode="showOnDemand">
 			<convert type="TemplatedMultiContent">
 				{"template": [
-						MultiContentEntryText(pos = (0, 0), size = (520, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), 
+						MultiContentEntryText(pos = (0, 0), size = (550, 25), font=0, flags = RT_HALIGN_LEFT, text = 0),
 						],
 					"fonts": [gFont("Regular", 22)],
 					"itemHeight": 25
 				}
 			</convert>
 		</widget>
-
-		<ePixmap pixmap="skin_default/div-h.png" position="10,364" zPosition="2" size="540,2" />
-		<widget name="info" position="10,372" zPosition="2" size="540,25" valign="center" halign="left" font="Regular;22" foregroundColor="white" />
+		<ePixmap pixmap="skin_default/div-h.png" position="5,365" zPosition="2" size="550,2" />
+		<widget name="info" position="5,368" zPosition="2" size="550,25" valign="center" halign="left" font="Regular;22" foregroundColor="white" />
 	</screen>"""
 
 	def __init__(self, session, Servicelist=None):
@@ -215,33 +213,49 @@ class refreshBouquet(Screen, HelpableScreen):
 
 # looking new service reference for target service - returns service name, old service reference, new service reference and position in target bouquet
 
-	def compareServices(self, source, target):
-		diferences = SelectionList([])
+	def compareServices(self, source_services, target_services):
+		differences = SelectionList([])
+		potencialy_duplicity = []
 		i = 0 # index
-		length = 0
-		for t in target: # bouquet for refresh
+		length = 0 # found items
+		for t in target_services: # bouquet for refresh
 			if self.isNotService(t[1]):
 				i += 1
 				continue
 			t_name = self.prepareStr(t[0])
-			t_splited = t[1].split(':') # split ref
+			t_splited = t[1].split(':') # split target service_reference
 			t_core = ":".join((t_splited[3],t_splited[4],t_splited[5],t_splited[6]))
-			for s in source: # source bouquet - with lastest scan - f.eg. created by Fastscan
-				if self.isNotService(s[1]):
+			for s in source_services: # source bouquet - with fresh scan - f.eg. created by Fastscan or Last Scanned
+				if self.isNotService(s[1]): # skip all non playable
 					continue
-				s_splited = s[1].split(':') # split ref
+				s_splited = s[1].split(':') # split service_reference
 				s_core = ":".join((s_splited[3],s_splited[4],s_splited[5],s_splited[6]))
 				if t_name == self.prepareStr(s[0]): # services with same name founded
 					s_splited = s[1].split(':') # split ref
 					if t_splited[6] == s_splited[6]: # same orbital position only
 						if t_core != s_core and not t_splited[10] and not s_splited[10]: # is different ref ([3]-[6])and is not stream
-							new = ":".join((t_splited[0],t_splited[1],t_splited[2],s_splited[3],s_splited[4],s_splited[5],s_splited[6],t_splited[7],t_splited[8],t_splited[9],t_splited[10]))
-							# name, [new ref, old ref], index, selected
 							length += 1
-#							diferences.addSelection(s[0], [s[1], t[1]], i, True)
-							diferences.addSelection(s[0], [new, t[1]], i, True)
+							select = True
+							try:
+								tmp = potencialy_duplicity.index(self.charsOnly(s[0])) # same services_name in source = could be duplicity ... set in list as unselected
+								debug("Founded: %s" % self.charsOnly(s[0]))
+								select = False
+							except:
+								debug("Unique: %s" % self.charsOnly(s[0]))
+
+#							if cfg.replace36only.value:
+#								# new = in replaced service are changed ([3]-[6]) only
+#								new = ":".join((t_splited[0],t_splited[1],t_splited[2],s_splited[3],s_splited[4],s_splited[5],s_splited[6],t_splited[7],t_splited[8],t_splited[9],t_splited[10]))
+#								differences.addSelection(s[0], [new, t[1]], i, select)
+#							else:
+#								# name, [new ref, old ref], index, selected
+#								differences.addSelection(s[0], [s[1], t[1]], i, select)
+							# name, [new ref, old ref], index, selected
+							differences.addSelection(s[0], [s[1], t[1]], i, select)
+							debug("Added: %s" % self.charsOnly(s[0]))
+						potencialy_duplicity.append(self.charsOnly(s[0])) # add to list for next check duplicity
 			i += 1
-		return diferences, length
+		return differences, length
 ###
 # Add missing services to source bouquet or all services to empty bouquet
 ###
@@ -276,19 +290,19 @@ class refreshBouquet(Screen, HelpableScreen):
 
 	def getMissingSourceServices(self, source, target):
 		mode = config.servicelist.lastmode.value
-		diferences = []
+		differences = []
 		for s in source: # services in source bouquet
 			if self.isNotService(s[1]):
-				debug("Drop: %s" % s[1])
+				debug("Drop: %s %s" % (s[0], s[1]))
 				continue
 			if cfg.hd.value:
 				if not self.isHDinName(s[0]):
-					debug("Drop (SD): %s" % s[1])
+					debug("Drop (SD): %s %s" % (s[0], s[1]))
 					continue
 			add = 1
 			for t in target: # services in target bouquet
 				if self.isNotService(t[1]):
-					debug("Drop: %s" % t[1])
+					debug("Drop: %s %s" % (t[0], t[1]))
 					continue
 				if self.prepareStr(s[0]) == self.prepareStr(t[0]): # service exist in target (test by service name)
 					debug("Drop: %s %s" % (s[0], t[0]))
@@ -300,11 +314,13 @@ class refreshBouquet(Screen, HelpableScreen):
 				if t_splited[10] == '' and s_splited[10] == '': # it is not stream
 					if mode == "tv":
 						if int(s_splited[2],16) in TV:
-							diferences.append((s[0], s[1]))
+							differences.append((s[0], s[1]))
 					else:
 						if int(s_splited[2],16) in RADIO:
-							diferences.append((s[0], s[1]))
-		return diferences
+							differences.append((s[0], s[1]))
+				else:
+					debug("Dropped stream: %s %s" % (s[0], s[1]))
+		return differences
 
 ###
 # remove selected service (by user) in target directory
@@ -380,7 +396,7 @@ class refreshBouquet(Screen, HelpableScreen):
 						new.append((s[0], s[1], index))
 						index += 1
 			else:
-				debug("Dropped stream: %s" % s[1])
+				debug("Dropped stream: %s %s" % (s[0], s[1]))
 		return new
 
 # optionaly uppercase or remove control character in servicename ( removed for testing only)
@@ -391,6 +407,15 @@ class refreshBouquet(Screen, HelpableScreen):
 		if cfg.strip.value == True:
 			if name[0] < ' ':
 				return name[1:]
+		return name
+
+# returns name without control code on 1st position, optionaly as uppercase
+
+	def charsOnly(self, name):
+		if cfg.case_sensitive.value == False:
+			name = name.upper()
+		if name[0] < ' ':
+			return name[1:]
 		return name
 
 ###
@@ -427,11 +452,11 @@ class refreshBouquet(Screen, HelpableScreen):
 		new = []
 		for s in source: # source bouquet
 			if self.isNotService(s[1]):
-				debug("Drop: %s" % s[1])
+				debug("Drop: %s %s" % (s[0], s[1]))
 				continue
 			if cfg.hd.value:
 				if not self.isHDinName(s[0]):
-					debug("Drop (SD): %s" % s[1])
+					debug("Drop (SD): %s %s" % (s[0],s[1]))
 					continue
 			s_splited = s[1].split(':') # split ref
 			if s_splited[10] == '': # it is not stream
@@ -442,7 +467,7 @@ class refreshBouquet(Screen, HelpableScreen):
 					if int(s_splited[2],16) in RADIO:
 						new.append((s[0], s[1]))
 			else:
-				debug("Dropped stream: %s" % s[1])
+				debug("Dropped stream: %s %s" % (s[0], s[1]))
 		return new
 
 # test for "noplayable" service
@@ -558,7 +583,7 @@ class refreshBouquet(Screen, HelpableScreen):
 # manual replace
 class refreshBouquetManualSelection(Screen):
 	skin = """
-	<screen name="refreshBouquetManualSelection" position="center,center" size="710,540" title="RefreshBouquet - manual">
+	<screen name="refreshBouquetManualSelection" position="center,center" size="710,545" title="RefreshBouquet - manual">
 		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap name="green"  position="140,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" /> 
@@ -567,15 +592,18 @@ class refreshBouquetManualSelection(Screen):
 		<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" /> 
 		<widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
 		<widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-		<widget name="source_label" position="5,50" zPosition="2" size="350,25"  font="Regular;20" foregroundColor="yellow" />
-		<widget name="target_label" position="360,50" zPosition="2" size="350,25"  font="Regular;20" foregroundColor="blue" />
-		<widget name="sources" position="3,75" zPosition="2" size="350,425"  font="Regular;22" foregroundColor="white" />
-		<widget name="targets" position="360,75" zPosition="2" size="350,425"  font="Regular;22" foregroundColor="white" />
-		<ePixmap pixmap="skin_default/div-h.png" position="5,502" zPosition="2" size="700,2" />
-		<widget name="source" position="5,510" zPosition="2" size="350,25"  font="Regular;22" foregroundColor="white" />
-		<widget name="target" position="360,510" zPosition="2" size="350,25"  font="Regular;22" foregroundColor="white" />
-		<widget name="info" position="0,0" zPosition="2" size="0,0" valign="center" halign="left" font="Regular;22" foregroundColor="white" />
-
+		<widget name="source" position="5,40" zPosition="2" size="350,30"  font="Regular;25" foregroundColor="white" />
+		<widget name="target" position="360,40" zPosition="2" size="350,30"  font="Regular;25" foregroundColor="white" />
+		<widget name="source_label" position="5,67" zPosition="2" size="350,25"  font="Regular;18" foregroundColor="yellow" />
+		<widget name="target_label" position="360,67" zPosition="2" size="350,25"  font="Regular;18" foregroundColor="blue" />
+		<widget name="sources" position="3,90" zPosition="2" size="350,300"  font="Regular;22" foregroundColor="white" />
+		<widget name="targets" position="360,90" zPosition="2" size="350,300"  font="Regular;22" foregroundColor="white" />
+		<ePixmap pixmap="skin_default/div-h.png" position="5,393" zPosition="2" size="700,2" />
+		<widget source="Service" render="Label" position="5,397" size="700,23" font="Regular;20" valign="center" halign="left" transparent="1" zPosition="1">
+			<convert type="TransponderInfo"></convert>
+		</widget>
+		<ePixmap pixmap="skin_default/div-h.png" position="5,420" zPosition="2" size="700,2" />
+		<widget name="info" position="5,423" zPosition="2" size="705,120" valign="center" halign="left" font="Regular;20" foregroundColor="white" />
 	</screen>"""
 
 	def __init__(self, session, sourceList, target_services, target):
@@ -636,8 +664,8 @@ class refreshBouquetManualSelection(Screen):
 		self["source_label"] = Label(_("source bouquet"))
 		self["target_label"] = Label(_("target bouquet"))
 
-		text = _("Toggle source and target bouquets with Bouq +/-\nSelect with OK")
-		text += _("\n\nPrepare replacement target's service by service in source bouquet (both set with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'")
+		text = _("Toggle source and target bouquets with Bouq +/-\n")
+		text += _("Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'")
 		self["info"].setText(text)
 
 		self.targetRecord = ""
@@ -838,8 +866,9 @@ class refreshBouquetRefreshServices(Screen):
 
 		self["info"] = Label()
 
-		text = _("This feature looking diferences in service parameters for same service names in source and target bouquet and can replace it\n")
-		text += _("It can be usefull for bouquets builded with services gained by Fastscan searching.")
+		text = _("This feature looking for differences in service parameters with same names in source and target bouquets. Parameters for marked services will be replaced. ")
+		text += _("It can be in most cases useful for bouquets with services gained by Fastscan searching. ")
+		text += _("Posible duplicates will not be marked in list. Check validity with 'Preview' before mark and before 'Refresh selected'.")
 		self["info"].setText(text)
 
 		self.onSelectionChanged = []
@@ -922,8 +951,13 @@ class refreshBouquetCopyServices(Screen):
 		<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" /> 
 		<widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
 		<widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-		<widget name="services" position="5,50" zPosition="2" size="705,450" font="Regular;22" foregroundColor="white" />
-		<widget name="info" position="0,0" zPosition="2" size="0,0" valign="center" halign="left" font="Regular;22" foregroundColor="white" />
+		<widget name="services" position="5,50" zPosition="2" size="705,300" itemHeight="25" font="Regular;22" foregroundColor="white" />
+		<ePixmap pixmap="skin_default/div-h.png" position="5,351" zPosition="2" size="700,2" />
+		<widget source="Service" render="Label" position="5,354" size="700,23" font="Regular;20" valign="center" halign="left" transparent="1" zPosition="1">
+			<convert type="TransponderInfo"></convert>
+		</widget>
+		<ePixmap pixmap="skin_default/div-h.png" position="5,377" zPosition="2" size="700,2" />
+		<widget name="info" position="5,380" zPosition="2" size="705,120" valign="center" halign="left" font="Regular;20" foregroundColor="white" />
 	</screen>"""
 
 	def __init__(self, session, list, target):
@@ -960,7 +994,7 @@ class refreshBouquetCopyServices(Screen):
 		self["key_yellow"] = Button("")
 		self["key_blue"] = Button(_("Inversion"))
 
-		self["info"].setText(_("Mark several services with OK button and then copy them with 'Copy selected'"))
+		self["info"].setText(_("Mark services with OK button and then copy these with 'Copy selected'"))
 
 		self.onSelectionChanged = []
 		self["services"].onSelectionChanged.append(self.displayService)
@@ -1056,7 +1090,7 @@ class refreshBouquetRemoveServices(Screen):
 		self["key_yellow"] = Button()
 		self["key_blue"] = Button(_("Inversion"))
 
-		self["info"].setText(_("Mark several services with OK button and then remove them with 'Remove selected'"))
+		self["info"].setText(_("Mark services with OK button and then remove these with 'Remove selected'"))
 
 		self.onSelectionChanged = []
 		self["services"].onSelectionChanged.append(self.displayService)
@@ -1126,7 +1160,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" /> 
 		<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
 		<widget name="config" position="10,40" size="540,300" zPosition="1" transparent="0" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="skin_default/div-h.png" position="0,355" zPosition="1" size="560,2" />
+		<ePixmap pixmap="skin_default/div-h.png" position="5,355" zPosition="1" size="550,2" />
 		<ePixmap alphatest="on" pixmap="skin_default/icons/clock.png" position="480,361" size="14,14" zPosition="3"/>
 		<widget font="Regular;18" halign="right" position="495,358" render="Label" size="55,20" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
 			<convert type="ClockToText">Default</convert>
@@ -1138,7 +1172,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		Screen.__init__(self, session)
 		self.session = session
 		self.skin = refreshBouquetCfg.skin
-		self.skinName = ["Setup", "refreshBouquetCfg"]
+		self.skinName = ["refreshBouquetCfg", "Setup"]
 		self.setup_title = _("RefreshBouquet Setup")
 
 		self["key_red"] = Label(_("Cancel"))
@@ -1166,6 +1200,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Return to previous service on end"), cfg.on_end))
 #		refreshBouquetCfglist.append(getConfigListEntry(_("Save log for manual replace"), cfg.log))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Debug info"), cfg.debug))
+#		refreshBouquetCfglist.append(getConfigListEntry(_("For test only - do not use"), cfg.replace36only))
 		ConfigListScreen.__init__(self, refreshBouquetCfglist, session, on_change = self.changedEntry)
 
 		self.onChangedEntry = []

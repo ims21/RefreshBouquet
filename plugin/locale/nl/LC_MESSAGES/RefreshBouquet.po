@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-14 18:38+0200\n"
-"PO-Revision-Date: 2016-08-14 18:44+0100\n"
+"POT-Creation-Date: 2016-08-15 17:10+0200\n"
+"PO-Revision-Date: 2016-08-15 17:21+0100\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims21@users.sourceforge.net>\n"
 "Language: \n"
@@ -112,18 +112,14 @@ msgstr "bron boeket"
 msgid "target bouquet"
 msgstr "doel boeket"
 
-msgid ""
-"Toggle source and target bouquets with Bouq +/-\n"
-"Select with OK"
+#, fuzzy
+msgid "Toggle source and target bouquets with Bouq +/-\n"
 msgstr ""
 "Wissel tussen bron en doel lijsten met Bouqí +/-\n"
 "\n"
 "Maak de keuze met OK"
 
-msgid ""
-"\n"
-"\n"
-"Prepare replacement target's service by service in source bouquet (both set with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'"
+msgid "Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'"
 msgstr ""
 
 msgid "Replace"
@@ -150,10 +146,13 @@ msgstr "Selectie verwijderen"
 msgid "Inversion"
 msgstr "Inverteer"
 
-msgid "This feature looking diferences in service parameters for same service names in source and target bouquet and can replace it\n"
+msgid "This feature looking for differences in service parameters with same names in source and target bouquets. Parameters for marked services will be replaced. "
 msgstr ""
 
-msgid "It can be usefull for bouquets builded with services gained by Fastscan searching."
+msgid "It can be in most cases useful for bouquets with services gained by Fastscan searching. "
+msgstr ""
+
+msgid "Posible duplicates will not be marked in list. Check validity with 'Preview' before mark and before 'Refresh selected'."
 msgstr ""
 
 msgid "Position"
@@ -174,7 +173,7 @@ msgstr "- Kies de toe te voegen kanalen met OK"
 msgid "Copy selected"
 msgstr "Selectie verwijderen"
 
-msgid "Mark several services with OK button and then copy them with 'Copy selected'"
+msgid "Mark services with OK button and then copy these with 'Copy selected'"
 msgstr ""
 
 #, python-format
@@ -187,7 +186,7 @@ msgstr "- selecteer de te verwijderen kanalen met OK"
 msgid "Remove selected"
 msgstr "Selectie verwijderen"
 
-msgid "Mark several services with OK button and then remove them with 'Remove selected'"
+msgid "Mark services with OK button and then remove these with 'Remove selected'"
 msgstr ""
 
 #, python-format
