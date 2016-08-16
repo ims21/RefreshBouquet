@@ -2,7 +2,7 @@
 from . import _
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.46"
+VERSION = "1.47"
 #  by ims (c) 2016 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -22,7 +22,7 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Components.ActionMap import ActionMap, HelpableActionMap
-from Components.config import config, ConfigYesNo, getConfigListEntry
+from Components.config import config, ConfigYesNo, getConfigListEntry, ConfigSelection, NoSave
 from Components.Label import Label
 #import enigma
 from Components.Button import Button
@@ -45,6 +45,7 @@ config.plugins.refreshbouquet.diff = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.preview = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.autotoggle = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.on_end = ConfigYesNo(default = True)
+config.plugins.refreshbouquet.orbital = NoSave(ConfigSelection(default = "x", choices = [("x",_("no")),]))
 #config.plugins.refreshbouquet.replace36only = ConfigYesNo(default = False)
 cfg = config.plugins.refreshbouquet
 
@@ -180,12 +181,39 @@ class refreshBouquet(Screen, HelpableScreen):
 		current = self["config"].getCurrent()
 		self["source_name"].setText(current[0])
 		self.sourceItem = current
+		self.setOrbitalFilterConfig(self.sourceItem)
 # get name for target bouquet
 	def getTarget(self):
 		self["info"].setText("")
 		current = self["config"].getCurrent()
 		self["target_name"].setText(current[0])
 		self.targetItem = current
+# get orbital positions in source bouquets to config for filtering
+	def setOrbitalFilterConfig(self, sourceItem):
+
+		def op2human(orbpos):
+			if orbpos == 0xeeee:
+				return _("Terrestrial")
+			elif orbpos == 0xffff:
+				return _("Cable")
+			if orbpos > 1800:
+				return str((float(3600 - orbpos)) / 10.0) + "\xc2\xb0 W"
+			elif orbpos > 0:
+				return str((float(orbpos)) / 10.0) + "\xc2\xb0 E"
+			return "unknown"
+
+		op = []
+		new_choices = [("x",_("no"))]
+		source = self.getServices(sourceItem[0])
+		for service in source:
+			opHexStr = service[1].split(':')[6][0:-4]
+			opTXT = op2human(int(opHexStr,16))
+			try:
+				tmp = op.index((opHexStr,opTXT))
+			except:
+				op.append((opHexStr,opTXT))
+				new_choices.append(("%s" % opHexStr ,"%s" % opTXT))
+		config.plugins.refreshbouquet.orbital = NoSave(ConfigSelection(default = "x", choices = new_choices))
 
 # call refreshService as replace		
 	def refreshServices(self):
@@ -225,14 +253,18 @@ class refreshBouquet(Screen, HelpableScreen):
 			t_name = self.prepareStr(t[0])
 			t_splited = t[1].split(':') # split target service_reference
 			t_core = ":".join((t_splited[3],t_splited[4],t_splited[5],t_splited[6]))
+			t_op = t_splited[6][0:-4]
 			for s in source_services: # source bouquet - with fresh scan - f.eg. created by Fastscan or Last Scanned
 				if self.isNotService(s[1]): # skip all non playable
 					continue
 				s_splited = s[1].split(':') # split service_reference
 				s_core = ":".join((s_splited[3],s_splited[4],s_splited[5],s_splited[6]))
+#				if cfg.orbital.value != "x": # only on selected op
+#					if s_splited[6][:-4] != cfg.orbital.value:
+#						continue
 				if t_name == self.prepareStr(s[0]): # services with same name founded
 					s_splited = s[1].split(':') # split ref
-					if t_splited[6] == s_splited[6]: # same orbital position only
+					if t_op == s_splited[6][0:-4]: # same orbital position only
 						if t_core != s_core and not t_splited[10] and not s_splited[10]: # is different ref ([3]-[6])and is not stream
 							length += 1
 							select = True
@@ -242,7 +274,6 @@ class refreshBouquet(Screen, HelpableScreen):
 								select = False
 							except:
 								debug("Unique: %s" % self.charsOnly(s[0]))
-
 #							if cfg.replace36only.value:
 #								# new = in replaced service are changed ([3]-[6]) only
 #								new = ":".join((t_splited[0],t_splited[1],t_splited[2],s_splited[3],s_splited[4],s_splited[5],s_splited[6],t_splited[7],t_splited[8],t_splited[9],t_splited[10]))
@@ -273,7 +304,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				new = self.getMissingSourceServices(source, target)
 			else:
 				# fill empty target with or TV or Radio source services
-				new = self.addToBouquetFilteredIndexed(source)
+				new = self.addToBouquetFiltered(source)
 			if not len(new):
 				self["info"].setText(_("No services in source bouquet !"))
 				return
@@ -333,7 +364,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				self["info"].setText(_("Source bouquet is empty !"))
 				return
 			new = []
-			new = self.addToBouquetFilteredIndexed(source)
+			new = self.addToBouquetFiltered(source)
 			if not len(new):
 				self["info"].setText(_("No services in source bouquet !"))
 				return
@@ -363,7 +394,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			if cfg.diff.value: # only missing services
 				source_services = self.getMissingSourceServices(source, target)
 			else:
-				source_services = self.addToBouquetFilteredIndexed(source)
+				source_services = self.addToBouquetFiltered(source)
 			if not len(source_services):
 				self["info"].setText(_("No services in source bouquet !"))
 				return
@@ -373,7 +404,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			target_services = self.addToBouquetAllIndexed(target) # name, service reference, index in bouquet
 			self.session.open(refreshBouquetManualSelection, sourceList, target_services, self.targetItem)
 
-# returns all source services (with marks too) and with true positions in source bouquet
+# returns all source services (with marks too) and with true positions in bouquet (target)
 
 	def addToBouquetAllIndexed(self, bouquet):
 		# bouquet[0] - name, bouquet[1] - service reference
@@ -430,7 +461,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				self["info"].setText(_("Source bouquet is empty !"))
 				return
 			new = []
-			new = self.addToBouquetFilteredIndexed(source)
+			new = self.addToBouquetFiltered(source)
 			if not len(new):
 				self["info"].setText(_("No services in source bouquet !"))
 				return
@@ -446,7 +477,7 @@ class refreshBouquet(Screen, HelpableScreen):
 
 # returns all services from bouquet (without notes atc ...)
 
-	def addToBouquetFilteredIndexed(self, source):
+	def addToBouquetFiltered(self, source):
 		# source[0] - name, source[1] - service reference
 		mode = config.servicelist.lastmode.value
 		new = []
@@ -459,6 +490,9 @@ class refreshBouquet(Screen, HelpableScreen):
 					debug("Drop (SD): %s %s" % (s[0],s[1]))
 					continue
 			s_splited = s[1].split(':') # split ref
+			if cfg.orbital.value != "x":
+				if s_splited[6][:-4] != cfg.orbital.value:
+					continue
 			if s_splited[10] == '': # it is not stream
 				if mode == "tv":
 					if int(s_splited[2],16) in TV:
@@ -1193,6 +1227,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Skip 1st nonstandard char in name"), cfg.strip))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Sort services in source bouquets"), cfg.sort))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Missing source services for manually replace only"), cfg.diff))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Filter services by orbital position in source"), cfg.orbital))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Programs with 'HD' in name only for source"), cfg.hd))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Preview on selection"), cfg.preview))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Auto toggle in manually replacing"), cfg.autotoggle))
