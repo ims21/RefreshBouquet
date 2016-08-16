@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-15 17:10+0200\n"
+"POT-Creation-Date: 2016-08-16 14:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,9 @@ msgid "RefreshBouquet"
 msgstr ""
 
 msgid "Actualize services in bouquets"
+msgstr ""
+
+msgid "no"
 msgstr ""
 
 #, python-format
@@ -85,6 +88,12 @@ msgid "Settings..."
 msgstr ""
 
 msgid "Wrong selection!"
+msgstr ""
+
+msgid "Terrestrial"
+msgstr ""
+
+msgid "Cable"
 msgstr ""
 
 msgid "Target bouquet is empty !"
@@ -217,6 +226,9 @@ msgid "Sort services in source bouquets"
 msgstr ""
 
 msgid "Missing source services for manually replace only"
+msgstr ""
+
+msgid "Filter services by orbital position in source"
 msgstr ""
 
 msgid "Programs with 'HD' in name only for source"
