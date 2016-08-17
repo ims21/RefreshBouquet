@@ -1,8 +1,9 @@
 # for localized messages  	 
 from . import _
+
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.47"
+VERSION = "1.48"
 #  by ims (c) 2016 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -24,7 +25,6 @@ from Screens.HelpMenu import HelpableScreen
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.config import config, ConfigYesNo, getConfigListEntry, ConfigSelection, NoSave
 from Components.Label import Label
-#import enigma
 from Components.Button import Button
 from Components.Sources.List import List
 from Screens.ChoiceBox import ChoiceBox
@@ -810,7 +810,8 @@ class refreshBouquetManualSelection(Screen):
 
 	def replaceService(self):
 		nr_items = len(self.changedTargetdata)
-		self.session.openWithCallback(self.replaceTargetBouquet, MessageBox, (_("Are you sure to apply all %d changes and close?") % nr_items), MessageBox.TYPE_YESNO, default=False )
+		if nr_items:
+			self.session.openWithCallback(self.replaceTargetBouquet, MessageBox, ngettext("Are you sure to apply %d change and close?" ,"Are you sure to apply all %d changes and close?", nr_items) % nr_items, MessageBox.TYPE_YESNO, default=False )
 
 	def replaceTargetBouquet(self, answer): # self.target_services: [0] - new name, [1] - old ref, [2] - new ref, [3] - index,
 		if answer == True:
@@ -853,7 +854,7 @@ class refreshBouquetManualSelection(Screen):
 	def exit(self):
 		nr_items = len(self.changedTargetdata)
 		if nr_items:
-			self.session.openWithCallback(self.callBackExit, MessageBox, (_("Are you sure to close and lost all %d changes?") % nr_items), MessageBox.TYPE_YESNO, default=False )
+			self.session.openWithCallback(self.callBackExit, MessageBox, ngettext("Are you sure to close and lost %d change?", "Are you sure to close and lost all %d changes?", nr_items) % nr_items, MessageBox.TYPE_YESNO, default=False )
 		else:
 			self.close()
 
@@ -930,7 +931,8 @@ class refreshBouquetRefreshServices(Screen):
 
 	def replaceSelectedEntries(self):
 		nr_items = len(self.list.getSelectionsList())
-		self.session.openWithCallback(self.replaceService, MessageBox, (_("Are you sure to refresh this %d service(s)?") % nr_items), MessageBox.TYPE_YESNO, default=False )
+		if nr_items:
+			self.session.openWithCallback(self.replaceService, MessageBox, ngettext("Are you sure to refresh this %d service?", "Are you sure to refresh this %d services?", nr_items) % nr_items, MessageBox.TYPE_YESNO, default=False )
 
 	def replaceService(self, answer):
 		if answer == True:
@@ -965,7 +967,7 @@ class refreshBouquetRefreshServices(Screen):
 	def exit(self):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
-			self.session.openWithCallback(self.callBackExit, MessageBox, (_("Are you sure to close and lost all %d selections?") % nr_items), MessageBox.TYPE_YESNO, default=False )
+			self.session.openWithCallback(self.callBackExit, MessageBox, ngettext("Are you sure to close and lost %d selection?", "Are you sure to close and lost all %d selections?", nr_items) % nr_items, MessageBox.TYPE_YESNO, default=False )
 		else:
 			self.close()
 
@@ -1014,9 +1016,9 @@ class refreshBouquetCopyServices(Screen):
 
 		self["actions"] = ActionMap(["OkCancelActions", "RefreshBouquetActions"],
 			{
-				"cancel": self.close,
+				"cancel": self.exit,
 				"ok": self.list.toggleSelection,
-				"red": self.close,
+				"red": self.exit,
 				"green": self.copyCurrentEntries,
 				"blue": self.list.toggleAllSelection,
 				"yellow": self.previewService,
@@ -1055,7 +1057,8 @@ class refreshBouquetCopyServices(Screen):
 
 	def copyCurrentEntries(self):
 		nr_items = len(self.list.getSelectionsList())
-		self.session.openWithCallback(self.copyToTarget, MessageBox, (_("Are you sure to copy this %d service(s)?") % nr_items), MessageBox.TYPE_YESNO, default=False )
+		if nr_items:
+			self.session.openWithCallback(self.copyToTarget, MessageBox, ngettext("Are you sure to copy this %d service?", "Are you sure to copy this %d services?", nr_items) % nr_items, MessageBox.TYPE_YESNO, default=False )
 
 	def copyToTarget(self, answer):
 		if answer == True:
@@ -1079,7 +1082,7 @@ class refreshBouquetCopyServices(Screen):
 	def exit(self):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
-			self.session.openWithCallback(self.callBackExit, MessageBox, (_("Are you sure to close and lost all %d selections?") % nr_items), MessageBox.TYPE_YESNO, default=False )
+			self.session.openWithCallback(self.callBackExit, MessageBox, ngettext("Are you sure to close and lost %d selection?", "Are you sure to close and lost all %d selections?", nr_items) % nr_items, MessageBox.TYPE_YESNO, default=False )
 		else:
 			self.close()
 
@@ -1110,9 +1113,9 @@ class refreshBouquetRemoveServices(Screen):
 
 		self["actions"] = ActionMap(["OkCancelActions", "RefreshBouquetActions"],
 			{
-				"cancel": self.close,
+				"cancel": self.exit,
 				"ok": self.list.toggleSelection,
-				"red": self.close,
+				"red": self.exit,
 				"green": self.removeCurrentEntries,
 				"blue": self.list.toggleAllSelection,
 				"yellow": self.previewService,
@@ -1151,7 +1154,8 @@ class refreshBouquetRemoveServices(Screen):
 
 	def removeCurrentEntries(self):
 		nr_items = len(self.list.getSelectionsList())
-		self.session.openWithCallback(self.removeFromSource, MessageBox, (_("Are you sure to remove this %d service(s)?") % nr_items), MessageBox.TYPE_YESNO, default=False )
+		if nr_items:
+			self.session.openWithCallback(self.removeFromSource, MessageBox, ngettext("Are you sure to remove this %d service?", "Are you sure to remove this %d services?", nr_items) % nr_items, MessageBox.TYPE_YESNO, default=False )
 
 	def removeFromSource(self, answer):
 		if answer == True:
@@ -1177,7 +1181,7 @@ class refreshBouquetRemoveServices(Screen):
 	def exit(self):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
-			self.session.openWithCallback(self.callBackExit, MessageBox, (_("Are you sure to close and lost all %d selections?") % nr_items), MessageBox.TYPE_YESNO, default=False )
+			self.session.openWithCallback(self.callBackExit, MessageBox, ngettext("Are you sure to close and lost %d selection?", "Are you sure to close and lost all %d selections?", nr_items) % nr_items, MessageBox.TYPE_YESNO, default=False )
 		else:
 			self.close()
 

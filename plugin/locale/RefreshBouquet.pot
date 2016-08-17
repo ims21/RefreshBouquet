@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-16 14:41+0200\n"
+"POT-Creation-Date: 2016-08-17 01:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 msgid "RefreshBouquet"
 msgstr ""
@@ -140,12 +141,16 @@ msgid "Preview"
 msgstr ""
 
 #, python-format
-msgid "Are you sure to apply all %d changes and close?"
-msgstr ""
+msgid "Are you sure to apply %d change and close?"
+msgid_plural "Are you sure to apply all %d changes and close?"
+msgstr[0] ""
+msgstr[1] ""
 
 #, python-format
-msgid "Are you sure to close and lost all %d changes?"
-msgstr ""
+msgid "Are you sure to close and lost %d change?"
+msgid_plural "Are you sure to close and lost all %d changes?"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "- results"
 msgstr ""
@@ -176,12 +181,16 @@ msgid "Position"
 msgstr ""
 
 #, python-format
-msgid "Are you sure to refresh this %d service(s)?"
-msgstr ""
+msgid "Are you sure to refresh this %d service?"
+msgid_plural "Are you sure to refresh this %d services?"
+msgstr[0] ""
+msgstr[1] ""
 
 #, python-format
-msgid "Are you sure to close and lost all %d selections?"
-msgstr ""
+msgid "Are you sure to close and lost %d selection?"
+msgid_plural "Are you sure to close and lost all %d selections?"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "- select service(s) for adding with OK"
 msgstr ""
@@ -193,8 +202,10 @@ msgid "Mark services with OK button and then copy these with 'Copy selected'"
 msgstr ""
 
 #, python-format
-msgid "Are you sure to copy this %d service(s)?"
-msgstr ""
+msgid "Are you sure to copy this %d service?"
+msgid_plural "Are you sure to copy this %d services?"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "- select service(s) for remove with OK"
 msgstr ""
@@ -207,8 +218,10 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "Are you sure to remove this %d service(s)?"
-msgstr ""
+msgid "Are you sure to remove this %d service?"
+msgid_plural "Are you sure to remove this %d services?"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "RefreshBouquet Setup"
 msgstr ""

@@ -2,10 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-16 14:41+0200\n"
-"PO-Revision-Date: 2016-08-16 14:42+0100\n"
+"POT-Creation-Date: 2016-08-17 01:29+0200\n"
+"PO-Revision-Date: 2016-08-17 01:31+0100\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
-"Language-Team: PLi <ims21@users.sourceforge.net>\n"
+"Language-Team: PLi\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -134,12 +134,18 @@ msgid "Preview"
 msgstr "Náhled"
 
 #, python-format
-msgid "Are you sure to apply all %d changes and close?"
-msgstr "Opravdu chcete provést %d změny a zavřít?"
+msgid "Are you sure to apply %d change and close?"
+msgid_plural "Are you sure to apply all %d changes and close?"
+msgstr[0] "Opravdu chcete provést %d změnu a zavřít?"
+msgstr[1] "Opravdu chcete provést %d změny a zavřít?"
+msgstr[2] "Opravdu chcete provést %d změn a zavřít?"
 
 #, python-format
-msgid "Are you sure to close and lost all %d changes?"
-msgstr "Opravdu chcete zavřít a zapomenout %d změny?"
+msgid "Are you sure to close and lost %d change?"
+msgid_plural "Are you sure to close and lost all %d changes?"
+msgstr[0] "Opravdu chcete zavřít a zapomenout %d změnu?"
+msgstr[1] "Opravdu chcete zavřít a zapomenout %d změny?"
+msgstr[2] "Opravdu chcete zavřít a zapomenout %d změn?"
 
 msgid "- results"
 msgstr "- výsledky"
@@ -163,12 +169,18 @@ msgid "Position"
 msgstr "Pozice"
 
 #, python-format
-msgid "Are you sure to refresh this %d service(s)?"
-msgstr "Opravdu chcete aktualizovat %d zvolené programy?"
+msgid "Are you sure to refresh this %d service?"
+msgid_plural "Are you sure to refresh this %d services?"
+msgstr[0] "Opravdu chcete aktualizovat %d zvolený program?"
+msgstr[1] "Opravdu chcete aktualizovat %d zvolené programy?"
+msgstr[2] "Opravdu chcete aktualizovat %d zvolených programů?"
 
 #, python-format
-msgid "Are you sure to close and lost all %d selections?"
-msgstr "Opravdu chcete zavřít a zapomenout %d změny?"
+msgid "Are you sure to close and lost %d selection?"
+msgid_plural "Are you sure to close and lost all %d selections?"
+msgstr[0] "Opravdu chcete zavřít a zapomenout %d označení?"
+msgstr[1] "Opravdu chcete zavřít a zapomenout %d označení?"
+msgstr[2] "Opravdu chcete zavřít a zapomenout %d označení?"
 
 msgid "- select service(s) for adding with OK"
 msgstr "- označte program(y) pro přidání pomocí OK"
@@ -180,8 +192,11 @@ msgid "Mark services with OK button and then copy these with 'Copy selected'"
 msgstr "Označte programy pomocí 'OK' a pak je zkopírujte  tlačítkem 'Zkopírovat vybrané'."
 
 #, python-format
-msgid "Are you sure to copy this %d service(s)?"
-msgstr "Opravdu chcete zkopírovat zvolené %d programy?"
+msgid "Are you sure to copy this %d service?"
+msgid_plural "Are you sure to copy this %d services?"
+msgstr[0] "Opravdu chcete zkopírovat zvolené %d programy?"
+msgstr[1] "Opravdu chcete zkopírovat zvolené %d programy?"
+msgstr[2] "Opravdu chcete zkopírovat zvolených %d programů?"
 
 msgid "- select service(s) for remove with OK"
 msgstr "- označte program(y) pro smazání pomocí OK"
@@ -193,8 +208,11 @@ msgid "Mark services with OK button and then remove these with 'Remove selected'
 msgstr "Označte programy pomocí 'OK' a pak je odstraňte tlačítkem 'Odstranit vybrané'."
 
 #, python-format
-msgid "Are you sure to remove this %d service(s)?"
-msgstr "Opravdu chcete smazat %d zvolené programy?"
+msgid "Are you sure to remove this %d service?"
+msgid_plural "Are you sure to remove this %d services?"
+msgstr[0] "Opravdu chcete smazat %d zvolený program?"
+msgstr[1] "Opravdu chcete smazat %d zvolené programy?"
+msgstr[2] "Opravdu chcete smazat %d zvolených programů?"
 
 msgid "RefreshBouquet Setup"
 msgstr "RefreshBouquet Nastavení"
@@ -235,28 +253,3 @@ msgstr "Po skončení návrat na předchozí  program"
 msgid "Debug info"
 msgstr ""
 
-#~ msgid "Test 'Refresh services in target bouquet'"
-#~ msgstr "Test 'Aktualizovat programy v cílovém přehledu'"
-
-#~ msgid "Service name"
-#~ msgstr "Program"
-
-#~ msgid "Bouquet position"
-#~ msgstr "Pozice v přehledu"
-
-#~ msgid ""
-#~ "\n"
-#~ "Refreshed %d services"
-#~ msgstr ""
-#~ "\n"
-#~ "Aktualizováno %d programů"
-
-#~ msgid ""
-#~ "\n"
-#~ "%d services for refresh"
-#~ msgstr ""
-#~ "\n"
-#~ "%d programů pro aktualizaci"
-
-#~ msgid "Copy"
-#~ msgstr "Kopírovat"

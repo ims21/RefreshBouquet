@@ -2,30 +2,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-16 14:41+0200\n"
-"PO-Revision-Date: 2016-08-16 14:43+0100\n"
+"POT-Creation-Date: 2016-08-17 01:29+0200\n"
+"PO-Revision-Date: 2016-08-17 02:19+0100\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
-"Language-Team: PLi <ims21@users.sourceforge.net>\n"
-"Language: \n"
+"Language-Team: PLiteam <translators@openpli.org>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Czech\n"
-"X-Poedit-Country: CZECH REPUBLIC\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NEDERLAND\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "RefreshBouquet"
-msgstr ""
+msgstr "Actualiseer bouquet"
 
 msgid "Actualize services in bouquets"
-msgstr "Ververs kanalen in boeketten"
+msgstr "Actualiseer de kanalen in de bouquetten"
 
 msgid "no"
-msgstr ""
+msgstr "nee"
 
 #, python-format
 msgid "RefreshBouquet v. %s"
-msgstr ""
+msgstr "Actualiseer bouquet v. %s"
 
 msgid "exit plugin"
 msgstr "plugin beëindigen"
@@ -34,10 +34,10 @@ msgid "select action"
 msgstr "kies een aktie"
 
 msgid "select source bouquet "
-msgstr "selecteer bron boeket"
+msgstr "selecteer het doelbouquet"
 
 msgid "select target bouquet "
-msgstr "selecteer doel boeket"
+msgstr "selecteer het doelbouquet"
 
 msgid "Cancel"
 msgstr "Annuleer"
@@ -46,87 +46,83 @@ msgid "Run"
 msgstr "Uitvoeren"
 
 msgid "Set source"
-msgstr "Stel bron in"
+msgstr "Als bron instellen"
 
 msgid "Set target"
-msgstr "Stel doel in"
+msgstr "Als doel instellen"
 
 msgid "Source bouquet:"
-msgstr "Bron boeket:"
+msgstr "Bronbouquet:"
 
 msgid "Target bouquet:"
-msgstr "Doel boeket:"
+msgstr "Doelbouquet:"
 
 msgid "Select or source or source and target bouquets !"
-msgstr "Kies bron of bron en doel boeket(ten)!"
+msgstr "Stel eerst het bron en/of doelbouquet in."
 
 msgid "Select action for bouquet:"
-msgstr "Kies aktie voor boeket:"
+msgstr "Kies de uit te voeren actie:"
 
 msgid "Remove selected services from source bouquet"
-msgstr "Verwijder de geselecteerde kanalen van brond boeket"
+msgstr "Verwijder de geselecteerde kanalen uit het bronbouquet"
 
 msgid "Manually replace services"
-msgstr "Handmatig kanalen vervangen"
+msgstr "Handmatig dekanalen vervangen"
 
 msgid "Add selected services to target bouquet"
-msgstr "Voeg de geselecteerde kanalen toe aan doel boeket "
+msgstr "Voeg de geselecteerde kanalen toe aan doel bouquet"
 
 msgid "Add selected missing services to target bouquet"
-msgstr "Voeg de geselecteerde ontbrekende kanalen toe aan doel boeket "
+msgstr "Voeg de geselecteerde ontbrekende kanalen toe aan het doelbouquet"
 
 msgid "Remove selected services in source bouquet"
-msgstr "Verwijder de geselecteerde kanalen in bron boeket"
+msgstr "Verwijder de geselecteerde kanalen in het bronbouquet"
 
 msgid "Refresh services in target bouquet"
-msgstr "Ververs kanalen in doel boeket"
+msgstr "Actualiseer de kanalen in het doelbouquet"
 
 msgid "Settings..."
 msgstr "Instellingen..."
 
 msgid "Wrong selection!"
-msgstr "Verkeerde keus!"
+msgstr "Verkeerde keuze!"
 
 msgid "Terrestrial"
-msgstr ""
+msgstr "Aards"
 
 msgid "Cable"
-msgstr ""
+msgstr "Kabel"
 
 msgid "Target bouquet is empty !"
-msgstr "Doel boeket is leeg!"
+msgstr "Doelbouquet is leeg!"
 
 msgid "Source bouquet is empty !"
-msgstr "Bron boeker is leeg!"
+msgstr "Het bronbouquet is leeg!"
 
 msgid "No differences found"
-msgstr ""
+msgstr "Geen verschil gevonden"
 
 msgid "No services in source bouquet !"
-msgstr "Geen kanalen in bron boeket !"
+msgstr "Geen kanalen in bronbouquet !"
 
 msgid "- select service for replace with OK"
-msgstr "- selecteer de te vervangen kana(a)l(en) met OK"
+msgstr "--  selecteer de te vervangen kana(a)l(en) met OK"
 
 #, python-format
 msgid "RefreshBouquet %s"
-msgstr ""
+msgstr "Actualiseer bouquet %s"
 
 msgid "Apply and close"
-msgstr "Toepassen en sluiten"
+msgstr "Toepassen en afsluiten"
 
 msgid "source bouquet"
-msgstr "bron boeket"
+msgstr "bronbouquet"
 
 msgid "target bouquet"
-msgstr "doel boeket"
+msgstr "doelbouquet"
 
-#, fuzzy
 msgid "Toggle source and target bouquets with Bouq +/-\n"
-msgstr ""
-"Wissel tussen bron en doel lijsten met Bouqí +/-\n"
-"\n"
-"Maak de keuze met OK"
+msgstr "Wissel tussen bron en doelbouquet met Bouquet +/-\n"
 
 msgid "Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'"
 msgstr ""
@@ -137,20 +133,23 @@ msgstr "Vervangen"
 msgid "Preview"
 msgstr "Voorbeeld"
 
-#, python-format
-msgid "Are you sure to apply all %d changes and close?"
-msgstr "Ben je er zeker van dan je alle %d wijzigingen wil toepassen en sluiten?"
+#, fuzzy, python-format
+msgid "Are you sure to apply %d change and close?"
+msgid_plural "Are you sure to apply all %d changes and close?"
+msgstr[0] "Ben je er zeker van dan je alle %d wijzigingen wil toepassen en sluiten?"
+msgstr[1] "Ben je er zeker van dan je alle %d wijzigingen wil toepassen en sluiten?"
 
-#, python-format
-msgid "Are you sure to close and lost all %d changes?"
-msgstr "Ben je zeker dan je wilt afsluiten en alle %d wijzigingen wilt annuleren?"
+#, fuzzy, python-format
+msgid "Are you sure to close and lost %d change?"
+msgid_plural "Are you sure to close and lost all %d changes?"
+msgstr[0] "Ben je zeker dan je wilt afsluiten en alle %d wijzigingen wilt annuleren?"
+msgstr[1] "Ben je zeker dan je wilt afsluiten en alle %d wijzigingen wilt annuleren?"
 
 msgid "- results"
 msgstr "- resultaat"
 
-#, fuzzy
 msgid "Refresh selected"
-msgstr "Selectie verwijderen"
+msgstr "Selectie actualiseren"
 
 msgid "Inversion"
 msgstr "Inverteer"
@@ -168,26 +167,31 @@ msgid "Position"
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Are you sure to refresh this %d service(s)?"
-msgstr "Ben je zeker dat je deze %d kana(a)l(en) wilt verwijderen?"
+msgid "Are you sure to refresh this %d service?"
+msgid_plural "Are you sure to refresh this %d services?"
+msgstr[0] "Ben je zeker dat je deze %d kana(a)l(en) wilt verwijderen?"
+msgstr[1] "Ben je zeker dat je deze %d kana(a)l(en) wilt verwijderen?"
 
-#, python-format
-msgid "Are you sure to close and lost all %d selections?"
-msgstr "Ben je zeker dat je deze %d kanalen na het afsluiten wilt verliezen?"
+#, fuzzy, python-format
+msgid "Are you sure to close and lost %d selection?"
+msgid_plural "Are you sure to close and lost all %d selections?"
+msgstr[0] "Ben je zeker dat je deze %d kanalen na het afsluiten wilt verliezen?"
+msgstr[1] "Ben je zeker dat je deze %d kanalen na het afsluiten wilt verliezen?"
 
 msgid "- select service(s) for adding with OK"
 msgstr "- Kies de toe te voegen kanalen met OK"
 
-#, fuzzy
 msgid "Copy selected"
-msgstr "Selectie verwijderen"
+msgstr "Kopieer selectie"
 
 msgid "Mark services with OK button and then copy these with 'Copy selected'"
-msgstr ""
+msgstr "Markeer de kanalen met de OK knop en kopieer ze met 'Kopieer selectie'"
 
-#, python-format
-msgid "Are you sure to copy this %d service(s)?"
-msgstr "Deze %d kanalen kopiëren?"
+#, fuzzy, python-format
+msgid "Are you sure to copy this %d service?"
+msgid_plural "Are you sure to copy this %d services?"
+msgstr[0] "Deze %d kanalen kopiëren?"
+msgstr[1] "Deze %d kanalen kopiëren?"
 
 msgid "- select service(s) for remove with OK"
 msgstr "- selecteer de te verwijderen kanalen met OK"
@@ -196,50 +200,52 @@ msgid "Remove selected"
 msgstr "Selectie verwijderen"
 
 msgid "Mark services with OK button and then remove these with 'Remove selected'"
-msgstr ""
+msgstr "Markeer de kanalen met de OK knop en verwijder ze met 'Selectie verwijderen'"
 
-#, python-format
-msgid "Are you sure to remove this %d service(s)?"
-msgstr "Ben je zeker dat je deze %d kana(a)l(en) wilt verwijderen?"
+#, fuzzy, python-format
+msgid "Are you sure to remove this %d service?"
+msgid_plural "Are you sure to remove this %d services?"
+msgstr[0] "Ben je zeker dat je deze %d kana(a)l(en) wilt verwijderen?"
+msgstr[1] "Ben je zeker dat je deze %d kana(a)l(en) wilt verwijderen?"
 
 msgid "RefreshBouquet Setup"
-msgstr "Ververs Boeket setup"
+msgstr "Bouquetactualiseer setup"
 
 msgid "OK"
 msgstr "OK"
 
 msgid "Compare case sensitive"
-msgstr "Vergelijk hoofdletter gevoeligheid"
+msgstr "Vergelijk hoofdlettergevoeligheid"
 
 msgid "Skip 1st nonstandard char in name"
 msgstr "Negeer 1e niet standaard karakter in de naam"
 
 msgid "Sort services in source bouquets"
-msgstr "Sorteer kanalen in bron boeket"
+msgstr "Sorteer de kanalen in het bronbouquet"
 
 msgid "Missing source services for manually replace only"
-msgstr "Mis kanalen in bron boeket voor alleen handmatig verplaatsen"
+msgstr "Missende kanalen in het bronbouquet om enkel handmatig te verplaatsen"
 
 msgid "Filter services by orbital position in source"
-msgstr ""
+msgstr "Filter de kanalen van de bron op orbitale positie"
 
 msgid "Programs with 'HD' in name only for source"
-msgstr "Ve zdroji zobrazit pouze jména s 'HD'"
+msgstr "Kanalen met 'HD' in de naam enkel voor de bron"
 
 msgid "Preview on selection"
-msgstr "Toon beeld tijdens selectie"
+msgstr "TGeef de zender weer tijdens de selectie"
 
 msgid "Auto toggle in manually replacing"
-msgstr "Wissel automatisch tijdens handmatigverplaatsen"
+msgstr "Wissel automatisch tijdens het handmatig verplaatsen"
 
 msgid "Display in Channellist context menu"
-msgstr "Toon in kanalenlijst context menu"
+msgstr "Toon in het kanalenlijst context menu"
 
 msgid "Return to previous service on end"
-msgstr ""
+msgstr "Keer terug naar het laatste kanaal"
 
 msgid "Debug info"
-msgstr ""
+msgstr "Debug informatie"
 
 #~ msgid "Test 'Refresh services in target bouquet'"
 #~ msgstr "Test 'Ververs kanalen in doel boeket'"
