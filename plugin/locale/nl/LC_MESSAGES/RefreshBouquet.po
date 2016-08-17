@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-16 14:41+0200\n"
-"PO-Revision-Date: 2016-08-18 10:27+0100\n"
-"Last-Translator: TecjNL <tech@openpli.org>\n"
+"POT-Creation-Date: 2016-08-17 16:03+0200\n"
+"PO-Revision-Date: 2016-08-17 16:28+0200\n"
+"Last-Translator: TechNL <tech@openpli.org>\n"
 "Language-Team: PLi <translators@openpli.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 msgid "RefreshBouquet"
 msgstr "Actualiseer bouquet"
@@ -22,6 +22,15 @@ msgstr "Actualiseer de kanalen in de bouquetten"
 
 msgid "no"
 msgstr "nee"
+
+msgid "Question"
+msgstr "Vraag"
+
+msgid "yes"
+msgstr "ja"
+
+msgid "Select"
+msgstr "Kies"
 
 #, python-format
 msgid "RefreshBouquet v. %s"
@@ -141,15 +150,22 @@ msgid "Preview"
 msgstr "Voorbeeld"
 
 #, python-format
-msgid "Are you sure to apply all %d changes and close?"
-msgstr ""
-"Ben je er zeker van dan je alle %d wijzigingen wilt toepassen en wilt\n"
-"afsluiten?"
+msgid "Are you sure to apply %d change and close?"
+msgid_plural "Are you sure to apply all %d changes and close?"
+msgstr[0] ""
+"Weet jij zeker dat je wilt afsluiten en de wijziging voor %d verliest?"
+msgstr[1] "Ben je zeker dat de %d wijzigingen wilt toepassen en afsluiten?"
+msgstr[2] "Ben je zeker dat de %d wijzigingen wilt toepassen en afsluiten?"
 
 #, python-format
-msgid "Are you sure to close and lost all %d changes?"
-msgstr ""
-"Weet je zeker dat je wilt afsluiten en alle %d wijzigingen wilt annuleren?"
+msgid "Are you sure to close and lost %d change?"
+msgid_plural "Are you sure to close and lost all %d changes?"
+msgstr[0] ""
+"Weet jij zeker dat je wilt afsluiten en de wijzigingen voor %d verliest?"
+msgstr[1] ""
+"Ben je zeker dat je wilt afsluiten en alle %d wijzigingen zult verliezen?"
+msgstr[2] ""
+"Ben je zeker dat je wilt afsluiten en alle %d wijzigingen zult verliezen?"
 
 msgid "- results"
 msgstr "- resultaat"
@@ -188,12 +204,21 @@ msgid "Position"
 msgstr "Positie"
 
 #, python-format
-msgid "Are you sure to refresh this %d service(s)?"
-msgstr "Weet je zeker dat je deze %d kana(a)l(en) wilt verwijderen?"
+msgid "Are you sure to refresh this %d service?"
+msgid_plural "Are you sure to refresh this %d services?"
+msgstr[0] "Weet je zeker dat je dit %d kanaal wilt actualiseren?"
+msgstr[1] "Ben je er zeker van deze %d kanalen te actualiseren?"
+msgstr[2] "Ben je er zeker van deze %d kanalen te actualiseren?"
 
 #, python-format
-msgid "Are you sure to close and lost all %d selections?"
-msgstr "Weet jij zeker dat je wilt afsluiten en alle %d verliest?"
+msgid "Are you sure to close and lost %d selection?"
+msgid_plural "Are you sure to close and lost all %d selections?"
+msgstr[0] ""
+"Weet jij zeker dat je wilt afsluiten en de selectie %d wilt annuleren?"
+msgstr[1] ""
+"Weet jij zeker dat je wilt afsluiten en de selecties %d wilt annuleren?"
+msgstr[2] ""
+"Weet jij zeker dat je wilt afsluiten en de selecties %d wilt annuleren?"
 
 msgid "- select service(s) for adding with OK"
 msgstr "- Kies de toe te voegen kanalen met OK"
@@ -208,8 +233,11 @@ msgstr ""
 "eerder gekozen doelbouquet. "
 
 #, python-format
-msgid "Are you sure to copy this %d service(s)?"
-msgstr "Deze %d geselecteerde kanalen toevoegen aan het bronbouquet?"
+msgid "Are you sure to copy this %d service?"
+msgid_plural "Are you sure to copy this %d services?"
+msgstr[0] "Kanaal %d kopiëren?"
+msgstr[1] "Deze %d kanalen kopiëren?"
+msgstr[2] "Deze %d kanalen kopiëren?"
 
 msgid "- select service(s) for remove with OK"
 msgstr "- selecteer de te verwijderen kanalen met OK"
@@ -224,8 +252,11 @@ msgstr ""
 "toets, 'Verwijderen'."
 
 #, python-format
-msgid "Are you sure to remove this %d service(s)?"
-msgstr "Weet je zeker dat je deze %d kanalen wilt verwijderen?"
+msgid "Are you sure to remove this %d service?"
+msgid_plural "Are you sure to remove this %d services?"
+msgstr[0] "Weet je zeker dat je dit %d kanaal wilt verwijderen?"
+msgstr[1] "Weet je zeker dat je deze %d kanalen wilt verwijderen?"
+msgstr[2] "Weet je zeker dat je deze %d kanalen wilt verwijderen?"
 
 msgid "RefreshBouquet Setup"
 msgstr "Bouquetactualiseer setup"
@@ -265,6 +296,27 @@ msgstr "Keer terug naar het laatste kanaal"
 
 msgid "Debug info"
 msgstr "Debug informatie"
+
+#~ msgid "Are you sure to apply all %d changes and close?"
+#~ msgstr ""
+#~ "Ben je er zeker van dan je alle %d wijzigingen wilt toepassen en wilt\n"
+#~ "afsluiten?"
+
+#~ msgid "Are you sure to close and lost all %d changes?"
+#~ msgstr ""
+#~ "Weet je zeker dat je wilt afsluiten en alle %d wijzigingen wilt annuleren?"
+
+#~ msgid "Are you sure to refresh this %d service(s)?"
+#~ msgstr "Weet je zeker dat je deze %d kana(a)l(en) wilt verwijderen?"
+
+#~ msgid "Are you sure to close and lost all %d selections?"
+#~ msgstr "Weet jij zeker dat je wilt afsluiten en alle %d verliest?"
+
+#~ msgid "Are you sure to copy this %d service(s)?"
+#~ msgstr "Deze %d geselecteerde kanalen toevoegen aan het bronbouquet?"
+
+#~ msgid "Are you sure to remove this %d service(s)?"
+#~ msgstr "Weet je zeker dat je deze %d kanalen wilt verwijderen?"
 
 #~ msgid "Test 'Refresh services in target bouquet'"
 #~ msgstr "Test 'Ververs kanalen in doel boeket'"
