@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # for localized messages  	 
 from . import _
 #
@@ -27,6 +28,7 @@ def main(session, servicelist=None, **kwargs):
 	Servicelist = servicelist or Screens.InfoBar.InfoBar.instance.servicelist
 	if Servicelist and Servicelist.getRoot() is not None:
 		import ui
+		ui.setPluginCatalog()
 		session.openWithCallback(ui.closed, ui.refreshBouquet, Servicelist)
 
 def Plugins(path,**kwargs):

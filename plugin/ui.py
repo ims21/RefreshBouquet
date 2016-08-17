@@ -1,9 +1,10 @@
-# for localized messages  	 
+# -*- coding: utf-8 -*-
+# for localized messages
 from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.48"
+VERSION = "1.49"
 #  by ims (c) 2016 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -46,8 +47,10 @@ config.plugins.refreshbouquet.preview = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.autotoggle = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.on_end = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.orbital = NoSave(ConfigSelection(default = "x", choices = [("x",_("no")),]))
-#config.plugins.refreshbouquet.replace36only = ConfigYesNo(default = False)
+
 cfg = config.plugins.refreshbouquet
+
+dummyText = _("Question") + _("yes")+ _("Select")
 
 TV = (1, 17, 22, 25, 31, 134, 195)
 RADIO = (2, 10)
@@ -274,13 +277,6 @@ class refreshBouquet(Screen, HelpableScreen):
 								select = False
 							except:
 								debug("Unique: %s" % self.charsOnly(s[0]))
-#							if cfg.replace36only.value:
-#								# new = in replaced service are changed ([3]-[6]) only
-#								new = ":".join((t_splited[0],t_splited[1],t_splited[2],s_splited[3],s_splited[4],s_splited[5],s_splited[6],t_splited[7],t_splited[8],t_splited[9],t_splited[10]))
-#								differences.addSelection(s[0], [new, t[1]], i, select)
-#							else:
-#								# name, [new ref, old ref], index, selected
-#								differences.addSelection(s[0], [s[1], t[1]], i, select)
 							# name, [new ref, old ref], index, selected
 							differences.addSelection(s[0], [s[1], t[1]], i, select)
 							debug("Added: %s" % self.charsOnly(s[0]))
@@ -811,7 +807,8 @@ class refreshBouquetManualSelection(Screen):
 	def replaceService(self):
 		nr_items = len(self.changedTargetdata)
 		if nr_items:
-			self.session.openWithCallback(self.replaceTargetBouquet, MessageBox, ngettext("Are you sure to apply %d change and close?" ,"Are you sure to apply all %d changes and close?", nr_items) % nr_items, MessageBox.TYPE_YESNO, default=False )
+			text = ngettext("Are you sure to apply %d change and close?" ,"Are you sure to apply all %d changes and close?", nr_items) % nr_items
+			self.session.openWithCallback(self.replaceTargetBouquet, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
 
 	def replaceTargetBouquet(self, answer): # self.target_services: [0] - new name, [1] - old ref, [2] - new ref, [3] - index,
 		if answer == True:
@@ -854,7 +851,8 @@ class refreshBouquetManualSelection(Screen):
 	def exit(self):
 		nr_items = len(self.changedTargetdata)
 		if nr_items:
-			self.session.openWithCallback(self.callBackExit, MessageBox, ngettext("Are you sure to close and lost %d change?", "Are you sure to close and lost all %d changes?", nr_items) % nr_items, MessageBox.TYPE_YESNO, default=False )
+			text = ngettext("Are you sure to close and lost %d change?", "Are you sure to close and lost all %d changes?", nr_items) % nr_items
+			self.session.openWithCallback(self.callBackExit, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
 		else:
 			self.close()
 
@@ -932,7 +930,8 @@ class refreshBouquetRefreshServices(Screen):
 	def replaceSelectedEntries(self):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
-			self.session.openWithCallback(self.replaceService, MessageBox, ngettext("Are you sure to refresh this %d service?", "Are you sure to refresh this %d services?", nr_items) % nr_items, MessageBox.TYPE_YESNO, default=False )
+			text = ngettext("Are you sure to refresh this %d service?", "Are you sure to refresh this %d services?", nr_items) % nr_items
+			self.session.openWithCallback(self.replaceService, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
 
 	def replaceService(self, answer):
 		if answer == True:
@@ -967,7 +966,8 @@ class refreshBouquetRefreshServices(Screen):
 	def exit(self):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
-			self.session.openWithCallback(self.callBackExit, MessageBox, ngettext("Are you sure to close and lost %d selection?", "Are you sure to close and lost all %d selections?", nr_items) % nr_items, MessageBox.TYPE_YESNO, default=False )
+			text = ngettext("Are you sure to close and lost %d selection?", "Are you sure to close and lost all %d selections?", nr_items) % nr_items
+			self.session.openWithCallback(self.callBackExit, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
 		else:
 			self.close()
 
@@ -1058,7 +1058,8 @@ class refreshBouquetCopyServices(Screen):
 	def copyCurrentEntries(self):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
-			self.session.openWithCallback(self.copyToTarget, MessageBox, ngettext("Are you sure to copy this %d service?", "Are you sure to copy this %d services?", nr_items) % nr_items, MessageBox.TYPE_YESNO, default=False )
+			text = ngettext("Are you sure to copy this %d service?", "Are you sure to copy this %d services?", nr_items) % nr_items
+			self.session.openWithCallback(self.copyToTarget, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
 
 	def copyToTarget(self, answer):
 		if answer == True:
@@ -1082,7 +1083,8 @@ class refreshBouquetCopyServices(Screen):
 	def exit(self):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
-			self.session.openWithCallback(self.callBackExit, MessageBox, ngettext("Are you sure to close and lost %d selection?", "Are you sure to close and lost all %d selections?", nr_items) % nr_items, MessageBox.TYPE_YESNO, default=False )
+			text = ngettext("Are you sure to close and lost %d selection?", "Are you sure to close and lost all %d selections?", nr_items) % nr_items
+			self.session.openWithCallback(self.callBackExit, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
 		else:
 			self.close()
 
@@ -1155,7 +1157,8 @@ class refreshBouquetRemoveServices(Screen):
 	def removeCurrentEntries(self):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
-			self.session.openWithCallback(self.removeFromSource, MessageBox, ngettext("Are you sure to remove this %d service?", "Are you sure to remove this %d services?", nr_items) % nr_items, MessageBox.TYPE_YESNO, default=False )
+			text = ngettext("Are you sure to remove this %d service?", "Are you sure to remove this %d services?", nr_items) % nr_items
+			self.session.openWithCallback(self.removeFromSource, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
 
 	def removeFromSource(self, answer):
 		if answer == True:
@@ -1181,7 +1184,8 @@ class refreshBouquetRemoveServices(Screen):
 	def exit(self):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
-			self.session.openWithCallback(self.callBackExit, MessageBox, ngettext("Are you sure to close and lost %d selection?", "Are you sure to close and lost all %d selections?", nr_items) % nr_items, MessageBox.TYPE_YESNO, default=False )
+			text = ngettext("Are you sure to close and lost %d selection?", "Are you sure to close and lost all %d selections?", nr_items) % nr_items
+			self.session.openWithCallback(self.callBackExit, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
 		else:
 			self.close()
 
@@ -1239,7 +1243,6 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Return to previous service on end"), cfg.on_end))
 #		refreshBouquetCfglist.append(getConfigListEntry(_("Save log for manual replace"), cfg.log))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Debug info"), cfg.debug))
-#		refreshBouquetCfglist.append(getConfigListEntry(_("For test only - do not use"), cfg.replace36only))
 		ConfigListScreen.__init__(self, refreshBouquetCfglist, session, on_change = self.changedEntry)
 
 		self.onChangedEntry = []
@@ -1276,4 +1279,15 @@ def freeMemory():
 	os.system("echo 3 > /proc/sys/vm/drop_caches")
 
 def closed(ret=False):
+	setEnigmaCatalog()
 	freeMemory()
+
+# for ngettext in external plugin
+import gettext
+from Components.Language import language
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
+
+def setPluginCatalog():
+	gettext.translation('RefreshBouquet', resolveFilename(SCOPE_PLUGINS, 'Extensions/RefreshBouquet/locale'), languages=[language.getLanguage()]).install(names=("ngettext", "pgettext"))
+def setEnigmaCatalog():
+	gettext.translation('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), languages=[language.getLanguage()]).install(names=("ngettext", "pgettext"))
