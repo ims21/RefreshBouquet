@@ -200,9 +200,9 @@ class refreshBouquet(Screen, HelpableScreen):
 			elif orbpos == 0xffff:
 				return _("Cable")
 			if orbpos > 1800:
-				return str((float(3600 - orbpos)) / 10.0) + "\xc2\xb0 W"
+				return str((float(3600 - orbpos)) / 10.0) + "° W"
 			elif orbpos > 0:
-				return str((float(orbpos)) / 10.0) + "\xc2\xb0 E"
+				return str((float(orbpos)) / 10.0) + "° E"
 			return "unknown"
 
 		op = []
