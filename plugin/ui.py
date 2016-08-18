@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.49"
+VERSION = "1.50"
 #  by ims (c) 2016 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -50,7 +50,7 @@ config.plugins.refreshbouquet.orbital = NoSave(ConfigSelection(default = "x", ch
 
 cfg = config.plugins.refreshbouquet
 
-dummyText = _("Question") + _("yes")+ _("Select")
+dummy_text = _("Question") + _("yes")+ _("Select") + _("Information")
 
 TV = (1, 17, 22, 25, 31, 134, 195)
 RADIO = (2, 10)
@@ -112,14 +112,14 @@ class refreshBouquet(Screen, HelpableScreen):
 		self["key_green"] = Button(_("Run"))
 		self["key_yellow"] = Button(_("Set source"))
 		self["key_blue"] = Button(_("Set target"))
-		
+
 		self["config"] = List([])
 		self["source_text"] = Label(_("Source bouquet:"))
 		self["target_text"] = Label(_("Target bouquet:"))
 		self["source_name"] = Label()
 		self["target_name"] = Label()
 		self["info"] = Label(_("Select or source or source and target bouquets !"))
-		
+
 		self.sourceItem = None
 		self.targetItem = None
 
@@ -649,12 +649,12 @@ class refreshBouquetManualSelection(Screen):
 
 		self.listSource = sourceList
 		self["sources"] = self.listSource
-		
+
 		self.target_services = target_services
 
 		self.listTarget = MenuList(self.target_services)
 		self["targets"] = self.listTarget
-		
+
 		self["source"] = Label()
 		self["target"] = Label()
 		self["info"] = Label()
@@ -723,7 +723,7 @@ class refreshBouquetManualSelection(Screen):
 			self["key_blue"].setText(_("Replace"))
 		if cfg.autotoggle.value:
 			self.switchLists()
-		
+
 	def replaceTarget(self):
 		if self.targetRecord != "" and self.sourceRecord != "":
 #		insert(index, hodnota)
@@ -753,7 +753,6 @@ class refreshBouquetManualSelection(Screen):
 		else:
 			self["key_yellow"].setText("")
 			self["Service"].newService(None)
-		
 
 	def previewService(self):
 		ref = self[self.currList].getCurrent()[1]
@@ -809,6 +808,8 @@ class refreshBouquetManualSelection(Screen):
 		if nr_items:
 			text = ngettext("Are you sure to apply %d change and close?" ,"Are you sure to apply all %d changes and close?", nr_items) % nr_items
 			self.session.openWithCallback(self.replaceTargetBouquet, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+		else:
+			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3 )
 
 	def replaceTargetBouquet(self, answer): # self.target_services: [0] - new name, [1] - old ref, [2] - new ref, [3] - index,
 		if answer == True:
@@ -830,7 +831,7 @@ class refreshBouquetManualSelection(Screen):
 						mutableList.addService(old)
 						mutableList.moveService(old, index)
 						mutableList.flushChanges()
-			
+
 					mutableList.removeService(old, False)
 					mutableList.addService(new)
 					mutableList.moveService(new, index)
@@ -932,6 +933,8 @@ class refreshBouquetRefreshServices(Screen):
 		if nr_items:
 			text = ngettext("Are you sure to refresh this %d service?", "Are you sure to refresh this %d services?", nr_items) % nr_items
 			self.session.openWithCallback(self.replaceService, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+		else:
+			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3 )
 
 	def replaceService(self, answer):
 		if answer == True:
@@ -1060,6 +1063,8 @@ class refreshBouquetCopyServices(Screen):
 		if nr_items:
 			text = ngettext("Are you sure to copy this %d service?", "Are you sure to copy this %d services?", nr_items) % nr_items
 			self.session.openWithCallback(self.copyToTarget, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+		else:
+			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3 )
 
 	def copyToTarget(self, answer):
 		if answer == True:
@@ -1159,6 +1164,8 @@ class refreshBouquetRemoveServices(Screen):
 		if nr_items:
 			text = ngettext("Are you sure to remove this %d service?", "Are you sure to remove this %d services?", nr_items) % nr_items
 			self.session.openWithCallback(self.removeFromSource, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+		else:
+			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3 )
 
 	def removeFromSource(self, answer):
 		if answer == True:

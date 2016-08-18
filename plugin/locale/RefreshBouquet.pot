@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-17 14:34+0200\n"
+"POT-Creation-Date: 2016-08-18 18:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,6 +34,9 @@ msgid "yes"
 msgstr ""
 
 msgid "Select"
+msgstr ""
+
+msgid "Information"
 msgstr ""
 
 #, python-format
@@ -154,6 +157,9 @@ msgid "Are you sure to apply %d change and close?"
 msgid_plural "Are you sure to apply all %d changes and close?"
 msgstr[0] ""
 msgstr[1] ""
+
+msgid "Nothing for processing..."
+msgstr ""
 
 #, python-format
 msgid "Are you sure to close and lost %d change?"

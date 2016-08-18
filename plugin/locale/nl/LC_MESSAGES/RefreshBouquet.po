@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-17 16:03+0200\n"
-"PO-Revision-Date: 2016-08-18 08:43+0200\n"
+"PO-Revision-Date: 2016-08-18 18:47+0200\n"
 "Last-Translator: TechNL <tech@openpli.org>\n"
 "Language-Team: PLi <translators@openpli.org>\n"
 "Language: nl\n"
@@ -30,6 +30,9 @@ msgstr "ja"
 
 msgid "Select"
 msgstr "Kies"
+
+msgid "Information"
+msgstr "Informatie"
 
 #, python-format
 msgid "RefreshBouquet v. %s"
@@ -148,6 +151,9 @@ msgid "Are you sure to apply %d change and close?"
 msgid_plural "Are you sure to apply all %d changes and close?"
 msgstr[0] "Weet jij zeker dat je wilt afsluiten en de wijziging voor %d verliest?"
 msgstr[1] "Ben je zeker dat de %d wijzigingen wilt toepassen en afsluiten?"
+
+msgid "Nothing for processing..."
+msgstr "Niets voor de verwerking..."
 
 #, python-format
 msgid "Are you sure to close and lost %d change?"
