@@ -26,10 +26,11 @@ config.plugins.refreshbouquet.channel_context_menu = ConfigYesNo(default = True)
 def main(session, servicelist=None, **kwargs):
 	import Screens.InfoBar
 	Servicelist = servicelist or Screens.InfoBar.InfoBar.instance.servicelist
-	if Servicelist and Servicelist.getRoot() is not None:
+	currentBouquet = Servicelist and Servicelist.getRoot()
+	if currentBouquet is not None:
 		import ui
-		ui.setPluginCatalog()
-		session.openWithCallback(ui.closed, ui.refreshBouquet, Servicelist)
+		ui.setPluginCatalog() # for prlugin's xgettext catalog
+		session.openWithCallback(ui.closed, ui.refreshBouquet, Servicelist, currentBouquet)
 
 def Plugins(path,**kwargs):
 	name= _("RefreshBouquet")

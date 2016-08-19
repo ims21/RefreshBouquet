@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.50"
+VERSION = "1.51"
 #  by ims (c) 2016 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -47,6 +47,7 @@ config.plugins.refreshbouquet.preview = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.autotoggle = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.on_end = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.orbital = NoSave(ConfigSelection(default = "x", choices = [("x",_("no")),]))
+config.plugins.refreshbouquet.current_bouquet = ConfigSelection(default = "0", choices = [("0",_("no")),("source",_("source bouquet")),("target",_("target bouquet"))])
 
 cfg = config.plugins.refreshbouquet
 
@@ -85,13 +86,13 @@ class refreshBouquet(Screen, HelpableScreen):
 		<widget name="info" position="5,368" zPosition="2" size="550,25" valign="center" halign="left" font="Regular;22" foregroundColor="white" />
 	</screen>"""
 
-	def __init__(self, session, Servicelist=None):
+	def __init__(self, session, Servicelist=None, currentBouquet=None):
 		self.skin = refreshBouquet.skin
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 
 		self.Servicelist = Servicelist
-
+		currentBouquet = ( ServiceReference(currentBouquet).getServiceName(), currentBouquet)
 		self.setTitle(_("RefreshBouquet v. %s" % VERSION))
 
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
@@ -125,6 +126,11 @@ class refreshBouquet(Screen, HelpableScreen):
 
 		self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.onLayoutFinish.append(self.getBouquetList)
+
+		if cfg.current_bouquet.value == "source":
+			self.getSource(currentBouquet)
+		elif cfg.current_bouquet.value == "target":
+			self.getTarget(currentBouquet)
 
 	def exit(self):
 		self.Servicelist.servicelist.resetRoot()
@@ -179,16 +185,22 @@ class refreshBouquet(Screen, HelpableScreen):
 			return
 
 # get name for source bouquet
-	def getSource(self):
-		self["info"].setText("")
-		current = self["config"].getCurrent()
+	def getSource(self, currentBouquet=None):
+		if currentBouquet is not None:
+			current = currentBouquet
+		else:
+			current = self["config"].getCurrent()
+			self["info"].setText("")
 		self["source_name"].setText(current[0])
 		self.sourceItem = current
 		self.setOrbitalFilterConfig(self.sourceItem)
 # get name for target bouquet
-	def getTarget(self):
-		self["info"].setText("")
-		current = self["config"].getCurrent()
+	def getTarget(self, currentBouquet=None):
+		if currentBouquet is not None:
+			current = currentBouquet
+		else:
+			current = self["config"].getCurrent()
+			self["info"].setText("")
 		self["target_name"].setText(current[0])
 		self.targetItem = current
 # get orbital positions in source bouquets to config for filtering
@@ -1248,6 +1260,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Auto toggle in manually replacing"), cfg.autotoggle))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Display in Channellist context menu"), cfg.channel_context_menu))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Return to previous service on end"), cfg.on_end))
+		refreshBouquetCfglist.append(getConfigListEntry(_("On plugin start use current bouquet as source or as target"), cfg.current_bouquet))
 #		refreshBouquetCfglist.append(getConfigListEntry(_("Save log for manual replace"), cfg.log))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Debug info"), cfg.debug))
 		ConfigListScreen.__init__(self, refreshBouquetCfglist, session, on_change = self.changedEntry)
