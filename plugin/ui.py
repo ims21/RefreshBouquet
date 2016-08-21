@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.51"
+VERSION = "1.52"
 #  by ims (c) 2016 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -17,9 +17,9 @@ VERSION = "1.51"
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 #
-from enigma import eServiceCenter, eServiceReference
-from ServiceReference import ServiceReference
 
+from ServiceReference import ServiceReference
+from enigma import eServiceCenter, eServiceReference, eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, getDesktop
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
@@ -30,11 +30,14 @@ from Components.Button import Button
 from Components.Sources.List import List
 from Screens.ChoiceBox import ChoiceBox
 from Components.ScrollLabel import ScrollLabel
-from Components.SelectionList import SelectionList
 from Components.MenuList import MenuList
 from Components.ConfigList import ConfigListScreen
 from Screens.MessageBox import MessageBox
 from Components.Sources.ServiceEvent import ServiceEvent
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
+from Tools.LoadPixmap import LoadPixmap
+import skin
+from plugin import plugin_path
 
 config.plugins.refreshbouquet.case_sensitive = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.strip = ConfigYesNo(default = False)
@@ -52,6 +55,10 @@ config.plugins.refreshbouquet.current_bouquet = ConfigSelection(default = "0", c
 cfg = config.plugins.refreshbouquet
 
 dummy_text = _("Question") + _("yes")+ _("Select") + _("Information")
+
+HD = False
+if getDesktop(0).size().width() > 1280:
+	HD = True
 
 TV = (1, 17, 22, 25, 31, 134, 195)
 RADIO = (2, 10)
@@ -238,7 +245,7 @@ class refreshBouquet(Screen, HelpableScreen):
 # Replace service-reference for services in target with same name as in source
 #
 	def actualizeServices(self):
-		data = SelectionList([])
+		data = MySelectionList([])
 		if self.sourceItem and self.targetItem:
 			target = self.getServices(self.targetItem[0])
 			source = self.getServices(self.sourceItem[0])
@@ -257,7 +264,7 @@ class refreshBouquet(Screen, HelpableScreen):
 # looking new service reference for target service - returns service name, old service reference, new service reference and position in target bouquet
 
 	def compareServices(self, source_services, target_services):
-		differences = SelectionList([])
+		differences = MySelectionList([])
 		potencialy_duplicity = []
 		i = 0 # index
 		length = 0 # found items
@@ -299,7 +306,7 @@ class refreshBouquet(Screen, HelpableScreen):
 # Add missing services to source bouquet or all services to empty bouquet
 ###
 	def addMissingServices(self):
-		data = SelectionList([])
+		data = MySelectionList([])
 		if self.sourceItem and self.targetItem:
 			target = self.getServices(self.targetItem[0])
 			source = self.getServices(self.sourceItem[0])
@@ -365,7 +372,7 @@ class refreshBouquet(Screen, HelpableScreen):
 # remove selected service (by user) in target directory
 ###
 	def removeServices(self):
-		data = SelectionList([])
+		data = MySelectionList([])
 		if self.sourceItem:
 			source = self.getServices(self.sourceItem[0])
 			if not len(source):
@@ -461,7 +468,7 @@ class refreshBouquet(Screen, HelpableScreen):
 # Add selected services (by user) to target bouquet
 ###
 	def addServices(self):
-		data = SelectionList([])
+		data = MySelectionList([])
 		if self.sourceItem and self.targetItem:
 			target = self.getServices(self.targetItem[0])
 			source = self.getServices(self.sourceItem[0])
@@ -887,10 +894,11 @@ class refreshBouquetRefreshServices(Screen):
 
 		self["Service"] = ServiceEvent()
 
+		setIcon()
+
 		self.list = list
 		if cfg.sort.value:
 			self.list.sort()
-		self["services"] = SelectionList()
 		self["services"] = self.list
 
 		self["actions"] = ActionMap(["OkCancelActions", "RefreshBouquetActions"],
@@ -1023,10 +1031,11 @@ class refreshBouquetCopyServices(Screen):
 
 		( self.target_bouquetname, self.target ) = target
 
+		setIcon()
+
 		self.list = list
 		if cfg.sort.value:
 			self.list.sort()
-		self["services"] = SelectionList()
 		self["services"] = self.list
 
 		self["actions"] = ActionMap(["OkCancelActions", "RefreshBouquetActions"],
@@ -1120,10 +1129,11 @@ class refreshBouquetRemoveServices(Screen):
 
 		( self.source_bouquetname, self.source ) = source
 
+		setIcon(True)
+
 		self.list = list
 		if cfg.sort.value:
 			self.list.sort()
-		self["services"] = SelectionList()
 		self["services"] = self.list
 
 		self["Service"] = ServiceEvent()
@@ -1288,6 +1298,65 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 
 	def exit(self):
 		self.keyCancel()
+		
+# change select icons for list operation
+def setIcon(delete=False):
+	
+	res = "_sd"
+	if HD:
+		res = ""
+	global select_png
+	select_png = None
+	if delete == True:
+		select_png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, plugin_path + "/png/select_del%s.png" % res))
+	else:
+		select_png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, plugin_path + "/png/select_on%s.png" % res))
+	if select_png is None:
+		select_png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/lock_on.png"))
+
+select_png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/lock_on.png"))
+
+def MySelectionEntryComponent(description, value, index, selected):
+	dx, dy, dw, dh = skin.parameters.get("SelectionListDescr",(35, 2, 650, 30))
+	res = [
+		(description, value, index, selected),
+		(eListboxPythonMultiContent.TYPE_TEXT, dx, dy, dw, dh, 0, RT_HALIGN_LEFT, description)
+	]
+	if selected:
+		ix, iy, iw, ih = skin.parameters.get("SelectionListLock",(0, 0, 24, 24))
+		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, ix, iy, iw, ih, select_png))
+	return res
+
+class MySelectionList(MenuList):
+	def __init__(self, list = None, enableWrapAround = False):
+		MenuList.__init__(self, list or [], enableWrapAround, content = eListboxPythonMultiContent)
+		font = skin.fonts.get("SelectionList", ("Regular", 20, 30))
+		self.l.setFont(0, gFont(font[0], font[1]))
+		self.l.setItemHeight(font[2])
+
+	def addSelection(self, description, value, index, selected = True):
+		self.list.append(MySelectionEntryComponent(description, value, index, selected))
+		self.setList(self.list)
+
+	def toggleSelection(self):
+		idx = self.getSelectedIndex()
+		item = self.list[idx][0]
+		self.list[idx] = MySelectionEntryComponent(item[0], item[1], item[2], not item[3])
+		self.setList(self.list)
+
+	def getSelectionsList(self):
+		return [ (item[0][0], item[0][1], item[0][2]) for item in self.list if item[0][3] ]
+
+	def toggleAllSelection(self):
+		for idx,item in enumerate(self.list):
+			item = self.list[idx][0]
+			self.list[idx] = MySelectionEntryComponent(item[0], item[1], item[2], not item[3])
+		self.setList(self.list)
+
+	def sort(self, sortType=False, flag=False):
+		# sorting by sortType: # 0 - description, 1 - value, 2 - index, 3 - selected
+		self.list.sort(key=lambda x: x[0][sortType],reverse=flag)
+		self.setList(self.list)
 
 def debug(message):
 	if cfg.debug.value:

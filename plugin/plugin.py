@@ -23,6 +23,8 @@ from Components.config import ConfigSubsection, config, ConfigYesNo
 config.plugins.refreshbouquet = ConfigSubsection()
 config.plugins.refreshbouquet.channel_context_menu = ConfigYesNo(default = True)
 
+plugin_path = None
+
 def main(session, servicelist=None, **kwargs):
 	import Screens.InfoBar
 	Servicelist = servicelist or Screens.InfoBar.InfoBar.instance.servicelist
@@ -33,6 +35,8 @@ def main(session, servicelist=None, **kwargs):
 		session.openWithCallback(ui.closed, ui.refreshBouquet, Servicelist, currentBouquet)
 
 def Plugins(path,**kwargs):
+	global plugin_path
+	plugin_path = path
 	name= _("RefreshBouquet")
 	descr=_("Actualize services in bouquets")
 	list = [PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_PLUGINMENU, icon = "refreshbouquet.png", needsRestart = False, fnc=main)]
