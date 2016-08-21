@@ -189,48 +189,46 @@ class refreshBouquet(Screen, HelpableScreen):
 
 # get name for source bouquet
 	def getSource(self, currentBouquet=None):
-		if currentBouquet is not None:
+		if currentBouquet is not None: # set current bouquet
 			current = currentBouquet
 		else:
 			current = self["config"].getCurrent()
 			self["info"].setText("")
 		self["source_name"].setText(current[0])
 		self.sourceItem = current
-		self.setOrbitalFilterConfig(self.sourceItem)
+		self.setBouquetsOrbitalPositionsConfigFilter(self.sourceItem)
 # get name for target bouquet
 	def getTarget(self, currentBouquet=None):
-		if currentBouquet is not None:
+		if currentBouquet is not None: # set current bouquet
 			current = currentBouquet
 		else:
 			current = self["config"].getCurrent()
 			self["info"].setText("")
 		self["target_name"].setText(current[0])
 		self.targetItem = current
-# get orbital positions in source bouquets to config for filtering
-	def setOrbitalFilterConfig(self, sourceItem):
-
-		def op2human(orbpos):
-			if orbpos == 0xeeee:
+# get services orbital positions in source bouquets to config for filtering
+	def setBouquetsOrbitalPositionsConfigFilter(self, sourceItem):
+		def op2human(orb_pos):
+			if orb_pos == 0xeeee:
 				return _("Terrestrial")
-			elif orbpos == 0xffff:
+			elif orb_pos == 0xffff:
 				return _("Cable")
-			if orbpos > 1800:
-				return str((float(3600 - orbpos)) / 10.0) + "° W"
-			elif orbpos > 0:
-				return str((float(orbpos)) / 10.0) + "° E"
+			if orb_pos > 1800:
+				return str((float(3600 - orb_pos)) / 10.0) + "° W"
+			elif orb_pos > 0:
+				return str((float(orb_pos)) / 10.0) + "° E"
 			return "unknown"
-
 		op = []
 		new_choices = [("x",_("no"))]
 		source = self.getServices(sourceItem[0])
 		for service in source:
-			opHexStr = service[1].split(':')[6][0:-4]
-			opTXT = op2human(int(opHexStr,16))
+			op_hex_str = service[1].split(':')[6][0:-4]
+			op_txt = op2human(int(op_hex_str,16))
 			try:
-				tmp = op.index((opHexStr,opTXT))
+				tmp = op.index((op_hex_str,op_txt))
 			except:
-				op.append((opHexStr,opTXT))
-				new_choices.append(("%s" % opHexStr ,"%s" % opTXT))
+				op.append((op_hex_str,op_txt))
+				new_choices.append(("%s" % op_hex_str ,"%s" % op_txt))
 		config.plugins.refreshbouquet.orbital = NoSave(ConfigSelection(default = "x", choices = new_choices))
 
 # call refreshService as replace		
@@ -485,7 +483,6 @@ class refreshBouquet(Screen, HelpableScreen):
 				data.addSelection(i[0], i[1], nr, False)
 			self.session.open(refreshBouquetCopyServices, data, self.targetItem)
 
-
 # returns all services from bouquet (without notes atc ...)
 
 	def addToBouquetFiltered(self, source):
@@ -522,7 +519,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			return True
 		return False
 
-# test if is 'HD' in name
+# test for 'HD' in service name
 
 	def isHDinName(self, name):
 		if name.find('HD') != -1:
@@ -621,7 +618,8 @@ class refreshBouquet(Screen, HelpableScreen):
 	def options(self):
 		self.session.openWithCallback(self.afterConfig, refreshBouquetCfg)
 
-# callBack for CFG
+# callBack for Config
+
 	def afterConfig(self, data=None):
 		self.showMenu()
 
@@ -846,12 +844,10 @@ class refreshBouquetManualSelection(Screen):
 						mutableList.addService(old)
 						mutableList.moveService(old, index)
 						mutableList.flushChanges()
-
 					mutableList.removeService(old, False)
 					mutableList.addService(new)
 					mutableList.moveService(new, index)
 					mutableList.flushChanges()
-
 					if cfg.log.value:
 						fo.write("%s|%s| replaced with |%s|%s| at |%s\n" % (data[4],data[1],data[0],data[2],data[3]+1))
 			if cfg.log.value:
@@ -1294,7 +1290,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 
 	def exit(self):
 		self.keyCancel()
-		
+
 # change select icons in list operation
 def setIcon(delete=False):
 	global select_png
