@@ -275,9 +275,9 @@ class refreshBouquet(Screen, HelpableScreen):
 					continue
 				s_splited = s[1].split(':') # split service_reference
 				s_core = ":".join((s_splited[3],s_splited[4],s_splited[5],s_splited[6]))
-#				if cfg.orbital.value != "x": # only on selected op
-#					if s_splited[6][:-4] != cfg.orbital.value:
-#						continue
+				if cfg.orbital.value != "x": # only on selected op
+					if s_splited[6][:-4] != cfg.orbital.value:
+						continue
 				if t_name == self.prepareStr(s[0]): # services with same name founded
 					s_splited = s[1].split(':') # split ref
 					if t_op == s_splited[6][0:-4]: # same orbital position only
@@ -338,6 +338,9 @@ class refreshBouquet(Screen, HelpableScreen):
 			if cfg.hd.value:
 				if not self.isHDinName(s[0]):
 					debug("Drop (SD): %s %s" % (s[0], s[1]))
+					continue
+			if cfg.orbital.value != "x":
+				if s[1].split(':')[6][:-4] != cfg.orbital.value:
 					continue
 			add = 1
 			for t in target: # services in target bouquet
