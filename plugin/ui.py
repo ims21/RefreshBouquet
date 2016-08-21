@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.52"
+VERSION = "1.53"
 #  by ims (c) 2016 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -55,10 +55,6 @@ config.plugins.refreshbouquet.current_bouquet = ConfigSelection(default = "0", c
 cfg = config.plugins.refreshbouquet
 
 dummy_text = _("Question") + _("yes")+ _("Select") + _("Information")
-
-HD = False
-if getDesktop(0).size().width() > 1280:
-	HD = True
 
 TV = (1, 17, 22, 25, 31, 134, 195)
 RADIO = (2, 10)
@@ -1299,18 +1295,17 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 	def exit(self):
 		self.keyCancel()
 		
-# change select icons for list operation
+# change select icons in list operation
 def setIcon(delete=False):
-	
-	res = "_sd"
-	if HD:
-		res = ""
 	global select_png
+	resolution = ""
+	if getDesktop(0).size().width() <= 1280:
+		resolution = "_sd"
 	select_png = None
-	if delete == True:
-		select_png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, plugin_path + "/png/select_del%s.png" % res))
+	if delete:
+		select_png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, plugin_path + "/png/select_del%s.png" % resolution))
 	else:
-		select_png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, plugin_path + "/png/select_on%s.png" % res))
+		select_png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, plugin_path + "/png/select_on%s.png" % resolution))
 	if select_png is None:
 		select_png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/lock_on.png"))
 
