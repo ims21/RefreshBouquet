@@ -261,7 +261,7 @@ msgid "Return to previous service on end"
 msgstr "Keer terug naar het laatste kanaal"
 
 msgid "On plugin start use current bouquet as source or as target"
-msgstr ""
+msgstr "Gebruik huidig bouquet als bron of als doel als de plugin wordt gestart"
 
 msgid "Debug info"
 msgstr "Debug informatie"
