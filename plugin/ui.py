@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.53"
+VERSION = "1.54"
 #  by ims (c) 2016 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -222,6 +222,8 @@ class refreshBouquet(Screen, HelpableScreen):
 		new_choices = [("x",_("no"))]
 		source = self.getServices(sourceItem[0])
 		for service in source:
+			if self.isNotService(service[1]):
+				continue
 			op_hex_str = service[1].split(':')[6][0:-4]
 			op_txt = op2human(int(op_hex_str,16))
 			try:
