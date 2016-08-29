@@ -1,0 +1,280 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: refreshBouquet\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-29 18:20+0100\n"
+"PO-Revision-Date: 2016-08-29 20:35+0300\n"
+"Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.4\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Language-Team: \n"
+"Language: ru_RU\n"
+
+msgid "RefreshBouquet"
+msgstr "Обновление букета"
+
+msgid "Actualize services in bouquets"
+msgstr "Актуализировать сервисы в букетах"
+
+msgid "no"
+msgstr "нет"
+
+msgid "source bouquet"
+msgstr "исходный букет"
+
+msgid "target bouquet"
+msgstr "целевой букет"
+
+msgid "Question"
+msgstr "Вопрос"
+
+msgid "yes"
+msgstr "да"
+
+msgid "Select"
+msgstr "Выбор"
+
+msgid "Information"
+msgstr "Информация"
+
+#, python-format
+msgid "RefreshBouquet v. %s"
+msgstr "Обновление букета вер. %s"
+
+msgid "exit plugin"
+msgstr "выход из плагина"
+
+msgid "select action"
+msgstr "выбор действия"
+
+msgid "select source bouquet "
+msgstr "выбор исходного букета "
+
+msgid "select target bouquet "
+msgstr "выбор целевого букета "
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Run"
+msgstr "Запуск"
+
+msgid "Set source"
+msgstr "Установить исходник"
+
+msgid "Set target"
+msgstr "Установить целевой"
+
+msgid "Source bouquet:"
+msgstr "Исходный букет:"
+
+msgid "Target bouquet:"
+msgstr "Целевой букет:"
+
+msgid "Select or source or source and target bouquets !"
+msgstr "Выбор исходных или исходных/целевых букетов!"
+
+msgid "Select action for bouquet:"
+msgstr "Выбор действия для букета:"
+
+msgid "Remove selected services from source bouquet"
+msgstr "Удалить выбранные сервисы из исходного букета"
+
+msgid "Manually replace services"
+msgstr "Ручная замена сервисов"
+
+msgid "Add selected services to target bouquet"
+msgstr "Добавить выбранные сервисы в целевой букет"
+
+msgid "Add selected missing services to target bouquet"
+msgstr "Добавить выбранные отсутствующие сервисы в целевой букет"
+
+msgid "Remove selected services in source bouquet"
+msgstr "Удалить ыбранные сервисы из исходного букета"
+
+msgid "Refresh services in target bouquet"
+msgstr "Обновить сервисы в целевом букете"
+
+msgid "Settings..."
+msgstr "Настройки..."
+
+msgid "Wrong selection!"
+msgstr "Неправильный выбор!"
+
+msgid "Terrestrial"
+msgstr "Наземные"
+
+msgid "Cable"
+msgstr "Кабельные"
+
+msgid "Target bouquet is empty !"
+msgstr "Целевой букет пустой !"
+
+msgid "Source bouquet is empty !"
+msgstr "Исходный букет пустой !"
+
+msgid "No differences found"
+msgstr "Никаких различий не найдено"
+
+msgid "No services in source bouquet !"
+msgstr "Нет сервисов в исходном букете !"
+
+msgid "- select service for replace with OK"
+msgstr "- выбрать сервис для замены с помощью OK"
+
+#, python-format
+msgid "RefreshBouquet %s"
+msgstr "Обновление букета %s"
+
+msgid "Apply and close"
+msgstr "Применить и закрыть"
+
+msgid "Toggle source and target bouquets with Bouq +/-\n"
+msgstr "Смена мсходного и целевых букетов с помощью Bouq +/-\n"
+
+msgid ""
+"Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it "
+"with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'"
+msgstr ""
+"Подготовьте замену сервиса в целевой букет на сервис из исходного букета (выбор с помощью 'ОК') и замените "
+"с помощью 'Замена'. Повторите это, как Вам нужно. Завершить все с помощью 'Применить и закрыть'"
+
+msgid "Replace"
+msgstr "Замена"
+
+msgid "Preview"
+msgstr "Превью"
+
+#, python-format
+msgid "Are you sure to apply %d change and close?"
+msgid_plural "Are you sure to apply all %d changes and close?"
+msgstr[0] "Вы действительно хотите применить %d изменение и закрыть?"
+msgstr[1] "Вы действительно хотите применить %d изменения и закрыть?"
+msgstr[2] "Вы действительно хотите применить %d изменения и закрыть?"
+
+msgid "Nothing for processing..."
+msgstr "Нет ничего для обработки .."
+
+#, python-format
+msgid "Are you sure to close and lost %d change?"
+msgid_plural "Are you sure to close and lost all %d changes?"
+msgstr[0] "Вы действительно хотите закрыть и потерять %d изменение?"
+msgstr[1] "Вы действительно хотите закрыть и потерять %d изменения?"
+msgstr[2] "Вы действительно хотите закрыть и потерять %d изменения?"
+
+msgid "- results"
+msgstr "- результаты"
+
+msgid "Refresh selected"
+msgstr "Обновить выбраннное"
+
+msgid "Inversion"
+msgstr "Инверсия"
+
+msgid ""
+"This feature looking for differences in service parameters with same names in source and target bouquets. "
+"Parameters for marked services will be replaced. "
+msgstr ""
+"Эта функция ищет различия в параметрах сервиса с одинаковыми именами в исходных и целевых букетах. "
+"Параметры для отмеченных сервисов будут заменены."
+
+msgid ""
+"Posible duplicates will not be marked in list. Check validity with 'Preview' before mark and before "
+"'Refresh selected'."
+msgstr ""
+"Возможные дубликаты не будут отмечены в списке. Проверьте достоверность с помощью 'Превью' Перед меткой и "
+"перед 'Обновление выбранного'."
+
+msgid "Position"
+msgstr "Позиция"
+
+#, python-format
+msgid "Are you sure to refresh this %d service?"
+msgid_plural "Are you sure to refresh this %d services?"
+msgstr[0] "Вы действительно хотите обновить этот %d сервис?"
+msgstr[1] "Вы действительно хотите обновить эти %d сервисы?"
+msgstr[2] "Вы действительно хотите обновить эти %d сервиса?"
+
+#, python-format
+msgid "Are you sure to close and lost %d selection?"
+msgid_plural "Are you sure to close and lost all %d selections?"
+msgstr[0] "Вы действительно хотите закрыть и потерять %d выбранное?"
+msgstr[1] "Вы действительно хотите закрыть и потерять %d выбранных?"
+msgstr[2] "Вы действительно хотите закрыть и потерять все %d выбранных?"
+
+msgid "- select service(s) for adding with OK"
+msgstr "- выбор сервиса(ов) для добавления с помощью OK"
+
+msgid "Copy selected"
+msgstr "Копировать выбранное"
+
+msgid "Mark services with OK button and then copy these with 'Copy selected'"
+msgstr "Пометить сервисы с помощью OK и затем копировать с помощью 'Копировать выбранное'"
+
+#, python-format
+msgid "Are you sure to copy this %d service?"
+msgid_plural "Are you sure to copy this %d services?"
+msgstr[0] "Вы действительно хотите копировать этот %d сервис?"
+msgstr[1] "Вы действительно хотите копировать эти %d сервисы?"
+msgstr[2] "Вы действительно хотите копировать эти %d сервиса?"
+
+msgid "- select service(s) for remove with OK"
+msgstr "- выбор сервиса(ов) для удаления с помощью OK"
+
+msgid "Remove selected"
+msgstr "Удалить выбранное"
+
+msgid "Mark services with OK button and then remove these with 'Remove selected'"
+msgstr "Пометить сервисы с помощью OK и затем удалить с помощью 'Удалить выбранное'"
+
+#, python-format
+msgid "Are you sure to remove this %d service?"
+msgid_plural "Are you sure to remove this %d services?"
+msgstr[0] "Вы действительно хотите удалить этот %d сервис?"
+msgstr[1] "Вы действительно хотите удалить эти %d сервиса?"
+msgstr[2] "Вы действительно хотите копировать эти %d сервиса?"
+
+msgid "RefreshBouquet Setup"
+msgstr "Настройки обновления букета"
+
+msgid "OK"
+msgstr "ОК"
+
+msgid "Compare case sensitive"
+msgstr "Сравнивать с учетом регистра"
+
+msgid "Skip 1st nonstandard char in name"
+msgstr "Пропустить 1-ый нестандартный символ в названии"
+
+msgid "Sort services in source bouquets"
+msgstr "Сортировка сервисов в исходных букетах"
+
+msgid "Missing source services for manually replace only"
+msgstr "Отсутствующие сервисы исходника для ручной замены только"
+
+msgid "Filter services by orbital position in source"
+msgstr "Фильтр сервисов по орбитальной позиции в исходнике"
+
+msgid "Programs with 'HD' in name only for source"
+msgstr "Программы с 'HD' в названии только для исходника"
+
+msgid "Preview on selection"
+msgstr "Превью при выборе"
+
+msgid "Auto toggle in manually replacing"
+msgstr "Авто переключение к ручной замене"
+
+msgid "Display in Channellist context menu"
+msgstr "Показать в контекстном меню селектора каналов"
+
+msgid "Return to previous service on end"
+msgstr "Возврат к предыдущему сервису по окончании"
+
+msgid "On plugin start use current bouquet as source or as target"
+msgstr "При запуске плагина использовать текущий букет в качестве исходника/целевого букета"
+
+msgid "Debug info"
+msgstr "Информация отладки"
