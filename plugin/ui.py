@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.54"
+VERSION = "1.55"
 #  by ims (c) 2016 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -1373,6 +1373,9 @@ from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 
 def setPluginCatalog():
-	gettext.translation('RefreshBouquet', resolveFilename(SCOPE_PLUGINS, 'Extensions/RefreshBouquet/locale'), languages=[language.getLanguage()]).install(names=("ngettext", "pgettext"))
+	try:
+		gettext.translation('RefreshBouquet', resolveFilename(SCOPE_PLUGINS, 'Extensions/RefreshBouquet/locale'), languages=[language.getLanguage()]).install(names=("ngettext", "pgettext"))
+	except:
+		debug("missing %s translation" % language.getLanguage())
 def setEnigmaCatalog():
 	gettext.translation('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), languages=[language.getLanguage()]).install(names=("ngettext", "pgettext"))
