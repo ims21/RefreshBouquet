@@ -261,6 +261,9 @@ msgstr "Фильтр сервисов по орбитальной позиции
 msgid "Programs with 'HD' in name only for source"
 msgstr "Программы с 'HD' в названии только для исходника"
 
+msgid "Programs with '4K/UHD' in name only for source"
+msgstr "Программы с '4K/UHD' в названии только для исходника"
+
 msgid "Preview on selection"
 msgstr "Превью при выборе"
 

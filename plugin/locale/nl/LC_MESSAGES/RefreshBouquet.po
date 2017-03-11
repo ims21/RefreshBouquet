@@ -248,6 +248,9 @@ msgstr "Filter de kanalen van de bron op orbitale positie"
 msgid "Programs with 'HD' in name only for source"
 msgstr "Kanalen met 'HD' in de naam enkel voor de bron"
 
+msgid "Programs with '4K/UHD' in name only for source"
+msgstr "Kanalen met '4K/UHD' in de naam enkel voor de bron"
+
 msgid "Preview on selection"
 msgstr "Geef de zender weer tijdens de selectie"
 

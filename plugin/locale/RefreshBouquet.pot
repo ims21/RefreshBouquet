@@ -262,6 +262,9 @@ msgstr ""
 msgid "Programs with 'HD' in name only for source"
 msgstr ""
 
+msgid "Programs with '4K/UHD' in name only for source"
+msgstr ""
+
 msgid "Preview on selection"
 msgstr ""
 

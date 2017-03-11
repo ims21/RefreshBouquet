@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-19 15:51+0200\n"
-"PO-Revision-Date: 2016-08-19 15:55+0100\n"
+"PO-Revision-Date: 2017-03-11 21:37+0100\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi\n"
 "Language: \n"
@@ -252,6 +252,9 @@ msgstr "Filtrovat ve zdroji programy podle orbitální pozice"
 
 msgid "Programs with 'HD' in name only for source"
 msgstr "Ve zdroji zobrazit pouze jména s 'HD'"
+
+msgid "Programs with '4K/UHD' in name only for source"
+msgstr "Ve zdroji zobrazit pouze jména s '4K/UHD'"
 
 msgid "Preview on selection"
 msgstr "Náhled při výběru"

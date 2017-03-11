@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.55"
+VERSION = "1.56"
 #  by ims (c) 2016 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -45,6 +45,7 @@ config.plugins.refreshbouquet.debug = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.log = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.sort = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.hd = ConfigYesNo(default = False)
+config.plugins.refreshbouquet.uhd = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.diff = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.preview = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.autotoggle = ConfigYesNo(default = True)
@@ -341,6 +342,10 @@ class refreshBouquet(Screen, HelpableScreen):
 				if not self.isHDinName(s[0]):
 					debug("Drop (SD): %s %s" % (s[0], s[1]))
 					continue
+			if cfg.uhd.value:
+				if not self.isUHDinName(s[0]):
+					debug("Drop (not UHD): %s %s" % (s[0], s[1]))
+					continue
 			if cfg.orbital.value != "x":
 				if s[1].split(':')[6][:-4] != cfg.orbital.value:
 					continue
@@ -502,6 +507,10 @@ class refreshBouquet(Screen, HelpableScreen):
 				if not self.isHDinName(s[0]):
 					debug("Drop (SD): %s %s" % (s[0],s[1]))
 					continue
+			if cfg.uhd.value:
+				if not self.isUHDinName(s[0]):
+					debug("Drop (noUHD): %s %s" % (s[0],s[1]))
+					continue
 			s_splited = s[1].split(':') # split ref
 			if cfg.orbital.value != "x":
 				if s_splited[6][:-4] != cfg.orbital.value:
@@ -528,6 +537,13 @@ class refreshBouquet(Screen, HelpableScreen):
 
 	def isHDinName(self, name):
 		if name.find('HD') != -1:
+			return True
+		return False
+
+# test for 'UHD' in service name
+
+	def isUHDinName(self, name):
+		if name.find('4K') != -1 or name.find('4k') != -1 or name.find('UHD') != -1 or name.find('uhd') != -1:
 			return True
 		return False
 
@@ -1263,6 +1279,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Missing source services for manually replace only"), cfg.diff))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Filter services by orbital position in source"), cfg.orbital))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Programs with 'HD' in name only for source"), cfg.hd))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Programs with '4K/UHD' in name only for source"), cfg.uhd))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Preview on selection"), cfg.preview))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Auto toggle in manually replacing"), cfg.autotoggle))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Display in Channellist context menu"), cfg.channel_context_menu))
