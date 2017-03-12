@@ -258,11 +258,17 @@ msgstr "Отсутствующие сервисы исходника для ру
 msgid "Filter services by orbital position in source"
 msgstr "Фильтр сервисов по орбитальной позиции в исходнике"
 
-msgid "Programs with 'HD' in name only for source"
-msgstr "Программы с 'HD' в названии только для исходника"
+msgid "HD"
+msgstr ""
 
-msgid "Programs with '4K/UHD' in name only for source"
-msgstr "Программы с '4K/UHD' в названии только для исходника"
+msgid "4K/UHD"
+msgstr ""
+
+msgid "HD or 4K/UHD"
+msgstr "HD или 4K/UHD"
+
+msgid "Programs with 'HD/4K(UHD)' in name only for source"
+msgstr "Программы с 'HD/4K(UHD)' в названии только для исходника"
 
 msgid "Preview on selection"
 msgstr "Превью при выборе"

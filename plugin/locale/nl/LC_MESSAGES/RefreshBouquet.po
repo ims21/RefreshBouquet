@@ -245,11 +245,17 @@ msgstr "Missende kanalen in het bronbouquet om enkel handmatig te verplaatsen"
 msgid "Filter services by orbital position in source"
 msgstr "Filter de kanalen van de bron op orbitale positie"
 
-msgid "Programs with 'HD' in name only for source"
-msgstr "Kanalen met 'HD' in de naam enkel voor de bron"
+msgid "HD"
+msgstr ""
 
-msgid "Programs with '4K/UHD' in name only for source"
-msgstr "Kanalen met '4K/UHD' in de naam enkel voor de bron"
+msgid "4K/UHD"
+msgstr ""
+
+msgid "HD or 4K/UHD"
+msgstr "HD of 4K/UHD"
+
+msgid "Programs with 'HD/4K(UHD)' in name only for source"
+msgstr "Kanalen met 'HD/4K(UHD)' in de naam enkel voor de bron"
 
 msgid "Preview on selection"
 msgstr "Geef de zender weer tijdens de selectie"

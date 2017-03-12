@@ -259,10 +259,16 @@ msgstr ""
 msgid "Filter services by orbital position in source"
 msgstr ""
 
-msgid "Programs with 'HD' in name only for source"
+msgid "HD"
 msgstr ""
 
-msgid "Programs with '4K/UHD' in name only for source"
+msgid "4K/UHD"
+msgstr ""
+
+msgid "HD or 4K/UHD"
+msgstr ""
+
+msgid "Programs with 'HD/4K(UHD)' in name only for source"
 msgstr ""
 
 msgid "Preview on selection"

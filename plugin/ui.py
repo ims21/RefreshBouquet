@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.56"
+VERSION = "1.57"
 #  by ims (c) 2016 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -44,8 +44,7 @@ config.plugins.refreshbouquet.strip = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.debug = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.log = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.sort = ConfigYesNo(default = False)
-config.plugins.refreshbouquet.hd = ConfigYesNo(default = False)
-config.plugins.refreshbouquet.uhd = ConfigYesNo(default = False)
+config.plugins.refreshbouquet.hd = ConfigSelection(default = "SD", choices = [("SD",_("no")),("HD",_("HD")),("4K",_("4K/UHD")),("HD4K",_("HD or 4K/UHD"))])
 config.plugins.refreshbouquet.diff = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.preview = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.autotoggle = ConfigYesNo(default = True)
@@ -338,14 +337,19 @@ class refreshBouquet(Screen, HelpableScreen):
 			if self.isNotService(s[1]):
 				debug("Drop: %s %s" % (s[0], s[1]))
 				continue
-			if cfg.hd.value:
-				if not self.isHDinName(s[0]):
-					debug("Drop (SD): %s %s" % (s[0], s[1]))
-					continue
-			if cfg.uhd.value:
-				if not self.isUHDinName(s[0]):
-					debug("Drop (not UHD): %s %s" % (s[0], s[1]))
-					continue
+			if cfg.hd.value != "SD":
+				if cfg.hd.value is "HD4K":
+					if not self.isHDinName(s[0]) and not self.isUHDinName(s[0]):
+						debug("Drop (SD): %s %s" % (s[0], s[1]))
+						continue
+				elif cfg.hd.value == "HD":
+					if not self.isHDinName(s[0]):
+						debug("Drop (not HD): %s %s" % (s[0], s[1]))
+						continue
+				elif cfg.hd.value == "4K":
+					if not self.isUHDinName(s[0]):
+						debug("Drop (not UHD): %s %s" % (s[0], s[1]))
+						continue
 			if cfg.orbital.value != "x":
 				if s[1].split(':')[6][:-4] != cfg.orbital.value:
 					continue
@@ -503,14 +507,19 @@ class refreshBouquet(Screen, HelpableScreen):
 			if self.isNotService(s[1]):
 				debug("Drop: %s %s" % (s[0], s[1]))
 				continue
-			if cfg.hd.value:
-				if not self.isHDinName(s[0]):
-					debug("Drop (SD): %s %s" % (s[0],s[1]))
-					continue
-			if cfg.uhd.value:
-				if not self.isUHDinName(s[0]):
-					debug("Drop (noUHD): %s %s" % (s[0],s[1]))
-					continue
+			if cfg.hd.value != "SD":
+				if cfg.hd.value is "HD4K":
+					if not self.isHDinName(s[0]) and not self.isUHDinName(s[0]):
+						debug("Drop (SD): %s %s" % (s[0], s[1]))
+						continue
+				elif cfg.hd.value == "HD":
+					if not self.isHDinName(s[0]):
+						debug("Drop (not HD): %s %s" % (s[0], s[1]))
+						continue
+				elif cfg.hd.value == "4K":
+					if not self.isUHDinName(s[0]):
+						debug("Drop (not UHD): %s %s" % (s[0], s[1]))
+						continue
 			s_splited = s[1].split(':') # split ref
 			if cfg.orbital.value != "x":
 				if s_splited[6][:-4] != cfg.orbital.value:
@@ -536,7 +545,7 @@ class refreshBouquet(Screen, HelpableScreen):
 # test for 'HD' in service name
 
 	def isHDinName(self, name):
-		if name.find('HD') != -1:
+		if name.find('HD') != -1 and name.find('UHD') == -1: # do not take 'UHD'
 			return True
 		return False
 
@@ -1278,8 +1287,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Sort services in source bouquets"), cfg.sort))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Missing source services for manually replace only"), cfg.diff))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Filter services by orbital position in source"), cfg.orbital))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Programs with 'HD' in name only for source"), cfg.hd))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Programs with '4K/UHD' in name only for source"), cfg.uhd))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Programs with 'HD/4K(UHD)' in name only for source"), cfg.hd))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Preview on selection"), cfg.preview))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Auto toggle in manually replacing"), cfg.autotoggle))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Display in Channellist context menu"), cfg.channel_context_menu))

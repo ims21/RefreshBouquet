@@ -250,11 +250,17 @@ msgstr "Pouze chybějící programy ve zdrojích pro ruční nahrazování"
 msgid "Filter services by orbital position in source"
 msgstr "Filtrovat ve zdroji programy podle orbitální pozice"
 
-msgid "Programs with 'HD' in name only for source"
-msgstr "Ve zdroji zobrazit pouze jména s 'HD'"
+msgid "HD"
+msgstr ""
 
-msgid "Programs with '4K/UHD' in name only for source"
-msgstr "Ve zdroji zobrazit pouze jména s '4K/UHD'"
+msgid "4K/UHD"
+msgstr ""
+
+msgid "HD or 4K/UHD"
+msgstr "HD nebo 4K/UHD"
+
+msgid "Programs with 'HD/4K(UHD)' in name only for source"
+msgstr "Ve zdroji zobrazit pouze jména s 'HD/4K(UHD)'"
 
 msgid "Preview on selection"
 msgstr "Náhled při výběru"
