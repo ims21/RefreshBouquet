@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.57"
+VERSION = "1.58"
 #  by ims (c) 2016 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -251,6 +251,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			if not len(source):
 				self["info"].setText(_("Source bouquet is empty !"))
 				return
+			setIcon() # icons for selecting must be set before adding to list in compareServices
 			(data, length) = self.compareServices(source, target)
 			if length:
 				self.session.open(refreshBouquetRefreshServices, data, self.targetItem)
@@ -425,7 +426,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				source_services.sort()
 			sourceList = MenuList(source_services) # name, service reference
 			target_services = self.addToBouquetAllIndexed(target) # name, service reference, index in bouquet
-			self.session.open(refreshBouquetManualSelection, sourceList, target_services, self.targetItem)
+			self.session.open(refreshBouquetManualSelection, sourceList, target_services, self.sourceItem[0], self.targetItem)
 
 # returns all source services (with marks too) and with true positions in bouquet (target)
 
@@ -679,7 +680,7 @@ class refreshBouquetManualSelection(Screen):
 		<widget name="info" position="5,423" zPosition="2" size="705,120" valign="center" halign="left" font="Regular;20" foregroundColor="white" />
 	</screen>"""
 
-	def __init__(self, session, sourceList, target_services, target):
+	def __init__(self, session, sourceList, target_services, source_name, target):
 		self.skin = refreshBouquetManualSelection.skin
 		Screen.__init__(self, session)
 	
@@ -734,8 +735,8 @@ class refreshBouquetManualSelection(Screen):
 		self["key_yellow"] = Button("")
 		self["key_blue"] = Button("")
 
-		self["source_label"] = Label(_("source bouquet"))
-		self["target_label"] = Label(_("target bouquet"))
+		self["source_label"] = Label(_("source bouquet") + ("  (%s)") % source_name )
+		self["target_label"] = Label(_("target bouquet") + ("  (%s)") % self.target_bouquetname )
 
 		text = _("Toggle source and target bouquets with Bouq +/-\n")
 		text += _("Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'")
@@ -909,14 +910,11 @@ class refreshBouquetRefreshServices(Screen):
 		Screen.__init__(self, session)
 		self.skinName = ["refreshBouquetRefreshServices", "refreshBouquetCopyServices"]
 
-		self.texttitle = _("RefreshBouquet %s") % _("- results")
+		( self.target_bouquetname, self.target ) = target
+		self.texttitle = _("RefreshBouquet %s") % (" (%s) " % self.target_bouquetname) + _("- results")
 		self.setTitle(self.texttitle)
 
-		( self.target_bouquetname, self.target ) = target
-
 		self["Service"] = ServiceEvent()
-
-		setIcon()
 
 		self.list = list
 		if cfg.sort.value:
@@ -1044,14 +1042,14 @@ class refreshBouquetCopyServices(Screen):
 	def __init__(self, session, list, target):
 		self.skin = refreshBouquetCopyServices.skin
 		Screen.__init__(self, session)
-		self.setTitle(_("RefreshBouquet %s" % _("- select service(s) for adding with OK")))
 		self.session = session
+
+		( self.target_bouquetname, self.target ) = target
+		self.setTitle(_("RefreshBouquet %s" % _("- select service(s) for adding with OK")) + ("  (%s)" % self.target_bouquetname))
 
 		self["Service"] = ServiceEvent()
 
 		self["info"] = Label()
-
-		( self.target_bouquetname, self.target ) = target
 
 		setIcon()
 
@@ -1145,11 +1143,10 @@ class refreshBouquetRemoveServices(Screen):
 	def __init__(self, session, list, source):
 		self.skin = refreshBouquetCopyServices.skin
 		Screen.__init__(self, session)
-		self.skinName = ["refreshBouquetRemoveServices", "refreshBouquetCopyServices"]
-		self.setTitle(_("RefreshBouquet %s" % _("- select service(s) for remove with OK")))
 		self.session = session
-
+		self.skinName = ["refreshBouquetRemoveServices", "refreshBouquetCopyServices"]
 		( self.source_bouquetname, self.source ) = source
+		self.setTitle(_("RefreshBouquet %s" % _("- select service(s) for remove with OK")) + ("  (%s)" % self.source_bouquetname))
 
 		setIcon(True)
 

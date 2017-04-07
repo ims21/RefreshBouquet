@@ -3,7 +3,7 @@ import setup_translate
 
 pkg = 'Extensions.RefreshBouquet'
 setup (name = 'enigma2-plugin-extensions-refreshbouquet',
-       version = '1.57',
+       version = '1.58',
        description = 'actualize services in bouquets',
        packages = [pkg],
        package_dir = {pkg: 'plugin'},
