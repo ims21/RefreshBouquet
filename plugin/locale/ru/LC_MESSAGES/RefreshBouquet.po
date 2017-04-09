@@ -287,3 +287,6 @@ msgstr "При запуске плагина использовать текущ
 
 msgid "Debug info"
 msgstr "Информация отладки"
+
+msgid "Display bouquet name"
+msgstr ""

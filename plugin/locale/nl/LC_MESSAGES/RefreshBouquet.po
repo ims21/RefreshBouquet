@@ -274,3 +274,6 @@ msgstr "Gebruik huidig bouquet als bron of als doel als de plugin wordt gestart"
 
 msgid "Debug info"
 msgstr "Debug informatie"
+
+msgid "Display bouquet name"
+msgstr ""

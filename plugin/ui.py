@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.58"
+VERSION = "1.59"
 #  by ims (c) 2016 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -51,6 +51,7 @@ config.plugins.refreshbouquet.autotoggle = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.on_end = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.orbital = NoSave(ConfigSelection(default = "x", choices = [("x",_("no")),]))
 config.plugins.refreshbouquet.current_bouquet = ConfigSelection(default = "0", choices = [("0",_("no")),("source",_("source bouquet")),("target",_("target bouquet"))])
+config.plugins.refreshbouquet.bouquet_name = ConfigYesNo(default = True)
 
 cfg = config.plugins.refreshbouquet
 
@@ -735,8 +736,10 @@ class refreshBouquetManualSelection(Screen):
 		self["key_yellow"] = Button("")
 		self["key_blue"] = Button("")
 
-		self["source_label"] = Label(_("source bouquet") + ("  (%s)") % source_name )
-		self["target_label"] = Label(_("target bouquet") + ("  (%s)") % self.target_bouquetname )
+		name_s = " " + addBouqetName(source_name)
+		name_t = " " + addBouqetName(self.target_bouquetname)
+		self["source_label"] = Label(_("source bouquet") + name_s )
+		self["target_label"] = Label(_("target bouquet") + name_t )
 
 		text = _("Toggle source and target bouquets with Bouq +/-\n")
 		text += _("Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'")
@@ -911,7 +914,9 @@ class refreshBouquetRefreshServices(Screen):
 		self.skinName = ["refreshBouquetRefreshServices", "refreshBouquetCopyServices"]
 
 		( self.target_bouquetname, self.target ) = target
-		self.texttitle = _("RefreshBouquet %s") % (" (%s) " % self.target_bouquetname) + _("- results")
+
+		name = addBouqetName(self.target_bouquetname) + " "
+		self.texttitle = _("RefreshBouquet %s") % name + _("- results")
 		self.setTitle(self.texttitle)
 
 		self["Service"] = ServiceEvent()
@@ -1045,7 +1050,8 @@ class refreshBouquetCopyServices(Screen):
 		self.session = session
 
 		( self.target_bouquetname, self.target ) = target
-		self.setTitle(_("RefreshBouquet %s" % _("- select service(s) for adding with OK")) + ("  (%s)" % self.target_bouquetname))
+		name = addBouqetName(self.target_bouquetname)
+		self.setTitle(_("RefreshBouquet %s" % _("- select service(s) for adding with OK")) + name)
 
 		self["Service"] = ServiceEvent()
 
@@ -1145,8 +1151,10 @@ class refreshBouquetRemoveServices(Screen):
 		Screen.__init__(self, session)
 		self.session = session
 		self.skinName = ["refreshBouquetRemoveServices", "refreshBouquetCopyServices"]
+
 		( self.source_bouquetname, self.source ) = source
-		self.setTitle(_("RefreshBouquet %s" % _("- select service(s) for remove with OK")) + ("  (%s)" % self.source_bouquetname))
+		name = addBouqetName(self.source_bouquetname)
+		self.setTitle(_("RefreshBouquet %s" % _("- select service(s) for remove with OK")) + name)
 
 		setIcon(True)
 
@@ -1290,6 +1298,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Display in Channellist context menu"), cfg.channel_context_menu))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Return to previous service on end"), cfg.on_end))
 		refreshBouquetCfglist.append(getConfigListEntry(_("On plugin start use current bouquet as source or as target"), cfg.current_bouquet))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Display bouquet name"), cfg.bouquet_name))
 #		refreshBouquetCfglist.append(getConfigListEntry(_("Save log for manual replace"), cfg.log))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Debug info"), cfg.debug))
 		ConfigListScreen.__init__(self, refreshBouquetCfglist, session, on_change = self.changedEntry)
@@ -1375,6 +1384,11 @@ class MySelectionList(MenuList):
 		# sorting by sortType: # 0 - description, 1 - value, 2 - index, 3 - selected
 		self.list.sort(key=lambda x: x[0][sortType],reverse=flag)
 		self.setList(self.list)
+
+def addBouqetName(bouquet_name):
+	if cfg.bouquet_name.value:
+		return " <%s>" % bouquet_name
+	return ""
 
 def debug(message):
 	if cfg.debug.value:

@@ -288,3 +288,6 @@ msgstr ""
 
 msgid "Debug info"
 msgstr ""
+
+msgid "Display bouquet name"
+msgstr ""
