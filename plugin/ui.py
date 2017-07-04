@@ -4,8 +4,8 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.59"
-#  by ims (c) 2016 ims21@users.sourceforge.net
+VERSION = "1.61"
+#  by ims (c) 2016-2017 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -52,6 +52,7 @@ config.plugins.refreshbouquet.on_end = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.orbital = NoSave(ConfigSelection(default = "x", choices = [("x",_("no")),]))
 config.plugins.refreshbouquet.current_bouquet = ConfigSelection(default = "0", choices = [("0",_("no")),("source",_("source bouquet")),("target",_("target bouquet"))])
 config.plugins.refreshbouquet.bouquet_name = ConfigYesNo(default = True)
+config.plugins.refreshbouquet.confirm_move = ConfigYesNo(default = True)
 
 cfg = config.plugins.refreshbouquet
 
@@ -149,17 +150,20 @@ class refreshBouquet(Screen, HelpableScreen):
 		if self.sourceItem and self.targetItem:
 			if self.sourceItem == self.targetItem:
 				menu.append((_("Remove selected services from source bouquet"),3))
-				buttons = ["4"]
+				menu.append((_("Move selected services in source bouquet"),5))
+				buttons = ["4","6"]
 			else:
 				menu.append((_("Manually replace services"),0))
 				menu.append((_("Add selected services to target bouquet"),1))
 				menu.append((_("Add selected missing services to target bouquet"),2))
 				menu.append((_("Remove selected services in source bouquet"),3))
 				menu.append((_("Refresh services in target bouquet"),4))
-				buttons = ["1","2","3","4","5"]
+				menu.append((_("Move selected services in source bouquet"),5))
+				buttons = ["1","2","3","4","5","6"]
 		elif self.sourceItem:
 			menu.append((_("Remove selected services from source bouquet"),3))
-			buttons = ["4"]
+			menu.append((_("Move selected services in source bouquet"),5))
+			buttons = ["4","6"]
 		else:
 			text = _("Select or source or source and target bouquets !")
 			self["info"].setText(text)
@@ -182,6 +186,8 @@ class refreshBouquet(Screen, HelpableScreen):
 			self.removeServices()
 		elif choice[1] == 4:
 			self.refreshServices()
+		elif choice[1] == 5:
+			self.moveServices()
 		elif choice[1] == 10:
 			self.options()
 		else:
@@ -379,7 +385,39 @@ class refreshBouquet(Screen, HelpableScreen):
 		return differences
 
 ###
-# remove selected service (by user) in target directory
+# close moveServices or call again moveServices
+###
+	def moveServicesCallback(self, close, answer):
+		if not close or not answer:
+			self.moveServices()
+
+###
+# move selected service (by user) in source bouquet
+###
+	def moveServices(self):
+		data = MySelectionList([])
+		if self.sourceItem:
+			source = self.getServices(self.sourceItem[0])
+			if not len(source):
+				self["info"].setText(_("Source bouquet is empty !"))
+				return
+			new = []
+			new = self.addToBouquetFiltered(source)
+			if not len(new):
+				self["info"].setText(_("No services in source bouquet !"))
+				return
+			nr = 0
+			debug(">>> Read bouquet <<<")
+			for i in new:
+				nr +=1
+				debug("nr: %s %s\t\t%s" % (nr, i[0],i[1]))
+				# service name, service reference, index, selected
+				data.addSelection(i[0], i[1], nr, False)
+			from Tools.BoundFunction import boundFunction
+			self.session.openWithCallback(boundFunction(self.moveServicesCallback, self.close), refreshBouquetMoveServices, data, self.sourceItem, new)
+
+###
+# remove selected service (by user) in source bouquet
 ###
 	def removeServices(self):
 		data = MySelectionList([])
@@ -1249,6 +1287,142 @@ class refreshBouquetRemoveServices(Screen):
 		if answer == True:
 			self.close()
 
+# move services in source list
+class refreshBouquetMoveServices(Screen):
+	def __init__(self, session, list, source, services):
+		self.skin = refreshBouquetCopyServices.skin
+		Screen.__init__(self, session)
+		self.session = session
+		self.skinName = ["refreshBouquetMoveServices", "refreshBouquetCopyServices"]
+
+		( self.source_bouquetname, self.source ) = source
+		name = addBouqetName(self.source_bouquetname)
+		self.setTitle(_("RefreshBouquet %s" % _("- select service(s) for move with OK")) + name)
+
+		setIcon(False)
+
+		self.services = services
+		self.list = list
+		self["services"] = self.list
+
+		self["Service"] = ServiceEvent()
+
+		self["info"] = Label()
+
+		self["actions"] = ActionMap(["OkCancelActions", "RefreshBouquetActions"],
+			{
+				"cancel": self.exit,
+				"ok": self.list.toggleSelection,
+				"red": self.exit,
+				"green": self.actionGreen,
+				"yellow": self.previewService,
+				"play": self.previewService,
+			})
+
+		self["key_red"] = Button(_("Cancel"))
+		self["key_green"] = Button(_("Move selected"))
+		self["key_yellow"] = Button()
+		self["key_blue"] = Button()
+		self["info"].setText(_("Mark service(s) with OK button, move selector to new position and finish with 'Move selected'. Selected service(s) will be moved top new position."))
+
+		self.onSelectionChanged = []
+		self["services"].onSelectionChanged.append(self.displayService)
+		self.onLayoutFinish.append(self.displayService)
+
+		debug("changed bouquet: %s" % self.source_bouquetname)
+
+	def actionGreen(self):
+		index = self["services"].getCurrent()[0][2]
+		#[0][x] ... x: 0 - service name, 1 - service reference, 2 - index from 1, 3 - selected/unselected
+		self.moveCurrentEntries(index)
+
+	def displayService(self):
+		ref = self["services"].getCurrent()[0][1]
+		if not self.isNotService(ref):
+			self["Service"].newService(eServiceReference(ref))
+			if cfg.preview.value:
+				self.previewService()
+			else:
+				self["key_yellow"].setText(_("Preview"))
+		else:
+			self["key_yellow"].setText("")
+			self["Service"].newService(None)
+
+	def previewService(self):
+		ref = self["services"].getCurrent()[0][1]
+		if not self.isNotService(ref):
+			self.session.nav.playService(eServiceReference(ref))
+
+	def moveCurrentEntries(self, index):
+		nr_items = len(self.list.getSelectionsList())
+		if nr_items:
+			text = ngettext("Are you sure to move this %d service?", "Are you sure to move this %d services?", nr_items) % nr_items
+			self.index = index
+			if cfg.confirm_move.value:
+				self.session.openWithCallback(self.moveFromSource, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+			else:
+				self.moveFromSource(True)
+		else:
+			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3 )
+
+	def moveFromSource(self, answer):
+		if answer == True:
+			new_list = self.rebuildList()
+			data = self.services
+			serviceHandler = eServiceCenter.getInstance()
+			list = self.source and serviceHandler.list(self.source)
+			if list is not None:
+				mutableList = list.startEdit()
+				for item in data:
+					removed = eServiceReference(item[1])
+					if not removed.valid():
+						continue
+					if not mutableList.removeService(removed):
+						mutableList.flushChanges()
+			data = new_list
+			serviceHandler = eServiceCenter.getInstance()
+			list = self.source and serviceHandler.list(self.source)
+			if list is not None:
+				mutableList = list.startEdit()
+				for item in data:
+					new = eServiceReference(item[1])
+					if not mutableList.addService(new):
+						mutableList.flushChanges()
+			self.close(False)
+		return
+
+	def rebuildList(self):	# self.index ... new position
+		newList = []
+		marked = []
+		for i in self.list.getSelectionsList(): 	# marked services
+			marked.append(i[2]) 			# indexes of marked services
+		for s in range(len(self.services)):
+			source = s+1				# services are indexed from 0, but marked are indexed from 1 => increase source index
+			if source == self.index:
+				for n in self.list.getSelectionsList():
+					newList.append(n)
+			if source in marked:
+				continue
+			newList.append(self.services[source-1])
+		return newList
+
+	def isNotService(self, refstr):
+		if eServiceReference(refstr).flags & (eServiceReference.isDirectory | eServiceReference.isMarker | eServiceReference.isGroup | eServiceReference.isNumberedMarker):
+			return True
+		return False
+
+	def exit(self):
+		nr_items = len(self.list.getSelectionsList())
+		if nr_items:
+			text = ngettext("Are you sure to close and lost %d selection?", "Are you sure to close and lost all %d selections?", nr_items) % nr_items
+			self.session.openWithCallback(self.callBackExit, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+		else:
+			self.close(True)
+
+	def callBackExit(self, answer):
+		if answer == True:
+			self.close(True)
+
 # options
 class refreshBouquetCfg(Screen, ConfigListScreen):
 	skin = """
@@ -1294,6 +1468,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Filter services by orbital position in source"), cfg.orbital))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Programs with 'HD/4K(UHD)' in name only for source"), cfg.hd))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Preview on selection"), cfg.preview))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Confirm services moving"), cfg.confirm_move))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Auto toggle in manually replacing"), cfg.autotoggle))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Display in Channellist context menu"), cfg.channel_context_menu))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Return to previous service on end"), cfg.on_end))

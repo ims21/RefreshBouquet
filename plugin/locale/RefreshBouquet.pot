@@ -103,6 +103,9 @@ msgstr ""
 msgid "Refresh services in target bouquet"
 msgstr ""
 
+msgid "Move selected services in source bouquet"
+msgstr ""
+
 msgid "Settings..."
 msgstr ""
 
@@ -202,6 +205,12 @@ msgstr[0] ""
 msgstr[1] ""
 
 #, python-format
+msgid "Are you sure to move this %d service?"
+msgid_plural "Are you sure to move this %d services?"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
 msgid "Are you sure to close and lost %d selection?"
 msgid_plural "Are you sure to close and lost all %d selections?"
 msgstr[0] ""
@@ -230,6 +239,16 @@ msgstr ""
 
 msgid ""
 "Mark services with OK button and then remove these with 'Remove selected'"
+msgstr ""
+
+msgid "- select service(s) for move with OK"
+msgstr ""
+
+msgid "Move selected"
+msgstr ""
+
+msgid ""
+"Mark service(s) with OK button, move selector to new position and finish with 'Move selected'. Selected service(s) will be moved top new position."
 msgstr ""
 
 #, python-format
@@ -290,4 +309,7 @@ msgid "Debug info"
 msgstr ""
 
 msgid "Display bouquet name"
+msgstr ""
+
+msgid "Confirm services moving"
 msgstr ""

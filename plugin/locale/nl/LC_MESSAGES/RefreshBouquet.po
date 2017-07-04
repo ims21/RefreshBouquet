@@ -22,6 +22,12 @@ msgstr "Actualiseer de kanalen in de bouquetten"
 msgid "no"
 msgstr "nee"
 
+msgid "source bouquet"
+msgstr "bronbouquet"
+
+msgid "target bouquet"
+msgstr "doelbouquet"
+
 msgid "Question"
 msgstr "Vraag"
 
@@ -92,6 +98,10 @@ msgstr "Verwijder de geselecteerde kanalen in het bronbouquet."
 msgid "Refresh services in target bouquet"
 msgstr "Actualiseer de kanalen in het gekozen doelbouquet."
 
+#, fuzzy
+msgid "Move selected services in source bouquet"
+msgstr ""
+
 msgid "Settings..."
 msgstr "Instellingen..."
 
@@ -125,12 +135,6 @@ msgstr "Actualiseer bouquet %s"
 
 msgid "Apply and close"
 msgstr "Toepassen"
-
-msgid "source bouquet"
-msgstr "bronbouquet"
-
-msgid "target bouquet"
-msgstr "doelbouquet"
 
 msgid "Toggle source and target bouquets with Bouq +/-\n"
 msgstr ""
@@ -188,6 +192,12 @@ msgid_plural "Are you sure to refresh this %d services?"
 msgstr[0] "Weet je zeker dat je dit %d kanaal wilt actualiseren?"
 msgstr[1] "Ben je er zeker van deze %d kanalen te actualiseren?"
 
+#, fuzzy, python-format
+msgid "Are you sure to move this %d service?"
+msgid_plural "Are you sure to move this %d services?"
+msgstr[0] ""
+msgstr[1] ""
+
 #, python-format
 msgid "Are you sure to close and lost %d selection?"
 msgid_plural "Are you sure to close and lost all %d selections?"
@@ -217,6 +227,17 @@ msgstr "Verwijderen"
 
 msgid "Mark services with OK button and then remove these with 'Remove selected'"
 msgstr "Markeer de kanalen met 'Ok' en verwijder deze definitief met de groene toets, 'Verwijderen'."
+
+#, fuzzy
+msgid "- select service(s) for move with OK"
+msgstr ""
+
+#, fuzzy
+msgid "Move selected"
+msgstr ""
+
+msgid "Mark service(s) with OK button, move selector to new position and finish with 'Move selected'. Selected service(s) will be moved top new position."
+msgstr ""
 
 #, python-format
 msgid "Are you sure to remove this %d service?"
@@ -276,4 +297,7 @@ msgid "Debug info"
 msgstr "Debug informatie"
 
 msgid "Display bouquet name"
+msgstr ""
+
+msgid "Confirm services moving"
 msgstr ""

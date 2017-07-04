@@ -3,16 +3,15 @@ msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-19 15:51+0200\n"
-"PO-Revision-Date: 2017-04-09 13:06+0100\n"
+"PO-Revision-Date: 2017-07-04 15:06+0100\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi\n"
-"Language: \n"
+"Language: cs_CZ\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Czech\n"
-"X-Poedit-Country: CZECH REPUBLIC\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Poedit 1.5.4\n"
 
 msgid "RefreshBouquet"
 msgstr ""
@@ -98,6 +97,9 @@ msgstr "Odstranit vybrané programy ze zdroje"
 
 msgid "Refresh services in target bouquet"
 msgstr "Aktualizovat programy v cílovém přehledu"
+
+msgid "Move selected services in source bouquet"
+msgstr "Přesouvat vybrané programy ve zdroji"
 
 msgid "Settings..."
 msgstr "Nastavení..."
@@ -191,6 +193,13 @@ msgstr[1] "Opravdu chcete aktualizovat %d zvolené programy?"
 msgstr[2] "Opravdu chcete aktualizovat %d zvolených programů?"
 
 #, python-format
+msgid "Are you sure to move this %d service?"
+msgid_plural "Are you sure to move this %d services?"
+msgstr[0] "Opravdu chcete přesunout %d zvolený program?"
+msgstr[1] "Opravdu chcete přesunout %d zvolené programy?"
+msgstr[2] "Opravdu chcete přesunout %d zvolených programů?"
+
+#, python-format
 msgid "Are you sure to close and lost %d selection?"
 msgid_plural "Are you sure to close and lost all %d selections?"
 msgstr[0] "Opravdu chcete zavřít a zapomenout %d označení?"
@@ -221,6 +230,15 @@ msgstr "Odstranit vybrané"
 
 msgid "Mark services with OK button and then remove these with 'Remove selected'"
 msgstr "Označte programy pomocí 'OK' a pak je odstraňte tlačítkem 'Odstranit vybrané'."
+
+msgid "- select service(s) for move with OK"
+msgstr "- označte program(y) pro přesun pomocí OK"
+
+msgid "Move selected"
+msgstr "Přesunout vybrané"
+
+msgid "Mark service(s) with OK button, move selector to new position and finish with 'Move selected'. Selected service(s) will be moved top new position."
+msgstr "Označte programy pomocí 'OK', přesuňte kurzor na novou pozici a dokončete tlačítkem 'Přesunout vybrané'. Označené programy budou přesunuty nad novou pozici."
 
 #, python-format
 msgid "Are you sure to remove this %d service?"
@@ -282,3 +300,6 @@ msgstr ""
 
 msgid "Display bouquet name"
 msgstr "Zobrazovat název přehledu"
+
+msgid "Confirm services moving"
+msgstr "Potvrzovat přesun programů"

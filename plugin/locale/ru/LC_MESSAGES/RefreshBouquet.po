@@ -98,6 +98,10 @@ msgstr "Удалить ыбранные сервисы из исходного �
 msgid "Refresh services in target bouquet"
 msgstr "Обновить сервисы в целевом букете"
 
+#, fuzzy
+msgid "Move selected services in source bouquet"
+msgstr ""
+
 msgid "Settings..."
 msgstr "Настройки..."
 
@@ -135,12 +139,8 @@ msgstr "Применить и закрыть"
 msgid "Toggle source and target bouquets with Bouq +/-\n"
 msgstr "Смена мсходного и целевых букетов с помощью Bouq +/-\n"
 
-msgid ""
-"Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it "
-"with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'"
-msgstr ""
-"Подготовьте замену сервиса в целевой букет на сервис из исходного букета (выбор с помощью 'ОК') и замените "
-"с помощью 'Замена'. Повторите это, как Вам нужно. Завершить все с помощью 'Применить и закрыть'"
+msgid "Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'"
+msgstr "Подготовьте замену сервиса в целевой букет на сервис из исходного букета (выбор с помощью 'ОК') и замените с помощью 'Замена'. Повторите это, как Вам нужно. Завершить все с помощью 'Применить и закрыть'"
 
 msgid "Replace"
 msgstr "Замена"
@@ -174,19 +174,14 @@ msgstr "Обновить выбраннное"
 msgid "Inversion"
 msgstr "Инверсия"
 
-msgid ""
-"This feature looking for differences in service parameters with same names in source and target bouquets. "
-"Parameters for marked services will be replaced. "
-msgstr ""
-"Эта функция ищет различия в параметрах сервиса с одинаковыми именами в исходных и целевых букетах. "
-"Параметры для отмеченных сервисов будут заменены."
+msgid "This feature looking for differences in service parameters with same names in source and target bouquets. Parameters for marked services will be replaced. "
+msgstr "Эта функция ищет различия в параметрах сервиса с одинаковыми именами в исходных и целевых букетах. Параметры для отмеченных сервисов будут заменены."
 
-msgid ""
-"Posible duplicates will not be marked in list. Check validity with 'Preview' before mark and before "
-"'Refresh selected'."
+msgid "It can be in most cases useful for bouquets with services gained by Fastscan searching. "
 msgstr ""
-"Возможные дубликаты не будут отмечены в списке. Проверьте достоверность с помощью 'Превью' Перед меткой и "
-"перед 'Обновление выбранного'."
+
+msgid "Posible duplicates will not be marked in list. Check validity with 'Preview' before mark and before 'Refresh selected'."
+msgstr "Возможные дубликаты не будут отмечены в списке. Проверьте достоверность с помощью 'Превью' Перед меткой и перед 'Обновление выбранного'."
 
 msgid "Position"
 msgstr "Позиция"
@@ -197,6 +192,13 @@ msgid_plural "Are you sure to refresh this %d services?"
 msgstr[0] "Вы действительно хотите обновить этот %d сервис?"
 msgstr[1] "Вы действительно хотите обновить эти %d сервисы?"
 msgstr[2] "Вы действительно хотите обновить эти %d сервиса?"
+
+#, fuzzy, python-format
+msgid "Are you sure to move this %d service?"
+msgid_plural "Are you sure to move this %d services?"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #, python-format
 msgid "Are you sure to close and lost %d selection?"
@@ -229,6 +231,17 @@ msgstr "Удалить выбранное"
 
 msgid "Mark services with OK button and then remove these with 'Remove selected'"
 msgstr "Пометить сервисы с помощью OK и затем удалить с помощью 'Удалить выбранное'"
+
+#, fuzzy
+msgid "- select service(s) for move with OK"
+msgstr ""
+
+#, fuzzy
+msgid "Move selected"
+msgstr ""
+
+msgid "Mark service(s) with OK button, move selector to new position and finish with 'Move selected'. Selected service(s) will be moved top new position."
+msgstr ""
 
 #, python-format
 msgid "Are you sure to remove this %d service?"
@@ -289,4 +302,7 @@ msgid "Debug info"
 msgstr "Информация отладки"
 
 msgid "Display bouquet name"
+msgstr ""
+
+msgid "Confirm services moving"
 msgstr ""
