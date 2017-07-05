@@ -85,9 +85,6 @@ msgstr ""
 msgid "Select action for bouquet:"
 msgstr ""
 
-msgid "Remove selected services from source bouquet"
-msgstr ""
-
 msgid "Manually replace services"
 msgstr ""
 

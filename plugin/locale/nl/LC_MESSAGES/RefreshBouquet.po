@@ -80,9 +80,6 @@ msgstr "Selecteer eerst het bron en / of het doelbouquet!"
 msgid "Select action for bouquet:"
 msgstr "Kies de uit te voeren actie:"
 
-msgid "Remove selected services from source bouquet"
-msgstr "Verwijder de gemarkeerde kanalen uit het bronbouquet."
-
 msgid "Manually replace services"
 msgstr "Handmatig vervangen van de kanalen in het doelbouquet."
 
@@ -98,7 +95,6 @@ msgstr "Verwijder de geselecteerde kanalen in het bronbouquet."
 msgid "Refresh services in target bouquet"
 msgstr "Actualiseer de kanalen in het gekozen doelbouquet."
 
-#, fuzzy
 msgid "Move selected services in source bouquet"
 msgstr ""
 

@@ -80,9 +80,6 @@ msgstr "Выбор исходных или исходных/целевых бу�
 msgid "Select action for bouquet:"
 msgstr "Выбор действия для букета:"
 
-msgid "Remove selected services from source bouquet"
-msgstr "Удалить выбранные сервисы из исходного букета"
-
 msgid "Manually replace services"
 msgstr "Ручная замена сервисов"
 

@@ -80,9 +80,6 @@ msgstr "Vyberte zdrojový nebo zdrojový a cílový přehled!"
 msgid "Select action for bouquet:"
 msgstr "Zvolte akci:"
 
-msgid "Remove selected services from source bouquet"
-msgstr "Odstranit vybrané programy ze zdroje"
-
 msgid "Manually replace services"
 msgstr "Ruční nahrazování programů"
 
