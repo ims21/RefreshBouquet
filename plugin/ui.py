@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.61"
+VERSION = "1.62"
 #  by ims (c) 2016-2017 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -60,6 +60,8 @@ dummy_text = _("Question") + _("yes")+ _("Select") + _("Information")
 
 TV = (1, 17, 22, 25, 31, 134, 195)
 RADIO = (2, 10)
+
+sel_position = None
 
 class refreshBouquet(Screen, HelpableScreen):
 	skin = """
@@ -1327,7 +1329,7 @@ class refreshBouquetMoveServices(Screen):
 
 		self.onSelectionChanged = []
 		self["services"].onSelectionChanged.append(self.displayService)
-		self.onLayoutFinish.append(self.displayService)
+		self.onLayoutFinish.append(self.setPosition)
 
 		debug("changed bouquet: %s" % self.source_bouquetname)
 
@@ -1335,6 +1337,15 @@ class refreshBouquetMoveServices(Screen):
 		index = self["services"].getCurrent()[0][2]
 		#[0][x] ... x: 0 - service name, 1 - service reference, 2 - index from 1, 3 - selected/unselected
 		self.moveCurrentEntries(index)
+
+	def setPosition(self):
+		global sel_position
+		if sel_position:
+			self["services"].moveToIndex(sel_position-1)
+			sel_position = None
+		else:
+			self["services"].moveToIndex(0)
+			self.displayService()
 
 	def displayService(self):
 		ref = self["services"].getCurrent()[0][1]
@@ -1391,19 +1402,30 @@ class refreshBouquetMoveServices(Screen):
 			self.close(False)
 		return
 
-	def rebuildList(self):	# self.index ... new position
+	def rebuildList(self):	# self.index ... selector position - insert will be top this position
 		newList = []
 		marked = []
-		for i in self.list.getSelectionsList(): 	# marked services
+		pos = 0
+		for i in self.list.getSelectionsList():		# marked services
 			marked.append(i[2]) 			# indexes of marked services
+			if i[2] > self.index:			# how many item bottom selector ?
+				pos += 1
+		last = None
 		for s in range(len(self.services)):
 			source = s+1				# services are indexed from 0, but marked are indexed from 1 => increase source index
 			if source == self.index:
 				for n in self.list.getSelectionsList():
-					newList.append(n)
+					if n[2] != self.index:	# add items, but item under selector add as last
+						newList.append(n)
+					else:
+						last = n
+				if last:
+					newList.append(last)
 			if source in marked:
 				continue
 			newList.append(self.services[source-1])
+		global sel_position
+		sel_position = self.index + pos
 		return newList
 
 	def isNotService(self, refstr):
