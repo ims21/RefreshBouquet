@@ -20,19 +20,19 @@ msgid "Actualize services in bouquets"
 msgstr "Aktualizace programů v přehledech"
 
 msgid "no"
-msgstr "ne"
+msgstr "Ne"
 
 msgid "source bouquet"
-msgstr "zdrojový přehled"
+msgstr "Zdrojový přehled"
 
 msgid "target bouquet"
-msgstr "cílový přehled"
+msgstr "Cílový přehled"
 
 msgid "Question"
 msgstr "Dotaz"
 
 msgid "yes"
-msgstr "ano"
+msgstr "Ano"
 
 msgid "Select"
 msgstr "Zvolte"
