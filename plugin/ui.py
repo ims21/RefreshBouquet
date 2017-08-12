@@ -96,10 +96,6 @@ class refreshBouquet(Screen, HelpableScreen):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 
-		# for generate gettext strings into .pot - this strings are displayed by enigma's functions
-		dummy_text = _("Question") + _("yes")+ _("Select") + _("Information") + _("Really close without saving settings?")
-		del dummy_text
-
 		self.Servicelist = Servicelist
 		currentBouquet = ( ServiceReference(currentBouquet).getServiceName(), currentBouquet)
 		self.setTitle(_("RefreshBouquet v. %s" % VERSION))
@@ -1610,6 +1606,9 @@ from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 
 def setPluginCatalog():
+	# for generate gettext strings into .pot - this strings are displayed by enigma's functions:
+	dummy_text = _("Question") + _("yes")+ _("Select") + _("Information") + _("Really close without saving settings?")
+	del dummy_text
 	try:
 		gettext.translation('RefreshBouquet', resolveFilename(SCOPE_PLUGINS, 'Extensions/RefreshBouquet/locale'), languages=[language.getLanguage()]).install(names=("ngettext", "pgettext"))
 	except:

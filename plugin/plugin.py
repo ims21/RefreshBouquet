@@ -31,7 +31,7 @@ def main(session, servicelist=None, **kwargs):
 	currentBouquet = Servicelist and Servicelist.getRoot()
 	if currentBouquet is not None:
 		import ui
-		ui.setPluginCatalog() # for prlugin's xgettext catalog
+		ui.setPluginCatalog() # for plugin's xgettext catalog
 		session.openWithCallback(ui.closed, ui.refreshBouquet, Servicelist, currentBouquet)
 
 def Plugins(path,**kwargs):
