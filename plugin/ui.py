@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.63"
+VERSION = "1.64"
 #  by ims (c) 2016-2017 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -56,8 +56,6 @@ config.plugins.refreshbouquet.confirm_move = ConfigYesNo(default = True)
 
 cfg = config.plugins.refreshbouquet
 
-dummy_text = _("Question") + _("yes")+ _("Select") + _("Information")
-
 TV = (1, 17, 22, 25, 31, 134, 195)
 RADIO = (2, 10)
 
@@ -97,6 +95,10 @@ class refreshBouquet(Screen, HelpableScreen):
 		self.skin = refreshBouquet.skin
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
+
+		# for generate gettext strings into .pot - this strings are displayed by enigma's functions
+		dummy_text = _("Question") + _("yes")+ _("Select") + _("Information") + _("Really close without saving settings?")
+		del dummy_text
 
 		self.Servicelist = Servicelist
 		currentBouquet = ( ServiceReference(currentBouquet).getServiceName(), currentBouquet)

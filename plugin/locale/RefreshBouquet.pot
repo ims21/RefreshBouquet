@@ -310,3 +310,6 @@ msgstr ""
 
 msgid "Confirm services moving"
 msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr ""

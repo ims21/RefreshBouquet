@@ -300,3 +300,6 @@ msgstr "Отображать имя букета"
 
 msgid "Confirm services moving"
 msgstr "Подтверждение при перемещении сервисов"
+
+msgid "Really close without saving settings?"
+msgstr "Действительно закрыть без сохранения настроек?"

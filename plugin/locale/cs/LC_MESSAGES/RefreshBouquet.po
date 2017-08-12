@@ -300,3 +300,6 @@ msgstr "Zobrazovat název přehledu"
 
 msgid "Confirm services moving"
 msgstr "Potvrzovat přesun programů"
+
+msgid "Really close without saving settings?"
+msgstr "Opravdu zavřít bez uloženého nastavení?"

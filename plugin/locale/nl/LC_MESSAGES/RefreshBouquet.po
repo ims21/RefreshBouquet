@@ -332,3 +332,6 @@ msgstr "Toon boeketnaam"
 
 msgid "Confirm services moving"
 msgstr "Bevestig het verplaatsen van de kanalen"
+
+msgid "Really close without saving settings?"
+msgstr "Wil je afsluiten zonder de wijzigingen op te slaan?"
