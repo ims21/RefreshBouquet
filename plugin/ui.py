@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.62"
+VERSION = "1.63"
 #  by ims (c) 2016-2017 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -230,6 +230,8 @@ class refreshBouquet(Screen, HelpableScreen):
 		op = []
 		new_choices = [("x",_("no"))]
 		source = self.getServices(sourceItem[0])
+		if not source:
+			return
 		for service in source:
 			if self.isNotService(service[1]):
 				continue
@@ -676,7 +678,7 @@ class refreshBouquet(Screen, HelpableScreen):
 	def getServices(self, bouquet_name):
 		bouquet = self.getBouquet(bouquet_name)
 		if bouquet is None:
-			return
+			return ""
 		serviceHandler = eServiceCenter.getInstance()
 		list = serviceHandler.list(bouquet)
 		services = list.getContent("NS", False)
