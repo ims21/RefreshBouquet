@@ -1169,10 +1169,10 @@ class refreshBouquetCopyServices(Screen):
 	def changeItems(self, mark, searchString = None):
 		if searchString:
 			searchString = searchString.decode('UTF-8', 'replace')
-			if not cfg.sensitive.value:
+			if not cfg.vk_sensitive.value:
 				searchString = searchString.lower()
 			for item in self.list.list:
-				if cfg.sensitive.value:
+				if cfg.vk_sensitive.value:
 					exist = item[0][0].decode('UTF-8', 'replace').startswith(searchString)
 				else:
 					exist = item[0][0].decode('UTF-8', 'replace').lower().startswith(searchString)
@@ -1305,10 +1305,10 @@ class refreshBouquetRemoveServices(Screen):
 	def changeItems(self, mark, searchString = None):
 		if searchString:
 			searchString = searchString.decode('UTF-8', 'replace')
-			if not cfg.sensitive.value:
+			if not cfg.vk_sensitive.value:
 				searchString = searchString.lower()
 			for item in self.list.list:
-				if cfg.sensitive.value:
+				if cfg.vk_sensitive.value:
 					exist = item[0][0].decode('UTF-8', 'replace').startswith(searchString)
 				else:
 					exist = item[0][0].decode('UTF-8', 'replace').lower().startswith(searchString)
@@ -1434,10 +1434,10 @@ class refreshBouquetMoveServices(Screen):
 	def changeItems(self, mark, searchString = None):
 		if searchString:
 			searchString = searchString.decode('UTF-8', 'replace')
-			if not cfg.sensitive.value:
+			if not cfg.vk_sensitive.value:
 				searchString = searchString.lower()
 			for item in self.list.list:
-				if cfg.sensitive.value:
+				if cfg.vk_sensitive.value:
 					exist = item[0][0].decode('UTF-8', 'replace').startswith(searchString)
 				else:
 					exist = item[0][0].decode('UTF-8', 'replace').lower().startswith(searchString)
