@@ -1183,11 +1183,6 @@ class refreshBouquetCopyServices(Screen):
 					else:
 						if item[0][3]:
 							self.list.toggleItemSelection(item[0])
-		self.displaySelectionPars()
-
-	def displaySelectionPars(self, singleToggle=False):
-		# TODO: label with number of selected
-		pass
 
 	def copyCurrentEntries(self):
 		nr_items = len(self.list.getSelectionsList())
@@ -1319,11 +1314,6 @@ class refreshBouquetRemoveServices(Screen):
 					else:
 						if item[0][3]:
 							self.list.toggleItemSelection(item[0])
-		self.displaySelectionPars()
-
-	def displaySelectionPars(self, singleToggle=False):
-		# TODO: label with number of selected
-		pass
 
 	def previewService(self):
 		ref = self["services"].getCurrent()[0][1]
@@ -1448,11 +1438,6 @@ class refreshBouquetMoveServices(Screen):
 					else:
 						if item[0][3]:
 							self.list.toggleItemSelection(item[0])
-		self.displaySelectionPars()
-
-	def displaySelectionPars(self, singleToggle=False):
-		# TODO: label with number of selected
-		pass
 
 	def actionGreen(self):
 		index = self["services"].getCurrent()[0][2]
