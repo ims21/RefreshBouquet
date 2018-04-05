@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.66"
+VERSION = "1.67"
 #  by ims (c) 2016-2018 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -36,6 +36,7 @@ from Screens.MessageBox import MessageBox
 from Components.Sources.ServiceEvent import ServiceEvent
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
+from Tools.BoundFunction import boundFunction
 import skin
 from plugin import plugin_path
 
@@ -421,7 +422,6 @@ class refreshBouquet(Screen, HelpableScreen):
 				debug("nr: %s %s\t\t%s" % (nr, i[0],i[1]))
 				# service name, service reference, index, selected
 				data.addSelection(i[0], i[1], nr, False)
-			from Tools.BoundFunction import boundFunction
 			self.session.openWithCallback(boundFunction(self.moveServicesCallback, self.close), refreshBouquetMoveServices, data, self.sourceItem, new)
 
 ###
@@ -1119,8 +1119,8 @@ class refreshBouquetCopyServices(Screen):
 				"blue": self.list.toggleAllSelection,
 				"yellow": self.previewService,
 				"play": self.previewService,
-				"prevBouquet": self.getUnselectString,
-				"nextBouquet": self.getSelectString
+				"prevBouquet": boundFunction(self.selectGroup, False),
+				"nextBouquet": boundFunction(self.selectGroup, True),
 			})
 
 		self["key_red"] = Button(_("Cancel"))
@@ -1153,56 +1153,41 @@ class refreshBouquetCopyServices(Screen):
 		if not self.isNotService(ref):
 			self.session.nav.playService(eServiceReference(ref))
 
-	def getSelectString(self):
-		name = ""
-		n = ""
+	def selectGroup(self, mark=True):
+		if mark:
+			txt = _("Add to selection (starts with...)")
+		else:
+			txt = _("Remove from selection (starts with...)")
 		item = self["services"].getCurrent()
 		length = int(cfg.vk_length.value)
+		name = ""
 		if item and length:
 			name = item[0][0].decode('UTF-8', 'replace')[0:length]
-			n = "\t%s" % length
-		self.session.openWithCallback(self.selectItems, VirtualKeyBoard, title = _("Add to selection (starts with...)") + n, text = name)
+			txt += "\t%s" % length
+		self.session.openWithCallback(boundFunction(self.changeItems, mark), VirtualKeyBoard, title = txt, text = name)
 
-	def selectItems(self, searchString = None):
+	def changeItems(self, mark, searchString = None):
 		if searchString:
 			searchString = searchString.decode('UTF-8', 'replace')
 			if cfg.vk_sensitive.value:
 					for item in self.list.list:
 						if item[0][0].decode('UTF-8', 'replace').startswith(searchString):
+							if mark:
+								if not item[0][3]:
+									self.list.toggleItemSelection(item[0])
+							else:
+								if item[0][3]:
+									self.list.toggleItemSelection(item[0])
+			else:
+				searchString = searchString.lower()
+				for item in self.list.list:
+					if item[0][0].decode('UTF-8', 'replace').lower().startswith(searchString):
+						if mark:
 							if not item[0][3]:
 								self.list.toggleItemSelection(item[0])
-			else:
-				searchString = searchString.lower()
-				for item in self.list.list:
-					if item[0][0].decode('UTF-8', 'replace').lower().startswith(searchString):
-						if not item[0][3]:
-							self.list.toggleItemSelection(item[0])
-		self.displaySelectionPars()
-
-	def getUnselectString(self):
-		name = ""
-		n = ""
-		item = self["services"].getCurrent()
-		length = int(cfg.vk_length.value)
-		if item and length:
-			name = item[0][0].decode('UTF-8', 'replace')[0:length]
-			n = "\t%s" % length
-		self.session.openWithCallback(self.unselectItems, VirtualKeyBoard, title = _("Remove from selection (starts with...)") + n, text = name)
-
-	def unselectItems(self, searchString = None):
-		if searchString:
-			searchString = searchString.decode('UTF-8', 'replace')
-			if cfg.vk_sensitive.value:
-					for item in self.list.list:
-						if item[0][0].decode('UTF-8', 'replace').startswith(searchString):
+						else:
 							if item[0][3]:
 								self.list.toggleItemSelection(item[0])
-			else:
-				searchString = searchString.lower()
-				for item in self.list.list:
-					if item[0][0].decode('UTF-8', 'replace').lower().startswith(searchString):
-						if item[0][3]:
-							self.list.toggleItemSelection(item[0])
 		self.displaySelectionPars()
 
 	def displaySelectionPars(self, singleToggle=False):
@@ -1280,8 +1265,8 @@ class refreshBouquetRemoveServices(Screen):
 				"blue": self.list.toggleAllSelection,
 				"yellow": self.previewService,
 				"play": self.previewService,
-				"prevBouquet": self.getUnselectString,
-				"nextBouquet": self.getSelectString
+				"prevBouquet": boundFunction(self.selectGroup, False),
+				"nextBouquet": boundFunction(self.selectGroup, True),
 			})
 
 		self["key_red"] = Button(_("Cancel"))
@@ -1309,56 +1294,41 @@ class refreshBouquetRemoveServices(Screen):
 			self["key_yellow"].setText("")
 			self["Service"].newService(None)
 
-	def getSelectString(self):
-		name = ""
-		n = ""
+	def selectGroup(self, mark=True):
+		if mark:
+			txt = _("Add to selection (starts with...)")
+		else:
+			txt = _("Remove from selection (starts with...)")
 		item = self["services"].getCurrent()
 		length = int(cfg.vk_length.value)
+		name = ""
 		if item and length:
 			name = item[0][0].decode('UTF-8', 'replace')[0:length]
-			n = "\t%s" % length
-		self.session.openWithCallback(self.selectItems, VirtualKeyBoard, title = _("Add to selection (starts with...)") + n, text = name)
+			txt += "\t%s" % length
+		self.session.openWithCallback(boundFunction(self.changeItems, mark), VirtualKeyBoard, title = txt, text = name)
 
-	def selectItems(self, searchString = None):
+	def changeItems(self, mark, searchString = None):
 		if searchString:
 			searchString = searchString.decode('UTF-8', 'replace')
 			if cfg.vk_sensitive.value:
 					for item in self.list.list:
 						if item[0][0].decode('UTF-8', 'replace').startswith(searchString):
+							if mark:
+								if not item[0][3]:
+									self.list.toggleItemSelection(item[0])
+							else:
+								if item[0][3]:
+									self.list.toggleItemSelection(item[0])
+			else:
+				searchString = searchString.lower()
+				for item in self.list.list:
+					if item[0][0].decode('UTF-8', 'replace').lower().startswith(searchString):
+						if mark:
 							if not item[0][3]:
 								self.list.toggleItemSelection(item[0])
-			else:
-				searchString = searchString.lower()
-				for item in self.list.list:
-					if item[0][0].decode('UTF-8', 'replace').lower().startswith(searchString):
-						if not item[0][3]:
-							self.list.toggleItemSelection(item[0])
-		self.displaySelectionPars()
-
-	def getUnselectString(self):
-		name = ""
-		n = ""
-		item = self["services"].getCurrent()
-		length = int(cfg.vk_length.value)
-		if item and length:
-			name = item[0][0].decode('UTF-8', 'replace')[0:length]
-			n = "\t%s" % length
-		self.session.openWithCallback(self.unselectItems, VirtualKeyBoard, title = _("Remove from selection (starts with...)") + n, text = name)
-
-	def unselectItems(self, searchString = None):
-		if searchString:
-			searchString = searchString.decode('UTF-8', 'replace')
-			if cfg.vk_sensitive.value:
-					for item in self.list.list:
-						if item[0][0].decode('UTF-8', 'replace').startswith(searchString):
+						else:
 							if item[0][3]:
 								self.list.toggleItemSelection(item[0])
-			else:
-				searchString = searchString.lower()
-				for item in self.list.list:
-					if item[0][0].decode('UTF-8', 'replace').lower().startswith(searchString):
-						if item[0][3]:
-							self.list.toggleItemSelection(item[0])
 		self.displaySelectionPars()
 
 	def displaySelectionPars(self, singleToggle=False):
@@ -1442,8 +1412,8 @@ class refreshBouquetMoveServices(Screen):
 				"green": self.actionGreen,
 				"yellow": self.previewService,
 				"play": self.previewService,
-				"prevBouquet": self.getUnselectString,
-				"nextBouquet": self.getSelectString
+				"prevBouquet": boundFunction(self.selectGroup, False),
+				"nextBouquet": boundFunction(self.selectGroup, True),
 			})
 
 		self["key_red"] = Button(_("Cancel"))
@@ -1458,56 +1428,41 @@ class refreshBouquetMoveServices(Screen):
 
 		debug("changed bouquet: %s" % self.source_bouquetname)
 
-	def getSelectString(self):
-		name = ""
-		n = ""
+	def selectGroup(self, mark=True):
+		if mark:
+			txt = _("Add to selection (starts with...)")
+		else:
+			txt = _("Remove from selection (starts with...)")
 		item = self["services"].getCurrent()
 		length = int(cfg.vk_length.value)
+		name = ""
 		if item and length:
 			name = item[0][0].decode('UTF-8', 'replace')[0:length]
-			n = "\t%s" % length
-		self.session.openWithCallback(self.selectItems, VirtualKeyBoard, title = _("Add to selection (starts with...)") + n, text = name)
+			txt += "\t%s" % length
+		self.session.openWithCallback(boundFunction(self.changeItems, mark), VirtualKeyBoard, title = txt, text = name)
 
-	def selectItems(self, searchString = None):
+	def changeItems(self, mark, searchString = None):
 		if searchString:
 			searchString = searchString.decode('UTF-8', 'replace')
 			if cfg.vk_sensitive.value:
 					for item in self.list.list:
 						if item[0][0].decode('UTF-8', 'replace').startswith(searchString):
+							if mark:
+								if not item[0][3]:
+									self.list.toggleItemSelection(item[0])
+							else:
+								if item[0][3]:
+									self.list.toggleItemSelection(item[0])
+			else:
+				searchString = searchString.lower()
+				for item in self.list.list:
+					if item[0][0].decode('UTF-8', 'replace').lower().startswith(searchString):
+						if mark:
 							if not item[0][3]:
 								self.list.toggleItemSelection(item[0])
-			else:
-				searchString = searchString.lower()
-				for item in self.list.list:
-					if item[0][0].decode('UTF-8', 'replace').lower().startswith(searchString):
-						if not item[0][3]:
-							self.list.toggleItemSelection(item[0])
-		self.displaySelectionPars()
-
-	def getUnselectString(self):
-		name = ""
-		n = ""
-		item = self["services"].getCurrent()
-		length = int(cfg.vk_length.value)
-		if item and length:
-			name = item[0][0].decode('UTF-8', 'replace')[0:length]
-			n = "\t%s" % length
-		self.session.openWithCallback(self.unselectItems, VirtualKeyBoard, title = _("Remove from selection (starts with...)") + n, text = name)
-
-	def unselectItems(self, searchString = None):
-		if searchString:
-			searchString = searchString.decode('UTF-8', 'replace')
-			if cfg.vk_sensitive.value:
-					for item in self.list.list:
-						if item[0][0].decode('UTF-8', 'replace').startswith(searchString):
+						else:
 							if item[0][3]:
 								self.list.toggleItemSelection(item[0])
-			else:
-				searchString = searchString.lower()
-				for item in self.list.list:
-					if item[0][0].decode('UTF-8', 'replace').lower().startswith(searchString):
-						if item[0][3]:
-							self.list.toggleItemSelection(item[0])
 		self.displaySelectionPars()
 
 	def displaySelectionPars(self, singleToggle=False):
