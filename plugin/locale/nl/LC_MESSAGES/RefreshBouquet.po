@@ -2,16 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-17 16:03+0200\n"
-"PO-Revision-Date: 2017-07-06 16:58+0100\n"
-"Last-Translator: Tech <tech@openpli.org>\n"
+"POT-Creation-Date: 2018-04-06 09:39+0200\n"
+"PO-Revision-Date: 2018-04-06 09:39+0200\n"
+"Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <translators@openpli.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 msgid "RefreshBouquet"
 msgstr "Actualiseer bouquet"
@@ -22,23 +22,26 @@ msgstr "Actualiseer de kanalen in de bouquetten"
 msgid "no"
 msgstr "nee"
 
+msgid "HD"
+msgstr "HD"
+
+msgid "4K/UHD"
+msgstr "4K/UHD"
+
+msgid "HD or 4K/UHD"
+msgstr "HD of 4K/UHD"
+
 msgid "source bouquet"
 msgstr "bronbouquet"
 
 msgid "target bouquet"
 msgstr "doelbouquet"
 
-msgid "Question"
-msgstr "Vraag"
+msgid "No"
+msgstr ""
 
-msgid "yes"
-msgstr "ja"
-
-msgid "Select"
-msgstr "Kies"
-
-msgid "Information"
-msgstr "Informatie"
+msgid "All"
+msgstr ""
 
 #, python-format
 msgid "RefreshBouquet v. %s"
@@ -80,6 +83,12 @@ msgstr "Selecteer eerst het bron en / of het doelbouquet!"
 msgid "Select action for bouquet:"
 msgstr "Kies de uit te voeren actie:"
 
+msgid "Remove selected services in source bouquet"
+msgstr "Verwijder de geselecteerde kanalen in het bronbouquet."
+
+msgid "Move selected services in source bouquet"
+msgstr "Verplaats de geselecteerde kanalen naar boeket"
+
 msgid "Manually replace services"
 msgstr "Handmatig vervangen van de kanalen in het doelbouquet."
 
@@ -89,14 +98,12 @@ msgstr "Voeg de gemarkeerde kanalen toe aan het doelbouquet."
 msgid "Add selected missing services to target bouquet"
 msgstr "Voeg de gemarkeerde ontbrekende kanalen toe aan het doelbouquet."
 
-msgid "Remove selected services in source bouquet"
-msgstr "Verwijder de geselecteerde kanalen in het bronbouquet."
-
 msgid "Refresh services in target bouquet"
 msgstr "Actualiseer de kanalen in het gekozen doelbouquet."
 
-msgid "Move selected services in source bouquet"
-msgstr "Verplaats de geselecteerde kanalen naar boeket"
+#, fuzzy
+msgid "Remove selected services from source bouquet"
+msgstr "Verwijder de geselecteerde kanalen in het bronbouquet."
 
 msgid "Settings..."
 msgstr "Instellingen..."
@@ -212,12 +219,6 @@ msgstr[0] "Weet je zeker dat je dit %d kanaal wilt actualiseren?"
 msgstr[1] "Ben je er zeker van deze %d kanalen te actualiseren?"
 
 #, python-format
-msgid "Are you sure to move this %d service?"
-msgid_plural "Are you sure to move this %d services?"
-msgstr[0] "Weet je zeker dat je kanaal %d wilt verplaatsen?"
-msgstr[1] "Weet je zeker dat je deze kanalen %d wilt verplaatsen?"
-
-#, python-format
 msgid "Are you sure to close and lost %d selection?"
 msgid_plural "Are you sure to close and lost all %d selections?"
 msgstr[0] ""
@@ -231,11 +232,20 @@ msgstr "- Kies de toe te voegen kanalen met OK"
 msgid "Copy selected"
 msgstr "Actualiseer"
 
-msgid "Mark services with OK button and then copy these with 'Copy selected'"
+#, fuzzy
+msgid ""
+"Mark services with OK button or use group selection (Ch+/Ch-) and then copy "
+"these with 'Copy selected'"
 msgstr ""
 "Markeer de kanalen met 'Ok' en indien de selectie compleet is, druk dan "
 "'Groen' / Actualiseer om de kanalen daadwerkelijk toe te voegen aan het "
 "eerder gekozen doelbouquet. "
+
+msgid "Add to selection (starts with...)"
+msgstr ""
+
+msgid "Remove from selection (starts with...)"
+msgstr ""
 
 #, python-format
 msgid "Are you sure to copy this %d service?"
@@ -249,11 +259,19 @@ msgstr "- selecteer de te verwijderen kanalen met OK"
 msgid "Remove selected"
 msgstr "Verwijderen"
 
+#, fuzzy
 msgid ""
-"Mark services with OK button and then remove these with 'Remove selected'"
+"Mark services with OK button or use group selection (Ch+/Ch-) and then "
+"remove these with 'Remove selected'"
 msgstr ""
 "Markeer de kanalen met 'Ok' en verwijder deze definitief met de groene "
 "toets, 'Verwijderen'."
+
+#, python-format
+msgid "Are you sure to remove this %d service?"
+msgid_plural "Are you sure to remove this %d services?"
+msgstr[0] "Weet je zeker dat je dit %d kanaal wilt verwijderen?"
+msgstr[1] "Weet je zeker dat je deze %d kanalen wilt verwijderen?"
 
 msgid "- select service(s) for move with OK"
 msgstr "- kies de te verplaatsen kana(a)l(en) met OK"
@@ -261,19 +279,21 @@ msgstr "- kies de te verplaatsen kana(a)l(en) met OK"
 msgid "Move selected"
 msgstr "Geselecteerde verplaatsen"
 
+#, fuzzy
 msgid ""
-"Mark service(s) with OK button, move selector to new position and finish "
-"with 'Move selected'. Selected service(s) will be moved top new position."
+"Mark service(s) with OK button or use group selection (Ch+/Ch-), move "
+"selector to new position and finish with 'Move selected'. Selected "
+"service(s) will be moved top new position."
 msgstr ""
 "Markeer de kanalen met de OK knop, verplaats de cursor naar de nieuwe plek "
 "en beëindig met 'Geselecteerde verplaatsen'. De gekozen kanalen worden "
 "vervolgens naar de nieuwe plek verplaatst."
 
 #, python-format
-msgid "Are you sure to remove this %d service?"
-msgid_plural "Are you sure to remove this %d services?"
-msgstr[0] "Weet je zeker dat je dit %d kanaal wilt verwijderen?"
-msgstr[1] "Weet je zeker dat je deze %d kanalen wilt verwijderen?"
+msgid "Are you sure to move this %d service?"
+msgid_plural "Are you sure to move this %d services?"
+msgstr[0] "Weet je zeker dat je kanaal %d wilt verplaatsen?"
+msgstr[1] "Weet je zeker dat je deze kanalen %d wilt verplaatsen?"
 
 msgid "RefreshBouquet Setup"
 msgstr "Bouquetactualiseer setup"
@@ -296,20 +316,14 @@ msgstr "Missende kanalen in het bronbouquet om enkel handmatig te verplaatsen"
 msgid "Filter services by orbital position in source"
 msgstr "Filter de kanalen van de bron op orbitale positie"
 
-msgid "HD"
-msgstr "HD"
-
-msgid "4K/UHD"
-msgstr "4K/UHD"
-
-msgid "HD or 4K/UHD"
-msgstr "HD of 4K/UHD"
-
 msgid "Programs with 'HD/4K(UHD)' in name only for source"
 msgstr "Kanalen met 'HD/4K(UHD)' in de naam enkel voor de bron"
 
 msgid "Preview on selection"
 msgstr "Geef de zender weer tijdens de selectie"
+
+msgid "Confirm services moving"
+msgstr "Bevestig het verplaatsen van de kanalen"
 
 msgid "Auto toggle in manually replacing"
 msgstr "Wissel automatisch tijdens het handmatig verplaatsen"
@@ -324,14 +338,30 @@ msgid "On plugin start use current bouquet as source or as target"
 msgstr ""
 "Gebruik huidig bouquet als bron of als doel als de plugin wordt gestart"
 
-msgid "Debug info"
-msgstr "Debug informatie"
-
 msgid "Display bouquet name"
 msgstr "Toon boeketnaam"
 
-msgid "Confirm services moving"
-msgstr "Bevestig het verplaatsen van de kanalen"
+msgid "Debug info"
+msgstr "Debug informatie"
+
+msgid "Pre-fill first 'n' servicename chars to virtual keyboard"
+msgstr ""
+
+#, fuzzy
+msgid "Compare virtual keyboard input as case sensitive"
+msgstr "Vergelijk hoofdlettergevoeligheid"
+
+msgid "Question"
+msgstr "Vraag"
+
+msgid "yes"
+msgstr "ja"
+
+msgid "Select"
+msgstr "Kies"
+
+msgid "Information"
+msgstr "Informatie"
 
 msgid "Really close without saving settings?"
 msgstr "Wil je afsluiten zonder de wijzigingen op te slaan?"

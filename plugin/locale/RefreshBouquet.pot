@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-19 15:51+0200\n"
+"POT-Creation-Date: 2018-04-06 09:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,22 +27,25 @@ msgstr ""
 msgid "no"
 msgstr ""
 
+msgid "HD"
+msgstr ""
+
+msgid "4K/UHD"
+msgstr ""
+
+msgid "HD or 4K/UHD"
+msgstr ""
+
 msgid "source bouquet"
 msgstr ""
 
 msgid "target bouquet"
 msgstr ""
 
-msgid "Question"
+msgid "No"
 msgstr ""
 
-msgid "yes"
-msgstr ""
-
-msgid "Select"
-msgstr ""
-
-msgid "Information"
+msgid "All"
 msgstr ""
 
 #, python-format
@@ -85,6 +88,12 @@ msgstr ""
 msgid "Select action for bouquet:"
 msgstr ""
 
+msgid "Remove selected services in source bouquet"
+msgstr ""
+
+msgid "Move selected services in source bouquet"
+msgstr ""
+
 msgid "Manually replace services"
 msgstr ""
 
@@ -94,13 +103,10 @@ msgstr ""
 msgid "Add selected missing services to target bouquet"
 msgstr ""
 
-msgid "Remove selected services in source bouquet"
-msgstr ""
-
 msgid "Refresh services in target bouquet"
 msgstr ""
 
-msgid "Move selected services in source bouquet"
+msgid "Remove selected services from source bouquet"
 msgstr ""
 
 msgid "Settings..."
@@ -202,12 +208,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 #, python-format
-msgid "Are you sure to move this %d service?"
-msgid_plural "Are you sure to move this %d services?"
-msgstr[0] ""
-msgstr[1] ""
-
-#, python-format
 msgid "Are you sure to close and lost %d selection?"
 msgid_plural "Are you sure to close and lost all %d selections?"
 msgstr[0] ""
@@ -219,7 +219,15 @@ msgstr ""
 msgid "Copy selected"
 msgstr ""
 
-msgid "Mark services with OK button and then copy these with 'Copy selected'"
+msgid ""
+"Mark services with OK button or use group selection (Ch+/Ch-) and then copy "
+"these with 'Copy selected'"
+msgstr ""
+
+msgid "Add to selection (starts with...)"
+msgstr ""
+
+msgid "Remove from selection (starts with...)"
 msgstr ""
 
 #, python-format
@@ -235,8 +243,15 @@ msgid "Remove selected"
 msgstr ""
 
 msgid ""
-"Mark services with OK button and then remove these with 'Remove selected'"
+"Mark services with OK button or use group selection (Ch+/Ch-) and then "
+"remove these with 'Remove selected'"
 msgstr ""
+
+#, python-format
+msgid "Are you sure to remove this %d service?"
+msgid_plural "Are you sure to remove this %d services?"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "- select service(s) for move with OK"
 msgstr ""
@@ -245,12 +260,14 @@ msgid "Move selected"
 msgstr ""
 
 msgid ""
-"Mark service(s) with OK button, move selector to new position and finish with 'Move selected'. Selected service(s) will be moved top new position."
+"Mark service(s) with OK button or use group selection (Ch+/Ch-), move "
+"selector to new position and finish with 'Move selected'. Selected "
+"service(s) will be moved top new position."
 msgstr ""
 
 #, python-format
-msgid "Are you sure to remove this %d service?"
-msgid_plural "Are you sure to remove this %d services?"
+msgid "Are you sure to move this %d service?"
+msgid_plural "Are you sure to move this %d services?"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -275,19 +292,13 @@ msgstr ""
 msgid "Filter services by orbital position in source"
 msgstr ""
 
-msgid "HD"
-msgstr ""
-
-msgid "4K/UHD"
-msgstr ""
-
-msgid "HD or 4K/UHD"
-msgstr ""
-
 msgid "Programs with 'HD/4K(UHD)' in name only for source"
 msgstr ""
 
 msgid "Preview on selection"
+msgstr ""
+
+msgid "Confirm services moving"
 msgstr ""
 
 msgid "Auto toggle in manually replacing"
@@ -302,13 +313,28 @@ msgstr ""
 msgid "On plugin start use current bouquet as source or as target"
 msgstr ""
 
-msgid "Debug info"
-msgstr ""
-
 msgid "Display bouquet name"
 msgstr ""
 
-msgid "Confirm services moving"
+msgid "Debug info"
+msgstr ""
+
+msgid "Pre-fill first 'n' servicename chars to virtual keyboard"
+msgstr ""
+
+msgid "Compare virtual keyboard input as case sensitive"
+msgstr ""
+
+msgid "Question"
+msgstr ""
+
+msgid "yes"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Information"
 msgstr ""
 
 msgid "Really close without saving settings?"

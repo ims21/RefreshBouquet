@@ -2,16 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-19 15:51+0200\n"
-"PO-Revision-Date: 2017-07-04 15:06+0100\n"
+"POT-Creation-Date: 2018-04-06 09:25+0200\n"
+"PO-Revision-Date: 2018-04-06 09:37+0200\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi\n"
 "Language: cs_CZ\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 msgid "RefreshBouquet"
 msgstr ""
@@ -22,23 +23,26 @@ msgstr "Aktualizace programů v přehledech"
 msgid "no"
 msgstr "Ne"
 
+msgid "HD"
+msgstr ""
+
+msgid "4K/UHD"
+msgstr ""
+
+msgid "HD or 4K/UHD"
+msgstr "HD nebo 4K/UHD"
+
 msgid "source bouquet"
 msgstr "Zdrojový přehled"
 
 msgid "target bouquet"
 msgstr "Cílový přehled"
 
-msgid "Question"
-msgstr "Dotaz"
+msgid "No"
+msgstr "Ne"
 
-msgid "yes"
-msgstr "Ano"
-
-msgid "Select"
-msgstr "Zvolte"
-
-msgid "Information"
-msgstr "Informace"
+msgid "All"
+msgstr "Vše"
 
 #, python-format
 msgid "RefreshBouquet v. %s"
@@ -80,6 +84,12 @@ msgstr "Vyberte zdrojový nebo zdrojový a cílový přehled!"
 msgid "Select action for bouquet:"
 msgstr "Zvolte akci:"
 
+msgid "Remove selected services in source bouquet"
+msgstr "Odstranit vybrané programy ze zdroje"
+
+msgid "Move selected services in source bouquet"
+msgstr "Přesouvat vybrané programy ve zdroji"
+
 msgid "Manually replace services"
 msgstr "Ruční nahrazování programů"
 
@@ -89,14 +99,11 @@ msgstr "Přidat vybrané programy do cílového přehledu"
 msgid "Add selected missing services to target bouquet"
 msgstr "Přidat vybrané chybějící programy do cílového přehledu"
 
-msgid "Remove selected services in source bouquet"
-msgstr "Odstranit vybrané programy ze zdroje"
-
 msgid "Refresh services in target bouquet"
 msgstr "Aktualizovat programy v cílovém přehledu"
 
-msgid "Move selected services in source bouquet"
-msgstr "Přesouvat vybrané programy ve zdroji"
+msgid "Remove selected services from source bouquet"
+msgstr "Odstranit vybrané programy ze zdroje"
 
 msgid "Settings..."
 msgstr "Nastavení..."
@@ -135,8 +142,14 @@ msgstr "Provést a zavřít"
 msgid "Toggle source and target bouquets with Bouq +/-\n"
 msgstr "Mezi přehledy přepínejte pomocí Bouq +/-\n"
 
-msgid "Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'"
-msgstr "Připravte nahrazení programu programem ze zdrojového přehledu (oba označte pomocí 'OK') a proveďte tlačítkem 'Nahradit'. Opakujte jak potřebujete. Dokončete pomocí 'Provést a zavřít'."
+msgid ""
+"Prepare replacement target's service by service in source bouquet (both "
+"select with 'OK') and replace it with 'Replace'. Repeat it as you need. "
+"Finish all with 'Apply and close'"
+msgstr ""
+"Připravte nahrazení programu programem ze zdrojového přehledu (oba označte "
+"pomocí 'OK') a proveďte tlačítkem 'Nahradit'. Opakujte jak potřebujete. "
+"Dokončete pomocí 'Provést a zavřít'."
 
 msgid "Replace"
 msgstr "Nahradit"
@@ -170,14 +183,27 @@ msgstr "Aktualizovat vybrané"
 msgid "Inversion"
 msgstr "Invertovat"
 
-msgid "This feature looking for differences in service parameters with same names in source and target bouquets. Parameters for marked services will be replaced. "
-msgstr "Tato funkce vyhledá odlišnosti v parametrech programů se stejným názvem ve zdrojovém a cílovém přehledu. Parametry označených programů budou nahrazeny. "
+msgid ""
+"This feature looking for differences in service parameters with same names "
+"in source and target bouquets. Parameters for marked services will be "
+"replaced. "
+msgstr ""
+"Tato funkce vyhledá odlišnosti v parametrech programů se stejným názvem ve "
+"zdrojovém a cílovém přehledu. Parametry označených programů budou nahrazeny. "
 
-msgid "It can be in most cases useful for bouquets with services gained by Fastscan searching. "
-msgstr "Využitelné hlavně pro přehledy používající programy získané z Fastscan vyhledávání. "
+msgid ""
+"It can be in most cases useful for bouquets with services gained by Fastscan "
+"searching. "
+msgstr ""
+"Využitelné hlavně pro přehledy používající programy získané z Fastscan "
+"vyhledávání. "
 
-msgid "Posible duplicates will not be marked in list. Check validity with 'Preview' before mark and before 'Refresh selected'."
-msgstr "Případné duplicity nebudou v seznamu označené. Před označením a před 'Aktualizovat vybrané' zkontrolujte platnost programu pomocí 'Náhled' ."
+msgid ""
+"Posible duplicates will not be marked in list. Check validity with 'Preview' "
+"before mark and before 'Refresh selected'."
+msgstr ""
+"Případné duplicity nebudou v seznamu označené. Před označením a před "
+"'Aktualizovat vybrané' zkontrolujte platnost programu pomocí 'Náhled' ."
 
 msgid "Position"
 msgstr "Pozice"
@@ -188,13 +214,6 @@ msgid_plural "Are you sure to refresh this %d services?"
 msgstr[0] "Opravdu chcete aktualizovat %d zvolený program?"
 msgstr[1] "Opravdu chcete aktualizovat %d zvolené programy?"
 msgstr[2] "Opravdu chcete aktualizovat %d zvolených programů?"
-
-#, python-format
-msgid "Are you sure to move this %d service?"
-msgid_plural "Are you sure to move this %d services?"
-msgstr[0] "Opravdu chcete přesunout %d zvolený program?"
-msgstr[1] "Opravdu chcete přesunout %d zvolené programy?"
-msgstr[2] "Opravdu chcete přesunout %d zvolených programů?"
 
 #, python-format
 msgid "Are you sure to close and lost %d selection?"
@@ -209,8 +228,18 @@ msgstr "- označte program(y) pro přidání pomocí OK"
 msgid "Copy selected"
 msgstr "Zkopírovat vybrané"
 
-msgid "Mark services with OK button and then copy these with 'Copy selected'"
-msgstr "Označte programy pomocí 'OK' a pak je zkopírujte  tlačítkem 'Zkopírovat vybrané'."
+msgid ""
+"Mark services with OK button or use group selection (Ch+/Ch-) and then copy "
+"these with 'Copy selected'"
+msgstr ""
+"Označte programy pomocí 'OK' nebo skupinového výběru (Ch+/Ch-)  a pak je "
+"zkopírujte  tlačítkem 'Zkopírovat vybrané'."
+
+msgid "Add to selection (starts with...)"
+msgstr "Přidat do výběru (začíná na...)"
+
+msgid "Remove from selection (starts with...)"
+msgstr "Odebrat z výběru (začíná na...)"
 
 #, python-format
 msgid "Are you sure to copy this %d service?"
@@ -225,17 +254,12 @@ msgstr "- označte program(y) pro smazání pomocí OK"
 msgid "Remove selected"
 msgstr "Odstranit vybrané"
 
-msgid "Mark services with OK button and then remove these with 'Remove selected'"
-msgstr "Označte programy pomocí 'OK' a pak je odstraňte tlačítkem 'Odstranit vybrané'."
-
-msgid "- select service(s) for move with OK"
-msgstr "- označte program(y) pro přesun pomocí OK"
-
-msgid "Move selected"
-msgstr "Přesunout vybrané"
-
-msgid "Mark service(s) with OK button, move selector to new position and finish with 'Move selected'. Selected service(s) will be moved top new position."
-msgstr "Označte programy pomocí 'OK', přesuňte kurzor na novou pozici a dokončete tlačítkem 'Přesunout vybrané'. Označené programy budou přesunuty nad novou pozici."
+msgid ""
+"Mark services with OK button or use group selection (Ch+/Ch-) and then "
+"remove these with 'Remove selected'"
+msgstr ""
+"Označte programy pomocí 'OK' nebo skupinového výběru (Ch+/Ch-) a pak je "
+"odstraňte tlačítkem 'Odstranit vybrané'."
 
 #, python-format
 msgid "Are you sure to remove this %d service?"
@@ -243,6 +267,28 @@ msgid_plural "Are you sure to remove this %d services?"
 msgstr[0] "Opravdu chcete smazat %d zvolený program?"
 msgstr[1] "Opravdu chcete smazat %d zvolené programy?"
 msgstr[2] "Opravdu chcete smazat %d zvolených programů?"
+
+msgid "- select service(s) for move with OK"
+msgstr "- označte program(y) pro přesun pomocí OK"
+
+msgid "Move selected"
+msgstr "Přesunout vybrané"
+
+msgid ""
+"Mark service(s) with OK button or use group selection (Ch+/Ch-), move "
+"selector to new position and finish with 'Move selected'. Selected "
+"service(s) will be moved top new position."
+msgstr ""
+"Označte programy pomocí 'OK' nebo skupinového výběru (Ch+/Ch-), přesuňte "
+"kurzor na novou pozici a dokončete tlačítkem 'Přesunout vybrané'. Označené "
+"programy budou přesunuty nad novou pozici."
+
+#, python-format
+msgid "Are you sure to move this %d service?"
+msgid_plural "Are you sure to move this %d services?"
+msgstr[0] "Opravdu chcete přesunout %d zvolený program?"
+msgstr[1] "Opravdu chcete přesunout %d zvolené programy?"
+msgstr[2] "Opravdu chcete přesunout %d zvolených programů?"
 
 msgid "RefreshBouquet Setup"
 msgstr "RefreshBouquet Nastavení"
@@ -265,20 +311,14 @@ msgstr "Pouze chybějící programy ve zdrojích pro ruční nahrazování"
 msgid "Filter services by orbital position in source"
 msgstr "Filtrovat ve zdroji programy podle orbitální pozice"
 
-msgid "HD"
-msgstr ""
-
-msgid "4K/UHD"
-msgstr ""
-
-msgid "HD or 4K/UHD"
-msgstr "HD nebo 4K/UHD"
-
 msgid "Programs with 'HD/4K(UHD)' in name only for source"
 msgstr "Ve zdroji zobrazit pouze jména s 'HD/4K(UHD)'"
 
 msgid "Preview on selection"
 msgstr "Náhled při výběru"
+
+msgid "Confirm services moving"
+msgstr "Potvrzovat přesun programů"
 
 msgid "Auto toggle in manually replacing"
 msgstr "Automatické přepínání pro ruční nahrazování"
@@ -292,14 +332,29 @@ msgstr "Po skončení návrat na předchozí  program"
 msgid "On plugin start use current bouquet as source or as target"
 msgstr "Při startu pluginu použít aktuální přehled jako zdroj nebo cíl"
 
-msgid "Debug info"
-msgstr ""
-
 msgid "Display bouquet name"
 msgstr "Zobrazovat název přehledu"
 
-msgid "Confirm services moving"
-msgstr "Potvrzovat přesun programů"
+msgid "Debug info"
+msgstr ""
+
+msgid "Pre-fill first 'n' servicename chars to virtual keyboard"
+msgstr "Předvyplnit prvních 'n' znaků názvu programu do virtuální klávesnice"
+
+msgid "Compare virtual keyboard input as case sensitive"
+msgstr "Rozlišovat velikost písmen při zadání z virtuální klávesnice "
+
+msgid "Question"
+msgstr "Dotaz"
+
+msgid "yes"
+msgstr "Ano"
+
+msgid "Select"
+msgstr "Zvolte"
+
+msgid "Information"
+msgstr "Informace"
 
 msgid "Really close without saving settings?"
 msgstr "Opravdu zavřít bez uloženého nastavení?"
