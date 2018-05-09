@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.67"
+VERSION = "1.68"
 #  by ims (c) 2016-2018 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -40,8 +40,8 @@ from Tools.BoundFunction import boundFunction
 import skin
 from plugin import plugin_path
 
-config.plugins.refreshbouquet.case_sensitive = ConfigYesNo(default = True)
-config.plugins.refreshbouquet.strip = ConfigYesNo(default = False)
+config.plugins.refreshbouquet.case_sensitive = ConfigYesNo(default = False)
+config.plugins.refreshbouquet.strip = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.debug = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.log = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.sort = ConfigYesNo(default = False)
@@ -334,7 +334,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				# fill empty target with or TV or Radio source services
 				new = self.addToBouquetFiltered(source)
 			if not len(new):
-				self["info"].setText(_("No services in source bouquet !"))
+				self["info"].setText(_("No services in source bouquet or no differences in bouquets!"))
 				return
 			nr = 0
 			debug(">>> New <<<")
