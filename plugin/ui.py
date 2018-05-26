@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.68"
+VERSION = "1.69"
 #  by ims (c) 2016-2018 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -310,10 +310,12 @@ class refreshBouquet(Screen, HelpableScreen):
 							except:
 								debug("Unique: %s" % self.charsOnly(s[0]))
 							# name, [new ref, old ref], index, selected
-							differences.addSelection(s[0], [s[1], t[1]], i, select)
+							differences.list.append(MySelectionEntryComponent(s[0], [s[1], t[1]], i, select))
 							debug("Added: %s" % self.charsOnly(s[0]))
 						potencialy_duplicity.append(self.charsOnly(s[0])) # add to list for next check duplicity
 			i += 1
+			self.l = MySelectionList(differences)
+			self.l.setList(differences)
 		return differences, length
 ###
 # Add missing services to source bouquet or all services to empty bouquet
@@ -342,7 +344,9 @@ class refreshBouquet(Screen, HelpableScreen):
 				nr +=1
 				debug("nr:\t%s %s\t\t%s" % (nr, i[0],i[1]))
 				# service name, service reference, index, selected
-				data.addSelection(i[0], i[1], nr, False)
+				data.list.append(MySelectionEntryComponent(i[0], i[1], nr, False))
+			self.l = MySelectionList(data)
+			self.l.setList(data)
 			self.session.open(refreshBouquetCopyServices, data, self.targetItem)
 
 # returns source services not existing in target service (filtered)
@@ -421,7 +425,9 @@ class refreshBouquet(Screen, HelpableScreen):
 				nr +=1
 				debug("nr: %s %s\t\t%s" % (nr, i[0],i[1]))
 				# service name, service reference, index, selected
-				data.addSelection(i[0], i[1], nr, False)
+				data.list.append(MySelectionEntryComponent(i[0], i[1], nr, False))
+			self.l = MySelectionList(data)
+			self.l.setList(data)
 			self.session.openWithCallback(boundFunction(self.moveServicesCallback, self.close), refreshBouquetMoveServices, data, self.sourceItem, new)
 
 ###
@@ -445,7 +451,9 @@ class refreshBouquet(Screen, HelpableScreen):
 				nr +=1
 				debug("nr: %s %s\t\t%s" % (nr, i[0],i[1]))
 				# service name, service reference, index, selected
-				data.addSelection(i[0], i[1], nr, False)
+				data.list.append(MySelectionEntryComponent(i[0], i[1], nr, False))
+			self.l = MySelectionList(data)
+			self.l.setList(data)
 			self.session.open(refreshBouquetRemoveServices, data, self.sourceItem)
 
 ###
@@ -542,7 +550,9 @@ class refreshBouquet(Screen, HelpableScreen):
 				nr +=1
 				debug("nr:\t%s %s\t\t%s" % (nr, i[0],i[1]))
 				# service name, service reference, index, selected
-				data.addSelection(i[0], i[1], nr, False)
+				data.list.append(MySelectionEntryComponent(i[0], i[1], nr, False))
+			self.l = MySelectionList(data)
+			self.l.setList(data)
 			self.session.open(refreshBouquetCopyServices, data, self.targetItem)
 
 # returns all services from bouquet (without notes atc ...)
