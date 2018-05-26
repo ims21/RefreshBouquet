@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: refreshBouquet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-06 09:40+0200\n"
-"PO-Revision-Date: 2018-04-06 09:40+0200\n"
+"POT-Creation-Date: 2018-05-26 23:43+0200\n"
+"PO-Revision-Date: 2018-05-26 23:43+0200\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -44,6 +44,23 @@ msgstr ""
 #, fuzzy
 msgid "All"
 msgstr "Все"
+
+#, fuzzy
+msgid "Original"
+msgstr "Оригинал"
+
+msgid "A-z sort"
+msgstr ""
+
+msgid "Z-a sort"
+msgstr ""
+
+#, fuzzy
+msgid "Selected top"
+msgstr "Выбор"
+
+msgid "Original - reverted"
+msgstr ""
 
 #, python-format
 msgid "RefreshBouquet v. %s"
@@ -128,6 +145,10 @@ msgstr "Исходный букет пустой !"
 msgid "No differences found"
 msgstr "Никаких различий не найдено"
 
+#, fuzzy
+msgid "No services in source bouquet or no differences in bouquets!"
+msgstr "Нет сервисов в исходном букете !"
+
 msgid "No services in source bouquet !"
 msgstr "Нет сервисов в исходном букете !"
 
@@ -206,6 +227,10 @@ msgid ""
 msgstr ""
 "Возможные дубликаты не будут отмечены в списке. Проверьте достоверность с "
 "помощью 'Превью' Перед меткой и перед 'Обновление выбранного'."
+
+#, fuzzy
+msgid "Sort bouquet:"
+msgstr "Исходный букет:"
 
 msgid "Position"
 msgstr "Позиция"
@@ -306,8 +331,9 @@ msgstr "Сравнивать с учетом регистра"
 msgid "Skip 1st nonstandard char in name"
 msgstr "Пропустить 1-ый нестандартный символ в названии"
 
-msgid "Sort services in source bouquets"
-msgstr "Сортировка сервисов в исходных букетах"
+#, fuzzy
+msgid "Sort source bouquet services in manually replace"
+msgstr "Отсутствующие сервисы исходника для ручной замены только"
 
 msgid "Missing source services for manually replace only"
 msgstr "Отсутствующие сервисы исходника для ручной замены только"
@@ -365,3 +391,6 @@ msgstr "Информация"
 
 msgid "Really close without saving settings?"
 msgstr "Действительно закрыть без сохранения настроек?"
+
+#~ msgid "Sort services in source bouquets"
+#~ msgstr "Сортировка сервисов в исходных букетах"

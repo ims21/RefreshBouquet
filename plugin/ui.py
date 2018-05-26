@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.69"
+VERSION = "1.70"
 #  by ims (c) 2016-2018 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -61,6 +61,8 @@ choicelist.append(("15","15"))
 choicelist.append(("20","20"))
 config.plugins.refreshbouquet.vk_length = ConfigSelection(default = "3", choices = [("0", _("No"))] + choicelist + [("255", _("All"))])
 config.plugins.refreshbouquet.vk_sensitive = ConfigYesNo(default=False)
+config.plugins.refreshbouquet.sortmenu = ConfigSelection(default = "0", choices = [("0", _("Original")),("1", _("A-z sort")),("2", _("Z-a sort")),("3", _("Selected top")),("4", _("Original - reverted"))])
+
 cfg = config.plugins.refreshbouquet
 
 TV = (1, 17, 22, 25, 31, 134, 195)
@@ -978,9 +980,8 @@ class refreshBouquetRefreshServices(Screen):
 		self["Service"] = ServiceEvent()
 
 		self.list = list
-		if cfg.sort.value:
-			self.list.sort()
 		self["services"] = self.list
+		self.sortList()
 
 		self["actions"] = ActionMap(["OkCancelActions", "RefreshBouquetActions"],
 			{
@@ -992,6 +993,7 @@ class refreshBouquetRefreshServices(Screen):
 				"blue": self.list.toggleAllSelection,
 
 				"play": self.previewService,
+				"menu": self.sortMenu
 			})
 
 		self["key_red"] = Button(_("Cancel"))
@@ -1010,7 +1012,47 @@ class refreshBouquetRefreshServices(Screen):
 		self["services"].onSelectionChanged.append(self.displayService)
 		self.onLayoutFinish.append(self.displayService)
 
+	def sortMenu(self):
+		menu = []
+		for x in cfg.sortmenu.choices.choices:
+			menu.append((x[1], x[0]))
+		self.session.openWithCallback(self.sortbyCallback, ChoiceBox, title=_("Sort bouquet:"), list=menu, selection=int(cfg.sortmenu.value))
+
+	def sortbyCallback(self, choice):
+		if choice is None:
+			return
+		config.plugins.refreshbouquet.sortmenu.value = choice[1]
+		config.plugins.refreshbouquet.sortmenu.save()
+		self.sortList()
+
+	def sortList(self):
+		if len(self["services"].list):
+			item = self["services"].getCurrent()[0]
+			sort = int(cfg.sortmenu.value)
+			if sort == 0:	#default
+				self.list.sort(sortType=2)
+			elif sort == 1:	#A-z
+				self.list.sort(sortType=0)
+			elif sort == 2:	#Z-a
+				self.list.sort(sortType=0, flag=True)
+			elif sort == 3:	#selected top
+				self.list.sort(sortType=3, flag=True)
+			elif sort == 4:	#default reversed
+				self.list.sort(sortType=2, flag=True)
+			idx = self.getItemIndex(item)
+			self["services"].moveToIndex(idx)
+
+	def getItemIndex(self,item):
+		index = 0
+		for i in self["services"].list:
+			if i[0] == item:
+				return index
+			index += 1
+		return 0
+
 	def displayService(self):
+		if not len(self["services"].list):
+			return
 		ref = self["services"].getCurrent()[0][1][0]
 		index = self["services"].getCurrent()[0][2] + 1
 		self.setTitle("%s\t%s: %s" % (self.texttitle, _("Position"), index))
@@ -1116,9 +1158,8 @@ class refreshBouquetCopyServices(Screen):
 		setIcon()
 
 		self.list = list
-		if cfg.sort.value:
-			self.list.sort()
 		self["services"] = self.list
+		self.sortList()
 
 		self["actions"] = ActionMap(["OkCancelActions", "RefreshBouquetActions"],
 			{
@@ -1131,6 +1172,7 @@ class refreshBouquetCopyServices(Screen):
 				"play": self.previewService,
 				"prevBouquet": boundFunction(self.selectGroup, False),
 				"nextBouquet": boundFunction(self.selectGroup, True),
+				"menu": self.sortMenu
 			})
 
 		self["key_red"] = Button(_("Cancel"))
@@ -1145,6 +1187,44 @@ class refreshBouquetCopyServices(Screen):
 		self.onLayoutFinish.append(self.displayService)
 
 		debug("changed bouquet: %s" % self.target_bouquetname)
+
+	def sortMenu(self):
+		menu = []
+		for x in cfg.sortmenu.choices.choices:
+			menu.append((x[1], x[0]))
+		self.session.openWithCallback(self.sortbyCallback, ChoiceBox, title=_("Sort bouquet:"), list=menu, selection=int(cfg.sortmenu.value))
+
+	def sortbyCallback(self, choice):
+		if choice is None:
+			return
+		config.plugins.refreshbouquet.sortmenu.value = choice[1]
+		config.plugins.refreshbouquet.sortmenu.save()
+		self.sortList()
+
+	def sortList(self):
+		if len(self["services"].list):
+			item = self["services"].getCurrent()[0]
+			sort = int(cfg.sortmenu.value)
+			if sort == 0:	#default
+				self.list.sort(sortType=2)
+			elif sort == 1:	#A-z
+				self.list.sort(sortType=0)
+			elif sort == 2:	#Z-a
+				self.list.sort(sortType=0, flag=True)
+			elif sort == 3:	#selected top
+				self.list.sort(sortType=3, flag=True)
+			elif sort == 4:	#default reversed
+				self.list.sort(sortType=2, flag=True)
+			idx = self.getItemIndex(item)
+			self["services"].moveToIndex(idx)
+
+	def getItemIndex(self,item):
+		index = 0
+		for i in self["services"].list:
+			if i[0] == item:
+				return index
+			index += 1
+		return 0
 
 	def displayService(self):
 		ref = self["services"].getCurrent()[0][1]
@@ -1248,9 +1328,8 @@ class refreshBouquetRemoveServices(Screen):
 		setIcon(True)
 
 		self.list = list
-		if cfg.sort.value:
-			self.list.sort()
 		self["services"] = self.list
+		self.sortList()
 
 		self["Service"] = ServiceEvent()
 
@@ -1267,6 +1346,7 @@ class refreshBouquetRemoveServices(Screen):
 				"play": self.previewService,
 				"prevBouquet": boundFunction(self.selectGroup, False),
 				"nextBouquet": boundFunction(self.selectGroup, True),
+				"menu": self.sortMenu
 			})
 
 		self["key_red"] = Button(_("Cancel"))
@@ -1281,6 +1361,44 @@ class refreshBouquetRemoveServices(Screen):
 		self.onLayoutFinish.append(self.displayService)
 
 		debug("changed bouquet: %s" % self.source_bouquetname)
+
+	def sortMenu(self):
+		menu = []
+		for x in cfg.sortmenu.choices.choices:
+			menu.append((x[1], x[0]))
+		self.session.openWithCallback(self.sortbyCallback, ChoiceBox, title=_("Sort bouquet:"), list=menu, selection=int(cfg.sortmenu.value))
+
+	def sortbyCallback(self, choice):
+		if choice is None:
+			return
+		config.plugins.refreshbouquet.sortmenu.value = choice[1]
+		config.plugins.refreshbouquet.sortmenu.save()
+		self.sortList()
+
+	def sortList(self):
+		if len(self["services"].list):
+			item = self["services"].getCurrent()[0]
+			sort = int(cfg.sortmenu.value)
+			if sort == 0:	#default
+				self.list.sort(sortType=2)
+			elif sort == 1:	#A-z
+				self.list.sort(sortType=0)
+			elif sort == 2:	#Z-a
+				self.list.sort(sortType=0, flag=True)
+			elif sort == 3:	#selected top
+				self.list.sort(sortType=3, flag=True)
+			elif sort == 4:	#default reversed
+				self.list.sort(sortType=2, flag=True)
+			idx = self.getItemIndex(item)
+			self["services"].moveToIndex(idx)
+
+	def getItemIndex(self,item):
+		index = 0
+		for i in self["services"].list:
+			if i[0] == item:
+				return index
+			index += 1
+		return 0
 
 	def displayService(self):
 		ref = self["services"].getCurrent()[0][1]
@@ -1389,6 +1507,7 @@ class refreshBouquetMoveServices(Screen):
 		self.services = services
 		self.list = list
 		self["services"] = self.list
+		self.sortList()
 
 		self["Service"] = ServiceEvent()
 
@@ -1404,6 +1523,7 @@ class refreshBouquetMoveServices(Screen):
 				"play": self.previewService,
 				"prevBouquet": boundFunction(self.selectGroup, False),
 				"nextBouquet": boundFunction(self.selectGroup, True),
+				"menu": self.sortMenu
 			})
 
 		self["key_red"] = Button(_("Cancel"))
@@ -1417,6 +1537,44 @@ class refreshBouquetMoveServices(Screen):
 		self.onLayoutFinish.append(self.setPosition)
 
 		debug("changed bouquet: %s" % self.source_bouquetname)
+
+	def sortMenu(self):
+		menu = []
+		for x in cfg.sortmenu.choices.choices:
+			menu.append((x[1], x[0]))
+		self.session.openWithCallback(self.sortbyCallback, ChoiceBox, title=_("Sort bouquet:"), list=menu, selection=int(cfg.sortmenu.value))
+
+	def sortbyCallback(self, choice):
+		if choice is None:
+			return
+		config.plugins.refreshbouquet.sortmenu.value = choice[1]
+		config.plugins.refreshbouquet.sortmenu.save()
+		self.sortList()
+
+	def sortList(self):
+		if len(self["services"].list):
+			item = self["services"].getCurrent()[0]
+			sort = int(cfg.sortmenu.value)
+			if sort == 0:	#default
+				self.list.sort(sortType=2)
+			elif sort == 1:	#A-z
+				self.list.sort(sortType=0)
+			elif sort == 2:	#Z-a
+				self.list.sort(sortType=0, flag=True)
+			elif sort == 3:	#selected top
+				self.list.sort(sortType=3, flag=True)
+			elif sort == 4:	#default reversed
+				self.list.sort(sortType=2, flag=True)
+			idx = self.getItemIndex(item)
+			self["services"].moveToIndex(idx)
+
+	def getItemIndex(self,item):
+		index = 0
+		for i in self["services"].list:
+			if i[0] == item:
+				return index
+			index += 1
+		return 0
 
 	def selectGroup(self, mark=True):
 		if mark:
@@ -1601,7 +1759,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist = []
 		refreshBouquetCfglist.append(getConfigListEntry(_("Compare case sensitive"), cfg.case_sensitive))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Skip 1st nonstandard char in name"), cfg.strip))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Sort services in source bouquets"), cfg.sort))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Sort source bouquet services in manually replace"), cfg.sort))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Missing source services for manually replace only"), cfg.diff))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Filter services by orbital position in source"), cfg.orbital))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Programs with 'HD/4K(UHD)' in name only for source"), cfg.hd))
@@ -1712,7 +1870,7 @@ class MySelectionList(MenuList):
 				return
 
 	def sort(self, sortType=False, flag=False):
-		# sorting by sortType: # 0 - description, 1 - value, 2 - index, 3 - selected
+		# sorting by sortType: # 0 - name, 1 - item, 2 - index, 3 - selected
 		self.list.sort(key=lambda x: x[0][sortType],reverse=flag)
 		self.setList(self.list)
 
