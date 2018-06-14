@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-26 23:38+0200\n"
+"POT-Creation-Date: 2018-06-14 23:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -170,7 +170,18 @@ msgid ""
 "Finish all with 'Apply and close'"
 msgstr ""
 
+msgid "Marking can be canceled with key '0'."
+msgstr ""
+
+msgid ""
+"You can insert source service to target's list too. Select source service "
+"with 'OK', then put selector to item in target list and press 'Insert'."
+msgstr ""
+
 msgid "Replace"
+msgstr ""
+
+msgid "Insert"
 msgstr ""
 
 msgid "Preview"
