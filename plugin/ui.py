@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.70"
+VERSION = "1.71"
 #  by ims (c) 2016-2018 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -771,7 +771,7 @@ class refreshBouquetManualSelection(Screen):
 				"red": self.exit,
 				"green": self.replaceService,
 				"yellow": self.previewService,
-				"blue": self.replaceTarget,
+				"blue": self.keyBlue,
 
 				"play": self.previewService,
 
@@ -787,6 +787,8 @@ class refreshBouquetManualSelection(Screen):
 				"leftRepeated": self.left,
 				"right": self.right,
 				"rightRepeated": self.right,
+
+				"clearInputs": self.clearInputs,
 			},-2)
 
 		self["key_red"] = Button(_("Cancel"))
@@ -800,7 +802,10 @@ class refreshBouquetManualSelection(Screen):
 		self["target_label"] = Label(_("target bouquet") + name_t )
 
 		text = _("Toggle source and target bouquets with Bouq +/-\n")
-		text += _("Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'")
+		text += _("Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'")+ " "
+		text += _("Marking can be canceled with key '0'.") + " "
+		text += _("You can insert source service to target's list too. Select source service with 'OK', then put selector to item in target list and press 'Insert'.")
+
 		self["info"].setText(text)
 
 		self.targetRecord = ""
@@ -826,8 +831,16 @@ class refreshBouquetManualSelection(Screen):
 			self.sourceRecord = self[self.currList].getCurrent()
 		if self.targetRecord != "" and self.sourceRecord != "":
 			self["key_blue"].setText(_("Replace"))
+		elif self.targetRecord == "" and self.sourceRecord != "":
+			self["key_blue"].setText(_("Insert"))
 		if cfg.autotoggle.value:
 			self.switchLists()
+
+	def keyBlue(self):
+		if self.targetRecord != "" and self.sourceRecord != "":
+			self.replaceTarget()
+		elif self.targetRecord == "" and self.sourceRecord != "" and self.currList == "targets":
+			self.insertBeforeCurrent()
 
 	def replaceTarget(self):
 		if self.targetRecord != "" and self.sourceRecord != "":
@@ -845,6 +858,15 @@ class refreshBouquetManualSelection(Screen):
 			else:
 				self.switchToSourceList() # trick - must be both lines
 				self.switchToTargetList()
+			self.clearInputs()
+
+	def insertBeforeCurrent(self):
+		if self.targetRecord == "" and self.sourceRecord != "":
+			target = self["targets"].getCurrent()
+			self.target_services.insert(target[2], (self.sourceRecord[0], self.sourceRecord[1], target[2]))
+			self.changedTargetdata.append((self.sourceRecord[0], target[1], self.sourceRecord[1], target[2], target[0]))
+			self.right()
+			self.left()
 			self.clearInputs()
 
 	def displayService(self):
