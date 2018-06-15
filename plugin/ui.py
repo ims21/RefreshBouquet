@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.71"
+VERSION = "1.72"
 #  by ims (c) 2016-2018 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -774,6 +774,7 @@ class refreshBouquetManualSelection(Screen):
 				"blue": self.keyBlue,
 
 				"play": self.previewService,
+				"stop":	self.stopPreview,
 
 				"prevBouquet": self.switchLists,
 				"nextBouquet": self.switchLists,
@@ -804,7 +805,6 @@ class refreshBouquetManualSelection(Screen):
 		text = _("Toggle source and target bouquets with Bouq +/-\n")
 		text += _("Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'")+ " "
 		text += _("Marking can be canceled with key '0'.") + " "
-		text += _("You can insert source service to target's list too. Select source service with 'OK', then put selector to item in target list and press 'Insert'.")
 
 		self["info"].setText(text)
 
@@ -815,6 +815,7 @@ class refreshBouquetManualSelection(Screen):
 		self.changedTargetdata = []
 
 		debug("changed bouquet: %s" % self.target_bouquetname)
+		self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.onLayoutFinish.append(self.switchLists)
 
 	def ok(self): # get source and target items
@@ -831,16 +832,12 @@ class refreshBouquetManualSelection(Screen):
 			self.sourceRecord = self[self.currList].getCurrent()
 		if self.targetRecord != "" and self.sourceRecord != "":
 			self["key_blue"].setText(_("Replace"))
-		elif self.targetRecord == "" and self.sourceRecord != "":
-			self["key_blue"].setText(_("Insert"))
 		if cfg.autotoggle.value:
 			self.switchLists()
 
 	def keyBlue(self):
 		if self.targetRecord != "" and self.sourceRecord != "":
 			self.replaceTarget()
-		elif self.targetRecord == "" and self.sourceRecord != "" and self.currList == "targets":
-			self.insertBeforeCurrent()
 
 	def replaceTarget(self):
 		if self.targetRecord != "" and self.sourceRecord != "":
@@ -860,15 +857,6 @@ class refreshBouquetManualSelection(Screen):
 				self.switchToTargetList()
 			self.clearInputs()
 
-	def insertBeforeCurrent(self):
-		if self.targetRecord == "" and self.sourceRecord != "":
-			target = self["targets"].getCurrent()
-			self.target_services.insert(target[2], (self.sourceRecord[0], self.sourceRecord[1], target[2]))
-			self.changedTargetdata.append((self.sourceRecord[0], target[1], self.sourceRecord[1], target[2], target[0]))
-			self.right()
-			self.left()
-			self.clearInputs()
-
 	def displayService(self):
 		ref = self[self.currList].getCurrent()[1]
 		if not self.isNotService(ref):
@@ -886,6 +874,8 @@ class refreshBouquetManualSelection(Screen):
 		if not self.isNotService(ref):
 			#self["Service"].newService(eServiceReference(ref))
 			self.session.nav.playService(eServiceReference(ref))
+	def stopPreview(self):
+		self.session.nav.playService(self.playingRef)
 
 	def clearInputs(self):
 		self.targetRecord = ""
@@ -964,6 +954,7 @@ class refreshBouquetManualSelection(Screen):
 					mutableList.flushChanges()
 					if cfg.log.value:
 						fo.write("%s|%s| replaced with |%s|%s| at |%s\n" % (data[4],data[1],data[0],data[2],data[3]+1))
+
 			if cfg.log.value:
 				fo.close()
 			self.close()
@@ -1015,6 +1006,7 @@ class refreshBouquetRefreshServices(Screen):
 				"blue": self.list.toggleAllSelection,
 
 				"play": self.previewService,
+				"stop": self.stopPreview,
 				"menu": self.sortMenu
 			})
 
@@ -1030,6 +1022,7 @@ class refreshBouquetRefreshServices(Screen):
 		text += _("Posible duplicates will not be marked in list. Check validity with 'Preview' before mark and before 'Refresh selected'.")
 		self["info"].setText(text)
 
+		self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.onSelectionChanged = []
 		self["services"].onSelectionChanged.append(self.displayService)
 		self.onLayoutFinish.append(self.displayService)
@@ -1092,6 +1085,8 @@ class refreshBouquetRefreshServices(Screen):
 		ref = self["services"].getCurrent()[0][1][0]
 		if not self.isNotService(ref):
 			self.session.nav.playService(eServiceReference(ref))
+	def stopPreview(self):
+		self.session.nav.playService(self.playingRef)
 
 	def replaceSelectedEntries(self):
 		nr_items = len(self.list.getSelectionsList())
@@ -1192,6 +1187,7 @@ class refreshBouquetCopyServices(Screen):
 				"blue": self.list.toggleAllSelection,
 				"yellow": self.previewService,
 				"play": self.previewService,
+				"stop": self.stopPreview,
 				"prevBouquet": boundFunction(self.selectGroup, False),
 				"nextBouquet": boundFunction(self.selectGroup, True),
 				"menu": self.sortMenu
@@ -1208,6 +1204,7 @@ class refreshBouquetCopyServices(Screen):
 		self["services"].onSelectionChanged.append(self.displayService)
 		self.onLayoutFinish.append(self.displayService)
 
+		self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		debug("changed bouquet: %s" % self.target_bouquetname)
 
 	def sortMenu(self):
@@ -1264,6 +1261,8 @@ class refreshBouquetCopyServices(Screen):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
 			self.session.nav.playService(eServiceReference(ref))
+	def stopPreview(self):
+		self.session.nav.playService(self.playingRef)
 
 	def selectGroup(self, mark=True):
 		if mark:
@@ -1366,6 +1365,7 @@ class refreshBouquetRemoveServices(Screen):
 				"blue": self.list.toggleAllSelection,
 				"yellow": self.previewService,
 				"play": self.previewService,
+				"stop": self.stopPreview,
 				"prevBouquet": boundFunction(self.selectGroup, False),
 				"nextBouquet": boundFunction(self.selectGroup, True),
 				"menu": self.sortMenu
@@ -1382,6 +1382,7 @@ class refreshBouquetRemoveServices(Screen):
 		self["services"].onSelectionChanged.append(self.displayService)
 		self.onLayoutFinish.append(self.displayService)
 
+		self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		debug("changed bouquet: %s" % self.source_bouquetname)
 
 	def sortMenu(self):
@@ -1469,6 +1470,8 @@ class refreshBouquetRemoveServices(Screen):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
 			self.session.nav.playService(eServiceReference(ref))
+	def stopPreview(self):
+		self.session.nav.playService(self.playingRef)
 
 	def removeCurrentEntries(self):
 		nr_items = len(self.list.getSelectionsList())
@@ -1543,6 +1546,7 @@ class refreshBouquetMoveServices(Screen):
 				"green": self.actionGreen,
 				"yellow": self.previewService,
 				"play": self.previewService,
+				"stop": self.stopPreview,
 				"prevBouquet": boundFunction(self.selectGroup, False),
 				"nextBouquet": boundFunction(self.selectGroup, True),
 				"menu": self.sortMenu
@@ -1558,6 +1562,7 @@ class refreshBouquetMoveServices(Screen):
 		self["services"].onSelectionChanged.append(self.displayService)
 		self.onLayoutFinish.append(self.setPosition)
 
+		self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		debug("changed bouquet: %s" % self.source_bouquetname)
 
 	def sortMenu(self):
@@ -1659,6 +1664,8 @@ class refreshBouquetMoveServices(Screen):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
 			self.session.nav.playService(eServiceReference(ref))
+	def stopPreview(self):
+		self.session.nav.playService(self.playingRef)
 
 	def moveCurrentEntries(self, index):
 		nr_items = len(self.list.getSelectionsList())
