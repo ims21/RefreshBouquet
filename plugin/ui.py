@@ -804,7 +804,7 @@ class refreshBouquetManualSelection(Screen):
 
 		text = _("Toggle source and target bouquets with Bouq +/-\n")
 		text += _("Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'")+ " "
-		text += _("Marking can be canceled with key '0'.") + " "
+		text += _("Marking can be canceled with key '0'.")
 
 		self["info"].setText(text)
 
