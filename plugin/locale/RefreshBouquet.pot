@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-15 14:24+0200\n"
+"POT-Creation-Date: 2018-06-24 08:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -248,6 +248,9 @@ msgid ""
 "these with 'Copy selected'"
 msgstr ""
 
+msgid "Use 'Menu' for sorting."
+msgstr ""
+
 msgid "Add to selection (starts with...)"
 msgstr ""
 
@@ -287,6 +290,9 @@ msgid ""
 "Mark service(s) with OK button or use group selection (Ch+/Ch-), move "
 "selector to new position and finish with 'Move selected'. Selected "
 "service(s) will be moved top new position."
+msgstr ""
+
+msgid "Sorting has not effect for finaly bouquet sorting."
 msgstr ""
 
 #, python-format

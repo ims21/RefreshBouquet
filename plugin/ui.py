@@ -1198,7 +1198,10 @@ class refreshBouquetCopyServices(Screen):
 		self["key_yellow"] = Button("")
 		self["key_blue"] = Button(_("Inversion"))
 
-		self["info"].setText(_("Mark services with OK button or use group selection (Ch+/Ch-) and then copy these with 'Copy selected'"))
+		text =_("Mark services with OK button or use group selection (Ch+/Ch-) and then copy these with 'Copy selected'")
+		text += "\n"
+		text += _("Use 'Menu' for sorting.")
+		self["info"].setText(text)
 
 		self.onSelectionChanged = []
 		self["services"].onSelectionChanged.append(self.displayService)
@@ -1376,7 +1379,10 @@ class refreshBouquetRemoveServices(Screen):
 		self["key_yellow"] = Button()
 		self["key_blue"] = Button(_("Inversion"))
 
-		self["info"].setText(_("Mark services with OK button or use group selection (Ch+/Ch-) and then remove these with 'Remove selected'"))
+		text = _("Mark services with OK button or use group selection (Ch+/Ch-) and then remove these with 'Remove selected'")
+		text += "\n"
+		text += _("Use 'Menu' for sorting.")
+		self["info"].setText(text)
 
 		self.onSelectionChanged = []
 		self["services"].onSelectionChanged.append(self.displayService)
@@ -1556,7 +1562,12 @@ class refreshBouquetMoveServices(Screen):
 		self["key_green"] = Button(_("Move selected"))
 		self["key_yellow"] = Button()
 		self["key_blue"] = Button()
-		self["info"].setText(_("Mark service(s) with OK button or use group selection (Ch+/Ch-), move selector to new position and finish with 'Move selected'. Selected service(s) will be moved top new position."))
+
+		text = _("Mark service(s) with OK button or use group selection (Ch+/Ch-), move selector to new position and finish with 'Move selected'. Selected service(s) will be moved top new position.")
+		text += "\n"
+		text += _("Use 'Menu' for sorting.") + " "
+		text += _("Sorting has not effect for finaly bouquet sorting.")
+		self["info"].setText(text)
 
 		self.onSelectionChanged = []
 		self["services"].onSelectionChanged.append(self.displayService)

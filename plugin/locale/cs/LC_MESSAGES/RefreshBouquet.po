@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-15 14:25+0200\n"
-"PO-Revision-Date: 2018-06-15 14:25+0200\n"
+"POT-Creation-Date: 2018-06-24 08:04+0200\n"
+"PO-Revision-Date: 2018-06-24 08:06+0200\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi\n"
 "Language: cs_CZ\n"
@@ -259,6 +259,9 @@ msgstr ""
 "Označte programy pomocí 'OK' nebo skupinového výběru (Ch+/Ch-)  a pak je "
 "zkopírujte  tlačítkem 'Zkopírovat vybrané'."
 
+msgid "Use 'Menu' for sorting."
+msgstr "Pro setřídění použijte 'Menu'."
+
 msgid "Add to selection (starts with...)"
 msgstr "Přidat do výběru (začíná na...)"
 
@@ -306,6 +309,9 @@ msgstr ""
 "Označte programy pomocí 'OK' nebo skupinového výběru (Ch+/Ch-), přesuňte "
 "kurzor na novou pozici a dokončete tlačítkem 'Přesunout vybrané'. Označené "
 "programy budou přesunuty nad novou pozici."
+
+msgid "Sorting has not effect for finaly bouquet sorting."
+msgstr "Třídění nemá vliv na konečné setřídění přehledu."
 
 #, python-format
 msgid "Are you sure to move this %d service?"
