@@ -243,11 +243,11 @@ class refreshBouquet(Screen, HelpableScreen):
 			if self.isNotService(service[1]):
 				continue
 			op_hex_str = service[1].split(':')[6][0:-4]
-			op_txt = op2human(int(op_hex_str,16))
+			op_txt = op2human(int(op_hex_str,16)) if op_hex_str else op_hex_str
 			try:
-				tmp = op.index((op_hex_str,op_txt))
+				tmp = op.index((op_hex_str, op_txt))
 			except:
-				op.append((op_hex_str,op_txt))
+				op.append((op_hex_str, op_txt))
 				new_choices.append(("%s" % op_hex_str ,"%s" % op_txt))
 		config.plugins.refreshbouquet.orbital = NoSave(ConfigSelection(default = "x", choices = new_choices))
 
