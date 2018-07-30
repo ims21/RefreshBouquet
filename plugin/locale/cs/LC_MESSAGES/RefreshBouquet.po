@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-24 08:04+0200\n"
-"PO-Revision-Date: 2018-06-24 08:06+0200\n"
+"POT-Creation-Date: 2018-07-30 22:06+0200\n"
+"PO-Revision-Date: 2018-07-30 22:11+0200\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi\n"
 "Language: cs_CZ\n"
@@ -24,10 +24,10 @@ msgid "no"
 msgstr "Ne"
 
 msgid "HD"
-msgstr ""
+msgstr "HD"
 
 msgid "4K/UHD"
-msgstr ""
+msgstr "4K/UHD"
 
 msgid "HD or 4K/UHD"
 msgstr "HD nebo 4K/UHD"
@@ -61,7 +61,7 @@ msgstr "Původní - opačně"
 
 #, python-format
 msgid "RefreshBouquet v. %s"
-msgstr ""
+msgstr "RefreshBouquet v. %s"
 
 msgid "exit plugin"
 msgstr "ukončit plugin"
@@ -93,8 +93,8 @@ msgstr "Zdrojový přehled:"
 msgid "Target bouquet:"
 msgstr "Cílový přehled:"
 
-msgid "Select or source or source and target bouquets !"
-msgstr "Vyberte zdrojový nebo zdrojový a cílový přehled!"
+msgid "Select or source or target or source and target bouquets !"
+msgstr "Vyberte zdrojový nebo cílový nebo zdrojový a cílový přehled!"
 
 msgid "Select action for bouquet:"
 msgstr "Zvolte akci:"
@@ -147,12 +147,15 @@ msgstr "Ve zdrojovém přehledu nejsou programy nebo nejsou odlišnosti!"
 msgid "No services in source bouquet !"
 msgstr "Ve zdrojovém přehledu nejsou programy!"
 
+msgid "No services in target bouquet !"
+msgstr "V cílovém přehledu nejsou programy!"
+
 msgid "- select service for replace with OK"
 msgstr "- označte program(y) pro nahrazení pomocí OK"
 
 #, python-format
 msgid "RefreshBouquet %s"
-msgstr ""
+msgstr "RefreshBouquet v. %s"
 
 msgid "Apply and close"
 msgstr "Provést a zavřít"
@@ -362,11 +365,14 @@ msgstr "Po skončení návrat na předchozí  program"
 msgid "On plugin start use current bouquet as source or as target"
 msgstr "Při startu pluginu použít aktuální přehled jako zdroj nebo cíl"
 
+msgid "Selector to current bouquet"
+msgstr "Nastavit kurzor na aktuální přehled"
+
 msgid "Display bouquet name"
 msgstr "Zobrazovat název přehledu"
 
 msgid "Debug info"
-msgstr ""
+msgstr "Debug info"
 
 msgid "Pre-fill first 'n' servicename chars to virtual keyboard"
 msgstr "Předvyplnit prvních 'n' znaků názvu programu do virtuální klávesnice"

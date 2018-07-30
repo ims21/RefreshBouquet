@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-24 08:04+0200\n"
+"POT-Creation-Date: 2018-07-30 22:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,7 +97,7 @@ msgstr ""
 msgid "Target bouquet:"
 msgstr ""
 
-msgid "Select or source or source and target bouquets !"
+msgid "Select or source or target or source and target bouquets !"
 msgstr ""
 
 msgid "Select action for bouquet:"
@@ -149,6 +149,9 @@ msgid "No services in source bouquet or no differences in bouquets!"
 msgstr ""
 
 msgid "No services in source bouquet !"
+msgstr ""
+
+msgid "No services in target bouquet !"
 msgstr ""
 
 msgid "- select service for replace with OK"
@@ -341,6 +344,9 @@ msgid "Return to previous service on end"
 msgstr ""
 
 msgid "On plugin start use current bouquet as source or as target"
+msgstr ""
+
+msgid "Selector to current bouquet"
 msgstr ""
 
 msgid "Display bouquet name"

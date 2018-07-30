@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.72"
+VERSION = "1.74"
 #  by ims (c) 2016-2018 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -52,6 +52,7 @@ config.plugins.refreshbouquet.autotoggle = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.on_end = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.orbital = NoSave(ConfigSelection(default = "x", choices = [("x",_("no")),]))
 config.plugins.refreshbouquet.current_bouquet = ConfigSelection(default = "0", choices = [("0",_("no")),("source",_("source bouquet")),("target",_("target bouquet"))])
+config.plugins.refreshbouquet.selector2bouquet = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.bouquet_name = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.confirm_move = ConfigYesNo(default = True)
 choicelist = []
@@ -128,23 +129,29 @@ class refreshBouquet(Screen, HelpableScreen):
 		self["key_yellow"] = Button(_("Set source"))
 		self["key_blue"] = Button(_("Set target"))
 
-		self["config"] = List([])
+		self.list = List([])
+		self["config"] = self.list
 		self["source_text"] = Label(_("Source bouquet:"))
 		self["target_text"] = Label(_("Target bouquet:"))
 		self["source_name"] = Label()
 		self["target_name"] = Label()
-		self["info"] = Label(_("Select or source or source and target bouquets !"))
+		self["info"] = Label(_("Select or source or target or source and target bouquets !"))
 
 		self.sourceItem = None
 		self.targetItem = None
 
 		self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-		self.onLayoutFinish.append(self.getBouquetList)
 
 		if cfg.current_bouquet.value == "source":
 			self.getSource(currentBouquet)
 		elif cfg.current_bouquet.value == "target":
 			self.getTarget(currentBouquet)
+		else:
+			self.currentBouquet = currentBouquet
+
+		self.onLayoutFinish.append(self.getBouquetList)
+		if cfg.selector2bouquet.value:
+			self.onLayoutFinish.append(self.setSelector)
 
 	def exit(self):
 		self.Servicelist.servicelist.resetRoot()
@@ -169,12 +176,12 @@ class refreshBouquet(Screen, HelpableScreen):
 				menu.append((_("Refresh services in target bouquet"),4))
 				menu.append((_("Move selected services in source bouquet"),5))
 				buttons = ["1","2","3","4","5","6"]
-		elif self.sourceItem:
+		elif self.sourceItem and not self.targetItem or self.targetItem and not self.sourceItem:
 			menu.append((_("Remove selected services from source bouquet"),3))
 			menu.append((_("Move selected services in source bouquet"),5))
 			buttons = ["4","6"]
 		else:
-			text = _("Select or source or source and target bouquets !")
+			text = _("Select or source or target or source and target bouquets !")
 			self["info"].setText(text)
 
 		menu.append((_("Settings..."),10))
@@ -202,6 +209,16 @@ class refreshBouquet(Screen, HelpableScreen):
 		else:
 			self["info"].setText(_("Wrong selection!"))
 			return
+
+# set selector to selected bouquet
+	def setSelector(self):
+		item = self.sourceItem if self.sourceItem else self.targetItem if self.targetItem else self.currentBouquet
+		if item:
+			index = 0
+			for i in self["config"].list:
+				if i[0] == item[0]:
+					self["config"].setIndex(index)
+				index += 1
 
 # get name for source bouquet
 	def getSource(self, currentBouquet=None):
@@ -407,19 +424,34 @@ class refreshBouquet(Screen, HelpableScreen):
 			self.moveServices()
 
 ###
+#	Prepare bouquet and text for operation with one bouquet (moveServices, removeServices)
+###
+	def prepareSingleBouquetOperation(self):
+		if self.sourceItem and not self.targetItem or self.sourceItem:
+			Bouquet = self.sourceItem
+			t1 = _("Source bouquet is empty !")
+			t2 = _("No services in source bouquet !")
+			return self.sourceItem, t1, t2
+		elif self.targetItem and not self.sourceItem:
+			Bouquet = self.targetItem
+			t1 = _("Target bouquet is empty !")
+			t2 = _("No services in target bouquet !")
+			return self.targetItem, t1, t2
+###
 # move selected service (by user) in source bouquet
 ###
 	def moveServices(self):
 		data = MySelectionList([])
-		if self.sourceItem:
-			source = self.getServices(self.sourceItem[0])
-			if not len(source):
-				self["info"].setText(_("Source bouquet is empty !"))
+		bouquet, t1, t2 = self.prepareSingleBouquetOperation()
+		if bouquet:
+			item = self.getServices(bouquet[0])
+			if not len(item):
+				self["info"].setText("%s" % t1)
 				return
 			new = []
-			new = self.addToBouquetFiltered(source)
+			new = self.addToBouquetFiltered(item)
 			if not len(new):
-				self["info"].setText(_("No services in source bouquet !"))
+				self["info"].setText("s" % t2)
 				return
 			nr = 0
 			debug(">>> Read bouquet <<<")
@@ -430,22 +462,23 @@ class refreshBouquet(Screen, HelpableScreen):
 				data.list.append(MySelectionEntryComponent(i[0], i[1], nr, False))
 			self.l = MySelectionList(data)
 			self.l.setList(data)
-			self.session.openWithCallback(boundFunction(self.moveServicesCallback, self.close), refreshBouquetMoveServices, data, self.sourceItem, new)
+			self.session.openWithCallback(boundFunction(self.moveServicesCallback, self.close), refreshBouquetMoveServices, data, bouquet, new)
 
 ###
 # remove selected service (by user) in source bouquet
 ###
 	def removeServices(self):
 		data = MySelectionList([])
-		if self.sourceItem:
-			source = self.getServices(self.sourceItem[0])
-			if not len(source):
-				self["info"].setText(_("Source bouquet is empty !"))
+		bouquet, t1, t2 = self.prepareSingleBouquetOperation()
+		if bouquet:
+			item = self.getServices(bouquet[0])
+			if not len(item):
+				self["info"].setText("%s" % t1)
 				return
 			new = []
-			new = self.addToBouquetFiltered(source)
+			new = self.addToBouquetFiltered(item)
 			if not len(new):
-				self["info"].setText(_("No services in source bouquet !"))
+				self["info"].setText("%s" % t1)
 				return
 			nr = 0
 			debug(">>> Read bouquet <<<")
@@ -456,7 +489,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				data.list.append(MySelectionEntryComponent(i[0], i[1], nr, False))
 			self.l = MySelectionList(data)
 			self.l.setList(data)
-			self.session.open(refreshBouquetRemoveServices, data, self.sourceItem)
+			self.session.open(refreshBouquetRemoveServices, data, bouquet)
 
 ###
 # replace service in target manually by user (all sources)
@@ -1809,6 +1842,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Display in Channellist context menu"), cfg.channel_context_menu))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Return to previous service on end"), cfg.on_end))
 		refreshBouquetCfglist.append(getConfigListEntry(_("On plugin start use current bouquet as source or as target"), cfg.current_bouquet))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Selector to current bouquet"), cfg.selector2bouquet))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Display bouquet name"), cfg.bouquet_name))
 #		refreshBouquetCfglist.append(getConfigListEntry(_("Save log for manual replace"), cfg.log))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Debug info"), cfg.debug))
