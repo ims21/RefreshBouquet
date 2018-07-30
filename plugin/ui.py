@@ -177,8 +177,8 @@ class refreshBouquet(Screen, HelpableScreen):
 				menu.append((_("Move selected services in source bouquet"),5))
 				buttons = ["1","2","3","4","5","6"]
 		elif self.sourceItem and not self.targetItem or self.targetItem and not self.sourceItem:
-			menu.append((_("Remove selected services from source bouquet"),3))
-			menu.append((_("Move selected services in source bouquet"),5))
+			menu.append((_("Remove selected services from bouquet"),3))
+			menu.append((_("Move selected services in bouquet"),5))
 			buttons = ["4","6"]
 		else:
 			text = _("Select or source or target or source and target bouquets !")
