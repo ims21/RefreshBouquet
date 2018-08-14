@@ -1052,7 +1052,7 @@ class refreshBouquetRefreshServices(Screen):
 
 		text = _("This feature looking for differences in service parameters with same names in source and target bouquets. Parameters for marked services will be replaced. ")
 		text += _("It can be in most cases useful for bouquets with services gained by Fastscan searching. ")
-		text += _("Posible duplicates will not be marked in list. Check validity with 'Preview' before mark and before 'Refresh selected'.")
+		text += _("Possible duplicates will not be marked in list. Check validity with 'Preview' before mark and before 'Refresh selected'.")
 		self["info"].setText(text)
 
 		self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
