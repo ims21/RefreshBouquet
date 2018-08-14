@@ -222,7 +222,7 @@ msgstr ""
 "полученными при сканировании через 'Fastscan'. "
 
 msgid ""
-"Posible duplicates will not be marked in list. Check validity with 'Preview' "
+"Possible duplicates will not be marked in list. Check validity with 'Preview' "
 "before mark and before 'Refresh selected'."
 msgstr ""
 "Возможные дубликаты не будут отмечены в списке. Проверьте достоверность с "

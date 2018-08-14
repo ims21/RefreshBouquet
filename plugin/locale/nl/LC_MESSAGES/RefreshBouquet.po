@@ -220,7 +220,7 @@ msgstr ""
 "Fastscan. "
 
 msgid ""
-"Posible duplicates will not be marked in list. Check validity with 'Preview' "
+"Possible duplicates will not be marked in list. Check validity with 'Preview' "
 "before mark and before 'Refresh selected'."
 msgstr ""
 "Mogelijke duplicaten worden niet in de lijst aangegeven. Check de juistheid "
