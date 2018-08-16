@@ -60,7 +60,7 @@ class refreshBouquetRbbManager(Screen):
 		self["config"] = self.list
 		self["text"] = Label()
 
-		self["actions"] = ActionMap(["OkCancelActions", "ColorAction"],
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 			{
 				"cancel": self.exit,
 				"ok": self.ok,
