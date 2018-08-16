@@ -27,9 +27,9 @@ from Components.SelectionList import SelectionList
 import skin
 import os
 
-class RefreshBouquetRbbManager(Screen):
+class refreshBouquetRbbManager(Screen):
 	skin = """
-		<screen name="RefreshBouquetRbbManager" position="center,center" size="560,410" title="RefreshBouquet - rbb files">
+		<screen name="refreshBouquetRbbManager" position="center,center" size="560,410" title="RefreshBouquet - rbb files">
 		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap name="green"  position="140,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />

@@ -471,15 +471,20 @@ class refreshBouquet(Screen, HelpableScreen):
 #
 
 # Test if exist rbb file
+
 	def isRbbFile(self):
 		for x in os.listdir("/etc/enigma2"):
 			if x.endswith(".rbb"):
 				return True
 		return False
 
+# call screen for selection rbb file
+
 	def createRbbBouquet(self):
-		from rbbmanager import RefreshBouquetRbbManager
-		self.session.openWithCallback(self.fillRbbBouquet, RefreshBouquetRbbManager)
+		from rbbmanager import refreshBouquetRbbManager
+		self.session.openWithCallback(self.fillRbbBouquet, refreshBouquetRbbManager)
+
+# create bouquet as valid source services filed to bouquet created of rbb file
 
 	def fillRbbBouquet(self, rbb_name):
 		if not rbb_name:
