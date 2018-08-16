@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.74"
+VERSION = "1.75"
 #  by ims (c) 2016-2018 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -19,7 +19,7 @@ VERSION = "1.74"
 #
 
 from ServiceReference import ServiceReference
-from enigma import eServiceCenter, eServiceReference, eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, getDesktop
+from enigma import eServiceCenter, eServiceReference, eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, getDesktop, eDVBDB
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
@@ -37,6 +37,7 @@ from Components.Sources.ServiceEvent import ServiceEvent
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
 from Tools.BoundFunction import boundFunction
+import os, unicodedata
 import skin
 from plugin import plugin_path
 
@@ -163,23 +164,35 @@ class refreshBouquet(Screen, HelpableScreen):
 		text = _("Select action for bouquet:")
 		buttons = []
 		menu = []
-		if self.sourceItem and self.targetItem:
-			if self.sourceItem == self.targetItem:
+		if self.sourceItem and self.targetItem:	# both are selected
+			if self.sourceItem == self.targetItem:	# source == target
 				menu.append((_("Remove selected services in source bouquet"),3))
 				menu.append((_("Move selected services in source bouquet"),5))
-				buttons = ["4","6"]
-			else:
+				menu.append((_("Create rbb file"),20))
+				buttons = ["4","6",""]
+				if self.isRbbFile():
+					menu.append((_("Create bouquet from rbb file"),21))
+					buttons += [""]
+			else:				# source != target
 				menu.append((_("Manually replace services"),0))
 				menu.append((_("Add selected services to target bouquet"),1))
 				menu.append((_("Add selected missing services to target bouquet"),2))
 				menu.append((_("Remove selected services in source bouquet"),3))
 				menu.append((_("Refresh services in target bouquet"),4))
 				menu.append((_("Move selected services in source bouquet"),5))
-				buttons = ["1","2","3","4","5","6"]
-		elif self.sourceItem and not self.targetItem or self.targetItem and not self.sourceItem:
+				menu.append((_("Create rbb file"),20))
+				buttons = ["1","2","3","4","5","6",""]
+				if self.isRbbFile():
+					menu.append((_("Create bouquet from rbb file"),21))
+					buttons += [""]
+		elif self.sourceItem and not self.targetItem or self.targetItem and not self.sourceItem: # or source only or target only
 			menu.append((_("Remove selected services from bouquet"),3))
 			menu.append((_("Move selected services in bouquet"),5))
-			buttons = ["4","6"]
+			menu.append((_("Create rbb file"),20))
+			buttons = ["4","6",""]
+			if self.isRbbFile():
+				menu.append((_("Create bouquet from rbb file"),21))
+				buttons += [""]
 		else:
 			text = _("Select or source or target or source and target bouquets !")
 			self["info"].setText(text)
@@ -206,6 +219,10 @@ class refreshBouquet(Screen, HelpableScreen):
 			self.moveServices()
 		elif choice[1] == 10:
 			self.options()
+		elif choice[1] == 20:
+			self.saveRbbBouquet()
+		elif choice[1] == 21:
+			self.createRbbBouquet()
 		else:
 			self["info"].setText(_("Wrong selection!"))
 			return
@@ -423,8 +440,152 @@ class refreshBouquet(Screen, HelpableScreen):
 		if not close or not answer:
 			self.moveServices()
 
+#
+# Save RefreshBouquetBackup name:orbital_position services parameters in selected bouquet to /etc/enigma2/bouquetname.rbb file
+#
+	def saveRbbBouquet(self):
+		bouquet, t1, t2 = self.prepareSingleBouquetOperation()
+		if bouquet:
+			item = self.getServices(bouquet[0])
+			if not len(item):
+				self["info"].setText("%s" % t1)
+				return
+			new = []
+			new = self.addToBouquetFiltered(item)
+			if not len(new):
+				self["info"].setText("s" % t2)
+				return
+			fo = open("/etc/enigma2/%s.rbb" % bouquet[0], "wt")
+			for t in new: # bouquet for save
+				if self.isNotService(t[1]):
+					continue
+				name = self.prepareStr(t[0])
+				splited = t[1].split(':') # split target service_reference
+				#t_core = ":".join((splited[3],splited[4],splited[5],splited[6]))
+				#op = splited[6][0:-4]
+				fo.write("%s:%s\n" % (name, splited[6]))
+			fo.close()
+
+#
+# Replace service-reference for services in selected RBB bouquet
+#
+
+# Test if exist rbb file
+	def isRbbFile(self):
+		for x in os.listdir("/etc/enigma2"):
+			if x.endswith(".rbb"):
+				return True
+		return False
+
+	def createRbbBouquet(self):
+		from rbbmanager import RefreshBouquetRbbManager
+		self.session.openWithCallback(self.fillRbbBouquet, RefreshBouquetRbbManager)
+
+	def fillRbbBouquet(self, rbb_name):
+		if not rbb_name:
+			return
+		def getRbbBouquetContent(path):
+			list = []
+			fi = open(path, "rt")
+			for line in fi:
+				list.append((line.replace('\n','')))
+			fi.close()
+			return list
+		if self.addBouquet(rbb_name, None):
+			data = MySelectionList([])
+			if self.sourceItem:  # predpoklada se spravne nacteny soubor .rbb
+				target = getRbbBouquetContent("/etc/enigma2/%s.rbb" % rbb_name)
+				source = self.getServices(self.sourceItem[0])
+				if not len(target):
+					self["info"].setText(_("Target bouquet is empty !"))
+					return
+				if not len(source):
+					self["info"].setText(_("Source bouquet is empty !"))
+					return
+				setIcon() # icons for selecting must be set before adding to list in compareServices
+				(data, length) = self.compareRbbServices(source, target)
+				if length:
+					def reloadList():
+						self.getBouquetList()
+					self.session.openWithCallback(reloadList, refreshBouquetCopyServices, data, self.targetItem)
+				else:
+					self.session.open(MessageBox, _("No differences found"), type = MessageBox.TYPE_INFO, timeout = 5)
+		else:
+			self.session.open(MessageBox, _("Bouquet '%s' was not created!"), type = MessageBox.TYPE_ERROR, timeout = 5)
+
+# looking new service reference for target service - returns service name, old service reference, new service reference and position in target bouquet
+
+	def compareRbbServices(self, source_services, target_services):
+		differences = MySelectionList([])
+		potencialy_duplicity = []
+		i = 0 # index
+		length = 0 # found items
+		for t in target_services: # bouquet for refresh
+			t_split = t.split(':') # split target service_reference
+			t_name = self.prepareStr(t_split[0])
+			t_op = t_split[1][0:-4]
+			for s in source_services: # source bouquet - with fresh scan - f.eg. created by Fastscan or Last Scanned
+				if self.isNotService(s[1]): # skip all non playable
+					continue
+				s_splited = s[1].split(':') # split service_reference
+				if cfg.orbital.value != "x": # only on selected op
+					if s_splited[6][:-4] != cfg.orbital.value:
+						continue
+				if t_name == self.prepareStr(s[0]): # services with same name founded
+					s_splited = s[1].split(':') # split ref
+					if t_op == s_splited[6][0:-4]: # same orbital position only
+						if not s_splited[10]: # if s is not stream
+							length += 1
+							select = True
+							try:
+								tmp = potencialy_duplicity.index(self.charsOnly(s[0])) # same services_name in source = could be duplicity ... set in list as unselected
+								debug("Founded: %s" % self.charsOnly(s[0]))
+								select = False
+							except:
+								debug("Unique: %s" % self.charsOnly(s[0]))
+							# name, new ref, index, selected
+							differences.list.append(MySelectionEntryComponent(s[0], s[1], i, False))
+							debug("Added: %s" % self.charsOnly(s[0]))
+						potencialy_duplicity.append(self.charsOnly(s[0])) # add to list for next check duplicity
+			i += 1
+			self.l = MySelectionList(differences)
+			self.l.setList(differences)
+		return differences, length
+
+# add bouquet with bName
+
+	def addBouquet(self, bName, services):
+		mode = config.servicelist.lastmode.value
+		serviceHandler = eServiceCenter.getInstance()
+		bouquet_root = self.getRoot()
+		mutableBouquetList = serviceHandler.list(bouquet_root).startEdit()
+		if mutableBouquetList:
+			name = unicodedata.normalize('NFKD', unicode(bName, 'utf_8', errors='ignore')).encode('ASCII', 'ignore').translate(None, '<>:"/\\|?*() ')
+			while os.path.isfile((mode == "tv" and '/etc/enigma2/userbouquet.%s.tv' or '/etc/enigma2/userbouquet.%s.radio') % name):
+				name = name.rsplit('_', 1)
+				name = ('_').join((name[0], len(name) == 2 and name[1].isdigit() and str(int(name[1]) + 1) or '1'))
+			new_bouquet_ref = eServiceReference((mode == "tv" and '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.%s.tv" ORDER BY bouquet' or '1:7:2:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.%s.radio" ORDER BY bouquet') % name)
+			if not mutableBouquetList.addService(new_bouquet_ref):
+				mutableBouquetList.flushChanges()
+				eDVBDB.getInstance().reloadBouquets()
+				mutableBouquet = serviceHandler.list(new_bouquet_ref).startEdit()
+				if mutableBouquet:
+					mutableBouquet.setListName(bName)
+					mutableBouquet.flushChanges()
+				else:
+					print "get mutable list for new created bouquet failed"
+					return False
+				self.getTarget((bName, new_bouquet_ref))
+				return True
+			else:
+				print "add", str, "to bouquets failed"
+				return False
+		else:
+			print "bouquetlist is not editable"
+			return False
+
 ###
-#	Prepare bouquet and text for operation with one bouquet (moveServices, removeServices)
+# Prepare bouquet and text for operation with one bouquet (moveServices, removeServices)
 ###
 	def prepareSingleBouquetOperation(self):
 		if self.sourceItem and not self.targetItem or self.sourceItem:
@@ -665,6 +826,8 @@ class refreshBouquet(Screen, HelpableScreen):
 				bouquet_rootstr = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.radio" ORDER BY bouquet'
 			else:
 				bouquet_rootstr = '%s FROM BOUQUET "userbouquet.favourites.radio" ORDER BY bouquet'%(service_types)
+		self.bouquet_rootstr = bouquet_rootstr
+		self.bouquet_root = eServiceReference(self.bouquet_rootstr)
 		bouquet_root = eServiceReference(bouquet_rootstr)	
 		return bouquet_root
 
