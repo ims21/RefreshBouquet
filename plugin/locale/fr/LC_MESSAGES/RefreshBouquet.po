@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: GithubIMS 21\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-18 12:24+0200\n"
-"PO-Revision-Date: 2018-08-18 12:30+0200\n"
+"PO-Revision-Date: 2018-08-18 13:25+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -126,7 +126,7 @@ msgstr "Bascule automatique en remplacement manuel"
 #: ../ui.py:519
 #, python-format
 msgid "Bouquet '%s' was not created!"
-msgstr ""
+msgstr "Bouquet ‘%s’ n’a pas été créé!"
 
 #: ../ui.py:265
 msgid "Cable"
@@ -155,11 +155,11 @@ msgstr "Copier la sélection"
 
 #: ../ui.py:174 ../ui.py:186 ../ui.py:194
 msgid "Create bouquet from rbb file"
-msgstr ""
+msgstr "Créer un bouquet à partir d’un fichier rob"
 
 #: ../ui.py:171 ../ui.py:183 ../ui.py:191
 msgid "Create rbb file"
-msgstr ""
+msgstr "Créer un fichier RBB"
 
 #: ../ui.py:2016
 msgid "Debug info"
@@ -377,11 +377,11 @@ msgstr "Choisissez ou la source ou la cible ou la source et les bouquets cibles!
 
 #: ../rbbmanager.py:48
 msgid "Select rbb file"
-msgstr ""
+msgstr "Sélectionner le fichier rob"
 
 #: ../rbbmanager.py:71
 msgid "Select rbb file with 'OK' and create bouquet with same name."
-msgstr ""
+msgstr "Sélectionner un fichier rbb avec 'OK' et créer un bouquet avec le même nom."
 
 #: ../ui.py:66
 msgid "Selected top"
