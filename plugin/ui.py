@@ -563,7 +563,8 @@ class refreshBouquet(Screen, HelpableScreen):
 						potencialy_duplicity.append(self.charsOnly(s[0])) # add to list for next check duplicity
 			if not found:
 				t_name = "--- %s" % t_name
-				t_pars= ":".join(("1","0","1","1000","100","100",t_6,"0","0","0", t_name))
+				mode = "1" if config.servicelist.lastmode.value == "tv" else "2"
+				t_pars= ":".join(("1","0",mode,"0","0","0",t_6,"0","0","0", t_name))
 				differences.list.append(MySelectionEntryComponent(t_name, t_pars, i, False))
 			i += 1
 			self.l = MySelectionList(differences)
