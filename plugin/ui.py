@@ -563,7 +563,7 @@ class refreshBouquet(Screen, HelpableScreen):
 						potencialy_duplicity.append(self.charsOnly(s[0])) # add to list for next check duplicity
 			if not found:
 				t_name = "--- %s" % t_name
-				t_pars= ":".join(("1","0","0","0","0","0",t_6,"0","0","0", t_name))
+				t_pars= ":".join(("1","0","1","1000","100","100",t_6,"0","0","0", t_name))
 				differences.list.append(MySelectionEntryComponent(t_name, t_pars, i, False))
 			i += 1
 			self.l = MySelectionList(differences)
@@ -710,7 +710,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				index += 1
 				continue
 			s_splited = s[1].split(':') # split ref
-			if s_splited[10] == '': # it is not stream
+			if s_splited[10] == '' or s_splited[10].startswith('--- '): # it is not stream
 				if mode == "tv":
 					if int(s_splited[2],16) in TV:
 						new.append((s[0], s[1], index))
@@ -720,7 +720,7 @@ class refreshBouquet(Screen, HelpableScreen):
 						new.append((s[0], s[1], index))
 						index += 1
 			else:
-				debug("Dropped stream: %s %s" % (s[0], s[1]))
+				debug("Dropped stream 2: %s %s" % (s[0], s[1]))
 		return new
 
 # optionaly uppercase or remove control character in servicename ( removed for testing only)
@@ -796,7 +796,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			if cfg.orbital.value != "x":
 				if s_splited[6][:-4] != cfg.orbital.value:
 					continue
-			if s_splited[10] == '': # it is not stream
+			if s_splited[10] == '' or s_splited[10].startswith('--- '): # it is not stream
 				if mode == "tv":
 					if int(s_splited[2],16) in TV:
 						new.append((s[0], s[1]))
@@ -804,7 +804,7 @@ class refreshBouquet(Screen, HelpableScreen):
 					if int(s_splited[2],16) in RADIO:
 						new.append((s[0], s[1]))
 			else:
-				debug("Dropped stream: %s %s" % (s[0], s[1]))
+				debug("Dropped stream 3: %s %s" % (s[0], s[1]))
 		return new
 
 # test for "noplayable" service

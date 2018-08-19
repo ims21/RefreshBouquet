@@ -68,7 +68,9 @@ class refreshBouquetRbbManager(Screen):
 			})
 
 		self["key_red"] = Button(_("Cancel"))
-		self["text"].setText(_("Select rbb file with 'OK' and create bouquet with same name."))
+		text = _("Select rbb file with 'OK' and create bouquet with same name.")
+		text += _("If You will add to bouquet some missing services (start with '---'), You can then finalize created bouquet with '%s' etc.") % _("Manually replace services")
+		self["text"].setText(text)
 
 	def ok(self):
 		if self["config"].getCurrent():
