@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-19 16:09+0200\n"
-"PO-Revision-Date: 2018-08-19 16:10+0200\n"
+"POT-Creation-Date: 2018-08-19 23:02+0200\n"
+"PO-Revision-Date: 2018-08-19 23:03+0200\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi\n"
 "Language: cs_CZ\n"
@@ -426,6 +426,9 @@ msgstr "Opravdu zavřít bez uloženého nastavení?"
 msgid "Select rbb file"
 msgstr "Zvolte rbb soubor"
 
+msgid "Erase"
+msgstr "Odstranit"
+
 msgid "Select rbb file with 'OK' and create bouquet with same name."
 msgstr "Vyberte rbb soubor pomocí 'OK' a vytvořte přehled stejného názvu."
 
@@ -436,6 +439,10 @@ msgid ""
 msgstr ""
 "Jestliže přidáte do přehledu nějaké chybějící programy (začínají na '----'), "
 "můžete vytvořený přehled dokončit pomocí '%s' apod."
+
+#, python-format
+msgid "Really erase file: '%s'?"
+msgstr "Opravdu smazat soubor '%s'?"
 
 #~ msgid "Insert"
 #~ msgstr "Vložit"

@@ -47,17 +47,8 @@ class refreshBouquetRbbManager(Screen):
 		Screen.__init__(self, session)
 		self.setTitle(_("Select rbb file"))
 
-		data = SelectionList([])
-		nr = 0
-		for x in os.listdir("/etc/enigma2"):
-			if x.endswith(".rbb"):
-				data.addSelection(x, "/etc/enigma2/%s" % x, nr, False)
-				nr += 1
-
-		self.list = data
-		self.list.sort()
-
-		self["config"] = self.list
+		self.list = SelectionList([])
+		self.reloadList()
 		self["text"] = Label()
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
@@ -65,16 +56,40 @@ class refreshBouquetRbbManager(Screen):
 				"cancel": self.exit,
 				"ok": self.ok,
 				"red": self.exit,
+				"blue": self.remove,
 			})
 
 		self["key_red"] = Button(_("Cancel"))
+		self["key_blue"] = Button(_("Erase"))
+
 		text = _("Select rbb file with 'OK' and create bouquet with same name.")
 		text += _("If You will add to bouquet some missing services (start with '---'), You can then finalize created bouquet with '%s' etc.") % _("Manually replace services")
 		self["text"].setText(text)
 
+	def reloadList(self):
+		self.l = self.list
+		self.l.setList([])
+		nr = 0
+		for x in os.listdir("/etc/enigma2"):
+			if x.endswith(".rbb"):
+				self.list.addSelection(x, "/etc/enigma2/%s" % x, nr, False)
+				nr += 1
+		self.list.sort()
+		self["config"] = self.list
+
 	def ok(self):
 		if self["config"].getCurrent():
 			self.close(self["config"].getCurrent()[0][0].split('.')[0])
+
+	def remove(self):
+		def callbackErase(answer):
+			if answer == True:
+				os.unlink(self["config"].getCurrent()[0][1])
+				self.reloadList()
+		if self["config"].getCurrent():
+			path = self["config"].getCurrent()[0][1]
+			from Screens.MessageBox import MessageBox
+			self.session.openWithCallback(callbackErase, MessageBox, _("Really erase file: '%s'?") % path, type=MessageBox.TYPE_YESNO, default=False)
 
 	def exit(self):
 		self.close(False)
