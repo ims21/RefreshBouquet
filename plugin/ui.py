@@ -70,6 +70,8 @@ cfg = config.plugins.refreshbouquet
 TV = (1, 17, 22, 25, 31, 134, 195)
 RADIO = (2, 10)
 
+E2 = "/etc/enigma2"
+
 sel_position = None
 
 class refreshBouquet(Screen, HelpableScreen):
@@ -456,7 +458,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			if not len(new):
 				self["info"].setText("s" % t2)
 				return
-			fo = open("/etc/enigma2/%s.rbb" % bouquet[0], "wt")
+			fo = open("%s/%s.rbb" % (E2,bouquet[0]), "wt")
 			for t in new: # bouquet for save
 				if self.isNotService(t[1]):
 					continue
@@ -477,7 +479,7 @@ class refreshBouquet(Screen, HelpableScreen):
 # Test if exist rbb file
 
 	def isRbbFile(self):
-		for x in os.listdir("/etc/enigma2"):
+		for x in os.listdir(E2):
 			if x.endswith(".rbb"):
 				return True
 		return False
@@ -503,7 +505,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		if self.addBouquet(rbb_name, None):
 			data = MySelectionList([])
 			if self.sourceItem:  # predpoklada se spravne nacteny soubor .rbb
-				target = getRbbBouquetContent("/etc/enigma2/%s.rbb" % rbb_name)
+				target = getRbbBouquetContent("%s/%s.rbb" % (E2,rbb_name))
 				source = self.getServices(self.sourceItem[0])
 				if not len(target):
 					self["info"].setText(_("Target bouquet is empty !"))
@@ -580,7 +582,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		mutableBouquetList = serviceHandler.list(bouquet_root).startEdit()
 		if mutableBouquetList:
 			name = unicodedata.normalize('NFKD', unicode(bName, 'utf_8', errors='ignore')).encode('ASCII', 'ignore').translate(None, '<>:"/\\|?*() ')
-			while os.path.isfile((mode == "tv" and '/etc/enigma2/userbouquet.%s.tv' or '/etc/enigma2/userbouquet.%s.radio') % name):
+			while os.path.isfile((mode == "tv" and '%s/userbouquet.%s.tv' or '%s/userbouquet.%s.radio') % (E2,name)):
 				name = name.rsplit('_', 1)
 				name = ('_').join((name[0], len(name) == 2 and name[1].isdigit() and str(int(name[1]) + 1) or '1'))
 			new_bouquet_ref = eServiceReference((mode == "tv" and '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.%s.tv" ORDER BY bouquet' or '1:7:2:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.%s.radio" ORDER BY bouquet') % name)

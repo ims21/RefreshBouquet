@@ -24,8 +24,11 @@ from Components.Button import Button
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.SelectionList import SelectionList
+from Screens.VirtualKeyBoard import VirtualKeyBoard
+from Screens.MessageBox import MessageBox
 import skin
 import os
+from ui import E2
 
 class refreshBouquetRbbManager(Screen):
 	skin = """
@@ -57,10 +60,12 @@ class refreshBouquetRbbManager(Screen):
 				"ok": self.ok,
 				"red": self.exit,
 				"blue": self.remove,
+				"yellow": self.rename,
 			})
 
 		self["key_red"] = Button(_("Cancel"))
 		self["key_blue"] = Button(_("Erase"))
+		self["key_yellow"] = Button(_("Rename"))
 
 		text = _("Select rbb file with 'OK' and create bouquet with same name.")
 		text += _("If You will add to bouquet some missing services (start with '---'), You can then finalize created bouquet with '%s' etc.") % _("Manually replace services")
@@ -70,9 +75,9 @@ class refreshBouquetRbbManager(Screen):
 		self.l = self.list
 		self.l.setList([])
 		nr = 0
-		for x in os.listdir("/etc/enigma2"):
+		for x in os.listdir(E2):
 			if x.endswith(".rbb"):
-				self.list.addSelection(x, "/etc/enigma2/%s" % x, nr, False)
+				self.list.addSelection(x, "%s/%s" % (E2,x), nr, False)
 				nr += 1
 		self.list.sort()
 		self["config"] = self.list
@@ -81,6 +86,34 @@ class refreshBouquetRbbManager(Screen):
 		if self["config"].getCurrent():
 			self.close(self["config"].getCurrent()[0][0].split('.')[0])
 
+	def rename(self):
+		def renameCallback(name):
+			if not name:
+				return
+			msg = ""
+			try:
+				path = self["config"].getCurrent()[0][1]
+				newpath = "%s/%s.rbb" % (E2,name)
+				os.rename(path, newpath)
+				self.reloadList()
+				return
+			except OSError, e:
+				print "Error %s:" % e.errno, e
+				if e.errno == 17:
+					msg = _("The path %s already exists.") % name
+				else:
+					msg = _("Error") + '\n' + str(e)
+			except Exception, e:
+				import traceback
+				print "[ML] Unexpected error:", e
+				traceback.print_exc()
+				msg = _("Error") + '\n' + str(e)
+			if msg:
+				self.session.open(MessageBox, msg, type = MessageBox.TYPE_ERROR, timeout = 5)
+		if self["config"].getCurrent():
+			name = self["config"].getCurrent()[0][0].split('.')[0]
+			self.session.openWithCallback(renameCallback, VirtualKeyBoard, title = _("Rename"), text = name)
+
 	def remove(self):
 		def callbackErase(answer):
 			if answer == True:
@@ -88,7 +121,6 @@ class refreshBouquetRbbManager(Screen):
 				self.reloadList()
 		if self["config"].getCurrent():
 			path = self["config"].getCurrent()[0][1]
-			from Screens.MessageBox import MessageBox
 			self.session.openWithCallback(callbackErase, MessageBox, _("Really erase file: '%s'?") % path, type=MessageBox.TYPE_YESNO, default=False)
 
 	def exit(self):
