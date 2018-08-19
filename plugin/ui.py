@@ -549,7 +549,7 @@ class refreshBouquet(Screen, HelpableScreen):
 							except:
 								debug("Unique: %s" % self.charsOnly(s[0]))
 							# name, new ref, index, selected
-							differences.list.append(MySelectionEntryComponent(s[0], s[1], i, False))
+							differences.list.append(MySelectionEntryComponent(s[0], s[1], i, select))
 							debug("Added: %s" % self.charsOnly(s[0]))
 						potencialy_duplicity.append(self.charsOnly(s[0])) # add to list for next check duplicity
 			i += 1
