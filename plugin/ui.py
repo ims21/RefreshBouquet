@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.75"
+VERSION = "1.76"
 #  by ims (c) 2016-2018 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -444,6 +444,7 @@ class refreshBouquet(Screen, HelpableScreen):
 # Save RefreshBouquetBackup name:orbital_position services parameters in selected bouquet to /etc/enigma2/bouquetname.rbb file
 #
 	def saveRbbBouquet(self):
+		nr = 0
 		bouquet, t1, t2 = self.prepareSingleBouquetOperation()
 		if bouquet:
 			item = self.getServices(bouquet[0])
@@ -460,11 +461,14 @@ class refreshBouquet(Screen, HelpableScreen):
 				if self.isNotService(t[1]):
 					continue
 				name = self.prepareStr(t[0])
+				if name.upper() == '<N/A>':
+					nr += 1
 				splited = t[1].split(':') # split target service_reference
-				#t_core = ":".join((splited[3],splited[4],splited[5],splited[6]))
-				#op = splited[6][0:-4]
 				fo.write("%s:%s\n" % (name, splited[6]))
 			fo.close()
+			txt = _("File %s.rbb was created.") % bouquet[0]
+			text, delay, msgtype = (_("%s\n<N/A> items in source bouquet: %s") % (txt, nr), 8, MessageBox.TYPE_WARNING) if nr else (txt, 3, MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, text, type = msgtype, timeout = delay)
 
 #
 # Replace service-reference for services in selected RBB bouquet
@@ -526,9 +530,13 @@ class refreshBouquet(Screen, HelpableScreen):
 		i = 0 # index
 		length = 0 # found items
 		for t in target_services: # bouquet for refresh
-			t_split = t.split(':') # split target service_reference
-			t_name = self.prepareStr(t_split[0])
-			t_op = t_split[1][0:-4]
+			pos = t.rfind(':')
+			t_name = self.prepareStr(t[:pos])
+			if t_name == '<N/A>':
+				t_name=_("unknown")
+			t_6 = t[pos+1:]
+			t_op = t_6[0:-4]
+			found = False
 			for s in source_services: # source bouquet - with fresh scan - f.eg. created by Fastscan or Last Scanned
 				if self.isNotService(s[1]): # skip all non playable
 					continue
@@ -550,8 +558,13 @@ class refreshBouquet(Screen, HelpableScreen):
 								debug("Unique: %s" % self.charsOnly(s[0]))
 							# name, new ref, index, selected
 							differences.list.append(MySelectionEntryComponent(s[0], s[1], i, select))
+							found = True
 							debug("Added: %s" % self.charsOnly(s[0]))
 						potencialy_duplicity.append(self.charsOnly(s[0])) # add to list for next check duplicity
+			if not found:
+				t_name = "--- %s" % t_name
+				t_pars= ":".join(("1","0","0","0","0","0",t_6,"0","0","0", t_name))
+				differences.list.append(MySelectionEntryComponent(t_name, t_pars, i, False))
 			i += 1
 			self.l = MySelectionList(differences)
 			self.l.setList(differences)

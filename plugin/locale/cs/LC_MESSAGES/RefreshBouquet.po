@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-16 18:28+0200\n"
-"PO-Revision-Date: 2018-08-16 18:30+0200\n"
+"POT-Creation-Date: 2018-08-19 13:36+0200\n"
+"PO-Revision-Date: 2018-08-19 13:37+0200\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi\n"
 "Language: cs_CZ\n"
@@ -154,8 +154,23 @@ msgid "No services in source bouquet or no differences in bouquets!"
 msgstr "Ve zdrojovém přehledu nejsou programy nebo nejsou odlišnosti!"
 
 #, python-format
+msgid "File %s.rbb was created."
+msgstr "Soubor '%s' byl založen!"
+
+#, python-format
+msgid ""
+"%s\n"
+"<N/A> items in source bouquet: %s"
+msgstr ""
+"%s\n"
+"<N/A> položek ve zdrojovém přehledu: %s"
+
+#, python-format
 msgid "Bouquet '%s' was not created!"
 msgstr "Přehled '%s' nebyl založen!"
+
+msgid "unknown"
+msgstr "neznámý"
 
 msgid "No services in source bouquet !"
 msgstr "Ve zdrojovém přehledu nejsou programy!"

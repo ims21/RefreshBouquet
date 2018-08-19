@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-16 18:28+0200\n"
+"POT-Creation-Date: 2018-08-19 13:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -158,7 +158,20 @@ msgid "No services in source bouquet or no differences in bouquets!"
 msgstr ""
 
 #, python-format
+msgid "File %s.rbb was created."
+msgstr ""
+
+#, python-format
+msgid ""
+"%s\n"
+"<N/A> items in source bouquet: %s"
+msgstr ""
+
+#, python-format
 msgid "Bouquet '%s' was not created!"
+msgstr ""
+
+msgid "unknown"
 msgstr ""
 
 msgid "No services in source bouquet !"
