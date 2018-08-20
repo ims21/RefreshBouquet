@@ -50,6 +50,10 @@ class refreshBouquetRbbManager(Screen):
 		Screen.__init__(self, session)
 		self.setTitle(_("Select rbb file"))
 
+		self["key_red"] = Button(_("Cancel"))
+		self["key_blue"] = Button()
+		self["key_yellow"] = Button()
+
 		self.list = SelectionList([])
 		self.reloadList()
 		self["text"] = Label()
@@ -62,10 +66,6 @@ class refreshBouquetRbbManager(Screen):
 				"blue": self.remove,
 				"yellow": self.rename,
 			})
-
-		self["key_red"] = Button(_("Cancel"))
-		self["key_blue"] = Button(_("Erase"))
-		self["key_yellow"] = Button(_("Rename"))
 
 		text = _("Select rbb file with 'OK' and create bouquet with same name.")
 		text += _("If You will add to bouquet some missing services (start with '---'), You can then finalize created bouquet with '%s' etc.") % _("Manually replace services")
@@ -81,6 +81,12 @@ class refreshBouquetRbbManager(Screen):
 				nr += 1
 		self.list.sort()
 		self["config"] = self.list
+		if nr:
+			self["key_blue"].setText(_("Erase"))
+			self["key_yellow"].setText(_("Rename"))
+		else:
+			self["key_blue"].setText("")
+			self["key_yellow"].setText("")
 
 	def ok(self):
 		if self["config"].getCurrent():
