@@ -166,11 +166,12 @@ class refreshBouquet(Screen, HelpableScreen):
 		text = _("Select action for bouquet:")
 		buttons = []
 		menu = []
+		bName =self.getSelectedBouquetName()
 		if self.sourceItem and self.targetItem:	# both are selected
 			if self.sourceItem == self.targetItem:	# source == target
 				menu.append((_("Remove selected services in source bouquet"),3))
 				menu.append((_("Move selected services in source bouquet"),5))
-				menu.append((_("Create rbb file"),20))
+				menu.append((_("Create '%s.rbb' file") % bName,20))
 				buttons = ["4","6",""]
 				if self.isRbbFile():
 					menu.append((_("Create bouquet from rbb file"),21))
@@ -182,7 +183,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				menu.append((_("Remove selected services in source bouquet"),3))
 				menu.append((_("Refresh services in target bouquet"),4))
 				menu.append((_("Move selected services in source bouquet"),5))
-				menu.append((_("Create rbb file"),20))
+				menu.append((_("Create '%s.rbb' file") % bName,20))
 				buttons = ["1","2","3","4","5","6",""]
 				if self.isRbbFile():
 					menu.append((_("Create bouquet from rbb file"),21))
@@ -190,7 +191,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		elif self.sourceItem and not self.targetItem or self.targetItem and not self.sourceItem: # or source only or target only
 			menu.append((_("Remove selected services from bouquet"),3))
 			menu.append((_("Move selected services in bouquet"),5))
-			menu.append((_("Create rbb file"),20))
+			menu.append((_("Create '%s.rbb' file") % bName,20))
 			buttons = ["4","6",""]
 			if self.isRbbFile():
 				menu.append((_("Create bouquet from rbb file"),21))
@@ -619,6 +620,16 @@ class refreshBouquet(Screen, HelpableScreen):
 			t1 = _("Target bouquet is empty !")
 			t2 = _("No services in target bouquet !")
 			return self.targetItem, t1, t2
+		return None, None, None
+
+###
+# get selected bouquet valid for operation: or source, or target or source if both are selected
+###
+	def getSelectedBouquetName(self):
+		bouquet, t1, t2 = self.prepareSingleBouquetOperation()
+		if bouquet:
+			return bouquet[0]
+		return None
 ###
 # move selected service (by user) in source bouquet
 ###

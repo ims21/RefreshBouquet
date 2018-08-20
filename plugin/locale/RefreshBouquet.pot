@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-19 23:02+0200\n"
+"POT-Creation-Date: 2018-08-20 22:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,7 +109,8 @@ msgstr ""
 msgid "Move selected services in source bouquet"
 msgstr ""
 
-msgid "Create rbb file"
+#, python-format
+msgid "Create '%s.rbb' file"
 msgstr ""
 
 msgid "Create bouquet from rbb file"
@@ -405,9 +406,6 @@ msgstr ""
 msgid "Select rbb file"
 msgstr ""
 
-msgid "Erase"
-msgstr ""
-
 msgid "Select rbb file with 'OK' and create bouquet with same name."
 msgstr ""
 
@@ -415,6 +413,19 @@ msgstr ""
 msgid ""
 "If You will add to bouquet some missing services (start with '---'), You can "
 "then finalize created bouquet with '%s' etc."
+msgstr ""
+
+msgid "Erase"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+#, python-format
+msgid "The path %s already exists."
+msgstr ""
+
+msgid "Error"
 msgstr ""
 
 #, python-format

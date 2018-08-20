@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-19 23:02+0200\n"
-"PO-Revision-Date: 2018-08-19 23:03+0200\n"
+"POT-Creation-Date: 2018-08-20 22:33+0200\n"
+"PO-Revision-Date: 2018-08-20 22:34+0200\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi\n"
 "Language: cs_CZ\n"
@@ -105,8 +105,9 @@ msgstr "Odstranit vybrané programy ze zdroje"
 msgid "Move selected services in source bouquet"
 msgstr "Přesouvat vybrané programy ve zdroji"
 
-msgid "Create rbb file"
-msgstr "Založit rbb soubor"
+#, python-format
+msgid "Create '%s.rbb' file"
+msgstr "Založit '%s.rbb' soubor"
 
 msgid "Create bouquet from rbb file"
 msgstr "Vytvořit přehled z rbb souboru"
@@ -426,9 +427,6 @@ msgstr "Opravdu zavřít bez uloženého nastavení?"
 msgid "Select rbb file"
 msgstr "Zvolte rbb soubor"
 
-msgid "Erase"
-msgstr "Odstranit"
-
 msgid "Select rbb file with 'OK' and create bouquet with same name."
 msgstr "Vyberte rbb soubor pomocí 'OK' a vytvořte přehled stejného názvu."
 
@@ -439,6 +437,19 @@ msgid ""
 msgstr ""
 "Jestliže přidáte do přehledu nějaké chybějící programy (začínají na '----'), "
 "můžete vytvořený přehled dokončit pomocí '%s' apod."
+
+msgid "Erase"
+msgstr "Odstranit"
+
+msgid "Rename"
+msgstr "Přejmenovat"
+
+#, python-format
+msgid "The path %s already exists."
+msgstr "Cesta %s již existuje."
+
+msgid "Error"
+msgstr "Chyba"
 
 #, python-format
 msgid "Really erase file: '%s'?"
