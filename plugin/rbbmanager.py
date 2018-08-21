@@ -127,7 +127,7 @@ class refreshBouquetRbbManager(Screen):
 				self.reloadList()
 		if self["config"].getCurrent():
 			path = self["config"].getCurrent()[0][1]
-			self.session.openWithCallback(callbackErase, MessageBox, _("Really erase file: '%s'?") % path, type=MessageBox.TYPE_YESNO, default=False)
+			self.session.openWithCallback(callbackErase, MessageBox, _("Are You sure to remove file?") + "\n\n%s" % path, type=MessageBox.TYPE_YESNO, default=False)
 
 	def exit(self):
 		self.close(False)

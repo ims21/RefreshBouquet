@@ -201,7 +201,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			self["info"].setText(text)
 		if self["config"].getCurrent():
 			name = self["config"].getCurrent()[0]
-			menu.append((_("Remove bouquet %s") % name,15))
+			menu.append((_("Remove bouquet '%s'") % name,15))
 			buttons += [""]
 		menu.append((_("Settings..."),10))
 		buttons.append("menu")
@@ -615,16 +615,22 @@ class refreshBouquet(Screen, HelpableScreen):
 # Remove Bouquet
 ###
 	def removeBouquet(self):
-		ref = self["config"].getCurrent()[1]
-		mode = config.servicelist.lastmode.value
-		serviceHandler = eServiceCenter.getInstance()
-		bouquet_root = self.getRoot()
-		mutableBouquetList = serviceHandler.list(bouquet_root).startEdit()
-		if mutableBouquetList:
-			if not mutableBouquetList.removeService(ref):
-				mutableBouquetList.flushChanges()
-				eDVBDB.getInstance().reloadBouquets()
-		self.getBouquetList()
+		def callbackErase(answer):
+			if answer:
+				ref = self["config"].getCurrent()[1]
+				mode = config.servicelist.lastmode.value
+				serviceHandler = eServiceCenter.getInstance()
+				bouquet_root = self.getRoot()
+				mutableBouquetList = serviceHandler.list(bouquet_root).startEdit()
+				if mutableBouquetList:
+					if not mutableBouquetList.removeService(ref, False):
+						mutableBouquetList.flushChanges()
+						eDVBDB.getInstance().reloadBouquets()
+				self.getBouquetList()
+
+		if self["config"].getCurrent():
+			name = self["config"].getCurrent()[0]
+			self.session.openWithCallback(callbackErase, MessageBox, _("Are You sure to remove bouquet?") + "\n\n%s" % name, type=MessageBox.TYPE_YESNO, default=False)
 
 ###
 # Prepare bouquet and text for operation with one bouquet (moveServices, removeServices)
