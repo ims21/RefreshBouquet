@@ -199,7 +199,10 @@ class refreshBouquet(Screen, HelpableScreen):
 		else:
 			text = _("Select or source or target or source and target bouquets !")
 			self["info"].setText(text)
-
+		if self["config"].getCurrent():
+			name = self["config"].getCurrent()[0]
+			menu.append((_("Remove bouquet %s") % name,15))
+			buttons += [""]
 		menu.append((_("Settings..."),10))
 		buttons.append("menu")
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=text, list=menu, keys=buttons)
@@ -222,6 +225,8 @@ class refreshBouquet(Screen, HelpableScreen):
 			self.moveServices()
 		elif choice[1] == 10:
 			self.options()
+		elif choice[1] == 15:
+			self.removeBouquet()
 		elif choice[1] == 20:
 			self.saveRbbBouquet()
 		elif choice[1] == 21:
@@ -605,6 +610,21 @@ class refreshBouquet(Screen, HelpableScreen):
 		else:
 			print "bouquetlist is not editable"
 			return False
+
+###
+# Remove Bouquet
+###
+	def removeBouquet(self):
+		ref = self["config"].getCurrent()[1]
+		mode = config.servicelist.lastmode.value
+		serviceHandler = eServiceCenter.getInstance()
+		bouquet_root = self.getRoot()
+		mutableBouquetList = serviceHandler.list(bouquet_root).startEdit()
+		if mutableBouquetList:
+			if not mutableBouquetList.removeService(ref):
+				mutableBouquetList.flushChanges()
+				eDVBDB.getInstance().reloadBouquets()
+		self.getBouquetList()
 
 ###
 # Prepare bouquet and text for operation with one bouquet (moveServices, removeServices)
