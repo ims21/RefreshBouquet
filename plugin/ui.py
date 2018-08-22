@@ -125,6 +125,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			"yellow": (self.getSource, _("select source bouquet ")),
 			"blue": (self.getTarget, _("select target bouquet ")),
 			"menu": (self.showMenu, _("select action")),
+			"clearInputs": (self.clearInputs, _("clear selection")),
 			}, -2)
 
 		self["key_red"] = Button(_("Cancel"))
@@ -244,6 +245,12 @@ class refreshBouquet(Screen, HelpableScreen):
 				if i[0] == item[0]:
 					self["config"].setIndex(index)
 				index += 1
+# clear selected inputs
+	def clearInputs(self):
+		self.sourceItem = None
+		self.targetItem = None
+		self["source_name"].setText("")
+		self["target_name"].setText("")
 
 # get name for source bouquet
 	def getSource(self, currentBouquet=None):
