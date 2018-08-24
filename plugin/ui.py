@@ -455,6 +455,15 @@ class refreshBouquet(Screen, HelpableScreen):
 		if not close or not answer:
 			self.moveServices()
 
+# get transponder freq
+	def getTransponderFreq(self, ref):
+		from enigma import iServiceInformation
+		from Tools.Transponder import ConvertToHumanReadable
+		ref = eServiceReference(ref)
+		info = eServiceCenter.getInstance().info(ref)
+		transponderraw = info.getInfoObject(ref, iServiceInformation.sTransponderData)
+		transponderdata = ConvertToHumanReadable(transponderraw)
+		return transponderdata["frequency"]/1000
 #
 # Save RefreshBouquetBackup name:orbital_position services parameters in selected bouquet to /etc/enigma2/bouquetname.rbb file
 #
