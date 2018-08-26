@@ -40,6 +40,7 @@ from Tools.BoundFunction import boundFunction
 import os, unicodedata
 import skin
 from plugin import plugin_path
+from Screens.VirtualKeyBoard import VirtualKeyBoard
 
 config.plugins.refreshbouquet.case_sensitive = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.strip = ConfigYesNo(default = True)
@@ -1613,11 +1614,13 @@ class refreshBouquetCopyServices(Screen):
 			self.close()
 		elif answer == "new":
 			def runCreate(searchString = None):
-				if searchString:
-					services = self.list.getSelectionsList()
-					self.parent.addBouquet(searchString, services)
-					self.parent.getBouquetList()
-					self.close()
+				if not searchString:
+					self.session.open(MessageBox, _("You did not enter the bouquet name!"), MessageBox.TYPE_WARNING, timeout=3 )
+					return
+				services = self.list.getSelectionsList()
+				self.parent.addBouquet(searchString, services)
+				self.parent.getBouquetList()
+				self.close()
 			self.session.openWithCallback(runCreate, VirtualKeyBoard, title = _("Enter new bouquet name"), text = "")
 		return
 
@@ -1822,7 +1825,6 @@ class refreshBouquetRemoveServices(Screen):
 			self.close()
 
 # move services in source list
-from Screens.VirtualKeyBoard import VirtualKeyBoard
 class refreshBouquetMoveServices(Screen):
 	def __init__(self, session, list, source, services):
 		self.skin = refreshBouquetCopyServices.skin
