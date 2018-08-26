@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # for localized messages
-from . import _
+from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
@@ -34,7 +34,7 @@ from Components.MenuList import MenuList
 from Components.ConfigList import ConfigListScreen
 from Screens.MessageBox import MessageBox
 from Components.Sources.ServiceEvent import ServiceEvent
-from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 from Tools.BoundFunction import boundFunction
 import os, unicodedata
@@ -2236,21 +2236,5 @@ def freeMemory():
 	os.system("echo 3 > /proc/sys/vm/drop_caches")
 
 def closed(ret=False):
-	setEnigmaCatalog()
 	freeMemory()
 
-# for ngettext in external plugin
-import gettext
-from Components.Language import language
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
-
-def setPluginCatalog():
-	# for generate gettext strings into .pot - this strings are displayed by enigma's functions:
-	dummy_text = _("Question") + _("yes")+ _("Select") + _("Information") + _("Really close without saving settings?")
-	del dummy_text
-	try:
-		gettext.translation('RefreshBouquet', resolveFilename(SCOPE_PLUGINS, 'Extensions/RefreshBouquet/locale'), languages=[language.getLanguage()]).install(names=("ngettext", "pgettext"))
-	except:
-		debug("missing %s translation" % language.getLanguage())
-def setEnigmaCatalog():
-	gettext.translation('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), languages=[language.getLanguage()]).install(names=("ngettext", "pgettext"))

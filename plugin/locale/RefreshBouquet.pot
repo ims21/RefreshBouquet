@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-26 11:11+0200\n"
+"POT-Creation-Date: 2018-08-26 12:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -411,21 +411,6 @@ msgid "Pre-fill first 'n' servicename chars to virtual keyboard"
 msgstr ""
 
 msgid "Compare virtual keyboard input as case sensitive"
-msgstr ""
-
-msgid "Question"
-msgstr ""
-
-msgid "yes"
-msgstr ""
-
-msgid "Select"
-msgstr ""
-
-msgid "Information"
-msgstr ""
-
-msgid "Really close without saving settings?"
 msgstr ""
 
 msgid "Select rbb file"
