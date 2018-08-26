@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-22 10:57+0200\n"
+"POT-Creation-Date: 2018-08-26 10:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,6 +137,9 @@ msgstr ""
 msgid "Move selected services in bouquet"
 msgstr ""
 
+msgid "New bouquet"
+msgstr ""
+
 #, python-format
 msgid "Remove bouquet '%s'"
 msgstr ""
@@ -180,6 +183,9 @@ msgid "Bouquet '%s' was not created!"
 msgstr ""
 
 msgid "unknown"
+msgstr ""
+
+msgid "Enter new bouquet name"
 msgstr ""
 
 msgid "Are You sure to remove bouquet?"
@@ -302,6 +308,12 @@ msgid "Are you sure to copy this %d service?"
 msgid_plural "Are you sure to copy this %d services?"
 msgstr[0] ""
 msgstr[1] ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "Yes, add to new bouquet..."
+msgstr ""
 
 msgid "- select service(s) for remove with OK"
 msgstr ""

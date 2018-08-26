@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-22 10:57+0200\n"
-"PO-Revision-Date: 2018-08-22 10:59+0200\n"
+"POT-Creation-Date: 2018-08-26 10:29+0200\n"
+"PO-Revision-Date: 2018-08-26 10:30+0200\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi\n"
 "Language: cs_CZ\n"
@@ -133,6 +133,9 @@ msgstr "Odstranit vybrané programy z přehledu"
 msgid "Move selected services in bouquet"
 msgstr "Přesouvat vybrané programy v přehledu"
 
+msgid "New bouquet"
+msgstr "Nový přehled"
+
 #, python-format
 msgid "Remove bouquet '%s'"
 msgstr "Odstranit přehled '%s'"
@@ -179,6 +182,9 @@ msgstr "Přehled '%s' nebyl založen!"
 
 msgid "unknown"
 msgstr "neznámý"
+
+msgid "Enter new bouquet name"
+msgstr "Zadejte název nového přehledu"
 
 msgid "Are You sure to remove bouquet?"
 msgstr "Opravdu chcete smazat přehled?"
@@ -316,6 +322,12 @@ msgid_plural "Are you sure to copy this %d services?"
 msgstr[0] "Opravdu chcete zkopírovat %d zvolený program?"
 msgstr[1] "Opravdu chcete zkopírovat %d zvolené programy?"
 msgstr[2] "Opravdu chcete zkopírovat %d zvolených programů?"
+
+msgid "Yes"
+msgstr "Ano"
+
+msgid "Yes, add to new bouquet..."
+msgstr "Ano, přidat do nového přehledu..."
 
 msgid "- select service(s) for remove with OK"
 msgstr "- označte program(y) pro smazání pomocí OK"

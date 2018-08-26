@@ -4,7 +4,7 @@ from . import _
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.76"
+VERSION = "1.78"
 #  by ims (c) 2016-2018 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -200,6 +200,8 @@ class refreshBouquet(Screen, HelpableScreen):
 		else:
 			text = _("Select or source or target or source and target bouquets !")
 			self["info"].setText(text)
+		menu.append((_("New bouquet"),13))
+		buttons += [""]
 		if self["config"].getCurrent():
 			name = self["config"].getCurrent()[0]
 			menu.append((_("Remove bouquet '%s'") % name,15))
@@ -226,6 +228,8 @@ class refreshBouquet(Screen, HelpableScreen):
 			self.moveServices()
 		elif choice[1] == 10:
 			self.options()
+		elif choice[1] == 13:
+			self.newBouquet()
 		elif choice[1] == 15:
 			self.removeBouquet()
 		elif choice[1] == 20:
@@ -398,7 +402,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				data.list.append(MySelectionEntryComponent(i[0], i[1], nr, False))
 			self.l = MySelectionList(data)
 			self.l.setList(data)
-			self.session.open(refreshBouquetCopyServices, data, self.targetItem)
+			self.session.open(refreshBouquetCopyServices, data, self.targetItem, missing=True, parent=self.session.current_dialog)
 
 # returns source services not existing in target service (filtered)
 
@@ -595,6 +599,16 @@ class refreshBouquet(Screen, HelpableScreen):
 			self.l.setList(differences)
 		return differences, length
 
+
+# add new bouquet	
+
+	def newBouquet(self):
+		def runCreate(searchString = None):
+			if searchString:
+				self.addBouquet(searchString, None)
+				self.getBouquetList()
+		self.session.openWithCallback(runCreate, VirtualKeyBoard, title = _("Enter new bouquet name"), text = "")
+
 # add bouquet with bName
 
 	def addBouquet(self, bName, services):
@@ -614,17 +628,21 @@ class refreshBouquet(Screen, HelpableScreen):
 				mutableBouquet = serviceHandler.list(new_bouquet_ref).startEdit()
 				if mutableBouquet:
 					mutableBouquet.setListName(bName)
+					if services is not None:
+						for service in services:
+							if mutableBouquet.addService(eServiceReference(service[1])):
+								print "[RefreshBouquet] add", service, "to new bouquet failed"
 					mutableBouquet.flushChanges()
 				else:
-					print "get mutable list for new created bouquet failed"
+					print "[RefreshBouquet] get mutable list for new created bouquet failed"
 					return False
 				self.getTarget((bName, new_bouquet_ref))
 				return True
 			else:
-				print "add", str, "to bouquets failed"
+				print "[RefreshBouquet] add", str, "to bouquets failed"
 				return False
 		else:
-			print "bouquetlist is not editable"
+			print "[RefreshBouquet] bouquetlist is not editable"
 			return False
 
 ###
@@ -1429,10 +1447,12 @@ class refreshBouquetCopyServices(Screen):
 		<widget name="info" position="5,380" zPosition="2" size="705,120" valign="center" halign="left" font="Regular;20" foregroundColor="white" />
 	</screen>"""
 
-	def __init__(self, session, list, target):
+	def __init__(self, session, list, target, missing=None, parent=None):
 		self.skin = refreshBouquetCopyServices.skin
-		Screen.__init__(self, session)
+		Screen.__init__(self, session, parent=None)
 		self.session = session
+		self.missing = missing
+		self.parent = parent
 
 		( self.target_bouquetname, self.target ) = target
 		name = addBouqetName(self.target_bouquetname)
@@ -1572,7 +1592,10 @@ class refreshBouquetCopyServices(Screen):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
 			text = ngettext("Are you sure to copy this %d service?", "Are you sure to copy this %d services?", nr_items) % nr_items
-			self.session.openWithCallback(self.copyToTarget, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+			list = [(_("Yes"), True), (_("No"), False)]
+			if self.missing: # for 'Add selected missing services to target bouquet' only 
+				 list.append((_("Yes, add to new bouquet..."), "new"))
+			self.session.openWithCallback(self.copyToTarget, MessageBox, text, MessageBox.TYPE_YESNO, default=False, list=list )
 		else:
 			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3 )
 
@@ -1588,6 +1611,14 @@ class refreshBouquetCopyServices(Screen):
 					if not mutableList.addService(new):
 						mutableList.flushChanges()
 			self.close()
+		elif answer == "new":
+			def runCreate(searchString = None):
+				if searchString:
+					services = self.list.getSelectionsList()
+					self.parent.addBouquet(searchString, services)
+					self.parent.getBouquetList()
+					self.close()
+			self.session.openWithCallback(runCreate, VirtualKeyBoard, title = _("Enter new bouquet name"), text = "")
 		return
 
 	def isNotService(self, refstr):
