@@ -250,6 +250,16 @@ class refreshBouquet(Screen, HelpableScreen):
 				if i[0] == item[0]:
 					self["config"].setIndex(index)
 				index += 1
+
+# clear input
+	def clearInput(self, name):
+		if name == self["source_name"].getText():
+			self.sourceItem = None
+			self["source_name"].setText("")
+		if name == self["target_name"].getText():
+			self.targetItem = None
+			self["target_name"].setText("")
+
 # clear selected inputs
 	def clearInputs(self):
 		self.sourceItem = None
@@ -652,6 +662,7 @@ class refreshBouquet(Screen, HelpableScreen):
 	def removeBouquet(self):
 		def callbackErase(answer):
 			if answer:
+				name = self["config"].getCurrent()[0]
 				ref = self["config"].getCurrent()[1]
 				mode = config.servicelist.lastmode.value
 				serviceHandler = eServiceCenter.getInstance()
@@ -661,6 +672,7 @@ class refreshBouquet(Screen, HelpableScreen):
 					if not mutableBouquetList.removeService(ref, False):
 						mutableBouquetList.flushChanges()
 						eDVBDB.getInstance().reloadBouquets()
+				self.clearInput(name)
 				self.getBouquetList()
 
 		if self["config"].getCurrent():
