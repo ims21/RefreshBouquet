@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-25 10:27+0200\n"
+"POT-Creation-Date: 2018-09-25 16:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -368,16 +368,45 @@ msgstr ""
 msgid "Skip 1st nonstandard char in name"
 msgstr ""
 
-msgid "Omit last char in target names for 'Refresh services'"
+msgid "Omit last char in target names"
+msgstr ""
+
+msgid ""
+"You can omit last service name char if provider added it for his planned 're-"
+"tuning' and You want use 'Refresh services' for this services too."
+msgstr ""
+
+msgid "On plugin exit it will be set to 'no' again."
+msgstr ""
+
+msgid "Auto toggle in manually replacing"
+msgstr ""
+
+msgid ""
+"In 'Manually replacing' automaticaly toggles between columns when is used "
+"'OK' button."
 msgstr ""
 
 msgid "Sort source bouquet services in manually replace"
 msgstr ""
 
+msgid "In source services column will be services sorted."
+msgstr ""
+
 msgid "Missing source services for manually replace only"
 msgstr ""
 
+msgid ""
+"In source services column will be displayed missing services in target "
+"column only."
+msgstr ""
+
 msgid "Filter services by orbital position in source"
+msgstr ""
+
+msgid ""
+"You can select valid orbital position as filter for display services in "
+"source bouquet."
 msgstr ""
 
 msgid "Programs with 'HD/4K(UHD)' in name only for source"
@@ -386,10 +415,15 @@ msgstr ""
 msgid "Preview on selection"
 msgstr ""
 
+msgid "Automaticaly preview current service in bouquet list."
+msgstr ""
+
 msgid "Confirm services moving"
 msgstr ""
 
-msgid "Auto toggle in manually replacing"
+msgid ""
+"It will require confirmation for moving selected services in the source "
+"bouquet."
 msgstr ""
 
 msgid "Display in Channellist context menu"

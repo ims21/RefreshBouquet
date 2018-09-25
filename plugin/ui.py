@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.79"
+VERSION = "1.80"
 #  by ims (c) 2016-2018 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -52,12 +52,12 @@ config.plugins.refreshbouquet.diff = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.preview = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.autotoggle = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.on_end = ConfigYesNo(default = True)
-config.plugins.refreshbouquet.orbital = NoSave(ConfigSelection(default = "x", choices = [("x",_("no")),]))
+config.plugins.refreshbouquet.orbital = ConfigSelection(default = "x", choices = [("x",_("no")),])
 config.plugins.refreshbouquet.current_bouquet = ConfigSelection(default = "0", choices = [("0",_("no")),("source",_("source bouquet")),("target",_("target bouquet"))])
 config.plugins.refreshbouquet.selector2bouquet = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.bouquet_name = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.confirm_move = ConfigYesNo(default = True)
-config.plugins.refreshbouquet.ignore_last_char = NoSave(ConfigSelection(default = None, choices = [(None,_("no")),(".",".")]))
+config.plugins.refreshbouquet.ignore_last_char = ConfigSelection(default = None, choices = [(None,_("no")),(".",".")])
 choicelist = []
 for i in range(1, 11, 1):
 	choicelist.append(("%d" % i))
@@ -163,7 +163,12 @@ class refreshBouquet(Screen, HelpableScreen):
 		self.Servicelist.servicelist.resetRoot()
 		if cfg.on_end.value:
 			self.session.nav.playService(self.playingRef)
+		self.setDefaultCfg()
 		self.close()
+
+	def setDefaultCfg(self):
+		config.plugins.refreshbouquet.orbital.value = config.plugins.refreshbouquet.orbital.default
+		config.plugins.refreshbouquet.ignore_last_char.value = config.plugins.refreshbouquet.ignore_last_char.default
 
 	def showMenu(self):
 		text = _("Select action for bouquet:")
@@ -2102,7 +2107,8 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		self["key_red"] = Label(_("Cancel"))
 		self["key_green"] = Label(_("OK"))
 
-		self["statusbar"] = Label("ims (c) 2016. v%s" % VERSION)
+		self["description"] = Label()
+		self["statusbar"] = Label("ims (c) 2018. v%s" % VERSION)
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -2115,14 +2121,14 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist = []
 		refreshBouquetCfglist.append(getConfigListEntry(_("Compare case sensitive"), cfg.case_sensitive))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Skip 1st nonstandard char in name"), cfg.strip))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Omit last char in target names for 'Refresh services'"), cfg.ignore_last_char))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Sort source bouquet services in manually replace"), cfg.sort))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Missing source services for manually replace only"), cfg.diff))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Filter services by orbital position in source"), cfg.orbital))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Omit last char in target names"), cfg.ignore_last_char, _("You can omit last service name char if provider added it for his planned 're-tuning' and You want use 'Refresh services' for this services too.")+" "+_("On plugin exit it will be set to 'no' again.")))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Auto toggle in manually replacing"), cfg.autotoggle, _("In 'Manually replacing' automaticaly toggles between columns when is used 'OK' button.")))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Sort source bouquet services in manually replace"), cfg.sort, _("In source services column will be services sorted.")))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Missing source services for manually replace only"), cfg.diff, _("In source services column will be displayed missing services in target column only.")))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Filter services by orbital position in source"), cfg.orbital, _("You can select valid orbital position as filter for display services in source bouquet.")+" "+_("On plugin exit it will be set to 'no' again.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Programs with 'HD/4K(UHD)' in name only for source"), cfg.hd))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Preview on selection"), cfg.preview))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Confirm services moving"), cfg.confirm_move))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Auto toggle in manually replacing"), cfg.autotoggle))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Preview on selection"), cfg.preview, _("Automaticaly preview current service in bouquet list.")))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Confirm services moving"), cfg.confirm_move, _("It will require confirmation for moving selected services in the source bouquet.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Display in Channellist context menu"), cfg.channel_context_menu))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Return to previous service on end"), cfg.on_end))
 		refreshBouquetCfglist.append(getConfigListEntry(_("On plugin start use current bouquet as source or as target"), cfg.current_bouquet))
