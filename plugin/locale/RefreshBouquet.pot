@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-26 12:03+0200\n"
+"POT-Creation-Date: 2018-09-25 10:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -366,6 +366,9 @@ msgid "Compare case sensitive"
 msgstr ""
 
 msgid "Skip 1st nonstandard char in name"
+msgstr ""
+
+msgid "Omit last char in target names for 'Refresh services'"
 msgstr ""
 
 msgid "Sort source bouquet services in manually replace"

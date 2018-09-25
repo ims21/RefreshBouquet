@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.78"
+VERSION = "1.79"
 #  by ims (c) 2016-2018 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -57,6 +57,7 @@ config.plugins.refreshbouquet.current_bouquet = ConfigSelection(default = "0", c
 config.plugins.refreshbouquet.selector2bouquet = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.bouquet_name = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.confirm_move = ConfigYesNo(default = True)
+config.plugins.refreshbouquet.ignore_last_char = NoSave(ConfigSelection(default = None, choices = [(None,_("no")),(".",".")]))
 choicelist = []
 for i in range(1, 11, 1):
 	choicelist.append(("%d" % i))
@@ -186,7 +187,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				menu.append((_("Refresh services in target bouquet"),4))
 				menu.append((_("Move selected services in source bouquet"),5))
 				menu.append((_("Create '%s.rbb' file") % bName,20))
-				buttons = ["1","2","3","4","5","6",""]
+				buttons = ["1","2","3","4","green","6",""]
 				if self.isRbbFile():
 					menu.append((_("Create bouquet from rbb file"),21))
 					buttons += [""]
@@ -351,7 +352,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			if self.isNotService(t[1]):
 				i += 1
 				continue
-			t_name = self.prepareStr(t[0])
+			t_name = self.prepareStr(t[0]).replace(cfg.ignore_last_char.value,'') if cfg.ignore_last_char.value else self.prepareStr(t[0])
 			t_splited = t[1].split(':') # split target service_reference
 			t_core = ":".join((t_splited[3],t_splited[4],t_splited[5],t_splited[6]))
 			t_op = t_splited[6][0:-4]
@@ -2114,6 +2115,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist = []
 		refreshBouquetCfglist.append(getConfigListEntry(_("Compare case sensitive"), cfg.case_sensitive))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Skip 1st nonstandard char in name"), cfg.strip))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Omit last char in target names for 'Refresh services'"), cfg.ignore_last_char))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Sort source bouquet services in manually replace"), cfg.sort))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Missing source services for manually replace only"), cfg.diff))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Filter services by orbital position in source"), cfg.orbital))
