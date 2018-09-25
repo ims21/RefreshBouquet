@@ -455,7 +455,7 @@ msgid ""
 "It will require confirmation for moving selected services in the source "
 "bouquet."
 msgstr ""
-"Bude požadovat porvrzení při přemístování vybraných programů v přehledu."
+"Bude požadovat porvrzení při přemísťování vybraných programů v přehledu."
 
 msgid "Display in Channellist context menu"
 msgstr "Zobrazovat v kontextovém menu přehledu programů"
