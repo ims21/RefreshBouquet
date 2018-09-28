@@ -169,7 +169,7 @@ class refreshBouquet(Screen, HelpableScreen):
 	def setDefaultCfg(self):
 		config.plugins.refreshbouquet.orbital.value = config.plugins.refreshbouquet.orbital.default
 		config.plugins.refreshbouquet.ignore_last_char.value = config.plugins.refreshbouquet.ignore_last_char.default
-		config.plugins.refreshbouquet.services.value = config.plugins.refreshbouquet.services.default
+		config.plugins.refreshbouquet.used_services.value = config.plugins.refreshbouquet.used_services.default
 
 	def showMenu(self):
 		text = _("Select action for bouquet:")
