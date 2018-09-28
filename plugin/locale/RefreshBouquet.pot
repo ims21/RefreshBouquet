@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-28 08:39+0200\n"
+"POT-Creation-Date: 2018-09-28 09:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -416,6 +416,11 @@ msgstr ""
 msgid "Programs with 'HD/4K(UHD)' in name only for source"
 msgstr ""
 
+msgid ""
+"Plugin will be display in service bouquet services with HD,4K/UHD in service "
+"name only."
+msgstr ""
+
 msgid "Preview on selection"
 msgstr ""
 
@@ -445,7 +450,17 @@ msgstr ""
 msgid "On plugin start use current bouquet as source or as target"
 msgstr ""
 
+msgid ""
+"When the plugin is launched, current bouquet can be set as source or target "
+"bouquet."
+msgstr ""
+
 msgid "Selector to current bouquet"
+msgstr ""
+
+msgid ""
+"When the plugin is launched, the selector will be set in the bouquets list "
+"on current bouquet."
 msgstr ""
 
 msgid "Display bouquet name"
