@@ -1251,18 +1251,18 @@ class refreshBouquetManualSelection(Screen):
 				list = self.target and serviceHandler.list(self.target)
 				if list is not None:
 					mutableList = list.startEdit()
-					if cfg.case_sensitive.value == False: # trick for changing name - it cannot be made in one step
+					if mutableList:
+						if cfg.case_sensitive.value == False: # trick for changing name - it cannot be made in one step
+							mutableList.removeService(old, False)
+							mutableList.addService(old)
+							mutableList.moveService(old, index)
+							mutableList.flushChanges()
 						mutableList.removeService(old, False)
-						mutableList.addService(old)
-						mutableList.moveService(old, index)
+						mutableList.addService(new)
+						mutableList.moveService(new, index)
 						mutableList.flushChanges()
-					mutableList.removeService(old, False)
-					mutableList.addService(new)
-					mutableList.moveService(new, index)
-					mutableList.flushChanges()
-					if cfg.log.value:
-						fo.write("%s|%s| replaced with |%s|%s| at |%s\n" % (data[4],data[1],data[0],data[2],data[3]+1))
-
+						if cfg.log.value:
+							fo.write("%s|%s| replaced with |%s|%s| at |%s\n" % (data[4],data[1],data[0],data[2],data[3]+1))
 			if cfg.log.value:
 				fo.close()
 			self.close()
@@ -1412,20 +1412,21 @@ class refreshBouquetRefreshServices(Screen):
 			if list is not None:
 				for data in refresh:
 					mutableList = list.startEdit()
-					index = data[2]
-					old = eServiceReference(data[1][1])
-					new = eServiceReference(data[1][0])
-					debug("Replace - name: %s new ref: %s old ref: %s index: %s" % (data[0], data[1][0], data[1][1], data[2]))
-					if cfg.case_sensitive.value == False: # trick for changing name - it cannot be made in one step
-						old.setName(data[0])
+					if mutableList:
+						index = data[2]
+						old = eServiceReference(data[1][1])
+						new = eServiceReference(data[1][0])
+						debug("Replace - name: %s new ref: %s old ref: %s index: %s" % (data[0], data[1][0], data[1][1], data[2]))
+						if cfg.case_sensitive.value == False: # trick for changing name - it cannot be made in one step
+							old.setName(data[0])
+							mutableList.removeService(old, False)
+							mutableList.addService(old)
+							mutableList.moveService(old, index)
+							mutableList.flushChanges()
 						mutableList.removeService(old, False)
-						mutableList.addService(old)
-						mutableList.moveService(old, index)
+						mutableList.addService(new)
+						mutableList.moveService(new, index)
 						mutableList.flushChanges()
-					mutableList.removeService(old, False)
-					mutableList.addService(new)
-					mutableList.moveService(new, index)
-					mutableList.flushChanges()
 			self.close()
 		return
 
@@ -1626,10 +1627,11 @@ class refreshBouquetCopyServices(Screen):
 			list = self.target and serviceHandler.list(self.target)
 			if list is not None:
 				mutableList = list.startEdit()
-				for item in data:
-					new = eServiceReference(item[1])
-					if not mutableList.addService(new):
-						mutableList.flushChanges()
+				if mutableList:
+					for item in data:
+						new = eServiceReference(item[1])
+						if not mutableList.addService(new):
+							mutableList.flushChanges()
 			self.close()
 		elif answer == "new":
 			def runCreate(searchString = None):
@@ -1817,12 +1819,13 @@ class refreshBouquetRemoveServices(Screen):
 			list = self.source and serviceHandler.list(self.source)
 			if list is not None:
 				mutableList = list.startEdit()
-				for item in data:
-					removed = eServiceReference(item[1])
-					if not removed.valid():
-						continue
-					if not mutableList.removeService(removed):
-						mutableList.flushChanges()
+				if mutableList:
+					for item in data:
+						removed = eServiceReference(item[1])
+						if not removed.valid():
+							continue
+						if not mutableList.removeService(removed):
+							mutableList.flushChanges()
 			self.close()
 		return
 
@@ -2020,21 +2023,23 @@ class refreshBouquetMoveServices(Screen):
 			list = self.source and serviceHandler.list(self.source)
 			if list is not None:
 				mutableList = list.startEdit()
-				for item in data:
-					removed = eServiceReference(item[1])
-					if not removed.valid():
-						continue
-					if not mutableList.removeService(removed):
-						mutableList.flushChanges()
+				if mutableList:
+					for item in data:
+						removed = eServiceReference(item[1])
+						if not removed.valid():
+							continue
+						if not mutableList.removeService(removed):
+							mutableList.flushChanges()
 			data = new_list
 			serviceHandler = eServiceCenter.getInstance()
 			list = self.source and serviceHandler.list(self.source)
 			if list is not None:
 				mutableList = list.startEdit()
-				for item in data:
-					new = eServiceReference(item[1])
-					if not mutableList.addService(new):
-						mutableList.flushChanges()
+				if mutableList:
+					for item in data:
+						new = eServiceReference(item[1])
+						if not mutableList.addService(new):
+							mutableList.flushChanges()
 			self.close(False)
 		return
 
