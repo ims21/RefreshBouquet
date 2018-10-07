@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-28 09:03+0200\n"
-"PO-Revision-Date: 2018-09-28 09:14+0200\n"
+"POT-Creation-Date: 2018-10-07 13:16+0200\n"
+"PO-Revision-Date: 2018-10-07 13:18+0200\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi\n"
 "Language: cs_CZ\n"
@@ -19,6 +19,15 @@ msgstr "RefreshBouquet"
 
 msgid "Actualize services in bouquets"
 msgstr "Aktualizace programů v přehledech"
+
+msgid "Original"
+msgstr "Původní"
+
+msgid "A-z sort"
+msgstr "A-z"
+
+msgid "Z-a sort"
+msgstr "Z-a"
 
 msgid "no"
 msgstr "Ne"
@@ -43,15 +52,6 @@ msgstr "Ne"
 
 msgid "All"
 msgstr "Vše"
-
-msgid "Original"
-msgstr "Původní"
-
-msgid "A-z sort"
-msgstr "A-z"
-
-msgid "Z-a sort"
-msgstr "Z-a"
 
 msgid "Selected top"
 msgstr "Označené nahoru"
@@ -205,8 +205,13 @@ msgstr "RefreshBouquet v. %s"
 msgid "Apply and close"
 msgstr "Provést a zavřít"
 
-msgid "Toggle source and target bouquets with Bouq +/-\n"
-msgstr "Mezi přehledy přepínejte pomocí Ch+/-\n"
+msgid "Toggle source and target bouquets with Bouq +/- ."
+msgstr "Mezi přehledy přepínejte pomocí Ch+/- ."
+
+msgid ""
+"Or toggle with 'Prev/Next', which trying to find a similar name in source."
+msgstr ""
+"Nebo přepněte s 'Prev/Next', které se snaží najít podobný název ve zdroji."
 
 msgid ""
 "Prepare replacement target's service by service in source bouquet (both "
@@ -219,6 +224,12 @@ msgstr ""
 
 msgid "Marking can be canceled with key '0'."
 msgstr "Označení může být zrušeno klávesou '0'."
+
+msgid "Source can be sorted with 'Menu'."
+msgstr "Zdroj může být tříděn pomocí 'Menu'."
+
+msgid "Sort source bouquet:"
+msgstr "Třídit zdrojový přehled:"
 
 msgid "Replace"
 msgstr "Nahradit"
@@ -418,13 +429,6 @@ msgstr ""
 "V 'Ručním nahrazování' přepíná automaticky mezi sloupci po použití tlačítka "
 "'OK'."
 
-msgid "Sort source bouquet services in manually replace"
-msgstr "Třídit programy ve zdrojovém přehledu pro ruční nahrazování"
-
-msgid ""
-"In 'Manually replacing' in source services column will be services sorted."
-msgstr "V 'Ručním nahrazování' budou programy ve zdrojovém sloupci setříděné."
-
 msgid "Missing source services for manually replace only"
 msgstr "Pouze chybějící programy ve zdrojích pro ruční nahrazování"
 
@@ -545,3 +549,11 @@ msgstr "Chyba"
 
 msgid "Are You sure to remove file?"
 msgstr "Opravdu chcete smazat soubor ?"
+
+#~ msgid "Sort source bouquet services in manually replace"
+#~ msgstr "Třídit programy ve zdrojovém přehledu pro ruční nahrazování"
+
+#~ msgid ""
+#~ "In 'Manually replacing' in source services column will be services sorted."
+#~ msgstr ""
+#~ "V 'Ručním nahrazování' budou programy ve zdrojovém sloupci setříděné."

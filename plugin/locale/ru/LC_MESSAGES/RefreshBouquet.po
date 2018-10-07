@@ -162,8 +162,8 @@ msgstr "Обновление букета %s"
 msgid "Apply and close"
 msgstr "Применить и закрыть"
 
-msgid "Toggle source and target bouquets with Bouq +/-\n"
-msgstr "Смена исходного и целевых букетов с помощью Bouq +/-\n"
+msgid "Toggle source and target bouquets with Bouq +/- ."
+msgstr "Смена исходного и целевых букетов с помощью Bouq +/- ."
 
 msgid ""
 "Prepare replacement target's service by service in source bouquet (both "

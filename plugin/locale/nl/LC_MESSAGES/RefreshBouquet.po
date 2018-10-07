@@ -158,9 +158,9 @@ msgstr "Actualiseer boeket %s"
 msgid "Apply and close"
 msgstr "Toepassen"
 
-msgid "Toggle source and target bouquets with Bouq +/-\n"
+msgid "Toggle source and target bouquets with Bouq +/- ."
 msgstr ""
-"Wissel tussen bron en doelboeket met Bouq +/-\n"
+"Wissel tussen bron en doelboeket met Bouq +/- ."
 "\n"
 
 msgid ""

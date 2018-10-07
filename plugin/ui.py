@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.80"
+VERSION = "1.82"
 #  by ims (c) 2016-2018 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -43,10 +43,10 @@ from plugin import plugin_path
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 
 config.plugins.refreshbouquet.case_sensitive = ConfigYesNo(default = False)
-config.plugins.refreshbouquet.strip = ConfigYesNo(default = True)
+config.plugins.refreshbouquet.omit_first = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.debug = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.log = ConfigYesNo(default = False)
-config.plugins.refreshbouquet.sort = ConfigYesNo(default = False)
+config.plugins.refreshbouquet.mr_sortsource = ConfigSelection(default = "0", choices = [("0", _("Original")),("1", _("A-z sort")),("2", _("Z-a sort"))])
 config.plugins.refreshbouquet.used_services = ConfigSelection(default = "all", choices = [("all",_("no")),("HD",_("HD")),("4K",_("4K/UHD")),("HD4K",_("HD or 4K/UHD"))])
 config.plugins.refreshbouquet.diff = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.preview = ConfigYesNo(default = False)
@@ -785,8 +785,6 @@ class refreshBouquet(Screen, HelpableScreen):
 			if not len(source_services):
 				self["info"].setText(_("No services in source bouquet !"))
 				return
-			if cfg.sort.value:
-				source_services.sort()
 			sourceList = MenuList(source_services) # name, service reference
 			target_services = self.addToBouquetAllIndexed(target) # name, service reference, index in bouquet
 			self.session.open(refreshBouquetManualSelection, sourceList, target_services, self.sourceItem[0], self.targetItem)
@@ -822,7 +820,7 @@ class refreshBouquet(Screen, HelpableScreen):
 	def prepareStr(self, name):
 		if cfg.case_sensitive.value == False:
 			name = name.upper()
-		if cfg.strip.value == True:
+		if cfg.omit_first.value == True:
 			if name[0] < ' ':
 				return name[1:]
 		return name
@@ -1061,6 +1059,8 @@ class refreshBouquetManualSelection(Screen):
 		self.listSource = sourceList
 		self["sources"] = self.listSource
 
+		self.origList = sourceList.list[:]
+
 		self.target_services = target_services
 
 		self.listTarget = MenuList(self.target_services)
@@ -1098,6 +1098,9 @@ class refreshBouquetManualSelection(Screen):
 				"rightRepeated": self.right,
 
 				"clearInputs": self.clearInputs,
+				"menu": self.sortMenu,
+				"next": self.lookServiceInSource,
+				"prev": self.lookServiceInSource,
 			},-2)
 
 		self["key_red"] = Button(_("Cancel"))
@@ -1110,9 +1113,11 @@ class refreshBouquetManualSelection(Screen):
 		self["source_label"] = Label(_("source bouquet") + name_s )
 		self["target_label"] = Label(_("target bouquet") + name_t )
 
-		text = _("Toggle source and target bouquets with Bouq +/-\n")
+		text =  _("Toggle source and target bouquets with Bouq +/- .") + " "
+		text += _("Or toggle with 'Prev/Next', which trying to find a similar name in source.") + " "
 		text += _("Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'")+ " "
-		text += _("Marking can be canceled with key '0'.")
+		text += _("Marking can be canceled with key '0'.") + " "
+		text += _("Source can be sorted with 'Menu'.")
 
 		self["info"].setText(text)
 
@@ -1125,6 +1130,30 @@ class refreshBouquetManualSelection(Screen):
 		debug("changed bouquet: %s" % self.target_bouquetname)
 		self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.onLayoutFinish.append(self.switchLists)
+		self.sortSourceList()
+
+	def sortMenu(self):
+		menu = []
+		for x in cfg.mr_sortsource.choices.choices:
+			menu.append((x[1], x[0]))
+		self.session.openWithCallback(self.sortbyCallback, ChoiceBox, title=_("Sort source bouquet:"), list=menu, selection=int(cfg.mr_sortsource.value))
+
+	def sortbyCallback(self, choice):
+		if choice is None:
+			return
+		config.plugins.refreshbouquet.mr_sortsource.value = choice[1]
+		config.plugins.refreshbouquet.mr_sortsource.save()
+		self.sortSourceList()
+
+	def sortSourceList(self):
+		name = self["sources"].getCurrent()[0]
+		if cfg.mr_sortsource.value == "1":
+			self.listSource.list.sort()
+		elif cfg.mr_sortsource.value == "2":
+			self.listSource.list.sort(reverse=True)
+		else:
+			self.listSource.setList(self.origList[:])
+		self["sources"].moveToIndex(self.getSourceIndex(name))
 
 	def ok(self): # get source and target items
 		if self.currList == "targets":
@@ -1142,6 +1171,39 @@ class refreshBouquetManualSelection(Screen):
 			self["key_blue"].setText(_("Replace"))
 		if cfg.autotoggle.value:
 			self.switchLists()
+
+	def getSourceIndex(self,name):
+		for idx, source in enumerate(self["sources"].list):
+			if source[0] == name:
+				return idx
+		return 0
+	def getSourceIndexUpper(self,name):
+		name = name.upper()
+		for idx, source in enumerate(self["sources"].list):
+			if source[0].upper() == name:
+				return idx
+		return 0
+	def getSourceSimilarIndexUpper(self,name):
+		uName = name.upper().replace(' ','')
+		for n in range(len(uName),0,-1):
+			for idx, source in enumerate(self["sources"].list):
+				sName = source[0].upper().replace(' ','')
+				if uName[0] != sName[0]:
+					continue
+				if sName.startswith(uName[:n]):
+					return idx
+		return 0
+
+	def lookServiceInSource(self):
+		if self.currList == "targets":
+			name = self["targets"].getCurrent()[0]
+			idx = self.getSourceIndex(name)
+			if not idx:
+				idx = self.getSourceIndexUpper(name)
+				if not idx:
+					idx = self.getSourceSimilarIndexUpper(name)
+			self["sources"].moveToIndex(idx)
+		self.switchLists()
 
 	def keyBlue(self):
 		if self.targetRecord != "" and self.sourceRecord != "":
@@ -2126,10 +2188,9 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 
 		refreshBouquetCfglist = []
 		refreshBouquetCfglist.append(getConfigListEntry(_("Compare case sensitive"), cfg.case_sensitive))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Skip 1st nonstandard char in name"), cfg.strip, _("Omit any control character in service name. Default set 'yes'")))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Skip 1st nonstandard char in name"), cfg.omit_first, _("Omit any control character in service name. Default set 'yes'")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Omit last char in target names"), cfg.ignore_last_char, _("You can omit last service name char if provider added it for his planned 're-tuning' and You want use 'Refresh services' for this services too.")+" "+_("On plugin exit it will be set to 'no' again.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Auto toggle in manually replacing"), cfg.autotoggle, _("In 'Manually replacing' automaticaly toggles between columns when is used 'OK' button.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Sort source bouquet services in manually replace"), cfg.sort, _("In 'Manually replacing' in source services column will be services sorted.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Missing source services for manually replace only"), cfg.diff, _("In 'Manually replacing' in source services column will be displayed missing services in target column only.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Filter services by orbital position in source"), cfg.orbital, _("You can select valid orbital position as filter for display services in source bouquet.")+" "+_("On plugin exit it will be set to 'no' again.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Programs with 'HD/4K(UHD)' in name only for source"), cfg.used_services,_("Plugin will be display in service bouquet services with HD,4K/UHD in service name only.")+" "+_("On plugin exit it will be set to 'no' again.")))

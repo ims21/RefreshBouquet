@@ -16,5 +16,7 @@
 		<key id="KEY_CHANNELDOWN" mapto="prevBouquet" flags="m"/>
 
 		<key id="KEY_0" mapto="clearInputs" flags="m"/>
+		<key id="KEY_NEXT" mapto="next" flags="m"/>
+		<key id="KEY_PREVIOUS" mapto="prev" flags="m"/>
 	</map>
 </keymap>

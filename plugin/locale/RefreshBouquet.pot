@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-28 09:03+0200\n"
+"POT-Creation-Date: 2018-10-07 13:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,6 +22,15 @@ msgid "RefreshBouquet"
 msgstr ""
 
 msgid "Actualize services in bouquets"
+msgstr ""
+
+msgid "Original"
+msgstr ""
+
+msgid "A-z sort"
+msgstr ""
+
+msgid "Z-a sort"
 msgstr ""
 
 msgid "no"
@@ -46,15 +55,6 @@ msgid "No"
 msgstr ""
 
 msgid "All"
-msgstr ""
-
-msgid "Original"
-msgstr ""
-
-msgid "A-z sort"
-msgstr ""
-
-msgid "Z-a sort"
 msgstr ""
 
 msgid "Selected top"
@@ -207,7 +207,11 @@ msgstr ""
 msgid "Apply and close"
 msgstr ""
 
-msgid "Toggle source and target bouquets with Bouq +/-\n"
+msgid "Toggle source and target bouquets with Bouq +/- ."
+msgstr ""
+
+msgid ""
+"Or toggle with 'Prev/Next', which trying to find a similar name in source."
 msgstr ""
 
 msgid ""
@@ -217,6 +221,12 @@ msgid ""
 msgstr ""
 
 msgid "Marking can be canceled with key '0'."
+msgstr ""
+
+msgid "Source can be sorted with 'Menu'."
+msgstr ""
+
+msgid "Sort source bouquet:"
 msgstr ""
 
 msgid "Replace"
@@ -388,13 +398,6 @@ msgstr ""
 msgid ""
 "In 'Manually replacing' automaticaly toggles between columns when is used "
 "'OK' button."
-msgstr ""
-
-msgid "Sort source bouquet services in manually replace"
-msgstr ""
-
-msgid ""
-"In 'Manually replacing' in source services column will be services sorted."
 msgstr ""
 
 msgid "Missing source services for manually replace only"

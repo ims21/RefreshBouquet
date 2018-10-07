@@ -445,8 +445,8 @@ msgid "This feature looking for differences in service parameters with same name
 msgstr "Cette fonctionnalité recherche les différences dans les paramètres de service avec les mêmes noms dans les bouquets source et cible. Les paramètres des services marqués seront remplacés. "
 
 #: ../ui.py:1006
-msgid "Toggle source and target bouquets with Bouq +/-\n"
-msgstr "Basculer les bouquets source et cible avec Bouq +/-\n"
+msgid "Toggle source and target bouquets with Bouq +/- ."
+msgstr "Basculer les bouquets source et cible avec Bouq +/- ."
 
 #: ../ui.py:1404 ../ui.py:1585 ../ui.py:1769
 msgid "Use 'Menu' for sorting."
