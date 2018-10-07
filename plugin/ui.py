@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.82"
+VERSION = "1.83"
 #  by ims (c) 2016-2018 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -27,6 +27,7 @@ from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.config import config, ConfigYesNo, getConfigListEntry, ConfigSelection, NoSave
 from Components.Label import Label
 from Components.Button import Button
+from Components.Sources.StaticText import StaticText
 from Components.Sources.List import List
 from Screens.ChoiceBox import ChoiceBox
 from Components.ScrollLabel import ScrollLabel
@@ -79,19 +80,19 @@ sel_position = None
 class refreshBouquet(Screen, HelpableScreen):
 	skin = """
 	<screen name="refreshBouquet" position="center,center" size="560,400" title="Refresh Bouquet">
-		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap name="green"  position="140,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" /> 
-		<ePixmap name="blue"   position="420,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" /> 
-		<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" /> 
-		<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" /> 
-		<widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-		<widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-		<widget name="source_text" position="10,50" zPosition="2" size="200,25" valign="center" halign="left" font="Regular;22" foregroundColor="yellow" />
-		<widget name="target_text" position="10,75" zPosition="2" size="200,25" valign="center" halign="left" font="Regular;22" foregroundColor="blue" />
-		<widget name="source_name" position="220,50" zPosition="2" size="330,25" valign="center" halign="left" font="Regular;22" foregroundColor="white" />
-		<widget name="target_name" position="220,75" zPosition="2" size="330,25" valign="center" halign="left" font="Regular;22" foregroundColor="white" />
-		<ePixmap pixmap="skin_default/div-h.png" position="5,102" zPosition="2" size="550,2" />
+		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on"/>
+		<ePixmap name="green"  position="140,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on"/>
+		<ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on"/>
+		<ePixmap name="blue"   position="420,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on"/>
+		<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
+		<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
+		<widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
+		<widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
+		<widget name="source_text" position="10,50" zPosition="2" size="200,25" valign="center" halign="left" font="Regular;22" foregroundColor="yellow"/>
+		<widget name="target_text" position="10,75" zPosition="2" size="200,25" valign="center" halign="left" font="Regular;22" foregroundColor="blue"/>
+		<widget name="source_name" position="220,50" zPosition="2" size="330,25" valign="center" halign="left" font="Regular;22" foregroundColor="white"/>
+		<widget name="target_name" position="220,75" zPosition="2" size="330,25" valign="center" halign="left" font="Regular;22" foregroundColor="white"/>
+		<ePixmap pixmap="skin_default/div-h.png" position="5,102" zPosition="2" size="550,2"/>
 		<widget source="config" render="Listbox" position="5,112" size="550,250" scrollbarMode="showOnDemand">
 			<convert type="TemplatedMultiContent">
 				{"template": [
@@ -102,8 +103,8 @@ class refreshBouquet(Screen, HelpableScreen):
 				}
 			</convert>
 		</widget>
-		<ePixmap pixmap="skin_default/div-h.png" position="5,365" zPosition="2" size="550,2" />
-		<widget name="info" position="5,368" zPosition="2" size="550,25" valign="center" halign="left" font="Regular;22" foregroundColor="white" />
+		<ePixmap pixmap="skin_default/div-h.png" position="5,365" zPosition="2" size="550,2"/>
+		<widget name="info" position="5,368" zPosition="2" size="550,25" valign="center" halign="left" font="Regular;22" foregroundColor="white"/>
 	</screen>"""
 
 	def __init__(self, session, Servicelist=None, currentBouquet=None):
@@ -1023,26 +1024,32 @@ class refreshBouquet(Screen, HelpableScreen):
 class refreshBouquetManualSelection(Screen):
 	skin = """
 	<screen name="refreshBouquetManualSelection" position="center,center" size="710,545" title="RefreshBouquet - manual">
-		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap name="green"  position="140,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" /> 
-		<ePixmap name="blue"   position="420,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" /> 
-		<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" /> 
-		<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" /> 
-		<widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-		<widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-		<widget name="source" position="5,40" zPosition="2" size="350,30"  font="Regular;25" foregroundColor="white" />
-		<widget name="target" position="360,40" zPosition="2" size="350,30"  font="Regular;25" foregroundColor="white" />
-		<widget name="source_label" position="5,67" zPosition="2" size="350,25"  font="Regular;18" foregroundColor="yellow" />
-		<widget name="target_label" position="360,67" zPosition="2" size="350,25"  font="Regular;18" foregroundColor="blue" />
-		<widget name="sources" position="3,90" zPosition="2" size="350,300"  font="Regular;22" foregroundColor="white" />
-		<widget name="targets" position="360,90" zPosition="2" size="350,300"  font="Regular;22" foregroundColor="white" />
-		<ePixmap pixmap="skin_default/div-h.png" position="5,393" zPosition="2" size="700,2" />
+		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on"/>
+		<widget objectTypes="key_green,StaticText" source="key_green" render="Pixmap"  position="140,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on">
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget objectTypes="key_yellow,StaticText" source="key_yellow" render="Pixmap" position="280,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on">
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget objectTypes="key_blue,StaticText" source="key_blue" render="Pixmap" position="420,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on">
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
+		<widget objectTypes="key_green,StaticText" source="key_green" render="Label" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
+		<widget objectTypes="key_yellow,StaticText" source="key_yellow" render="Label" position="280,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
+		<widget objectTypes="key_blue,StaticText" source="key_blue" render="Label" position="420,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
+		<widget name="source" position="5,40" zPosition="2" size="350,30"  font="Regular;25" foregroundColor="white"/>
+		<widget name="target" position="360,40" zPosition="2" size="350,30"  font="Regular;25" foregroundColor="white"/>
+		<widget name="source_label" position="5,67" zPosition="2" size="350,25"  font="Regular;18" foregroundColor="yellow"/>
+		<widget name="target_label" position="360,67" zPosition="2" size="350,25"  font="Regular;18" foregroundColor="blue"/>
+		<widget name="sources" position="3,90" zPosition="2" size="350,300"  font="Regular;22" foregroundColor="white"/>
+		<widget name="targets" position="360,90" zPosition="2" size="350,300"  font="Regular;22" foregroundColor="white"/>
+		<ePixmap pixmap="skin_default/div-h.png" position="5,393" zPosition="2" size="700,2"/>
 		<widget source="Service" render="Label" position="5,397" size="700,23" font="Regular;20" valign="center" halign="left" transparent="1" zPosition="1">
 			<convert type="TransponderInfo"></convert>
 		</widget>
-		<ePixmap pixmap="skin_default/div-h.png" position="5,420" zPosition="2" size="700,2" />
-		<widget name="info" position="5,423" zPosition="2" size="705,120" valign="center" halign="left" font="Regular;20" foregroundColor="white" />
+		<ePixmap pixmap="skin_default/div-h.png" position="5,420" zPosition="2" size="700,2"/>
+		<widget name="info" position="5,423" zPosition="2" size="705,120" valign="center" halign="left" font="Regular;20" foregroundColor="white"/>
 	</screen>"""
 
 	def __init__(self, session, sourceList, target_services, source_name, target):
@@ -1078,7 +1085,7 @@ class refreshBouquetManualSelection(Screen):
 				"ok": self.ok,
 				"red": self.exit,
 				"green": self.replaceService,
-				"yellow": self.previewService,
+				"yellow": self.keyYellow,
 				"blue": self.keyBlue,
 
 				"play": self.previewService,
@@ -1104,14 +1111,16 @@ class refreshBouquetManualSelection(Screen):
 			},-2)
 
 		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("Apply and close"))
-		self["key_yellow"] = Button("")
-		self["key_blue"] = Button("")
+		self["key_green"] = StaticText("")
+		self["key_yellow"] = StaticText("")
+		self["key_blue"] = StaticText("")
 
 		name_s = " " + addBouqetName(source_name)
 		name_t = " " + addBouqetName(self.target_bouquetname)
 		self["source_label"] = Label(_("source bouquet") + name_s )
 		self["target_label"] = Label(_("target bouquet") + name_t )
+
+		self.preview = False
 
 		text =  _("Toggle source and target bouquets with Bouq +/- .") + " "
 		text += _("Or toggle with 'Prev/Next', which trying to find a similar name in source.") + " "
@@ -1209,6 +1218,21 @@ class refreshBouquetManualSelection(Screen):
 		if self.targetRecord != "" and self.sourceRecord != "":
 			self.replaceTarget()
 
+	def keyYellow(self):
+		if self.preview:
+			self.stopPreview()
+		else:
+			self.previewService()
+	def textYellow(self):
+		if cfg.preview.value:
+			text = ""
+		else:
+			if self.preview:
+				text = _("Stop preview")
+			else:
+				text = _("Preview")
+		self["key_yellow"].setText(text)
+
 	def replaceTarget(self):
 		if self.targetRecord != "" and self.sourceRecord != "":
 #		insert(index, hodnota)
@@ -1226,6 +1250,7 @@ class refreshBouquetManualSelection(Screen):
 				self.switchToSourceList() # trick - must be both lines
 				self.switchToTargetList()
 			self.clearInputs()
+			self["key_green"].setText(_("Apply and close"))
 
 	def displayService(self):
 		ref = self[self.currList].getCurrent()[1]
@@ -1234,18 +1259,21 @@ class refreshBouquetManualSelection(Screen):
 			if cfg.preview.value:
 				self.previewService()
 			else:
-				self["key_yellow"].setText(_("Preview"))
+				self.textYellow()
 		else:
-			self["key_yellow"].setText("")
+			self.textYellow()
 			self["Service"].newService(None)
 
 	def previewService(self):
 		ref = self[self.currList].getCurrent()[1]
 		if not self.isNotService(ref):
-			#self["Service"].newService(eServiceReference(ref))
 			self.session.nav.playService(eServiceReference(ref))
+			self.preview = True
+			self.textYellow()
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
+		self.preview = False
+		self.textYellow()
 
 	def clearInputs(self):
 		self.targetRecord = ""
@@ -1372,7 +1400,7 @@ class refreshBouquetRefreshServices(Screen):
 				"red": self.exit,
 				"ok": self.list.toggleSelection,
 				"green": self.replaceSelectedEntries,
-				"yellow": self.previewService,
+				"yellow": self.keyYellow,
 				"blue": self.list.toggleAllSelection,
 
 				"play": self.previewService,
@@ -1382,10 +1410,12 @@ class refreshBouquetRefreshServices(Screen):
 
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Refresh selected"))
-		self["key_yellow"] = Button()
+		self["key_yellow"] = StaticText("")
 		self["key_blue"] = Button(_("Inversion"))
 
 		self["info"] = Label()
+
+		self.preview = False
 
 		text = _("This feature looking for differences in service parameters with same names in source and target bouquets. Parameters for marked services will be replaced. ")
 		text += _("It can be in most cases useful for bouquets with services gained by Fastscan searching. ")
@@ -1435,6 +1465,21 @@ class refreshBouquetRefreshServices(Screen):
 			index += 1
 		return 0
 
+	def keyYellow(self):
+		if self.preview:
+			self.stopPreview()
+		else:
+			self.previewService()
+	def textYellow(self):
+		if cfg.preview.value:
+			text = ""
+		else:
+			if self.preview:
+				text = _("Stop preview")
+			else:
+				text = _("Preview")
+		self["key_yellow"].setText(text)
+
 	def displayService(self):
 		if not len(self["services"].list):
 			return
@@ -1446,17 +1491,21 @@ class refreshBouquetRefreshServices(Screen):
 			if cfg.preview.value:
 				self.previewService()
 			else:
-				self["key_yellow"].setText(_("Preview"))
+				self.textYellow()
 		else:
-			self["key_yellow"].setText("")
+			self.textYellow()
 			self["Service"].newService(None)
 
 	def previewService(self):
 		ref = self["services"].getCurrent()[0][1][0]
 		if not self.isNotService(ref):
 			self.session.nav.playService(eServiceReference(ref))
+			self.preview = True
+			self.textYellow()
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
+		self.preview = False
+		self.textYellow()
 
 	def replaceSelectedEntries(self):
 		nr_items = len(self.list.getSelectionsList())
@@ -1513,21 +1562,23 @@ class refreshBouquetRefreshServices(Screen):
 class refreshBouquetCopyServices(Screen):
 	skin = """
 		<screen name="refreshBouquetDisplayServices" position="center,center" size="710,505" title="RefreshBouquet - results">
-		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap name="green"  position="140,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap name="blue"   position="420,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" /> 
-		<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" /> 
-		<widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-		<widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-		<widget name="services" position="5,50" zPosition="2" size="705,300" itemHeight="25" font="Regular;22" foregroundColor="white" />
-		<ePixmap pixmap="skin_default/div-h.png" position="5,351" zPosition="2" size="700,2" />
+		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on"/>
+		<ePixmap name="green"  position="140,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on"/>
+		<widget objectTypes="key_yellow,StaticText" source="key_yellow" render="Pixmap" position="280,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on">
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<ePixmap name="blue"   position="420,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on"/>
+		<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
+		<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
+		<widget objectTypes="key_yellow,StaticText" source="key_yellow" render="Label" position="280,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
+		<widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
+		<widget name="services" position="5,50" zPosition="2" size="705,300" itemHeight="25" font="Regular;22" foregroundColor="white"/>
+		<ePixmap pixmap="skin_default/div-h.png" position="5,351" zPosition="2" size="700,2"/>
 		<widget source="Service" render="Label" position="5,354" size="700,23" font="Regular;20" valign="center" halign="left" transparent="1" zPosition="1">
 			<convert type="TransponderInfo"></convert>
 		</widget>
-		<ePixmap pixmap="skin_default/div-h.png" position="5,377" zPosition="2" size="700,2" />
-		<widget name="info" position="5,380" zPosition="2" size="705,120" valign="center" halign="left" font="Regular;20" foregroundColor="white" />
+		<ePixmap pixmap="skin_default/div-h.png" position="5,377" zPosition="2" size="700,2"/>
+		<widget name="info" position="5,380" zPosition="2" size="705,120" valign="center" halign="left" font="Regular;20" foregroundColor="white"/>
 	</screen>"""
 
 	def __init__(self, session, list, target, missing=None, parent=None):
@@ -1558,7 +1609,7 @@ class refreshBouquetCopyServices(Screen):
 				"red": self.exit,
 				"green": self.copyCurrentEntries,
 				"blue": self.list.toggleAllSelection,
-				"yellow": self.previewService,
+				"yellow": self.keyYellow,
 				"play": self.previewService,
 				"stop": self.stopPreview,
 				"prevBouquet": boundFunction(self.selectGroup, False),
@@ -1568,8 +1619,10 @@ class refreshBouquetCopyServices(Screen):
 
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Copy selected"))
-		self["key_yellow"] = Button("")
+		self["key_yellow"] = StaticText("")
 		self["key_blue"] = Button(_("Inversion"))
+
+		self.preview = False
 
 		text =_("Mark services with OK button or use group selection (Ch+/Ch-) and then copy these with 'Copy selected'")
 		text += "\n"
@@ -1621,6 +1674,21 @@ class refreshBouquetCopyServices(Screen):
 			index += 1
 		return 0
 
+	def keyYellow(self):
+		if self.preview:
+			self.stopPreview()
+		else:
+			self.previewService()
+	def textYellow(self):
+		if cfg.preview.value:
+			text = ""
+		else:
+			if self.preview:
+				text = _("Stop preview")
+			else:
+				text = _("Preview")
+		self["key_yellow"].setText(text)
+
 	def displayService(self):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
@@ -1628,17 +1696,21 @@ class refreshBouquetCopyServices(Screen):
 			if cfg.preview.value:
 				self.previewService()
 			else:
-				self["key_yellow"].setText(_("Preview"))
+				self.textYellow()
 		else:
-			self["key_yellow"].setText("")
+			self.textYellow()
 			self["Service"].newService(None)
 
 	def previewService(self):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
 			self.session.nav.playService(eServiceReference(ref))
+			self.preview = True
+			self.textYellow()
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
+		self.preview = False
+		self.textYellow()
 
 	def selectGroup(self, mark=True):
 		if mark:
@@ -1753,7 +1825,7 @@ class refreshBouquetRemoveServices(Screen):
 				"red": self.exit,
 				"green": self.removeCurrentEntries,
 				"blue": self.list.toggleAllSelection,
-				"yellow": self.previewService,
+				"yellow": self.keyYellow,
 				"play": self.previewService,
 				"stop": self.stopPreview,
 				"prevBouquet": boundFunction(self.selectGroup, False),
@@ -1763,8 +1835,10 @@ class refreshBouquetRemoveServices(Screen):
 
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Remove selected"))
-		self["key_yellow"] = Button()
+		self["key_yellow"] = StaticText("")
 		self["key_blue"] = Button(_("Inversion"))
+
+		self.preview = False
 
 		text = _("Mark services with OK button or use group selection (Ch+/Ch-) and then remove these with 'Remove selected'")
 		text += "\n"
@@ -1816,6 +1890,21 @@ class refreshBouquetRemoveServices(Screen):
 			index += 1
 		return 0
 
+	def keyYellow(self):
+		if self.preview:
+			self.stopPreview()
+		else:
+			self.previewService()
+	def textYellow(self):
+		if cfg.preview.value:
+			text = ""
+		else:
+			if self.preview:
+				text = _("Stop preview")
+			else:
+				text = _("Preview")
+		self["key_yellow"].setText(text)
+
 	def displayService(self):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
@@ -1823,10 +1912,21 @@ class refreshBouquetRemoveServices(Screen):
 			if cfg.preview.value:
 				self.previewService()
 			else:
-				self["key_yellow"].setText(_("Preview"))
+				self.textYellow()
 		else:
-			self["key_yellow"].setText("")
+			self.textYellow()
 			self["Service"].newService(None)
+
+	def previewService(self):
+		ref = self["services"].getCurrent()[0][1]
+		if not self.isNotService(ref):
+			self.session.nav.playService(eServiceReference(ref))
+			self.preview = True
+			self.textYellow()
+	def stopPreview(self):
+		self.session.nav.playService(self.playingRef)
+		self.preview = False
+		self.textYellow()
 
 	def selectGroup(self, mark=True):
 		if mark:
@@ -1858,13 +1958,6 @@ class refreshBouquetRemoveServices(Screen):
 					else:
 						if item[0][3]:
 							self.list.toggleItemSelection(item[0])
-
-	def previewService(self):
-		ref = self["services"].getCurrent()[0][1]
-		if not self.isNotService(ref):
-			self.session.nav.playService(eServiceReference(ref))
-	def stopPreview(self):
-		self.session.nav.playService(self.playingRef)
 
 	def removeCurrentEntries(self):
 		nr_items = len(self.list.getSelectionsList())
@@ -1937,7 +2030,7 @@ class refreshBouquetMoveServices(Screen):
 				"ok": self.list.toggleSelection,
 				"red": self.exit,
 				"green": self.actionGreen,
-				"yellow": self.previewService,
+				"yellow": self.keyYellow,
 				"play": self.previewService,
 				"stop": self.stopPreview,
 				"prevBouquet": boundFunction(self.selectGroup, False),
@@ -1947,8 +2040,10 @@ class refreshBouquetMoveServices(Screen):
 
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Move selected"))
-		self["key_yellow"] = Button()
+		self["key_yellow"] = StaticText("")
 		self["key_blue"] = Button()
+
+		self.preview = False
 
 		text = _("Mark service(s) with OK button or use group selection (Ch+/Ch-), move selector to new position and finish with 'Move selected'. Selected service(s) will be moved top new position.")
 		text += "\n"
@@ -2046,6 +2141,21 @@ class refreshBouquetMoveServices(Screen):
 			self["services"].moveToIndex(0)
 			self.displayService()
 
+	def keyYellow(self):
+		if self.preview:
+			self.stopPreview()
+		else:
+			self.previewService()
+	def textYellow(self):
+		if cfg.preview.value:
+			text = ""
+		else:
+			if self.preview:
+				text = _("Stop preview")
+			else:
+				text = _("Preview")
+		self["key_yellow"].setText(text)
+
 	def displayService(self):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
@@ -2053,17 +2163,21 @@ class refreshBouquetMoveServices(Screen):
 			if cfg.preview.value:
 				self.previewService()
 			else:
-				self["key_yellow"].setText(_("Preview"))
+				self.textYellow()
 		else:
-			self["key_yellow"].setText("")
+			self.textYellow()
 			self["Service"].newService(None)
 
 	def previewService(self):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
 			self.session.nav.playService(eServiceReference(ref))
+			self.preview = True
+			self.textYellow()
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
+		self.preview = False
+		self.textYellow()
 
 	def moveCurrentEntries(self, index):
 		nr_items = len(self.list.getSelectionsList())
@@ -2152,17 +2266,17 @@ class refreshBouquetMoveServices(Screen):
 class refreshBouquetCfg(Screen, ConfigListScreen):
 	skin = """
 	<screen name="refreshBouquetCfg" position="center,center" size="560,380" title="RefreshBouquet Setup" >
-		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap name="green"  position="140,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" /> 
-		<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-		<widget name="config" position="10,40" size="540,300" zPosition="1" transparent="0" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="skin_default/div-h.png" position="5,355" zPosition="1" size="550,2" />
+		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on"/>
+		<ePixmap name="green"  position="140,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on"/>
+		<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
+		<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
+		<widget name="config" position="10,40" size="540,300" zPosition="1" transparent="0" scrollbarMode="showOnDemand"/>
+		<ePixmap pixmap="skin_default/div-h.png" position="5,355" zPosition="1" size="550,2"/>
 		<ePixmap alphatest="on" pixmap="skin_default/icons/clock.png" position="480,361" size="14,14" zPosition="3"/>
 		<widget font="Regular;18" halign="right" position="495,358" render="Label" size="55,20" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
 			<convert type="ClockToText">Default</convert>
 		</widget>
-		<widget name="statusbar" position="10,359" size="460,20" font="Regular;18" />
+		<widget name="statusbar" position="10,359" size="460,20" font="Regular;18"/>
 	</screen>"""
 
 	def __init__(self, session):
