@@ -1457,12 +1457,10 @@ class refreshBouquetRefreshServices(Screen):
 			idx = self.getItemIndex(item)
 			self["services"].moveToIndex(idx)
 
-	def getItemIndex(self,item):
-		index = 0
-		for i in self["services"].list:
-			if i[0] == item:
-				return index
-			index += 1
+	def getItemIndex(self, item):
+		for idx, service in enumerate(self["services"].list):
+			if service[0] == item:
+				return idx
 		return 0
 
 	def keyYellow(self):
@@ -1666,12 +1664,10 @@ class refreshBouquetCopyServices(Screen):
 			idx = self.getItemIndex(item)
 			self["services"].moveToIndex(idx)
 
-	def getItemIndex(self,item):
-		index = 0
-		for i in self["services"].list:
-			if i[0] == item:
-				return index
-			index += 1
+	def getItemIndex(self, item):
+		for idx, service in enumerate(self["services"].list):
+			if service[0] == item:
+				return idx
 		return 0
 
 	def keyYellow(self):
@@ -1882,12 +1878,10 @@ class refreshBouquetRemoveServices(Screen):
 			idx = self.getItemIndex(item)
 			self["services"].moveToIndex(idx)
 
-	def getItemIndex(self,item):
-		index = 0
-		for i in self["services"].list:
-			if i[0] == item:
-				return index
-			index += 1
+	def getItemIndex(self, item):
+		for idx, service in enumerate(self["services"].list):
+			if service[0] == item:
+				return idx
 		return 0
 
 	def keyYellow(self):
@@ -2088,12 +2082,10 @@ class refreshBouquetMoveServices(Screen):
 			idx = self.getItemIndex(item)
 			self["services"].moveToIndex(idx)
 
-	def getItemIndex(self,item):
-		index = 0
-		for i in self["services"].list:
-			if i[0] == item:
-				return index
-			index += 1
+	def getItemIndex(self, item):
+		for idx, service in enumerate(self["services"].list):
+			if service[0] == item:
+				return idx
 		return 0
 
 	def selectGroup(self, mark=True):
