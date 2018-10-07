@@ -159,9 +159,7 @@ msgid "Apply and close"
 msgstr "Toepassen"
 
 msgid "Toggle source and target bouquets with Bouq +/- ."
-msgstr ""
-"Wissel tussen bron en doelboeket met Bouq +/- ."
-"\n"
+msgstr "Wissel tussen bron en doelboeket met Bouq +/- ."
 
 msgid ""
 "Prepare replacement target's service by service in source bouquet (both "
