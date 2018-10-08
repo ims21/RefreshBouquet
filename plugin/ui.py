@@ -173,7 +173,6 @@ class refreshBouquet(Screen, HelpableScreen):
 		config.plugins.refreshbouquet.used_services.value = config.plugins.refreshbouquet.used_services.default
 
 	def showMenu(self):
-		text = _("Select action for bouquet:")
 		buttons = []
 		menu = []
 		bName =self.getSelectedBouquetName()
@@ -207,8 +206,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				menu.append((_("Create bouquet from rbb file"),21))
 				buttons += [""]
 		else:
-			text = _("Select or source or target or source and target bouquets !")
-			self["info"].setText(text)
+			self["info"].setText(_("Select or source or target or source and target bouquets !"))
 		menu.append((_("New bouquet"),13))
 		buttons += [""]
 		if self["config"].getCurrent():
@@ -217,7 +215,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			buttons += [""]
 		menu.append((_("Settings..."),10))
 		buttons.append("menu")
-		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=text, list=menu, keys=buttons)
+		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_("Select action for bouquet:"), list=menu, keys=buttons)
 
 	def menuCallback(self, choice):
 		if choice is None:
