@@ -79,7 +79,7 @@ sel_position = None
 
 class refreshBouquet(Screen, HelpableScreen):
 	skin = """
-	<screen name="refreshBouquet" position="center,center" size="560,400" title="Refresh Bouquet">
+	<screen name="refreshBouquet" position="center,center" size="560,375" title="Refresh Bouquet">
 		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on"/>
 		<ePixmap name="green"  position="140,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on"/>
 		<ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on"/>
@@ -88,12 +88,12 @@ class refreshBouquet(Screen, HelpableScreen):
 		<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
 		<widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
 		<widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
-		<widget name="source_text" position="10,50" zPosition="2" size="200,25" valign="center" halign="left" font="Regular;22" foregroundColor="yellow"/>
-		<widget name="target_text" position="10,75" zPosition="2" size="200,25" valign="center" halign="left" font="Regular;22" foregroundColor="blue"/>
-		<widget name="source_name" position="220,50" zPosition="2" size="330,25" valign="center" halign="left" font="Regular;22" foregroundColor="white"/>
-		<widget name="target_name" position="220,75" zPosition="2" size="330,25" valign="center" halign="left" font="Regular;22" foregroundColor="white"/>
-		<ePixmap pixmap="skin_default/div-h.png" position="5,102" zPosition="2" size="550,2"/>
-		<widget source="config" render="Listbox" position="5,112" size="550,250" scrollbarMode="showOnDemand">
+		<widget name="source_text" position="10,40" zPosition="2" size="200,25" valign="center" halign="left" font="Regular;22" foregroundColor="yellow"/>
+		<widget name="target_text" position="10,65" zPosition="2" size="200,25" valign="center" halign="left" font="Regular;22" foregroundColor="blue"/>
+		<widget name="source_name" position="220,40" zPosition="2" size="330,25" valign="center" halign="left" font="Regular;22" foregroundColor="white"/>
+		<widget name="target_name" position="220,65" zPosition="2" size="330,25" valign="center" halign="left" font="Regular;22" foregroundColor="white"/>
+		<ePixmap pixmap="skin_default/div-h.png" position="5,92" zPosition="2" size="550,2"/>
+		<widget source="config" render="Listbox" position="5,97" size="550,250" scrollbarMode="showOnDemand">
 			<convert type="TemplatedMultiContent">
 				{"template": [
 						MultiContentEntryText(pos = (0, 0), size = (550, 25), font=0, flags = RT_HALIGN_LEFT, text = 0),
@@ -103,8 +103,8 @@ class refreshBouquet(Screen, HelpableScreen):
 				}
 			</convert>
 		</widget>
-		<ePixmap pixmap="skin_default/div-h.png" position="5,365" zPosition="2" size="550,2"/>
-		<widget name="info" position="5,368" zPosition="2" size="550,25" valign="center" halign="left" font="Regular;22" foregroundColor="white"/>
+		<ePixmap pixmap="skin_default/div-h.png" position="5,350" zPosition="2" size="550,2"/>
+		<widget name="info" position="5,353" zPosition="2" size="550,23" valign="center" halign="left" font="Regular;20" foregroundColor="white"/>
 	</screen>"""
 
 	def __init__(self, session, Servicelist=None, currentBouquet=None):
@@ -142,7 +142,8 @@ class refreshBouquet(Screen, HelpableScreen):
 		self["target_text"] = Label(_("Target bouquet:"))
 		self["source_name"] = Label()
 		self["target_name"] = Label()
-		self["info"] = Label(_("Select or source or target or source and target bouquets !"))
+		self.infotext = _("Select or source or target or source and target bouquets !")
+		self["info"] = Label(self.infotext)
 
 		self.sourceItem = None
 		self.targetItem = None
@@ -206,7 +207,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				menu.append((_("Create bouquet from rbb file"),21))
 				buttons += [""]
 		else:
-			self["info"].setText(_("Select or source or target or source and target bouquets !"))
+			self["info"].setText(self.infotext)
 		menu.append((_("New bouquet"),13))
 		buttons += [""]
 		if self["config"].getCurrent():
@@ -265,6 +266,8 @@ class refreshBouquet(Screen, HelpableScreen):
 		if name == self["target_name"].getText():
 			self.targetItem = None
 			self["target_name"].setText("")
+		if not self.sourceItem and not self.targetItem:
+			self["info"].setText(self.infotext)
 
 # clear selected inputs
 	def clearInputs(self):
@@ -272,6 +275,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		self.targetItem = None
 		self["source_name"].setText("")
 		self["target_name"].setText("")
+		self["info"].setText(self.infotext)
 
 # get name for source bouquet
 	def getSource(self, currentBouquet=None):
@@ -1020,8 +1024,10 @@ class refreshBouquet(Screen, HelpableScreen):
 
 # manual replace
 class refreshBouquetManualSelection(Screen):
+	y = 25 * 4 if getDesktop(0).size().height() > 576 else 0 # added 4 bouquet's rows if screen height > 576
+	pars = (511+y,250+y,250+y,343+y,347+y,370+y,373+y)
 	skin = """
-	<screen name="refreshBouquetManualSelection" position="center,center" size="710,545" title="RefreshBouquet - manual">
+	<screen name="refreshBouquetManualSelection" position="center,center" size="700,%d" title="RefreshBouquet - manual">
 		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on"/>
 		<widget objectTypes="key_green,StaticText" source="key_green" render="Pixmap"  position="140,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on">
 			<convert type="ConditionalShowHide"/>
@@ -1036,19 +1042,20 @@ class refreshBouquetManualSelection(Screen):
 		<widget objectTypes="key_green,StaticText" source="key_green" render="Label" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
 		<widget objectTypes="key_yellow,StaticText" source="key_yellow" render="Label" position="280,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
 		<widget objectTypes="key_blue,StaticText" source="key_blue" render="Label" position="420,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
-		<widget name="source" position="5,40" zPosition="2" size="350,30"  font="Regular;25" foregroundColor="white"/>
-		<widget name="target" position="360,40" zPosition="2" size="350,30"  font="Regular;25" foregroundColor="white"/>
-		<widget name="source_label" position="5,67" zPosition="2" size="350,25"  font="Regular;18" foregroundColor="yellow"/>
-		<widget name="target_label" position="360,67" zPosition="2" size="350,25"  font="Regular;18" foregroundColor="blue"/>
-		<widget name="sources" position="3,90" zPosition="2" size="350,300"  font="Regular;22" foregroundColor="white"/>
-		<widget name="targets" position="360,90" zPosition="2" size="350,300"  font="Regular;22" foregroundColor="white"/>
-		<ePixmap pixmap="skin_default/div-h.png" position="5,393" zPosition="2" size="700,2"/>
-		<widget source="Service" render="Label" position="5,397" size="700,23" font="Regular;20" valign="center" halign="left" transparent="1" zPosition="1">
+		<widget name="source" position="5,40" zPosition="2" size="345,30"  font="Regular;25" foregroundColor="white"/>
+		<widget name="target" position="360,40" zPosition="2" size="345,30"  font="Regular;25" foregroundColor="white"/>
+		<widget name="source_label" position="5,67" zPosition="2" size="345,25"  font="Regular;18" foregroundColor="yellow"/>
+		<widget name="target_label" position="360,67" zPosition="2" size="345,25"  font="Regular;18" foregroundColor="blue"/>
+
+		<widget name="sources" position="3,90" zPosition="2" size="345,%d"  font="Regular;22" foregroundColor="white"/>
+		<widget name="targets" position="360,90" zPosition="2" size="345,%d"  font="Regular;22" foregroundColor="white"/>
+		<ePixmap pixmap="skin_default/div-h.png" position="5,%d" zPosition="2" size="690,2"/>
+		<widget source="Service" render="Label" position="5,%d" size="690,23" font="Regular;20" valign="center" halign="left" transparent="1" zPosition="1">
 			<convert type="TransponderInfo"></convert>
 		</widget>
-		<ePixmap pixmap="skin_default/div-h.png" position="5,420" zPosition="2" size="700,2"/>
-		<widget name="info" position="5,423" zPosition="2" size="705,120" valign="center" halign="left" font="Regular;20" foregroundColor="white"/>
-	</screen>"""
+		<ePixmap pixmap="skin_default/div-h.png" position="5,%d" zPosition="2" size="690,2"/>
+		<widget name="info" position="5,%d" zPosition="2" size="690,138" valign="center" halign="left" font="Regular;20" foregroundColor="#00c0c0c0"/>
+	</screen>""" % pars
 
 	def __init__(self, session, sourceList, target_services, source_name, target):
 		self.skin = refreshBouquetManualSelection.skin
