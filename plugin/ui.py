@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.83"
+VERSION = "1.84"
 #  by ims (c) 2016-2018 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -1090,7 +1090,7 @@ class refreshBouquetManualSelection(Screen):
 				"ok": self.ok,
 				"red": self.exit,
 				"green": self.replaceService,
-				"yellow": self.keyYellow,
+				"yellow": self.previewService,
 				"blue": self.keyBlue,
 
 				"play": self.previewService,
@@ -1124,8 +1124,6 @@ class refreshBouquetManualSelection(Screen):
 		name_t = " " + addBouqetName(self.target_bouquetname)
 		self["source_label"] = Label(_("source bouquet") + name_s )
 		self["target_label"] = Label(_("target bouquet") + name_t )
-
-		self.preview = False
 
 		text =  _("Toggle source and target bouquets with Bouq +/- .") + " "
 		text += _("Or toggle with 'Prev/Next', which trying to find a similar name in source.") + " "
@@ -1223,21 +1221,6 @@ class refreshBouquetManualSelection(Screen):
 		if self.targetRecord != "" and self.sourceRecord != "":
 			self.replaceTarget()
 
-	def keyYellow(self):
-		if self.preview:
-			self.stopPreview()
-		else:
-			self.previewService()
-	def textYellow(self):
-		if cfg.preview.value:
-			text = ""
-		else:
-			if self.preview:
-				text = _("Stop preview")
-			else:
-				text = _("Preview")
-		self["key_yellow"].setText(text)
-
 	def replaceTarget(self):
 		if self.targetRecord != "" and self.sourceRecord != "":
 #		insert(index, hodnota)
@@ -1264,21 +1247,17 @@ class refreshBouquetManualSelection(Screen):
 			if cfg.preview.value:
 				self.previewService()
 			else:
-				self.textYellow()
+				self["key_yellow"].setText(_("Preview"))
 		else:
-			self.textYellow()
+			self["key_yellow"].setText("")
 			self["Service"].newService(None)
 
 	def previewService(self):
 		ref = self[self.currList].getCurrent()[1]
 		if not self.isNotService(ref):
 			self.session.nav.playService(eServiceReference(ref))
-			self.preview = True
-			self.textYellow()
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
-		self.preview = False
-		self.textYellow()
 
 	def clearInputs(self):
 		self.targetRecord = ""
@@ -1405,7 +1384,7 @@ class refreshBouquetRefreshServices(Screen):
 				"red": self.exit,
 				"ok": self.list.toggleSelection,
 				"green": self.replaceSelectedEntries,
-				"yellow": self.keyYellow,
+				"yellow": self.previewService,
 				"blue": self.list.toggleAllSelection,
 
 				"play": self.previewService,
@@ -1419,8 +1398,6 @@ class refreshBouquetRefreshServices(Screen):
 		self["key_blue"] = Button(_("Inversion"))
 
 		self["info"] = Label()
-
-		self.preview = False
 
 		text = _("This feature looking for differences in service parameters with same names in source and target bouquets. Parameters for marked services will be replaced. ")
 		text += _("It can be in most cases useful for bouquets with services gained by Fastscan searching. ")
@@ -1468,21 +1445,6 @@ class refreshBouquetRefreshServices(Screen):
 				return idx
 		return 0
 
-	def keyYellow(self):
-		if self.preview:
-			self.stopPreview()
-		else:
-			self.previewService()
-	def textYellow(self):
-		if cfg.preview.value:
-			text = ""
-		else:
-			if self.preview:
-				text = _("Stop preview")
-			else:
-				text = _("Preview")
-		self["key_yellow"].setText(text)
-
 	def displayService(self):
 		if not len(self["services"].list):
 			return
@@ -1494,21 +1456,17 @@ class refreshBouquetRefreshServices(Screen):
 			if cfg.preview.value:
 				self.previewService()
 			else:
-				self.textYellow()
+				self["key_yellow"].setText(_("Preview"))
 		else:
-			self.textYellow()
+			self["key_yellow"].setText("")
 			self["Service"].newService(None)
 
 	def previewService(self):
 		ref = self["services"].getCurrent()[0][1][0]
 		if not self.isNotService(ref):
 			self.session.nav.playService(eServiceReference(ref))
-			self.preview = True
-			self.textYellow()
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
-		self.preview = False
-		self.textYellow()
 
 	def replaceSelectedEntries(self):
 		nr_items = len(self.list.getSelectionsList())
@@ -1612,7 +1570,7 @@ class refreshBouquetCopyServices(Screen):
 				"red": self.exit,
 				"green": self.copyCurrentEntries,
 				"blue": self.list.toggleAllSelection,
-				"yellow": self.keyYellow,
+				"yellow": self.previewService,
 				"play": self.previewService,
 				"stop": self.stopPreview,
 				"prevBouquet": boundFunction(self.selectGroup, False),
@@ -1624,8 +1582,6 @@ class refreshBouquetCopyServices(Screen):
 		self["key_green"] = Button(_("Copy selected"))
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = Button(_("Inversion"))
-
-		self.preview = False
 
 		text =_("Mark services with OK button or use group selection (Ch+/Ch-) and then copy these with 'Copy selected'")
 		text += "\n"
@@ -1675,21 +1631,6 @@ class refreshBouquetCopyServices(Screen):
 				return idx
 		return 0
 
-	def keyYellow(self):
-		if self.preview:
-			self.stopPreview()
-		else:
-			self.previewService()
-	def textYellow(self):
-		if cfg.preview.value:
-			text = ""
-		else:
-			if self.preview:
-				text = _("Stop preview")
-			else:
-				text = _("Preview")
-		self["key_yellow"].setText(text)
-
 	def displayService(self):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
@@ -1697,21 +1638,17 @@ class refreshBouquetCopyServices(Screen):
 			if cfg.preview.value:
 				self.previewService()
 			else:
-				self.textYellow()
+				self["key_yellow"].setText(_("Preview"))
 		else:
-			self.textYellow()
+			self["key_yellow"].setText("")
 			self["Service"].newService(None)
 
 	def previewService(self):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
 			self.session.nav.playService(eServiceReference(ref))
-			self.preview = True
-			self.textYellow()
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
-		self.preview = False
-		self.textYellow()
 
 	def selectGroup(self, mark=True):
 		if mark:
@@ -1826,7 +1763,7 @@ class refreshBouquetRemoveServices(Screen):
 				"red": self.exit,
 				"green": self.removeCurrentEntries,
 				"blue": self.list.toggleAllSelection,
-				"yellow": self.keyYellow,
+				"yellow": self.previewService,
 				"play": self.previewService,
 				"stop": self.stopPreview,
 				"prevBouquet": boundFunction(self.selectGroup, False),
@@ -1838,8 +1775,6 @@ class refreshBouquetRemoveServices(Screen):
 		self["key_green"] = Button(_("Remove selected"))
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = Button(_("Inversion"))
-
-		self.preview = False
 
 		text = _("Mark services with OK button or use group selection (Ch+/Ch-) and then remove these with 'Remove selected'")
 		text += "\n"
@@ -1889,21 +1824,6 @@ class refreshBouquetRemoveServices(Screen):
 				return idx
 		return 0
 
-	def keyYellow(self):
-		if self.preview:
-			self.stopPreview()
-		else:
-			self.previewService()
-	def textYellow(self):
-		if cfg.preview.value:
-			text = ""
-		else:
-			if self.preview:
-				text = _("Stop preview")
-			else:
-				text = _("Preview")
-		self["key_yellow"].setText(text)
-
 	def displayService(self):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
@@ -1911,21 +1831,17 @@ class refreshBouquetRemoveServices(Screen):
 			if cfg.preview.value:
 				self.previewService()
 			else:
-				self.textYellow()
+				self["key_yellow"].setText(_("Preview"))
 		else:
-			self.textYellow()
+			self["key_yellow"].setText("")
 			self["Service"].newService(None)
 
 	def previewService(self):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
 			self.session.nav.playService(eServiceReference(ref))
-			self.preview = True
-			self.textYellow()
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
-		self.preview = False
-		self.textYellow()
 
 	def selectGroup(self, mark=True):
 		if mark:
@@ -2029,7 +1945,7 @@ class refreshBouquetMoveServices(Screen):
 				"ok": self.list.toggleSelection,
 				"red": self.exit,
 				"green": self.actionGreen,
-				"yellow": self.keyYellow,
+				"yellow": self.previewService,
 				"play": self.previewService,
 				"stop": self.stopPreview,
 				"prevBouquet": boundFunction(self.selectGroup, False),
@@ -2041,8 +1957,6 @@ class refreshBouquetMoveServices(Screen):
 		self["key_green"] = Button(_("Move selected"))
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = Button()
-
-		self.preview = False
 
 		text = _("Mark service(s) with OK button or use group selection (Ch+/Ch-), move selector to new position and finish with 'Move selected'. Selected service(s) will be moved top new position.")
 		text += "\n"
@@ -2138,21 +2052,6 @@ class refreshBouquetMoveServices(Screen):
 			self["services"].moveToIndex(0)
 			self.displayService()
 
-	def keyYellow(self):
-		if self.preview:
-			self.stopPreview()
-		else:
-			self.previewService()
-	def textYellow(self):
-		if cfg.preview.value:
-			text = ""
-		else:
-			if self.preview:
-				text = _("Stop preview")
-			else:
-				text = _("Preview")
-		self["key_yellow"].setText(text)
-
 	def displayService(self):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
@@ -2160,21 +2059,17 @@ class refreshBouquetMoveServices(Screen):
 			if cfg.preview.value:
 				self.previewService()
 			else:
-				self.textYellow()
+				self["key_yellow"].setText(_("Preview"))
 		else:
-			self.textYellow()
+			self["key_yellow"].setText("")
 			self["Service"].newService(None)
 
 	def previewService(self):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
 			self.session.nav.playService(eServiceReference(ref))
-			self.preview = True
-			self.textYellow()
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
-		self.preview = False
-		self.textYellow()
 
 	def moveCurrentEntries(self, index):
 		nr_items = len(self.list.getSelectionsList())

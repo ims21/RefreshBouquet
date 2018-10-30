@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-07 18:17+0200\n"
-"PO-Revision-Date: 2018-10-07 18:18+0200\n"
+"POT-Creation-Date: 2018-10-30 09:37+0100\n"
+"PO-Revision-Date: 2018-10-30 09:37+0100\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi\n"
 "Language: cs_CZ\n"
@@ -99,9 +99,6 @@ msgstr "Cílový přehled:"
 msgid "Select or source or target or source and target bouquets !"
 msgstr "Vyberte zdrojový nebo cílový nebo zdrojový a cílový přehled!"
 
-msgid "Select action for bouquet:"
-msgstr "Zvolte akci:"
-
 msgid "Remove selected services in source bouquet"
 msgstr "Odstranit vybrané programy ze zdroje"
 
@@ -142,6 +139,9 @@ msgstr "Odstranit přehled '%s'"
 
 msgid "Settings..."
 msgstr "Nastavení..."
+
+msgid "Select action for bouquet:"
+msgstr "Zvolte akci:"
 
 msgid "Wrong selection!"
 msgstr "Neplatná volba!"
@@ -231,14 +231,11 @@ msgstr "Třídit zdrojový přehled:"
 msgid "Replace"
 msgstr "Nahradit"
 
-msgid "Stop preview"
-msgstr "Zastavit náhled"
+msgid "Apply and close"
+msgstr "Provést a zavřít"
 
 msgid "Preview"
 msgstr "Náhled"
-
-msgid "Apply and close"
-msgstr "Provést a zavřít"
 
 #, python-format
 msgid "Are you sure to apply %d change and close?"
@@ -552,6 +549,9 @@ msgstr "Chyba"
 
 msgid "Are You sure to remove file?"
 msgstr "Opravdu chcete smazat soubor ?"
+
+#~ msgid "Stop preview"
+#~ msgstr "Zastavit náhled"
 
 #~ msgid "Sort source bouquet services in manually replace"
 #~ msgstr "Třídit programy ve zdrojovém přehledu pro ruční nahrazování"
