@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.84"
+VERSION = "1.85"
 #  by ims (c) 2016-2018 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -174,38 +174,36 @@ class refreshBouquet(Screen, HelpableScreen):
 		config.plugins.refreshbouquet.used_services.value = config.plugins.refreshbouquet.used_services.default
 
 	def showMenu(self):
+		def rbbItems(menu,buttons,bName):
+			menu.append((_("Create '%s.rbb' file") % bName,20))
+			buttons += [""]
+			if self.isRbbFile():
+				menu.append((_("Create bouquet from rbb file"),21))
+				buttons += [""]
 		buttons = []
 		menu = []
 		bName =self.getSelectedBouquetName()
 		if self.sourceItem and self.targetItem:	# both are selected
 			if self.sourceItem == self.targetItem:	# source == target
-				menu.append((_("Remove selected services in source bouquet"),3))
 				menu.append((_("Move selected services in source bouquet"),5))
+				menu.append((_("Remove selected services in source bouquet"),3))
 				menu.append((_("Create '%s.rbb' file") % bName,20))
-				buttons = ["4","6",""]
-				if self.isRbbFile():
-					menu.append((_("Create bouquet from rbb file"),21))
-					buttons += [""]
+				buttons = ["6","8"]
+				rbbItems(menu,buttons,bName)
 			else:				# source != target
 				menu.append((_("Manually replace services"),0))
 				menu.append((_("Add selected services to target bouquet"),1))
 				menu.append((_("Add selected missing services to target bouquet"),2))
-				menu.append((_("Remove selected services in source bouquet"),3))
 				menu.append((_("Refresh services in target bouquet"),4))
 				menu.append((_("Move selected services in source bouquet"),5))
-				menu.append((_("Create '%s.rbb' file") % bName,20))
-				buttons = ["1","2","3","4","green","6",""]
-				if self.isRbbFile():
-					menu.append((_("Create bouquet from rbb file"),21))
-					buttons += [""]
+				menu.append((_("Remove selected services in source bouquet"),3))
+				buttons = ["1","2","3","green","6","8"]
+				rbbItems(menu,buttons,bName)
 		elif self.sourceItem and not self.targetItem or self.targetItem and not self.sourceItem: # or source only or target only
-			menu.append((_("Remove selected services from bouquet"),3))
 			menu.append((_("Move selected services in bouquet"),5))
-			menu.append((_("Create '%s.rbb' file") % bName,20))
-			buttons = ["4","6",""]
-			if self.isRbbFile():
-				menu.append((_("Create bouquet from rbb file"),21))
-				buttons += [""]
+			menu.append((_("Remove selected services from bouquet"),3))
+			buttons = ["6","8"]
+			rbbItems(menu,buttons,bName)
 		else:
 			self["info"].setText(self.infotext)
 		menu.append((_("New bouquet"),13))
