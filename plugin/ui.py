@@ -4,8 +4,8 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.85"
-#  by ims (c) 2016-2018 ims21@users.sourceforge.net
+VERSION = "1.86"
+#  by ims (c) 2016-2019 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@ VERSION = "1.85"
 #
 
 from ServiceReference import ServiceReference
-from enigma import eServiceCenter, eServiceReference, eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, getDesktop, eDVBDB
+from enigma import eServiceCenter, iServiceInformation, eServiceReference, eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, getDesktop, eDVBDB
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
@@ -38,10 +38,12 @@ from Components.Sources.ServiceEvent import ServiceEvent
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 from Tools.BoundFunction import boundFunction
+from Tools.Transponder import ConvertToHumanReadable
 import os, unicodedata
 import skin
 from plugin import plugin_path
 from Screens.VirtualKeyBoard import VirtualKeyBoard
+from ServiceReference import ServiceReference
 
 config.plugins.refreshbouquet.case_sensitive = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.omit_first = ConfigYesNo(default = True)
@@ -478,10 +480,14 @@ class refreshBouquet(Screen, HelpableScreen):
 		if not close or not answer:
 			self.moveServices()
 
+# get transponder parameter
+	def getTransponderInfo(self, service_reference, parameter):
+		ref = ServiceReference(service_reference).ref
+		transponder_info = eServiceCenter.getInstance().info(ref).getInfoObject(ref, iServiceInformation.sTransponderData)
+		return transponder_info[parameter]
+
 # get transponder freq
 	def getTransponderFreq(self, ref):
-		from enigma import iServiceInformation
-		from Tools.Transponder import ConvertToHumanReadable
 		ref = eServiceReference(ref)
 		info = eServiceCenter.getInstance().info(ref)
 		transponderraw = info.getInfoObject(ref, iServiceInformation.sTransponderData)
@@ -535,7 +541,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		from rbbmanager import refreshBouquetRbbManager
 		self.session.openWithCallback(self.fillRbbBouquet, refreshBouquetRbbManager)
 
-# create bouquet as valid source services filed to bouquet created of rbb file
+# create bouquet as valid source services filled to bouquet created from rbb file
 
 	def fillRbbBouquet(self, rbb_name):
 		if not rbb_name:
@@ -576,43 +582,62 @@ class refreshBouquet(Screen, HelpableScreen):
 		potencialy_duplicity = []
 		i = 0 # index
 		length = 0 # found items
-		for t in target_services: # bouquet for refresh
-			pos = t.rfind(':')
-			t_name = self.prepareStr(t[:pos])
-			if t_name == '<N/A>':
-				t_name=_("unknown")
-			t_6 = t[pos+1:]
-			t_op = t_6[0:-4]
+		for target in target_services: # bouquet for refresh
+			ts = target.split(':')
+
+			### for freesat rbb
+			freq = None
+			if len(ts) > 2 and ts[2] != "":
+				freq = int(ts[2].strip())
+			###
+
+			target_name = self.prepareStr(ts[0]).replace('%3A',':').replace('%3a',':')
+			if target_name == '<N/A>':
+				target_name = _("unknown")
+			target_op = ts[1]
 			found = False
-			for s in source_services: # source bouquet - with fresh scan - f.eg. created by Fastscan or Last Scanned
-				if self.isNotService(s[1]): # skip all non playable
+			for source in source_services: # source bouquet - with fresh scan - f.eg. created by Fastscan or Last Scanned
+				if self.isNotService(source[1]): # skip all non playable
 					continue
-				s_splited = s[1].split(':') # split service_reference
+				source_splited = source[1].split(':') # split service_reference
 				if cfg.orbital.value != "x": # only on selected op
-					if s_splited[6][:-4] != cfg.orbital.value:
+					if source_splited[6][:-4] != cfg.orbital.value:
 						continue
-				if t_name == self.prepareStr(s[0]): # services with same name founded
-					s_splited = s[1].split(':') # split ref
-					if t_op == s_splited[6][0:-4]: # same orbital position only
-						if not s_splited[10]: # if s is not stream
+				if target_name == self.prepareStr(source[0]): # services with same name founded
+					### for freesat rbb
+					same_service = False
+					if freq:
+						frequency = self.getTransponderInfo(source[1],"frequency")/1000
+						if abs(frequency - freq) < 10:
+							same_service = True
+					###
+					if target_op[:-4] == source_splited[6][:-4]: # same orbital position only
+						if not source_splited[10]: # if source is not stream
 							length += 1
 							select = True
 							try:
-								tmp = potencialy_duplicity.index(self.charsOnly(s[0])) # same services_name in source = could be duplicity ... set in list as unselected
-								debug("Founded: %s" % self.charsOnly(s[0]))
+								tmp = potencialy_duplicity.index(self.charsOnly(source[0])) # same services_name in source = could be duplicity ... set in list as unselected
+								debug("Founded: %s" % self.charsOnly(source[0]))
 								select = False
 							except:
-								debug("Unique: %s" % self.charsOnly(s[0]))
+								debug("Unique: %s" % self.charsOnly(source[0]))
+							### for freesat rbb
+							if freq:
+								if same_service:
+									select = True
+								else:
+									select = False
+							###
 							# name, new ref, index, selected
-							differences.list.append(MySelectionEntryComponent(s[0], s[1], i, select))
+							differences.list.append(MySelectionEntryComponent(source[0], source[1], i, select))
 							found = True
-							debug("Added: %s" % self.charsOnly(s[0]))
-						potencialy_duplicity.append(self.charsOnly(s[0])) # add to list for next check duplicity
+							debug("Added: %s" % self.charsOnly(source[0]))
+						potencialy_duplicity.append(self.charsOnly(source[0])) # add to list for next check duplicity
 			if not found:
-				t_name = "--- %s" % t_name
+				target_name = "--- %s" % target_name
 				mode = "1" if config.servicelist.lastmode.value == "tv" else "2"
-				t_pars= ":".join(("1","0",mode,"0","0","0",t_6,"0","0","0", t_name))
-				differences.list.append(MySelectionEntryComponent(t_name, t_pars, i, False))
+				target_pars= ":".join(("1","0",mode,"0","0","0",target_op,"0","0","0", target_name))
+				differences.list.append(MySelectionEntryComponent(target_name, target_pars, i, False))
 			i += 1
 			self.l = MySelectionList(differences)
 			self.l.setList(differences)
