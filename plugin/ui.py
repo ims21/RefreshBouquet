@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.86"
+VERSION = "1.87"
 #  by ims (c) 2016-2019 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -381,13 +381,16 @@ class refreshBouquet(Screen, HelpableScreen):
 							select = True
 							try:
 								tmp = potencialy_duplicity.index(self.charsOnly(s[0])) # same services_name in source = could be duplicity ... set in list as unselected
-								debug("Founded: %s" % self.charsOnly(s[0]))
+								if cfg.debug.value:
+									debug("Founded: %s" % self.charsOnly(s[0]))
 								select = False
 							except:
-								debug("Unique: %s" % self.charsOnly(s[0]))
+								if cfg.debug.value:
+									debug("Unique: %s" % self.charsOnly(s[0]))
 							# name, [new ref, old ref], index, selected
 							differences.list.append(MySelectionEntryComponent(s[0], [s[1], t[1]], i, select))
-							debug("Added: %s" % self.charsOnly(s[0]))
+							if cfg.debug.value:
+								debug("Added: %s" % self.charsOnly(s[0]))
 						potencialy_duplicity.append(self.charsOnly(s[0])) # add to list for next check duplicity
 			i += 1
 			self.l = MySelectionList(differences)
@@ -415,10 +418,12 @@ class refreshBouquet(Screen, HelpableScreen):
 				self["info"].setText(_("No services in source bouquet or no differences in bouquets!"))
 				return
 			nr = 0
-			debug(">>> New <<<")
+			if cfg.debug.value:
+				debug(">>> New <<<")
 			for i in new:
 				nr +=1
-				debug("nr:\t%s %s\t\t%s" % (nr, i[0],i[1]))
+				if cfg.debug.value:
+					debug("nr:\t%s %s\t\t%s" % (nr, i[0],i[1]))
 				# service name, service reference, index, selected
 				data.list.append(MySelectionEntryComponent(i[0], i[1], nr, False))
 			self.l = MySelectionList(data)
@@ -432,20 +437,24 @@ class refreshBouquet(Screen, HelpableScreen):
 		differences = []
 		for s in source: # services in source bouquet
 			if self.isNotService(s[1]):
-				debug("Drop: %s %s" % (s[0], s[1]))
+				if cfg.debug.value:
+					debug("Drop: %s %s" % (s[0], s[1]))
 				continue
 			if cfg.used_services.value != "all":
 				if cfg.used_services.value is "HD4K":
 					if not self.isHDinName(s[0]) and not self.isUHDinName(s[0]):
-						debug("Drop (SD): %s %s" % (s[0], s[1]))
+						if cfg.debug.value:
+							debug("Drop (SD): %s %s" % (s[0], s[1]))
 						continue
 				elif cfg.used_services.value == "HD":
 					if not self.isHDinName(s[0]):
-						debug("Drop (not HD): %s %s" % (s[0], s[1]))
+						if cfg.debug.value:
+							debug("Drop (not HD): %s %s" % (s[0], s[1]))
 						continue
 				elif cfg.used_services.value == "4K":
 					if not self.isUHDinName(s[0]):
-						debug("Drop (not UHD): %s %s" % (s[0], s[1]))
+						if cfg.debug.value:
+							debug("Drop (not UHD): %s %s" % (s[0], s[1]))
 						continue
 			if cfg.orbital.value != "x":
 				if s[1].split(':')[6][:-4] != cfg.orbital.value:
@@ -453,10 +462,12 @@ class refreshBouquet(Screen, HelpableScreen):
 			add = 1
 			for t in target: # services in target bouquet
 				if self.isNotService(t[1]):
-					debug("Drop: %s %s" % (t[0], t[1]))
+					if cfg.debug.value:
+						debug("Drop: %s %s" % (t[0], t[1]))
 					continue
 				if self.prepareStr(s[0]) == self.prepareStr(t[0]): # service exist in target (test by service name)
-					debug("Drop: %s %s" % (s[0], t[0]))
+					if cfg.debug.value:
+						debug("Drop: %s %s" % (s[0], t[0]))
 					add = 0
 					break
 			if add:
@@ -470,7 +481,8 @@ class refreshBouquet(Screen, HelpableScreen):
 						if int(s_splited[2],16) in RADIO:
 							differences.append((s[0], s[1]))
 				else:
-					debug("Dropped stream: %s %s" % (s[0], s[1]))
+					if cfg.debug.value:
+						debug("Dropped stream: %s %s" % (s[0], s[1]))
 		return differences
 
 ###
@@ -617,10 +629,12 @@ class refreshBouquet(Screen, HelpableScreen):
 							select = True
 							try:
 								tmp = potencialy_duplicity.index(self.charsOnly(source[0])) # same services_name in source = could be duplicity ... set in list as unselected
-								debug("Founded: %s" % self.charsOnly(source[0]))
+								if cfg.debug.value:
+									debug("Founded: %s" % self.charsOnly(source[0]))
 								select = False
 							except:
-								debug("Unique: %s" % self.charsOnly(source[0]))
+								if cfg.debug.value:
+									debug("Unique: %s" % self.charsOnly(source[0]))
 							### for freesat rbb
 							if freq:
 								if same_service:
@@ -631,7 +645,8 @@ class refreshBouquet(Screen, HelpableScreen):
 							# name, new ref, index, selected
 							differences.list.append(MySelectionEntryComponent(source[0], source[1], i, select))
 							found = True
-							debug("Added: %s" % self.charsOnly(source[0]))
+							if cfg.debug.value:
+								debug("Added: %s" % self.charsOnly(source[0]))
 						potencialy_duplicity.append(self.charsOnly(source[0])) # add to list for next check duplicity
 			if not found:
 				target_name = "--- %s" % target_name
@@ -639,8 +654,8 @@ class refreshBouquet(Screen, HelpableScreen):
 				target_pars= ":".join(("1","0",mode,"0","0","0",target_op,"0","0","0", target_name))
 				differences.list.append(MySelectionEntryComponent(target_name, target_pars, i, False))
 			i += 1
-			self.l = MySelectionList(differences)
-			self.l.setList(differences)
+		self.l = MySelectionList(differences)
+		self.l.setList(differences)
 		return differences, length
 
 
@@ -753,10 +768,12 @@ class refreshBouquet(Screen, HelpableScreen):
 				self["info"].setText("s" % t2)
 				return
 			nr = 0
-			debug(">>> Read bouquet <<<")
+			if cfg.debug.value:
+				debug(">>> Read bouquet <<<")
 			for i in new:
 				nr +=1
-				debug("nr: %s %s\t\t%s" % (nr, i[0],i[1]))
+				if cfg.debug.value:
+					debug("nr: %s %s\t\t%s" % (nr, i[0],i[1]))
 				# service name, service reference, index, selected
 				data.list.append(MySelectionEntryComponent(i[0], i[1], nr, False))
 			self.l = MySelectionList(data)
@@ -780,10 +797,12 @@ class refreshBouquet(Screen, HelpableScreen):
 				self["info"].setText("%s" % t1)
 				return
 			nr = 0
-			debug(">>> Read bouquet <<<")
+			if cfg.debug.value:
+				debug(">>> Read bouquet <<<")
 			for i in new:
 				nr +=1
-				debug("nr: %s %s\t\t%s" % (nr, i[0],i[1]))
+				if cfg.debug.value:
+					debug("nr: %s %s\t\t%s" % (nr, i[0],i[1]))
 				# service name, service reference, index, selected
 				data.list.append(MySelectionEntryComponent(i[0], i[1], nr, False))
 			self.l = MySelectionList(data)
@@ -838,7 +857,8 @@ class refreshBouquet(Screen, HelpableScreen):
 						new.append((s[0], s[1], index))
 						index += 1
 			else:
-				debug("Dropped stream 2: %s %s" % (s[0], s[1]))
+				if cfg.debug.value:
+					debug("Dropped stream 2: %s %s" % (s[0], s[1]))
 		return new
 
 # optionaly uppercase or remove control character in servicename ( removed for testing only)
@@ -877,10 +897,12 @@ class refreshBouquet(Screen, HelpableScreen):
 				self["info"].setText(_("No services in source bouquet !"))
 				return
 			nr = 0
-			debug(">>> All <<<")
+			if cfg.debug.value:
+				debug(">>> All <<<")
 			for i in new:
 				nr +=1
-				debug("nr:\t%s %s\t\t%s" % (nr, i[0],i[1]))
+				if cfg.debug.value:
+					debug("nr:\t%s %s\t\t%s" % (nr, i[0],i[1]))
 				# service name, service reference, index, selected
 				data.list.append(MySelectionEntryComponent(i[0], i[1], nr, False))
 			self.l = MySelectionList(data)
@@ -895,20 +917,24 @@ class refreshBouquet(Screen, HelpableScreen):
 		new = []
 		for s in source: # source bouquet
 			if self.isNotService(s[1]):
-				debug("Drop: %s %s" % (s[0], s[1]))
+				if cfg.debug.value:
+					debug("Drop: %s %s" % (s[0], s[1]))
 				continue
 			if cfg.used_services.value != "all":
 				if cfg.used_services.value is "HD4K":
 					if not self.isHDinName(s[0]) and not self.isUHDinName(s[0]):
-						debug("Drop (SD): %s %s" % (s[0], s[1]))
+						if cfg.debug.value:
+							debug("Drop (SD): %s %s" % (s[0], s[1]))
 						continue
 				elif cfg.used_services.value == "HD":
 					if not self.isHDinName(s[0]):
-						debug("Drop (not HD): %s %s" % (s[0], s[1]))
+						if cfg.debug.value:
+							debug("Drop (not HD): %s %s" % (s[0], s[1]))
 						continue
 				elif cfg.used_services.value == "4K":
 					if not self.isUHDinName(s[0]):
-						debug("Drop (not UHD): %s %s" % (s[0], s[1]))
+						if cfg.debug.value:
+							debug("Drop (not UHD): %s %s" % (s[0], s[1]))
 						continue
 			s_splited = s[1].split(':') # split ref
 			if cfg.orbital.value != "x":
@@ -922,7 +948,8 @@ class refreshBouquet(Screen, HelpableScreen):
 					if int(s_splited[2],16) in RADIO:
 						new.append((s[0], s[1]))
 			else:
-				debug("Dropped stream 3: %s %s" % (s[0], s[1]))
+				if cfg.debug.value:
+					debug("Dropped stream 3: %s %s" % (s[0], s[1]))
 		return new
 
 # test for "noplayable" service
@@ -1162,7 +1189,8 @@ class refreshBouquetManualSelection(Screen):
 		self.currLabel = "source"
 		self.changedTargetdata = []
 
-		debug("changed bouquet: %s" % self.target_bouquetname)
+		if cfg.debug.value:
+			debug("changed bouquet: %s" % self.target_bouquetname)
 		self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.onLayoutFinish.append(self.switchLists)
 		self.sortSourceList()
@@ -1511,7 +1539,8 @@ class refreshBouquetRefreshServices(Screen):
 						index = data[2]
 						old = eServiceReference(data[1][1])
 						new = eServiceReference(data[1][0])
-						debug("Replace - name: %s new ref: %s old ref: %s index: %s" % (data[0], data[1][0], data[1][1], data[2]))
+						if cfg.debug.value:
+							debug("Replace - name: %s new ref: %s old ref: %s index: %s" % (data[0], data[1][0], data[1][1], data[2]))
 						if cfg.case_sensitive.value == False: # trick for changing name - it cannot be made in one step
 							old.setName(data[0])
 							mutableList.removeService(old, False)
@@ -1616,7 +1645,8 @@ class refreshBouquetCopyServices(Screen):
 		self.onLayoutFinish.append(self.displayService)
 
 		self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-		debug("changed bouquet: %s" % self.target_bouquetname)
+		if cfg.debug.value:
+			debug("changed bouquet: %s" % self.target_bouquetname)
 
 	def sortMenu(self):
 		menu = []
@@ -1809,7 +1839,8 @@ class refreshBouquetRemoveServices(Screen):
 		self.onLayoutFinish.append(self.displayService)
 
 		self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-		debug("changed bouquet: %s" % self.source_bouquetname)
+		if cfg.debug.value:
+			debug("changed bouquet: %s" % self.source_bouquetname)
 
 	def sortMenu(self):
 		menu = []
@@ -1992,7 +2023,8 @@ class refreshBouquetMoveServices(Screen):
 		self.onLayoutFinish.append(self.setPosition)
 
 		self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-		debug("changed bouquet: %s" % self.source_bouquetname)
+		if cfg.debug.value:
+			debug("changed bouquet: %s" % self.source_bouquetname)
 
 	def sortMenu(self):
 		menu = []
@@ -2343,8 +2375,7 @@ def addBouqetName(bouquet_name):
 	return ""
 
 def debug(message):
-	if cfg.debug.value:
-		print "[RefreshBouquet] %s" % message
+	print "[RefreshBouquet] %s" % message
 
 def freeMemory():
 	import os
