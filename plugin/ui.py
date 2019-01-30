@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.87"
+VERSION = "1.88"
 #  by ims (c) 2016-2019 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -529,7 +529,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				if name.upper() == '<N/A>':
 					nr += 1
 				splited = t[1].split(':') # split target service_reference
-				fo.write("%s:%s\n" % (name, splited[6]))
+				fo.write("%s:%s\n" % (name.replace(':','%3a'), splited[6]))
 			fo.close()
 			txt = _("File %s.rbb was created.") % bouquet[0]
 			text, delay, msgtype = (_("%s\n<N/A> items in source bouquet: %s") % (txt, nr), 8, MessageBox.TYPE_WARNING) if nr else (txt, 3, MessageBox.TYPE_INFO)
@@ -591,6 +591,8 @@ class refreshBouquet(Screen, HelpableScreen):
 
 	def compareRbbServices(self, source_services, target_services):
 		differences = MySelectionList([])
+		names = []
+		results = []
 		potencialy_duplicity = []
 		i = 0 # index
 		length = 0 # found items
@@ -635,6 +637,7 @@ class refreshBouquet(Screen, HelpableScreen):
 							except:
 								if cfg.debug.value:
 									debug("Unique: %s" % self.charsOnly(source[0]))
+
 							### for freesat rbb
 							if freq:
 								if same_service:
@@ -642,8 +645,11 @@ class refreshBouquet(Screen, HelpableScreen):
 								else:
 									select = False
 							###
+
 							# name, new ref, index, selected
-							differences.list.append(MySelectionEntryComponent(source[0], source[1], i, select))
+							results.append((source[0], source[1], i, select))
+							names.append(source[0])
+							i += 1
 							found = True
 							if cfg.debug.value:
 								debug("Added: %s" % self.charsOnly(source[0]))
@@ -652,8 +658,17 @@ class refreshBouquet(Screen, HelpableScreen):
 				target_name = "--- %s" % target_name
 				mode = "1" if config.servicelist.lastmode.value == "tv" else "2"
 				target_pars= ":".join(("1","0",mode,"0","0","0",target_op,"0","0","0", target_name))
-				differences.list.append(MySelectionEntryComponent(target_name, target_pars, i, False))
-			i += 1
+				results.append((target_name, target_pars, i, False))
+				names.append(target_name)
+				i += 1
+		# unique item set as marked
+		for i, item in enumerate(names):
+			# replace not marked to marked for "unique and founded and not marked"
+			if names.count(item) == 1  and "---" not in item and not results[i][3]:
+				results[i] = results[i][0:3] + (True,)
+		# Copy results to MySelectionList
+		for item in results:
+			differences.list.append(MySelectionEntryComponent(item[0], item[1], item[2], item[3]))
 		self.l = MySelectionList(differences)
 		self.l.setList(differences)
 		return differences, length
