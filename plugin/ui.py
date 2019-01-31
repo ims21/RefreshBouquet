@@ -648,7 +648,7 @@ class refreshBouquet(Screen, HelpableScreen):
 
 							# name, new ref, index, selected
 							results.append((source[0], source[1], i, select))
-							names.append(source[0])
+							names.append(source[0].upper())
 							i += 1
 							found = True
 							if cfg.debug.value:
