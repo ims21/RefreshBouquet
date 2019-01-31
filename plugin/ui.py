@@ -296,7 +296,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			self["info"].setText("")
 		self["target_name"].setText(current[0])
 		self.targetItem = current
-# get services orbital positions in source bouquets to config for filtering
+# get all orbital positions in source bouquet to config for filtering
 	def setBouquetsOrbitalPositionsConfigFilter(self, sourceItem):
 		def op2human(orb_pos):
 			if orb_pos == 0xeeee:
@@ -364,7 +364,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			t_name = self.prepareStr(t[0]).replace(cfg.ignore_last_char.value,'') if cfg.ignore_last_char.value else self.prepareStr(t[0])
 			t_splited = t[1].split(':') # split target service_reference
 			t_core = ":".join((t_splited[3],t_splited[4],t_splited[5],t_splited[6]))
-			t_op = t_splited[6][0:-4]
+			t_op = t_splited[6][:-4]
 			for s in source_services: # source bouquet - with fresh scan - f.eg. created by Fastscan or Last Scanned
 				if self.isNotService(s[1]): # skip all non playable
 					continue
@@ -375,7 +375,7 @@ class refreshBouquet(Screen, HelpableScreen):
 						continue
 				if t_name == self.prepareStr(s[0]): # services with same name founded
 					s_splited = s[1].split(':') # split ref
-					if t_op == s_splited[6][0:-4]: # same orbital position only
+					if t_op == s_splited[6][:-4]: # same orbital position only
 						if t_core != s_core and not t_splited[10] and not s_splited[10]: # is different ref ([3]-[6])and is not stream
 							length += 1
 							select = True
@@ -599,7 +599,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		for target in target_services: # bouquet for refresh
 			ts = target.split(':')
 
-			### for freesat rbb
+			### for rbb with freq
 			freq = None
 			if len(ts) > 2 and ts[2] != "":
 				freq = int(ts[2].strip())
@@ -609,24 +609,30 @@ class refreshBouquet(Screen, HelpableScreen):
 			if target_name == '<N/A>':
 				target_name = _("unknown")
 			target_op = ts[1]
+			t_op = target_op[:-4]
 			found = False
 			for source in source_services: # source bouquet - with fresh scan - f.eg. created by Fastscan or Last Scanned
 				if self.isNotService(source[1]): # skip all non playable
 					continue
+				source_name = self.prepareStr(source[0])
+				if target_name[0] != source_name[0]: # basic acceleration
+					continue
 				source_splited = source[1].split(':') # split service_reference
+				s_op = source_splited[6][:-4]
 				if cfg.orbital.value != "x": # only on selected op
-					if source_splited[6][:-4] != cfg.orbital.value:
+					if s_op != cfg.orbital.value:
 						continue
-				if target_name == self.prepareStr(source[0]): # services with same name founded
-					### for freesat rbb
-					same_service = False
-					if freq:
-						frequency = self.getTransponderInfo(source[1],"frequency")/1000
-						if abs(frequency - freq) < 10:
-							same_service = True
-					###
-					if target_op[:-4] == source_splited[6][:-4]: # same orbital position only
+				if target_name == source_name: # services with same name founded
+					if t_op == s_op: # same orbital position only
 						if not source_splited[10]: # if source is not stream
+							### for rbb with freq
+							same_service = False
+							if freq:
+								frequency = self.getTransponderInfo(source[1],"frequency")/1000
+								if abs(frequency - freq) < 10:
+									same_service = True
+							###
+
 							length += 1
 							select = True
 							try:
@@ -638,7 +644,7 @@ class refreshBouquet(Screen, HelpableScreen):
 								if cfg.debug.value:
 									debug("Unique: %s" % self.charsOnly(source[0]))
 
-							### for freesat rbb
+							### for rbb with freq
 							if freq:
 								if same_service:
 									select = True
