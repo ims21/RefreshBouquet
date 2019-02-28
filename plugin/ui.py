@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.88"
+VERSION = "1.89"
 #  by ims (c) 2016-2019 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -69,6 +69,7 @@ choicelist.append(("20","20"))
 config.plugins.refreshbouquet.vk_length = ConfigSelection(default = "3", choices = [("0", _("No"))] + choicelist + [("255", _("All"))])
 config.plugins.refreshbouquet.vk_sensitive = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.sortmenu = ConfigSelection(default = "0", choices = [("0", _("Original")),("1", _("A-z sort")),("2", _("Z-a sort")),("3", _("Selected top")),("4", _("Original - reverted"))])
+config.plugins.refreshbouquet.rbb_dotted = ConfigYesNo(default=False)
 
 cfg = config.plugins.refreshbouquet
 
@@ -577,7 +578,7 @@ class refreshBouquet(Screen, HelpableScreen):
 					self["info"].setText(_("Source bouquet is empty !"))
 					return
 				setIcon() # icons for selecting must be set before adding to list in compareServices
-				(data, length) = self.compareRbbServices(source, target)
+				(data, length) = self.compareRbbServices(source, target, cfg.rbb_dotted.value)
 				if length:
 					def reloadList():
 						self.getBouquetList()
@@ -589,7 +590,7 @@ class refreshBouquet(Screen, HelpableScreen):
 
 # looking new service reference for target service - returns service name, old service reference, new service reference and position in target bouquet
 
-	def compareRbbServices(self, source_services, target_services):
+	def compareRbbServices(self, source_services, target_services, dotted):
 		differences = MySelectionList([])
 		names = []
 		results = []
@@ -615,14 +616,16 @@ class refreshBouquet(Screen, HelpableScreen):
 				if self.isNotService(source[1]): # skip all non playable
 					continue
 				source_name = self.prepareStr(source[0])
+
 				if target_name[0] != source_name[0]: # basic acceleration
 					continue
+
 				source_splited = source[1].split(':') # split service_reference
 				s_op = source_splited[6][:-4]
 				if cfg.orbital.value != "x": # only on selected op
 					if s_op != cfg.orbital.value:
 						continue
-				if target_name == source_name: # services with same name founded
+				if target_name == source_name or dotted and target_name+'.' == source_name: # services with same name founded
 					if t_op == s_op: # same orbital position only
 						if not source_splited[10]: # if source is not stream
 							### for rbb with freq
@@ -2287,6 +2290,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Debug info"), cfg.debug))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Pre-fill first 'n' servicename chars to virtual keyboard"), cfg.vk_length))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Compare virtual keyboard input as case sensitive"), cfg.vk_sensitive))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Use dotted service name for 'rbb' files"), cfg.rbb_dotted, _("When is creating a bouquet from 'rbb' file, dotted names can be compared too. You need then manually remove duplicates. Default set is 'no'")))
 		ConfigListScreen.__init__(self, refreshBouquetCfglist, session, on_change = self.changedEntry)
 
 		self.onChangedEntry = []

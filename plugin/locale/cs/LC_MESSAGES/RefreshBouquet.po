@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-30 09:37+0100\n"
-"PO-Revision-Date: 2018-10-30 09:37+0100\n"
+"POT-Creation-Date: 2019-02-28 22:07+0100\n"
+"PO-Revision-Date: 2019-02-28 22:09+0100\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi\n"
 "Language: cs_CZ\n"
@@ -99,18 +99,18 @@ msgstr "Cílový přehled:"
 msgid "Select or source or target or source and target bouquets !"
 msgstr "Vyberte zdrojový nebo cílový nebo zdrojový a cílový přehled!"
 
-msgid "Remove selected services in source bouquet"
-msgstr "Odstranit vybrané programy ze zdroje"
-
-msgid "Move selected services in source bouquet"
-msgstr "Přesouvat vybrané programy ve zdroji"
-
 #, python-format
 msgid "Create '%s.rbb' file"
 msgstr "Založit '%s.rbb' soubor"
 
 msgid "Create bouquet from rbb file"
 msgstr "Vytvořit přehled z rbb souboru"
+
+msgid "Move selected services in source bouquet"
+msgstr "Přesouvat vybrané programy ve zdroji"
+
+msgid "Remove selected services in source bouquet"
+msgstr "Odstranit vybrané programy ze zdroje"
 
 msgid "Manually replace services"
 msgstr "Ruční nahrazování programů"
@@ -124,11 +124,11 @@ msgstr "Přidat vybrané chybějící programy do cílového přehledu"
 msgid "Refresh services in target bouquet"
 msgstr "Aktualizovat programy v cílovém přehledu"
 
-msgid "Remove selected services from bouquet"
-msgstr "Odstranit vybrané programy z přehledu"
-
 msgid "Move selected services in bouquet"
 msgstr "Přesouvat vybrané programy v přehledu"
+
+msgid "Remove selected services from bouquet"
+msgstr "Odstranit vybrané programy z přehledu"
 
 msgid "New bouquet"
 msgstr "Nový přehled"
@@ -519,6 +519,16 @@ msgstr "Předvyplnit prvních 'n' znaků názvu programu do virtuální klávesn
 
 msgid "Compare virtual keyboard input as case sensitive"
 msgstr "Rozlišovat velikost písmen při zadání z virtuální klávesnice "
+
+msgid "Use dotted service name for 'rbb' files"
+msgstr "Používat otečkované názvy programů pro 'rbb' soubory"
+
+msgid ""
+"When is creating a bouquet from 'rbb' file, dotted names can be compared "
+"too. You need then manually remove duplicates. Default set is 'no'"
+msgstr ""
+"Při vytvářeí přehledu z 'rbb' souboru mohou být porovnávány i tečkované "
+"názvy programů. Budete muset ale ručně odstraňovat duplicity."
 
 msgid "Select rbb file"
 msgstr "Zvolte rbb soubor"

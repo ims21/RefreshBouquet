@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-30 09:34+0100\n"
+"POT-Creation-Date: 2019-02-28 22:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,17 +103,17 @@ msgstr ""
 msgid "Select or source or target or source and target bouquets !"
 msgstr ""
 
-msgid "Remove selected services in source bouquet"
-msgstr ""
-
-msgid "Move selected services in source bouquet"
-msgstr ""
-
 #, python-format
 msgid "Create '%s.rbb' file"
 msgstr ""
 
 msgid "Create bouquet from rbb file"
+msgstr ""
+
+msgid "Move selected services in source bouquet"
+msgstr ""
+
+msgid "Remove selected services in source bouquet"
 msgstr ""
 
 msgid "Manually replace services"
@@ -128,10 +128,10 @@ msgstr ""
 msgid "Refresh services in target bouquet"
 msgstr ""
 
-msgid "Remove selected services from bouquet"
+msgid "Move selected services in bouquet"
 msgstr ""
 
-msgid "Move selected services in bouquet"
+msgid "Remove selected services from bouquet"
 msgstr ""
 
 msgid "New bouquet"
@@ -479,6 +479,14 @@ msgid "Pre-fill first 'n' servicename chars to virtual keyboard"
 msgstr ""
 
 msgid "Compare virtual keyboard input as case sensitive"
+msgstr ""
+
+msgid "Use dotted service name for 'rbb' files"
+msgstr ""
+
+msgid ""
+"When is creating a bouquet from 'rbb' file, dotted names can be compared "
+"too. You need then manually remove duplicates. Default set is 'no'"
 msgstr ""
 
 msgid "Select rbb file"
