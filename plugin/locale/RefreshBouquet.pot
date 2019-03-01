@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-28 22:06+0100\n"
+"POT-Creation-Date: 2019-03-01 12:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -492,13 +492,31 @@ msgstr ""
 msgid "Select rbb file"
 msgstr ""
 
+msgid "Dotted"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
 msgid "Select rbb file with 'OK' and create bouquet with same name."
+msgstr ""
+
+msgid "Use 'Menu' for predefined 'rbb' files."
 msgstr ""
 
 #, python-format
 msgid ""
 "If You will add to bouquet some missing services (start with '---'), You can "
 "then finalize created bouquet with '%s' etc."
+msgstr ""
+
+msgid "You can try toggle 'Standard/Dotted' service names too."
+msgstr ""
+
+msgid "Copy predefined 'rbb' file(s) to list"
+msgstr ""
+
+msgid "Select action:"
 msgstr ""
 
 msgid "Erase"

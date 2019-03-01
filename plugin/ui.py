@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.89"
+VERSION = "1.90"
 #  by ims (c) 2016-2019 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -569,7 +569,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		if self.addBouquet(rbb_name, None):
 			data = MySelectionList([])
 			if self.sourceItem:  # predpoklada se spravne nacteny soubor .rbb
-				target = getRbbBouquetContent("%s/%s.rbb" % (E2,rbb_name))
+				target = getRbbBouquetContent("%s/%s.rbb" % (E2, rbb_name))
 				source = self.getServices(self.sourceItem[0])
 				if not len(target):
 					self["info"].setText(_("Target bouquet is empty !"))

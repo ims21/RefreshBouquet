@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-28 22:07+0100\n"
-"PO-Revision-Date: 2019-02-28 22:09+0100\n"
+"POT-Creation-Date: 2019-03-01 12:00+0100\n"
+"PO-Revision-Date: 2019-03-01 12:06+0100\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi\n"
 "Language: cs_CZ\n"
@@ -527,14 +527,23 @@ msgid ""
 "When is creating a bouquet from 'rbb' file, dotted names can be compared "
 "too. You need then manually remove duplicates. Default set is 'no'"
 msgstr ""
-"Při vytvářeí přehledu z 'rbb' souboru mohou být porovnávány i tečkované "
-"názvy programů. Budete muset ale ručně odstraňovat duplicity."
+"Při vytváření přehledu z 'rbb' souboru mohou být porovnávány i tečkované "
+"názvy programů. Budete ale muset ručně odstraňovat duplicity."
 
 msgid "Select rbb file"
 msgstr "Zvolte rbb soubor"
 
+msgid "Dotted"
+msgstr "Tečkované"
+
+msgid "Default"
+msgstr "Standardní"
+
 msgid "Select rbb file with 'OK' and create bouquet with same name."
 msgstr "Vyberte rbb soubor pomocí 'OK' a vytvořte přehled stejného názvu."
+
+msgid "Use 'Menu' for predefined 'rbb' files."
+msgstr "Použijte 'Menu' pro předdefinované 'rbb' soubory."
 
 #, python-format
 msgid ""
@@ -543,6 +552,15 @@ msgid ""
 msgstr ""
 "Jestliže přidáte do přehledu nějaké chybějící programy (začínají na '----'), "
 "můžete vytvořený přehled dokončit pomocí '%s' apod."
+
+msgid "You can try toggle 'Standard/Dotted' service names too."
+msgstr "Můžete zkusit přepnout také mezi 'Standardní/Tečkované' ."
+
+msgid "Copy predefined 'rbb' file(s) to list"
+msgstr "Kopírovat předdefinované 'rbb' soubor(y) do seznamu"
+
+msgid "Select action:"
+msgstr "Zvolte akci:"
 
 msgid "Erase"
 msgstr "Odstranit"

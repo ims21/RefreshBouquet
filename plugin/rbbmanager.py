@@ -28,7 +28,11 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.MessageBox import MessageBox
 import skin
 import os
-from ui import E2
+from Screens.ChoiceBox import ChoiceBox
+from shutil import copy2
+from plugin import plugin_path
+from ui import E2, cfg
+
 
 class refreshBouquetRbbManager(Screen):
 	skin = """
@@ -51,6 +55,7 @@ class refreshBouquetRbbManager(Screen):
 		self.setTitle(_("Select rbb file"))
 
 		self["key_red"] = Button(_("Cancel"))
+		self["key_green"] = Button(_("Dotted") if cfg.rbb_dotted.value else _("Default"))
 		self["key_blue"] = Button()
 		self["key_yellow"] = Button()
 
@@ -58,18 +63,43 @@ class refreshBouquetRbbManager(Screen):
 		self.reloadList()
 		self["text"] = Label()
 
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "RefreshBouquetActions"],
 			{
 				"cancel": self.exit,
 				"ok": self.ok,
 				"red": self.exit,
+				"green": self.style,
 				"blue": self.remove,
 				"yellow": self.rename,
+				"menu": self.menu,
 			})
 
-		text = _("Select rbb file with 'OK' and create bouquet with same name.")
-		text += _("If You will add to bouquet some missing services (start with '---'), You can then finalize created bouquet with '%s' etc.") % _("Manually replace services")
+		text = _("Select rbb file with 'OK' and create bouquet with same name.") + " "
+		text += _("Use 'Menu' for predefined 'rbb' files.") + " "
+		text += _("If You will add to bouquet some missing services (start with '---'), You can then finalize created bouquet with '%s' etc.") % _("Manually replace services") + " "
+		text += _("You can try toggle 'Standard/Dotted' service names too.")
 		self["text"].setText(text)
+
+	def menu(self):
+		buttons = []
+		menu = []
+		menu.append((_("Copy predefined 'rbb' file(s) to list"),0))
+		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_("Select action:"), list=menu, keys=buttons)
+
+	def style(self):
+		cfg.rbb_dotted.value = not cfg.rbb_dotted.value
+		self["key_green"].setText(_("Dotted") if cfg.rbb_dotted.value else _("Default"))
+
+	def menuCallback(self, choice):
+		if choice is None:
+			return
+		if choice[1] == 0:
+			dir_src = plugin_path + "/rbb/"
+			if os.path.exists(dir_src):
+				for filename in os.listdir(dir_src):
+					if filename.endswith('.rbb'):
+						copy2( dir_src + filename, E2)
+				self.reloadList()
 
 	def reloadList(self):
 		self.l = self.list
