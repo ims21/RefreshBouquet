@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.91"
+VERSION = "1.92"
 #  by ims (c) 2016-2019 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -1189,6 +1189,8 @@ class refreshBouquetManualSelection(Screen):
 				"menu": self.sortMenu,
 				"next": self.lookServiceInSource,
 				"prev": self.lookServiceInSource,
+
+				"epg": self.displayEPG,
 			},-2)
 
 		self["key_red"] = Button(_("Cancel"))
@@ -1336,6 +1338,11 @@ class refreshBouquetManualSelection(Screen):
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
 
+	def displayEPG(self):
+		ref = self[self.currList].getCurrent()[1]
+		if not self.isNotService(ref):
+			self.session.open(refreshBouquetEPG, eServiceReference(ref))
+
 	def clearInputs(self):
 		self.targetRecord = ""
 		self.sourceRecord = ""
@@ -1466,7 +1473,9 @@ class refreshBouquetRefreshServices(Screen):
 
 				"play": self.previewService,
 				"stop": self.stopPreview,
-				"menu": self.sortMenu
+				"menu": self.sortMenu,
+
+				"epg": self.displayEPG,
 			})
 
 		self["key_red"] = Button(_("Cancel"))
@@ -1544,6 +1553,11 @@ class refreshBouquetRefreshServices(Screen):
 			self.session.nav.playService(eServiceReference(ref))
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
+
+	def displayEPG(self):
+		ref = self["services"].getCurrent()[0][1][0]
+		if not self.isNotService(ref):
+			self.session.open(refreshBouquetEPG, eServiceReference(ref))
 
 	def replaceSelectedEntries(self):
 		nr_items = len(self.list.getSelectionsList())
@@ -1653,7 +1667,8 @@ class refreshBouquetCopyServices(Screen):
 				"stop": self.stopPreview,
 				"prevBouquet": boundFunction(self.selectGroup, False),
 				"nextBouquet": boundFunction(self.selectGroup, True),
-				"menu": self.sortMenu
+				"menu": self.sortMenu,
+				"epg": self.displayEPG,
 			})
 
 		self["key_red"] = Button(_("Cancel"))
@@ -1728,6 +1743,11 @@ class refreshBouquetCopyServices(Screen):
 			self.session.nav.playService(eServiceReference(ref))
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
+
+	def displayEPG(self):
+		ref = self["services"].getCurrent()[0][1]
+		if not self.isNotService(ref):
+			self.session.open(refreshBouquetEPG, eServiceReference(ref))
 
 	def selectGroup(self, mark=True):
 		if mark:
@@ -1847,7 +1867,8 @@ class refreshBouquetRemoveServices(Screen):
 				"stop": self.stopPreview,
 				"prevBouquet": boundFunction(self.selectGroup, False),
 				"nextBouquet": boundFunction(self.selectGroup, True),
-				"menu": self.sortMenu
+				"menu": self.sortMenu,
+				"epg": self.displayEPG,
 			})
 
 		self["key_red"] = Button(_("Cancel"))
@@ -1922,6 +1943,11 @@ class refreshBouquetRemoveServices(Screen):
 			self.session.nav.playService(eServiceReference(ref))
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
+
+	def displayEPG(self):
+		ref = self["services"].getCurrent()[0][1]
+		if not self.isNotService(ref):
+			self.session.open(refreshBouquetEPG, eServiceReference(ref))
 
 	def selectGroup(self, mark=True):
 		if mark:
@@ -2030,7 +2056,8 @@ class refreshBouquetMoveServices(Screen):
 				"stop": self.stopPreview,
 				"prevBouquet": boundFunction(self.selectGroup, False),
 				"nextBouquet": boundFunction(self.selectGroup, True),
-				"menu": self.sortMenu
+				"menu": self.sortMenu,
+				"epg": self.displayEPG,
 			})
 
 		self["key_red"] = Button(_("Cancel"))
@@ -2152,6 +2179,11 @@ class refreshBouquetMoveServices(Screen):
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
 
+	def displayEPG(self):
+		ref = self["services"].getCurrent()[0][1]
+		if not self.isNotService(ref):
+			self.session.open(refreshBouquetEPG, eServiceReference(ref))
+
 	def moveCurrentEntries(self, index):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
@@ -2234,6 +2266,41 @@ class refreshBouquetMoveServices(Screen):
 	def callBackExit(self, answer):
 		if answer == True:
 			self.close(True)
+
+# EPG screen
+class refreshBouquetEPG(Screen):
+	skin="""
+	<screen name="RefreshBouquet EPG" position="center,center" size="660,405" title="EPG" flags="wfNoBorder" backgroundColor="background">
+		<widget source="Service" render="Label" position="10,10" size="640,25" transparent="1" foregroundColor="secondFG" font="Regular;22" halign="left">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<widget source="Service" render="Label" position="10,50" size="640,345" transparent="1" font="Regular;20" halign="block">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+	</screen>"""
+
+	def __init__(self, session, service):
+		Screen.__init__(self, session)
+		self.session = session
+		self.service = service
+		self.setTitle(_("RefreshBouquet v. %s - EPG" % VERSION))
+		self["Service"] = ServiceEvent()
+
+		self["actions"] = ActionMap(["ColorActions", "OkCancelActions"],
+		{
+			"ok": self.exit,
+			"cancel": self.exit,
+			"green": self.exit,
+			"red": self.exit,
+		}, -2)
+
+		self.onLayoutFinish.append(self.displayEpg)
+
+	def displayEpg(self):
+		self["Service"].newService(self.service)
+
+	def exit(self):
+		self.close()
 
 # options
 class refreshBouquetCfg(Screen, ConfigListScreen):
