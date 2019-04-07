@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-01 12:00+0100\n"
+"POT-Creation-Date: 2019-04-07 11:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,6 +22,58 @@ msgid "RefreshBouquet"
 msgstr ""
 
 msgid "Actualize services in bouquets"
+msgstr ""
+
+msgid "Select rbb file"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Dotted"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "Select rbb file with 'OK' and create bouquet with same name."
+msgstr ""
+
+msgid "Use 'Menu' for predefined 'rbb' files."
+msgstr ""
+
+#, python-format
+msgid ""
+"If You will add to bouquet some missing services (start with '---'), You can "
+"then finalize created bouquet with '%s' etc."
+msgstr ""
+
+msgid "Manually replace services"
+msgstr ""
+
+msgid "You can try toggle 'Standard/Dotted' service names too."
+msgstr ""
+
+msgid "Copy predefined 'rbb' file(s) to list"
+msgstr ""
+
+msgid "Select action:"
+msgstr ""
+
+msgid "Erase"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+#, python-format
+msgid "The path %s already exists."
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Are You sure to remove file?"
 msgstr ""
 
 msgid "Original"
@@ -82,9 +134,6 @@ msgstr ""
 msgid "clear selection"
 msgstr ""
 
-msgid "Cancel"
-msgstr ""
-
 msgid "Run"
 msgstr ""
 
@@ -100,7 +149,12 @@ msgstr ""
 msgid "Target bouquet:"
 msgstr ""
 
-msgid "Select or source or target or source and target bouquets !"
+msgid "Select or source or target or source and target bouquets!"
+msgstr ""
+
+msgid ""
+"Source select with 'yellow' button, target with 'blue' button. Selection can "
+"be cleared with '0'."
 msgstr ""
 
 #, python-format
@@ -114,9 +168,6 @@ msgid "Move selected services in source bouquet"
 msgstr ""
 
 msgid "Remove selected services in source bouquet"
-msgstr ""
-
-msgid "Manually replace services"
 msgstr ""
 
 msgid "Add selected services to target bouquet"
@@ -191,10 +242,16 @@ msgstr ""
 msgid "Are You sure to remove bouquet?"
 msgstr ""
 
-msgid "No services in source bouquet !"
+msgid "Source bouquet is empty!"
 msgstr ""
 
-msgid "No services in target bouquet !"
+msgid "No services in source bouquet!"
+msgstr ""
+
+msgid "Target bouquet is empty!"
+msgstr ""
+
+msgid "No services in target bouquet!"
 msgstr ""
 
 msgid "- select service for replace with OK"
@@ -487,50 +544,4 @@ msgstr ""
 msgid ""
 "When is creating a bouquet from 'rbb' file, dotted names can be compared "
 "too. You need then manually remove duplicates. Default set is 'no'"
-msgstr ""
-
-msgid "Select rbb file"
-msgstr ""
-
-msgid "Dotted"
-msgstr ""
-
-msgid "Default"
-msgstr ""
-
-msgid "Select rbb file with 'OK' and create bouquet with same name."
-msgstr ""
-
-msgid "Use 'Menu' for predefined 'rbb' files."
-msgstr ""
-
-#, python-format
-msgid ""
-"If You will add to bouquet some missing services (start with '---'), You can "
-"then finalize created bouquet with '%s' etc."
-msgstr ""
-
-msgid "You can try toggle 'Standard/Dotted' service names too."
-msgstr ""
-
-msgid "Copy predefined 'rbb' file(s) to list"
-msgstr ""
-
-msgid "Select action:"
-msgstr ""
-
-msgid "Erase"
-msgstr ""
-
-msgid "Rename"
-msgstr ""
-
-#, python-format
-msgid "The path %s already exists."
-msgstr ""
-
-msgid "Error"
-msgstr ""
-
-msgid "Are You sure to remove file?"
 msgstr ""

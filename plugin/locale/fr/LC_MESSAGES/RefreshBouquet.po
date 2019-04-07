@@ -101,7 +101,7 @@ msgstr "Bouquet source:"
 msgid "Target bouquet:"
 msgstr "Bouquet cible:"
 
-msgid "Select or source or target or source and target bouquets !"
+msgid "Select or source or target or source and target bouquets!"
 msgstr ""
 "Choisissez ou la source ou la cible ou la source et les bouquets cibles!"
 
@@ -159,10 +159,10 @@ msgstr "Terrestre"
 msgid "Cable"
 msgstr "Câble"
 
-msgid "Target bouquet is empty !"
+msgid "Target bouquet is empty!"
 msgstr "Le bouquet cible est vide!"
 
-msgid "Source bouquet is empty !"
+msgid "Source bouquet is empty!"
 msgstr "Le bouquet source est vide!"
 
 msgid "No differences found"
@@ -198,10 +198,10 @@ msgstr "Afficher le nom du bouquet"
 msgid "Are You sure to remove bouquet?"
 msgstr "Êtes-vous sûr de supprimer ce %d service?"
 
-msgid "No services in source bouquet !"
+msgid "No services in source bouquet!"
 msgstr "Aucun service dans le bouquet source!"
 
-msgid "No services in target bouquet !"
+msgid "No services in target bouquet!"
 msgstr "Aucun service dans le bouquet cible!"
 
 msgid "- select service for replace with OK"

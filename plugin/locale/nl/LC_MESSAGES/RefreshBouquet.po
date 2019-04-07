@@ -99,7 +99,7 @@ msgid "Target bouquet:"
 msgstr "Doelboeket:"
 
 #, fuzzy
-msgid "Select or source or target or source and target bouquets !"
+msgid "Select or source or target or source and target bouquets!"
 msgstr "Selecteer eerst het bron en / of het doelboeket !"
 
 msgid "Select action for bouquet:"
@@ -158,10 +158,10 @@ msgstr "Terrestrial"
 msgid "Cable"
 msgstr "Kabel"
 
-msgid "Target bouquet is empty !"
+msgid "Target bouquet is empty!"
 msgstr "Het doelboeket is leeg !"
 
-msgid "Source bouquet is empty !"
+msgid "Source bouquet is empty!"
 msgstr "Het bronboeket is leeg !"
 
 msgid "No differences found"
@@ -197,11 +197,11 @@ msgstr "Toon de boeketnaam"
 msgid "Are You sure to remove bouquet?"
 msgstr "Weet je zeker dat je dit %d kanaal wilt verwijderen?"
 
-msgid "No services in source bouquet !"
+msgid "No services in source bouquet!"
 msgstr "Geen zender(s) aanwezig in het bronboeket !"
 
 #, fuzzy
-msgid "No services in target bouquet !"
+msgid "No services in target bouquet!"
 msgstr "Actualiseer de zenders in het doelboeket"
 
 msgid "- select service for replace with OK"

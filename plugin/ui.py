@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.90"
+VERSION = "1.91"
 #  by ims (c) 2016-2019 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -145,7 +145,9 @@ class refreshBouquet(Screen, HelpableScreen):
 		self["target_text"] = Label(_("Target bouquet:"))
 		self["source_name"] = Label()
 		self["target_name"] = Label()
-		self.infotext = _("Select or source or target or source and target bouquets !")
+		self.infotext = _("Select or source or target or source and target bouquets!")
+		self.infotext += " "
+		self.infotext += _("Source select with 'yellow' button, target with 'blue' button. Selection can be cleared with '0'.")
 		self["info"] = Label(self.infotext)
 
 		self.sourceItem = None
@@ -757,13 +759,13 @@ class refreshBouquet(Screen, HelpableScreen):
 	def prepareSingleBouquetOperation(self):
 		if self.sourceItem and not self.targetItem or self.sourceItem:
 			Bouquet = self.sourceItem
-			t1 = _("Source bouquet is empty !")
-			t2 = _("No services in source bouquet !")
+			t1 = _("Source bouquet is empty!")
+			t2 = _("No services in source bouquet!")
 			return self.sourceItem, t1, t2
 		elif self.targetItem and not self.sourceItem:
 			Bouquet = self.targetItem
-			t1 = _("Target bouquet is empty !")
-			t2 = _("No services in target bouquet !")
+			t1 = _("Target bouquet is empty!")
+			t2 = _("No services in target bouquet!")
 			return self.targetItem, t1, t2
 		return None, None, None
 
@@ -841,10 +843,10 @@ class refreshBouquet(Screen, HelpableScreen):
 			target = self.getServices(self.targetItem[0])
 			source = self.getServices(self.sourceItem[0])
 			if not len(target):
-				self["info"].setText(_("Target bouquet is empty !"))
+				self["info"].setText(_("Target bouquet is empty!"))
 				return
 			if not len(source):
-				self["info"].setText(_("Source bouquet is empty !"))
+				self["info"].setText(_("Source bouquet is empty!"))
 				return
 			source_services = []
 			if cfg.diff.value: # only missing services
@@ -852,7 +854,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			else:
 				source_services = self.addToBouquetFiltered(source)
 			if not len(source_services):
-				self["info"].setText(_("No services in source bouquet !"))
+				self["info"].setText(_("No services in source bouquet!"))
 				return
 			sourceList = MenuList(source_services) # name, service reference
 			target_services = self.addToBouquetAllIndexed(target) # name, service reference, index in bouquet
@@ -913,12 +915,12 @@ class refreshBouquet(Screen, HelpableScreen):
 			target = self.getServices(self.targetItem[0])
 			source = self.getServices(self.sourceItem[0])
 			if not len(source):
-				self["info"].setText(_("Source bouquet is empty !"))
+				self["info"].setText(_("Source bouquet is empty!"))
 				return
 			new = []
 			new = self.addToBouquetFiltered(source)
 			if not len(new):
-				self["info"].setText(_("No services in source bouquet !"))
+				self["info"].setText(_("No services in source bouquet!"))
 				return
 			nr = 0
 			if cfg.debug.value:

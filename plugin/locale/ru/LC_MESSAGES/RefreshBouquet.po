@@ -101,7 +101,7 @@ msgid "Target bouquet:"
 msgstr "Целевой букет:"
 
 #, fuzzy
-msgid "Select or source or target or source and target bouquets !"
+msgid "Select or source or target or source and target bouquets!"
 msgstr "Выбор исходных или исходных/целевых букетов!"
 
 msgid "Select action for bouquet:"
@@ -160,10 +160,10 @@ msgstr "Наземные"
 msgid "Cable"
 msgstr "Кабельные"
 
-msgid "Target bouquet is empty !"
+msgid "Target bouquet is empty!"
 msgstr "Целевой букет пустой !"
 
-msgid "Source bouquet is empty !"
+msgid "Source bouquet is empty!"
 msgstr "Исходный букет пустой !"
 
 msgid "No differences found"
@@ -199,11 +199,11 @@ msgstr "Отображать имя букета"
 msgid "Are You sure to remove bouquet?"
 msgstr "Вы действительно хотите удалить этот %d сервис?"
 
-msgid "No services in source bouquet !"
+msgid "No services in source bouquet!"
 msgstr "Нет сервисов в исходном букете !"
 
 #, fuzzy
-msgid "No services in target bouquet !"
+msgid "No services in target bouquet!"
 msgstr "Обновить сервисы в целевом букете"
 
 msgid "- select service for replace with OK"
