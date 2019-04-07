@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.92"
+VERSION = "1.93"
 #  by ims (c) 2016-2019 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -145,8 +145,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		self["target_text"] = Label(_("Target bouquet:"))
 		self["source_name"] = Label()
 		self["target_name"] = Label()
-		self.infotext = _("Select or source or target or source and target bouquets!")
-		self.infotext += " "
+		self.infotext = _("Select or source or target or source and target bouquets!") + " "
 		self.infotext += _("Source select with 'yellow' button, target with 'blue' button. Selection can be cleared with '0'.")
 		self["info"] = Label(self.infotext)
 
@@ -1101,7 +1100,7 @@ class refreshBouquet(Screen, HelpableScreen):
 # manual replace
 class refreshBouquetManualSelection(Screen):
 	y = 25 * 4 if getDesktop(0).size().height() > 576 else 0 # added 4 bouquet's rows if screen height > 576
-	pars = (511+y,250+y,250+y,343+y,347+y,370+y,373+y)
+	pars = (511+y,250+y,250+y,343+y,347+y,370+y,375+y,398+y,492+y,373+y)
 	skin = """
 	<screen name="refreshBouquetManualSelection" position="center,center" size="700,%d" title="RefreshBouquet - manual">
 		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on"/>
@@ -1118,18 +1117,25 @@ class refreshBouquetManualSelection(Screen):
 		<widget objectTypes="key_green,StaticText" source="key_green" render="Label" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
 		<widget objectTypes="key_yellow,StaticText" source="key_yellow" render="Label" position="280,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
 		<widget objectTypes="key_blue,StaticText" source="key_blue" render="Label" position="420,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
-		<widget name="source" position="5,40" zPosition="2" size="345,30"  font="Regular;25" foregroundColor="white"/>
-		<widget name="target" position="360,40" zPosition="2" size="345,30"  font="Regular;25" foregroundColor="white"/>
-		<widget name="source_label" position="5,67" zPosition="2" size="345,25"  font="Regular;18" foregroundColor="yellow"/>
-		<widget name="target_label" position="360,67" zPosition="2" size="345,25"  font="Regular;18" foregroundColor="blue"/>
+		<widget name="source" position="5,40" zPosition="2" size="345,28"  font="Regular;25" foregroundColor="white"/>
+		<widget name="target" position="360,40" zPosition="2" size="345,28"  font="Regular;25" foregroundColor="white"/>
+		<widget name="source_label" position="5,68" zPosition="2" size="345,25"  font="Regular;18" foregroundColor="yellow"/>
+		<widget name="target_label" position="360,68" zPosition="2" size="345,25"  font="Regular;18" foregroundColor="blue"/>
 
 		<widget name="sources" position="3,90" zPosition="2" size="345,%d"  font="Regular;22" foregroundColor="white"/>
 		<widget name="targets" position="360,90" zPosition="2" size="345,%d"  font="Regular;22" foregroundColor="white"/>
 		<ePixmap pixmap="skin_default/div-h.png" position="5,%d" zPosition="2" size="690,2"/>
-		<widget source="Service" render="Label" position="5,%d" size="690,23" font="Regular;20" valign="center" halign="left" transparent="1" zPosition="1">
+		<widget source="TransponderInfo" render="Label" position="5,%d" size="690,23" font="Regular;20" valign="center" halign="left" transparent="1" zPosition="1">
 			<convert type="TransponderInfo"></convert>
 		</widget>
 		<ePixmap pixmap="skin_default/div-h.png" position="5,%d" zPosition="2" size="690,2"/>
+		<widget source="Service" render="Label" position="5,%d" zPosition="1" size="690,18" font="Regular;18" foregroundColor="yellow" noWrap="1">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="Service" render="Label" position="5,%d" zPosition="1" size="690,90" font="Regular;18" foregroundColor="#00c0c0c0">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+		<widget source="Service" render="NextEpgInfo" position="5,%d" size="690,18" transparent="1" foregroundColor="yellow" noWrap="1" font="Regular;18"/>
 		<widget name="info" position="5,%d" zPosition="2" size="690,138" valign="center" halign="left" font="Regular;20" foregroundColor="#00c0c0c0"/>
 	</screen>""" % pars
 
@@ -1138,6 +1144,8 @@ class refreshBouquetManualSelection(Screen):
 		Screen.__init__(self, session)
 	
 		self["Service"] = ServiceEvent()
+		self["TransponderInfo"] = ServiceEvent()
+		self.display_epg = False
 
 		self.setTitle(_("RefreshBouquet %s" % _("- select service for replace with OK")))
 		self.session = session
@@ -1207,8 +1215,9 @@ class refreshBouquetManualSelection(Screen):
 		text += _("Or toggle with 'Prev/Next', which trying to find a similar name in source.") + " "
 		text += _("Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'")+ " "
 		text += _("Marking can be canceled with key '0'.") + " "
-		text += _("Source can be sorted with 'Menu'.")
-
+		text += _("Source can be sorted with 'Menu'.") + " "
+		text += _("Epg or Info toggles between EPG and Info text.") + " "
+		text += _("'Stop' button stops Preview.")
 		self["info"].setText(text)
 
 		self.targetRecord = ""
@@ -1322,7 +1331,14 @@ class refreshBouquetManualSelection(Screen):
 	def displayService(self):
 		ref = self[self.currList].getCurrent()[1]
 		if not self.isNotService(ref):
-			self["Service"].newService(eServiceReference(ref))
+			self["TransponderInfo"].newService(eServiceReference(ref))
+			if self.display_epg:
+				self["Service"].newService(eServiceReference(ref))
+				self["info"].hide()
+			else:
+				self["Service"].newService(None)
+				self["info"].show()
+
 			if cfg.preview.value:
 				self.previewService()
 			else:
@@ -1330,6 +1346,7 @@ class refreshBouquetManualSelection(Screen):
 		else:
 			self["key_yellow"].setText("")
 			self["Service"].newService(None)
+			self["TransponderInfo"].newService(None)
 
 	def previewService(self):
 		ref = self[self.currList].getCurrent()[1]
@@ -1339,9 +1356,8 @@ class refreshBouquetManualSelection(Screen):
 		self.session.nav.playService(self.playingRef)
 
 	def displayEPG(self):
-		ref = self[self.currList].getCurrent()[1]
-		if not self.isNotService(ref):
-			self.session.open(refreshBouquetEPG, eServiceReference(ref))
+		self.display_epg = not self.display_epg
+		self.displayService()
 
 	def clearInputs(self):
 		self.targetRecord = ""
@@ -1457,6 +1473,8 @@ class refreshBouquetRefreshServices(Screen):
 		self.setTitle(self.texttitle)
 
 		self["Service"] = ServiceEvent()
+		self["TransponderInfo"] = ServiceEvent()
+		self.display_epg = False
 
 		self.list = list
 		self["services"] = self.list
@@ -1485,9 +1503,11 @@ class refreshBouquetRefreshServices(Screen):
 
 		self["info"] = Label()
 
-		text = _("This feature looking for differences in service parameters with same names in source and target bouquets. Parameters for marked services will be replaced. ")
-		text += _("It can be in most cases useful for bouquets with services gained by Fastscan searching. ")
-		text += _("Possible duplicates will not be marked in list. Check validity with 'Preview' before mark and before 'Refresh selected'.")
+		text = _("This feature looking for differences in service parameters with same names in source and target bouquets. Parameters for marked services will be replaced.") + " "
+		text += _("It can be in most cases useful for bouquets with services gained by Fastscan searching.") + " "
+		text += _("Possible duplicates will not be marked in list. Check validity with 'Preview' before mark and before 'Refresh selected'.") + " "
+		text += _("Epg or Info toggles between EPG and Info text.") + " "
+		text += _("'Stop' button stops Preview.")
 		self["info"].setText(text)
 
 		self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
@@ -1538,7 +1558,14 @@ class refreshBouquetRefreshServices(Screen):
 		index = self["services"].getCurrent()[0][2] + 1
 		self.setTitle("%s\t%s: %s" % (self.texttitle, _("Position"), index))
 		if not self.isNotService(ref):
-			self["Service"].newService(eServiceReference(ref))
+			self["TransponderInfo"].newService(eServiceReference(ref))
+			if self.display_epg:
+				self["Service"].newService(eServiceReference(ref))
+				self["info"].hide()
+			else:
+				self["Service"].newService(None)
+				self["info"].show()
+
 			if cfg.preview.value:
 				self.previewService()
 			else:
@@ -1546,6 +1573,7 @@ class refreshBouquetRefreshServices(Screen):
 		else:
 			self["key_yellow"].setText("")
 			self["Service"].newService(None)
+			self["TransponderInfo"].newService(None)
 
 	def previewService(self):
 		ref = self["services"].getCurrent()[0][1][0]
@@ -1555,9 +1583,8 @@ class refreshBouquetRefreshServices(Screen):
 		self.session.nav.playService(self.playingRef)
 
 	def displayEPG(self):
-		ref = self["services"].getCurrent()[0][1][0]
-		if not self.isNotService(ref):
-			self.session.open(refreshBouquetEPG, eServiceReference(ref))
+		self.display_epg = not self.display_epg
+		self.displayService()
 
 	def replaceSelectedEntries(self):
 		nr_items = len(self.list.getSelectionsList())
@@ -1627,11 +1654,18 @@ class refreshBouquetCopyServices(Screen):
 		<widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2"/>
 		<widget name="services" position="5,50" zPosition="2" size="705,300" itemHeight="25" font="Regular;22" foregroundColor="white"/>
 		<ePixmap pixmap="skin_default/div-h.png" position="5,351" zPosition="2" size="700,2"/>
-		<widget source="Service" render="Label" position="5,354" size="700,23" font="Regular;20" valign="center" halign="left" transparent="1" zPosition="1">
+		<widget source="TransponderInfo" render="Label" position="5,354" size="700,23" font="Regular;20" valign="center" halign="left" transparent="1" zPosition="1">
 			<convert type="TransponderInfo"></convert>
 		</widget>
 		<ePixmap pixmap="skin_default/div-h.png" position="5,377" zPosition="2" size="700,2"/>
-		<widget name="info" position="5,380" zPosition="2" size="705,120" valign="center" halign="left" font="Regular;20" foregroundColor="white"/>
+		<widget source="Service" render="Label" position="5,380" zPosition="1" size="705,18" font="Regular;18" foregroundColor="yellow" noWrap="1">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="Service" render="Label" position="5,398" zPosition="1" size="705,90" font="Regular;18" foregroundColor="#00c0c0c0">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+		<widget source="Service" render="NextEpgInfo" position="5,488" size="705,16" transparent="1" foregroundColor="yellow" noWrap="1" font="Regular;16"/>
+		<widget name="info" position="5,380" zPosition="2" size="705,120" valign="center" halign="left" font="Regular;20" foregroundColor="#00c0c0c0"/>
 	</screen>"""
 
 	def __init__(self, session, list, target, missing=None, parent=None):
@@ -1646,6 +1680,8 @@ class refreshBouquetCopyServices(Screen):
 		self.setTitle(_("RefreshBouquet %s" % _("- select service(s) for adding with OK")) + name)
 
 		self["Service"] = ServiceEvent()
+		self["TransponderInfo"] = ServiceEvent()
+		self.display_epg = False
 
 		self["info"] = Label()
 
@@ -1676,9 +1712,10 @@ class refreshBouquetCopyServices(Screen):
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = Button(_("Inversion"))
 
-		text =_("Mark services with OK button or use group selection (Ch+/Ch-) and then copy these with 'Copy selected'")
-		text += "\n"
-		text += _("Use 'Menu' for sorting.")
+		text =_("Mark services with OK button or use group selection (Ch+/Ch-) and then copy these with 'Copy selected'") + " "
+		text += _("Use 'Menu' for sorting.") + " "
+		text += _("Epg or Info toggles between EPG and Info text.") + " "
+		text += _("'Stop' button stops Preview.")
 		self["info"].setText(text)
 
 		self.onSelectionChanged = []
@@ -1728,7 +1765,13 @@ class refreshBouquetCopyServices(Screen):
 	def displayService(self):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
-			self["Service"].newService(eServiceReference(ref))
+			self["TransponderInfo"].newService(eServiceReference(ref))
+			if self.display_epg:
+				self["Service"].newService(eServiceReference(ref))
+				self["info"].hide()
+			else:
+				self["Service"].newService(None)
+				self["info"].show()
 			if cfg.preview.value:
 				self.previewService()
 			else:
@@ -1736,6 +1779,7 @@ class refreshBouquetCopyServices(Screen):
 		else:
 			self["key_yellow"].setText("")
 			self["Service"].newService(None)
+			self["TransponderInfo"].newService(None)
 
 	def previewService(self):
 		ref = self["services"].getCurrent()[0][1]
@@ -1745,9 +1789,8 @@ class refreshBouquetCopyServices(Screen):
 		self.session.nav.playService(self.playingRef)
 
 	def displayEPG(self):
-		ref = self["services"].getCurrent()[0][1]
-		if not self.isNotService(ref):
-			self.session.open(refreshBouquetEPG, eServiceReference(ref))
+		self.display_epg = not self.display_epg
+		self.displayService()
 
 	def selectGroup(self, mark=True):
 		if mark:
@@ -1852,6 +1895,8 @@ class refreshBouquetRemoveServices(Screen):
 		self.sortList()
 
 		self["Service"] = ServiceEvent()
+		self["TransponderInfo"] = ServiceEvent()
+		self.display_epg = False
 
 		self["info"] = Label()
 
@@ -1876,9 +1921,10 @@ class refreshBouquetRemoveServices(Screen):
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = Button(_("Inversion"))
 
-		text = _("Mark services with OK button or use group selection (Ch+/Ch-) and then remove these with 'Remove selected'")
-		text += "\n"
-		text += _("Use 'Menu' for sorting.")
+		text = _("Mark services with OK button or use group selection (Ch+/Ch-) and then remove these with 'Remove selected'") + " "
+		text += _("Use 'Menu' for sorting.") + " "
+		text += _("Epg or Info toggles between EPG and Info text.") + " "
+		text += _("'Stop' button stops Preview.")
 		self["info"].setText(text)
 
 		self.onSelectionChanged = []
@@ -1928,7 +1974,14 @@ class refreshBouquetRemoveServices(Screen):
 	def displayService(self):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
-			self["Service"].newService(eServiceReference(ref))
+			self["TransponderInfo"].newService(eServiceReference(ref))
+			if self.display_epg:
+				self["Service"].newService(eServiceReference(ref))
+				self["info"].hide()
+			else:
+				self["Service"].newService(None)
+				self["info"].show()
+
 			if cfg.preview.value:
 				self.previewService()
 			else:
@@ -1936,6 +1989,7 @@ class refreshBouquetRemoveServices(Screen):
 		else:
 			self["key_yellow"].setText("")
 			self["Service"].newService(None)
+			self["TransponderInfo"].newService(None)
 
 	def previewService(self):
 		ref = self["services"].getCurrent()[0][1]
@@ -1945,9 +1999,8 @@ class refreshBouquetRemoveServices(Screen):
 		self.session.nav.playService(self.playingRef)
 
 	def displayEPG(self):
-		ref = self["services"].getCurrent()[0][1]
-		if not self.isNotService(ref):
-			self.session.open(refreshBouquetEPG, eServiceReference(ref))
+		self.display_epg = not self.display_epg
+		self.displayService()
 
 	def selectGroup(self, mark=True):
 		if mark:
@@ -2042,6 +2095,8 @@ class refreshBouquetMoveServices(Screen):
 		self.sortList()
 
 		self["Service"] = ServiceEvent()
+		self["TransponderInfo"] = ServiceEvent()
+		self.display_epg = False
 
 		self["info"] = Label()
 
@@ -2065,10 +2120,11 @@ class refreshBouquetMoveServices(Screen):
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = Button()
 
-		text = _("Mark service(s) with OK button or use group selection (Ch+/Ch-), move selector to new position and finish with 'Move selected'. Selected service(s) will be moved top new position.")
-		text += "\n"
+		text = _("Mark service(s) with OK button or use group selection (Ch+/Ch-), move selector to new position and finish with 'Move selected'. Selected service(s) will be moved top new position.") + " "
 		text += _("Use 'Menu' for sorting.") + " "
-		text += _("Sorting has not effect for finaly bouquet sorting.")
+		text += _("Sorting has not effect for finaly bouquet sorting.") + " "
+		text += _("Epg or Info toggles between EPG and Info text.") + " "
+		text += _("'Stop' button stops Preview.")
 		self["info"].setText(text)
 
 		self.onSelectionChanged = []
@@ -2163,7 +2219,14 @@ class refreshBouquetMoveServices(Screen):
 	def displayService(self):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
-			self["Service"].newService(eServiceReference(ref))
+			self["TransponderInfo"].newService(eServiceReference(ref))
+			if self.display_epg:
+				self["Service"].newService(eServiceReference(ref))
+				self["info"].hide()
+			else:
+				self["Service"].newService(None)
+				self["info"].show()
+
 			if cfg.preview.value:
 				self.previewService()
 			else:
@@ -2171,6 +2234,7 @@ class refreshBouquetMoveServices(Screen):
 		else:
 			self["key_yellow"].setText("")
 			self["Service"].newService(None)
+			self["TransponderInfo"].newService(None)
 
 	def previewService(self):
 		ref = self["services"].getCurrent()[0][1]
@@ -2180,9 +2244,8 @@ class refreshBouquetMoveServices(Screen):
 		self.session.nav.playService(self.playingRef)
 
 	def displayEPG(self):
-		ref = self["services"].getCurrent()[0][1]
-		if not self.isNotService(ref):
-			self.session.open(refreshBouquetEPG, eServiceReference(ref))
+		self.display_epg = not self.display_epg
+		self.displayService()
 
 	def moveCurrentEntries(self, index):
 		nr_items = len(self.list.getSelectionsList())
@@ -2266,42 +2329,6 @@ class refreshBouquetMoveServices(Screen):
 	def callBackExit(self, answer):
 		if answer == True:
 			self.close(True)
-
-# EPG screen
-class refreshBouquetEPG(Screen):
-	skin="""
-	<screen name="RefreshBouquet EPG" position="center,center" size="660,405" title="EPG" flags="wfNoBorder" backgroundColor="background">
-		<widget source="Service" render="Label" position="10,10" size="640,25" transparent="1" foregroundColor="secondFG" font="Regular;22" halign="left">
-			<convert type="EventName">Name</convert>
-		</widget>
-		<widget source="Service" render="Label" position="10,50" size="640,345" transparent="1" font="Regular;20" halign="block">
-			<convert type="EventName">FullDescription</convert>
-		</widget>
-	</screen>"""
-
-	def __init__(self, session, service):
-		Screen.__init__(self, session)
-		self.session = session
-		self.service = service
-		self.setTitle(_("RefreshBouquet v. %s - EPG" % VERSION))
-		self["Service"] = ServiceEvent()
-
-		self["actions"] = ActionMap(["OkCancelActions", "RefreshBouquetActions"],
-		{
-			"ok": self.exit,
-			"cancel": self.exit,
-			"green": self.exit,
-			"red": self.exit,
-			"epg": self.exit,
-		}, -2)
-
-		self.onLayoutFinish.append(self.displayEpg)
-
-	def displayEpg(self):
-		self["Service"].newService(self.service)
-
-	def exit(self):
-		self.close()
 
 # options
 class refreshBouquetCfg(Screen, ConfigListScreen):
