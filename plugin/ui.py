@@ -2286,12 +2286,13 @@ class refreshBouquetEPG(Screen):
 		self.setTitle(_("RefreshBouquet v. %s - EPG" % VERSION))
 		self["Service"] = ServiceEvent()
 
-		self["actions"] = ActionMap(["ColorActions", "OkCancelActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "RefreshBouquetActions"],
 		{
 			"ok": self.exit,
 			"cancel": self.exit,
 			"green": self.exit,
 			"red": self.exit,
+			"epg": self.exit,
 		}, -2)
 
 		self.onLayoutFinish.append(self.displayEpg)
