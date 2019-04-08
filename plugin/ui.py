@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.93"
+VERSION = "1.94"
 #  by ims (c) 2016-2019 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -208,8 +208,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			menu.append((_("Remove selected services from bouquet"),3))
 			buttons = ["6","8"]
 			rbbItems(menu,buttons,bName)
-		else:
-			self["info"].setText(self.infotext)
+		self["info"].setText(self.infotext)
 		menu.append((_("New bouquet"),13))
 		buttons += [""]
 		if self["config"].getCurrent():
@@ -268,8 +267,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		if name == self["target_name"].getText():
 			self.targetItem = None
 			self["target_name"].setText("")
-		if not self.sourceItem and not self.targetItem:
-			self["info"].setText(self.infotext)
+		self["info"].setText(self.infotext)
 
 # clear selected inputs
 	def clearInputs(self):
@@ -285,7 +283,6 @@ class refreshBouquet(Screen, HelpableScreen):
 			current = currentBouquet
 		else:
 			current = self["config"].getCurrent()
-			self["info"].setText("")
 		self["source_name"].setText(current[0])
 		self.sourceItem = current
 		self.setBouquetsOrbitalPositionsConfigFilter(self.sourceItem)
@@ -295,7 +292,6 @@ class refreshBouquet(Screen, HelpableScreen):
 			current = currentBouquet
 		else:
 			current = self["config"].getCurrent()
-			self["info"].setText("")
 		self["target_name"].setText(current[0])
 		self.targetItem = current
 # get all orbital positions in source bouquet to config for filtering
