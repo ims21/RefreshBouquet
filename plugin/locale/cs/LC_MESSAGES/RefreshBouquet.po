@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-07 23:52+0200\n"
-"PO-Revision-Date: 2019-04-07 23:55+0200\n"
+"POT-Creation-Date: 2019-04-27 20:34+0200\n"
+"PO-Revision-Date: 2019-04-27 20:36+0200\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi\n"
 "Language: cs_CZ\n"
@@ -19,11 +19,45 @@ msgstr "RefreshBouquet"
 msgid "Actualize services in bouquets"
 msgstr "Aktualizace programů v přehledech"
 
-msgid "Select rbb file"
-msgstr "Zvolte rbb soubor"
+msgid "Manage deleted userbouquets"
+msgstr "Správa odstraněných přehledů"
 
 msgid "Cancel"
 msgstr "Zavřít"
+
+msgid "Restore"
+msgstr "Obnovit"
+
+msgid "Remove"
+msgstr "Odstranit"
+
+msgid "Inversion"
+msgstr "Invertovat"
+
+msgid ""
+"On deleted userbouquet press 'Restore' or 'Remove' or mark more deleted "
+"userbouquets with 'OK' and then use 'Restore' or 'Remove'."
+msgstr ""
+"Na smazaném přehledu stiskněte 'Obnovit' nebo 'Odstranit' nebo označte více "
+"smazaných přehledů pomocí tlačítka 'OK' a poté použijte 'Obnovit' nebo "
+"'Odstranit'."
+
+msgid "Are you sure to remove selected deleted userbouquets?"
+msgstr "Opravdu chcete odstranit označené smazané přehledy?"
+
+#, python-format
+msgid "Are you sure to remove deleted userbouquet '%s'?"
+msgstr "Opravdu chcete odstranit smazaný přehled '%s'?"
+
+msgid "Are you sure to restore selected deleted userbouquets?"
+msgstr "Opravdu chcete obnovit označené smazané přehledy?"
+
+#, python-format
+msgid "Are you sure to restore deleted userbouquet '%s'?"
+msgstr "Opravdu chcete obnovit smazaný přehled '%s'?"
+
+msgid "Select rbb file"
+msgstr "Zvolte rbb soubor"
 
 msgid "Dotted"
 msgstr "Tečkované"
@@ -326,9 +360,6 @@ msgstr "- výsledky"
 msgid "Refresh selected"
 msgstr "Aktualizovat vybrané"
 
-msgid "Inversion"
-msgstr "Invertovat"
-
 msgid ""
 "This feature looking for differences in service parameters with same names "
 "in source and target bouquets. Parameters for marked services will be "
@@ -595,6 +626,12 @@ msgid ""
 msgstr ""
 "Při vytváření přehledu z 'rbb' souboru mohou být porovnávány i tečkované "
 "názvy programů. Budete ale muset ručně odstraňovat duplicity."
+
+#~ msgid "Are you sure to purge selected deleted userbouquets?"
+#~ msgstr "Opravdu chcete odstranit označené smazané přehledy?"
+
+#~ msgid "Are you sure to purge deleted userbouquet '%s'?"
+#~ msgstr "Opravdu chcete odstranit smazaný přehled '%s'?"
 
 #~ msgid "Sort source bouquet services in manually replace"
 #~ msgstr "Třídit programy ve zdrojovém přehledu pro ruční nahrazování"

@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.94"
+VERSION = "1.95"
 #  by ims (c) 2016-2019 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -215,6 +215,9 @@ class refreshBouquet(Screen, HelpableScreen):
 			name = self["config"].getCurrent()[0]
 			menu.append((_("Remove bouquet '%s'") % name,15))
 			buttons += [""]
+		if self.isDeletedBouquet():
+			menu.append((_("Manage deleted userbouquets"),18))
+			buttons += [""]
 		menu.append((_("Settings..."),10))
 		buttons.append("menu")
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_("Select action for bouquet:"), list=menu, keys=buttons)
@@ -241,6 +244,8 @@ class refreshBouquet(Screen, HelpableScreen):
 			self.newBouquet()
 		elif choice[1] == 15:
 			self.removeBouquet()
+		elif choice[1] == 18:
+			self.ManageDeletedBouquets()
 		elif choice[1] == 20:
 			self.saveRbbBouquet()
 		elif choice[1] == 21:
@@ -503,6 +508,22 @@ class refreshBouquet(Screen, HelpableScreen):
 		transponderraw = info.getInfoObject(ref, iServiceInformation.sTransponderData)
 		transponderdata = ConvertToHumanReadable(transponderraw)
 		return transponderdata["frequency"]/1000
+
+#
+# Test for deleted userbouquet
+#
+	def isDeletedBouquet(self):
+		for x in os.listdir(E2):
+			if x.startswith("userbouquet") and x.endswith(".del"):
+				return True
+		return False
+
+# call refreshBouquetRemoveBouquets screen
+
+	def ManageDeletedBouquets(self):
+		from managebq import refreshBouquetManageDeletedBouquets
+		self.session.openWithCallback(self.getBouquetList, refreshBouquetManageDeletedBouquets)
+
 #
 # Save RefreshBouquetBackup name:orbital_position services parameters in selected bouquet to /etc/enigma2/bouquetname.rbb file
 #

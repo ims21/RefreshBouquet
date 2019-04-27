@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-07 23:52+0200\n"
+"POT-Creation-Date: 2019-04-27 20:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,10 +24,41 @@ msgstr ""
 msgid "Actualize services in bouquets"
 msgstr ""
 
-msgid "Select rbb file"
+msgid "Manage deleted userbouquets"
 msgstr ""
 
 msgid "Cancel"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Inversion"
+msgstr ""
+
+msgid ""
+"On deleted userbouquet press 'Restore' or 'Remove' or mark more deleted "
+"userbouquets with 'OK' and then use 'Restore' or 'Remove'."
+msgstr ""
+
+msgid "Are you sure to remove selected deleted userbouquets?"
+msgstr ""
+
+#, python-format
+msgid "Are you sure to remove deleted userbouquet '%s'?"
+msgstr ""
+
+msgid "Are you sure to restore selected deleted userbouquets?"
+msgstr ""
+
+#, python-format
+msgid "Are you sure to restore deleted userbouquet '%s'?"
+msgstr ""
+
+msgid "Select rbb file"
 msgstr ""
 
 msgid "Dotted"
@@ -317,9 +348,6 @@ msgid "- results"
 msgstr ""
 
 msgid "Refresh selected"
-msgstr ""
-
-msgid "Inversion"
 msgstr ""
 
 msgid ""
