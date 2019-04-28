@@ -149,7 +149,7 @@ class refreshBouquetManageDeletedBouquets(Screen):
 	def fileName(self, filename):
 		if cfg.deleted_bq_fullname.value:
 			return filename
-		return filename.replace('userbouquet.','').replace('.tv.del','').replace('radio.del','').replace(E2+'/','')
+		return filename.split('.')[1]
 
 	def exit(self):
 		if self.original_selectionpng:
