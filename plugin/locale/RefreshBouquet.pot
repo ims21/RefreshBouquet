@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-27 20:34+0200\n"
+"POT-Creation-Date: 2019-04-28 10:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,18 +44,26 @@ msgid ""
 "userbouquets with 'OK' and then use 'Restore' or 'Remove'."
 msgstr ""
 
-msgid "Are you sure to remove selected deleted userbouquets?"
+#, python-format
+msgid "Are you sure to remove %s selected deleted userbouquets?"
 msgstr ""
 
 #, python-format
-msgid "Are you sure to remove deleted userbouquet '%s'?"
-msgstr ""
-
-msgid "Are you sure to restore selected deleted userbouquets?"
+msgid ""
+"Are you sure to remove deleted userbouquet?\n"
+"\n"
+"%s"
 msgstr ""
 
 #, python-format
-msgid "Are you sure to restore deleted userbouquet '%s'?"
+msgid "Are you sure to restore %s selected deleted userbouquets?"
+msgstr ""
+
+#, python-format
+msgid ""
+"Are you sure to restore deleted userbouquet?\n"
+"\n"
+"%s"
 msgstr ""
 
 msgid "Select rbb file"
@@ -186,6 +194,9 @@ msgstr ""
 msgid ""
 "Source select with 'yellow' button, target with 'blue' button. Selection can "
 "be cleared with '0'."
+msgstr ""
+
+msgid "Use the context 'menu' or 'green' buttons to select operation."
 msgstr ""
 
 #, python-format
@@ -578,4 +589,12 @@ msgstr ""
 msgid ""
 "When is creating a bouquet from 'rbb' file, dotted names can be compared "
 "too. You need then manually remove duplicates. Default set is 'no'"
+msgstr ""
+
+msgid "Show full filenames for deleted bouquets"
+msgstr ""
+
+msgid ""
+"'Manage deleted userbouquets' will display full filenames instead bouquet "
+"names only."
 msgstr ""

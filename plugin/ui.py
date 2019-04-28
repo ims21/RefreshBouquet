@@ -70,6 +70,7 @@ config.plugins.refreshbouquet.vk_length = ConfigSelection(default = "3", choices
 config.plugins.refreshbouquet.vk_sensitive = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.sortmenu = ConfigSelection(default = "0", choices = [("0", _("Original")),("1", _("A-z sort")),("2", _("Z-a sort")),("3", _("Selected top")),("4", _("Original - reverted"))])
 config.plugins.refreshbouquet.rbb_dotted = ConfigYesNo(default=False)
+config.plugins.refreshbouquet.deleted_bq_fullname = ConfigYesNo(default=False)
 
 cfg = config.plugins.refreshbouquet
 
@@ -146,7 +147,8 @@ class refreshBouquet(Screen, HelpableScreen):
 		self["source_name"] = Label()
 		self["target_name"] = Label()
 		self.infotext = _("Select or source or target or source and target bouquets!") + " "
-		self.infotext += _("Source select with 'yellow' button, target with 'blue' button. Selection can be cleared with '0'.")
+		self.infotext += _("Source select with 'yellow' button, target with 'blue' button. Selection can be cleared with '0'.") + " "
+		self.infotext += _("Use the context 'menu' or 'green' buttons to select operation.")
 		self["info"] = Label(self.infotext)
 
 		self.sourceItem = None
@@ -2405,6 +2407,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Pre-fill first 'n' servicename chars to virtual keyboard"), cfg.vk_length))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Compare virtual keyboard input as case sensitive"), cfg.vk_sensitive))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Use dotted service name for 'rbb' files"), cfg.rbb_dotted, _("When is creating a bouquet from 'rbb' file, dotted names can be compared too. You need then manually remove duplicates. Default set is 'no'")))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Show full filenames for deleted bouquets"), cfg.deleted_bq_fullname, _("'Manage deleted userbouquets' will display full filenames instead bouquet names only.")))
 		ConfigListScreen.__init__(self, refreshBouquetCfglist, session, on_change = self.changedEntry)
 
 		self.onChangedEntry = []

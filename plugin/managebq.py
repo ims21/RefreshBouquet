@@ -67,7 +67,7 @@ class refreshBouquetManageDeletedBouquets(Screen):
 		nr = 0
 		for x in os.listdir(E2):
 			if x.startswith("userbouquet") and x.endswith(".del"):
-				data.addSelection(x.replace('userbouquet.','').replace('.tv.del','').replace('radio.del',''), "%s/%s" % (E2,x), nr, False)
+				data.addSelection(self.fileName(x), "%s/%s" % (E2,x), nr, False)
 				nr += 1
 		self.list = data
 		self.list.sort()
@@ -95,9 +95,9 @@ class refreshBouquetManageDeletedBouquets(Screen):
 	def removeCurrentEntries(self):
 		marked = len(self.list.getSelectionsList())
 		if marked:
-			text = _("Are you sure to remove selected deleted userbouquets?")
+			text = _("Are you sure to remove %s selected deleted userbouquets?") % marked
 		else:
-			text = _("Are you sure to remove deleted userbouquet '%s'?") % self["config"].getCurrent()[0][1]
+			text = _("Are you sure to remove deleted userbouquet?\n\n%s") % self.fileName(self["config"].getCurrent()[0][1])
 		self.session.openWithCallback(self.removeFromSource, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
 
 	def removeFromSource(self, answer):
@@ -116,9 +116,9 @@ class refreshBouquetManageDeletedBouquets(Screen):
 	def restoreCurrentEntries(self):
 		marked = len(self.list.getSelectionsList())
 		if marked:
-			text = _("Are you sure to restore selected deleted userbouquets?")
+			text = _("Are you sure to restore %s selected deleted userbouquets?") % marked
 		else:
-			text = _("Are you sure to restore deleted userbouquet '%s'?") % self["config"].getCurrent()[0][1]
+			text = _("Are you sure to restore deleted userbouquet?\n\n%s") % self.fileName(self["config"].getCurrent()[0][1])
 		self.session.openWithCallback(self.restoreSelected, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
 
 	def restoreSelected(self, answer):
@@ -145,6 +145,11 @@ class refreshBouquetManageDeletedBouquets(Screen):
 			import Components.SelectionList
 			self.original_selectionpng = Components.SelectionList.selectionpng
 			Components.SelectionList.selectionpng = LoadPixmap(cached=True, path=path)
+
+	def fileName(self, filename):
+		if cfg.deleted_bq_fullname.value:
+			return filename
+		return filename.replace('userbouquet.','').replace('.tv.del','').replace('radio.del','').replace(E2+'/','')
 
 	def exit(self):
 		if self.original_selectionpng:
