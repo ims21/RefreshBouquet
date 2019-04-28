@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-06 09:39+0200\n"
-"PO-Revision-Date: 2018-04-06 19:38+0100\n"
+"POT-Creation-Date: 2019-04-28 10:26+0200\n"
+"PO-Revision-Date: 2019-04-28 10:57+0200\n"
 "Last-Translator: Frenske <voorzitter@openpli.org>\n"
 "Language-Team: PLi <translators@openpli.org>\n"
 "Language: nl\n"
@@ -11,13 +11,112 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 2.0.6\n"
 
 msgid "RefreshBouquet"
 msgstr "RefreshBouquet"
 
 msgid "Actualize services in bouquets"
 msgstr "Actualiseer de zenders in de boeketten"
+
+#, fuzzy
+msgid "Manage deleted userbouquets"
+msgstr "Verplaats de geselecteerde zenders vanuit het bronboeket"
+
+msgid "Cancel"
+msgstr "Annuleer"
+
+msgid "Restore"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Inversion"
+msgstr "Inverteer"
+
+msgid ""
+"On deleted userbouquet press 'Restore' or 'Remove' or mark more deleted "
+"userbouquets with 'OK' and then use 'Restore' or 'Remove'."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Are you sure to remove %s selected deleted userbouquets?"
+msgstr "Weet je zeker dat je dit %d kanaal wilt verwijderen?"
+
+#, fuzzy, python-format
+msgid ""
+"Are you sure to remove deleted userbouquet?\n"
+"\n"
+"%s"
+msgstr "Weet je zeker dat je dit %d kanaal wilt verwijderen?"
+
+#, fuzzy, python-format
+#| msgid "Are you sure to refresh this %d service?"
+#| msgid_plural "Are you sure to refresh this %d services?"
+msgid "Are you sure to restore %s selected deleted userbouquets?"
+msgstr "Weet je zeker dat je dit %d kanaal wilt actualiseren?"
+
+#, fuzzy, python-format
+msgid ""
+"Are you sure to restore deleted userbouquet?\n"
+"\n"
+"%s"
+msgstr "Weet je zeker dat je dit %d kanaal wilt verwijderen?"
+
+msgid "Select rbb file"
+msgstr ""
+
+msgid "Dotted"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "Select rbb file with 'OK' and create bouquet with same name."
+msgstr ""
+
+msgid "Use 'Menu' for predefined 'rbb' files."
+msgstr ""
+
+#, python-format
+msgid ""
+"If You will add to bouquet some missing services (start with '---'), You can "
+"then finalize created bouquet with '%s' etc."
+msgstr ""
+
+msgid "Manually replace services"
+msgstr "Handmatig vervangen van de zenders"
+
+msgid "You can try toggle 'Standard/Dotted' service names too."
+msgstr ""
+
+msgid "Copy predefined 'rbb' file(s) to list"
+msgstr ""
+
+#, fuzzy
+#| msgid "select action"
+msgid "Select action:"
+msgstr "kies een aktie"
+
+msgid "Erase"
+msgstr ""
+
+#, fuzzy
+msgid "Rename"
+msgstr "Wijzigen"
+
+#, fuzzy, python-format
+msgid "The path %s already exists."
+msgstr "Het pad %s bestaat al."
+
+#, fuzzy
+msgid "Error"
+msgstr "Fout"
+
+#, fuzzy
+msgid "Are You sure to remove file?"
+msgstr "Weet je zeker dat je dit %d kanaal wilt verwijderen?"
 
 #, fuzzy
 msgid "Original"
@@ -80,9 +179,6 @@ msgstr "selecteer het doelboeket"
 msgid "clear selection"
 msgstr "Verkeerde keuze!"
 
-msgid "Cancel"
-msgstr "Annuleer"
-
 msgid "Run"
 msgstr "Uitvoeren"
 
@@ -102,14 +198,13 @@ msgstr "Doelboeket:"
 msgid "Select or source or target or source and target bouquets!"
 msgstr "Selecteer eerst het bron en / of het doelboeket !"
 
-msgid "Select action for bouquet:"
-msgstr "Kies de uit te voeren actie:"
+msgid ""
+"Source select with 'yellow' button, target with 'blue' button. Selection can "
+"be cleared with '0'."
+msgstr ""
 
-msgid "Remove selected services in source bouquet"
-msgstr "Verwijder de geselecteerde zenders in het bronboeket"
-
-msgid "Move selected services in source bouquet"
-msgstr "Verplaats de geselecteerde zenders vanuit het bronboeket"
+msgid "Use the context 'menu' or 'green' buttons to select operation."
+msgstr ""
 
 #, python-format
 msgid "Create '%s.rbb' file"
@@ -118,8 +213,11 @@ msgstr ""
 msgid "Create bouquet from rbb file"
 msgstr ""
 
-msgid "Manually replace services"
-msgstr "Handmatig vervangen van de zenders"
+msgid "Move selected services in source bouquet"
+msgstr "Verplaats de geselecteerde zenders vanuit het bronboeket"
+
+msgid "Remove selected services in source bouquet"
+msgstr "Verwijder de geselecteerde zenders in het bronboeket"
 
 msgid "Add selected services to target bouquet"
 msgstr "Voeg de gemarkeerde zender(s) toe aan het doelboeket"
@@ -131,12 +229,12 @@ msgid "Refresh services in target bouquet"
 msgstr "Actualiseer de zenders in het doelboeket"
 
 #, fuzzy
-msgid "Remove selected services from bouquet"
-msgstr "Verwijder de geselecteerde zenders in het bronboeket"
-
-#, fuzzy
 msgid "Move selected services in bouquet"
 msgstr "Verplaats de geselecteerde zenders vanuit het bronboeket"
+
+#, fuzzy
+msgid "Remove selected services from bouquet"
+msgstr "Verwijder de geselecteerde zenders in het bronboeket"
 
 #, fuzzy
 msgid "New bouquet"
@@ -149,6 +247,9 @@ msgstr "Actualiseer boeket %s"
 msgid "Settings..."
 msgstr "Instellingen..."
 
+msgid "Select action for bouquet:"
+msgstr "Kies de uit te voeren actie:"
+
 msgid "Wrong selection!"
 msgstr "Verkeerde keuze!"
 
@@ -158,10 +259,14 @@ msgstr "Terrestrial"
 msgid "Cable"
 msgstr "Kabel"
 
-msgid "Target bouquet is empty!"
+#, fuzzy
+#| msgid "Target bouquet is empty!"
+msgid "Target bouquet is empty !"
 msgstr "Het doelboeket is leeg !"
 
-msgid "Source bouquet is empty!"
+#, fuzzy
+#| msgid "Source bouquet is empty!"
+msgid "Source bouquet is empty !"
 msgstr "Het bronboeket is leeg !"
 
 msgid "No differences found"
@@ -197,8 +302,14 @@ msgstr "Toon de boeketnaam"
 msgid "Are You sure to remove bouquet?"
 msgstr "Weet je zeker dat je dit %d kanaal wilt verwijderen?"
 
+msgid "Source bouquet is empty!"
+msgstr "Het bronboeket is leeg !"
+
 msgid "No services in source bouquet!"
 msgstr "Geen zender(s) aanwezig in het bronboeket !"
+
+msgid "Target bouquet is empty!"
+msgstr "Het doelboeket is leeg !"
 
 #, fuzzy
 msgid "No services in target bouquet!"
@@ -210,9 +321,6 @@ msgstr "-  kies de te vervangen zender(s) met 'Ok'"
 #, python-format
 msgid "RefreshBouquet %s"
 msgstr "Actualiseer boeket %s"
-
-msgid "Apply and close"
-msgstr "Toepassen"
 
 msgid "Toggle source and target bouquets with Bouq +/- ."
 msgstr "Wissel tussen bron en doelboeket met Bouq +/- ."
@@ -235,12 +343,21 @@ msgstr ""
 msgid "Source can be sorted with 'Menu'."
 msgstr ""
 
+msgid "Epg or Info toggles between EPG and Info text."
+msgstr ""
+
+msgid "'Stop' button stops Preview."
+msgstr ""
+
 #, fuzzy
 msgid "Sort source bouquet:"
 msgstr "Bronboeket:"
 
 msgid "Replace"
 msgstr "Vervangen"
+
+msgid "Apply and close"
+msgstr "Toepassen"
 
 msgid "Preview"
 msgstr "Voorbeeld"
@@ -267,9 +384,6 @@ msgstr "- resultaat"
 
 msgid "Refresh selected"
 msgstr "Selectie actualiseren"
-
-msgid "Inversion"
-msgstr "Inverteer"
 
 msgid ""
 "This feature looking for differences in service parameters with same names "
@@ -520,36 +634,21 @@ msgid "Compare virtual keyboard input as case sensitive"
 msgstr ""
 "Vergelijk de invoer van het virtuele toetsenbord als hoofdlettergevoelig"
 
-msgid "Select rbb file"
+msgid "Use dotted service name for 'rbb' files"
 msgstr ""
 
-msgid "Select rbb file with 'OK' and create bouquet with same name."
-msgstr ""
-
-#, python-format
 msgid ""
-"If You will add to bouquet some missing services (start with '---'), You can "
-"then finalize created bouquet with '%s' etc."
+"When is creating a bouquet from 'rbb' file, dotted names can be compared "
+"too. You need then manually remove duplicates. Default set is 'no'"
 msgstr ""
 
-msgid "Erase"
+msgid "Show full filenames for deleted bouquets"
 msgstr ""
 
-#, fuzzy
-msgid "Rename"
-msgstr "Wijzigen"
-
-#, fuzzy, python-format
-msgid "The path %s already exists."
-msgstr "Het pad %s bestaat al."
-
-#, fuzzy
-msgid "Error"
-msgstr "Fout"
-
-#, fuzzy
-msgid "Are You sure to remove file?"
-msgstr "Weet je zeker dat je dit %d kanaal wilt verwijderen?"
+msgid ""
+"'Manage deleted userbouquets' will display full filenames instead bouquet "
+"names only."
+msgstr ""
 
 #, fuzzy
 #~ msgid "Sort source bouquet services in manually replace"
