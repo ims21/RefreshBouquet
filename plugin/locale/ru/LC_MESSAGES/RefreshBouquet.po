@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: refreshBouquet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-28 10:26+0200\n"
-"PO-Revision-Date: 2019-04-28 10:59+0200\n"
+"POT-Creation-Date: 2019-04-28 23:42+0200\n"
+"PO-Revision-Date: 2019-04-28 23:45+0200\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -182,6 +182,9 @@ msgstr "выбор целевого букета "
 msgid "clear selection"
 msgstr "Неправильный выбор!"
 
+msgid "enable/disable moving bouquet"
+msgstr ""
+
 msgid "Run"
 msgstr "Запуск"
 
@@ -207,6 +210,9 @@ msgid ""
 msgstr ""
 
 msgid "Use the context 'menu' or 'green' buttons to select operation."
+msgstr ""
+
+msgid "Button '6' enable/disable moving bouquets with '<' and '>' buttons."
 msgstr ""
 
 #, python-format

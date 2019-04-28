@@ -44,6 +44,8 @@ import skin
 from plugin import plugin_path
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from ServiceReference import ServiceReference
+from Components.Sources.Boolean import Boolean
+from Components.Pixmap import Pixmap
 
 config.plugins.refreshbouquet.case_sensitive = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.omit_first = ConfigYesNo(default = True)
@@ -133,7 +135,17 @@ class refreshBouquet(Screen, HelpableScreen):
 			"blue": (self.getTarget, _("select target bouquet ")),
 			"menu": (self.showMenu, _("select action")),
 			"clearInputs": (self.clearInputs, _("clear selection")),
+#			"moving": (self.startMoving, _("enable/disable moving bouquet")),
+			"next": self.moveDown,
+			"prev": self.moveUp,
 			}, -2)
+
+		self.edit = 0
+		self.idx = 0
+		self.changes = False
+		self["h_prev"] = Pixmap()
+		self["h_next"] = Pixmap()
+		self.showPrevNext()
 
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Run"))
@@ -148,7 +160,8 @@ class refreshBouquet(Screen, HelpableScreen):
 		self["target_name"] = Label()
 		self.infotext = _("Select or source or target or source and target bouquets!") + " "
 		self.infotext += _("Source select with 'yellow' button, target with 'blue' button. Selection can be cleared with '0'.") + " "
-		self.infotext += _("Use the context 'menu' or 'green' buttons to select operation.")
+		self.infotext += _("Use the context 'menu' or 'green' buttons to select operation.") + " "
+#		self.infotext += _("Button '6' enable/disable moving bouquets with '<' and '>' buttons.")
 		self["info"] = Label(self.infotext)
 
 		self.sourceItem = None
@@ -162,11 +175,39 @@ class refreshBouquet(Screen, HelpableScreen):
 			self.getTarget(currentBouquet)
 		else:
 			self.currentBouquet = currentBouquet
-
 		self.onLayoutFinish.append(self.getBouquetList)
 		if cfg.selector2bouquet.value:
 			self.onLayoutFinish.append(self.setSelector)
 
+	def startMoving(self):
+		self.edit = not self.edit
+		self.idx = self["config"].getIndex()
+		self.showPrevNext()
+	def showPrevNext(self):
+		if self.edit:
+			self["h_prev"].show()
+			self["h_next"].show()
+		else:
+			self["h_prev"].hide()
+			self["h_next"].hide()
+			# if self.changes:
+			#	here call rebuild and reload bouquets
+			# 	self.changes=False
+	def moveUp(self):
+		if self.edit and self.idx -1 >= 0:
+			self.moveDirection(-1)
+	def moveDown(self):
+		if self.edit and self.idx +1 < self["config"].count():
+			self.moveDirection(1)
+	def moveDirection(self, direction):
+			self["config"].setIndex(self.idx)
+			tmp = self["config"].getCurrent()
+			self["config"].setIndex(self.idx+direction)
+			tmp2 = self["config"].getCurrent()
+			self["config"].modifyEntry(self.idx, tmp2)
+			self["config"].modifyEntry(self.idx+direction, tmp)
+			self.idx+=direction
+			self.changes=True
 	def exit(self):
 		self.Servicelist.servicelist.resetRoot()
 		if cfg.on_end.value:
