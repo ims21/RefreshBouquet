@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GithubIMS 21\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-29 12:21+0200\n"
-"PO-Revision-Date: 2019-04-29 12:22+0200\n"
+"POT-Creation-Date: 2019-04-29 13:57+0200\n"
+"PO-Revision-Date: 2019-04-29 17:40+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -220,8 +220,11 @@ msgstr ""
 msgid "Use the context 'menu' or 'green' buttons to select operation."
 msgstr ""
 
+msgid "For some operations, a selector on the bouquet is sufficient."
+msgstr ""
+
 msgid ""
-"Button '6' enable/disable moving bouquet with 'prev' and 'next' buttons."
+"Button '6' enable/disable moving bouquet with 'preview' and 'next' buttons."
 msgstr ""
 
 #, fuzzy, python-format

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-29 13:57+0200\n"
-"PO-Revision-Date: 2019-04-29 13:58+0200\n"
+"PO-Revision-Date: 2019-04-29 17:39+0200\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi\n"
 "Language: cs_CZ\n"
@@ -214,15 +214,15 @@ msgstr ""
 "Výběr můžete zrušit pomocí '0'. "
 
 msgid "Use the context 'menu' or 'green' buttons to select operation."
-msgstr "Použijte kontextové 'menu' nebo 'zelené' tlačítko pro výběr operace."
+msgstr "Použijte kontextové menu nebo zelené tlačítko pro výběr operace."
 
 msgid "For some operations, a selector on the bouquet is sufficient."
 msgstr "Pro některé operace postačuje kurzor na přehledu."
 
 msgid ""
-"Button '6' enable/disable moving bouquet with 'prev' and 'next' buttons."
+"Button '6' enable/disable moving bouquet with 'preview' and 'next' buttons."
 msgstr ""
-"Tlačítko '6' povoluje/zakazuje přesun přehledu pomocí kláves 'prev' a "
+"Tlačítko '6' povoluje/zakazuje přesun přehledu pomocí kláves 'preview' a "
 "'next' ."
 
 #, python-format

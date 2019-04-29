@@ -162,7 +162,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		self.infotext += _("Source select with 'yellow' button, target with 'blue' button. Selection can be cleared with '0'.") + " "
 		self.infotext += _("For some operations, a selector on the bouquet is sufficient.") + " "
 		self.infotext += _("Use the context 'menu' or 'green' buttons to select operation.") + " "
-		self.infotext += _("Button '6' enable/disable moving bouquet with 'prev' and 'next' buttons.")
+		self.infotext += _("Button '6' enable/disable moving bouquet with 'preview' and 'next' buttons.")
 		self["info"] = Label(self.infotext)
 
 		self.sourceItem = None
