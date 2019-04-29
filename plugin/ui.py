@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.95"
+VERSION = "1.96"
 #  by ims (c) 2016-2019 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -135,9 +135,9 @@ class refreshBouquet(Screen, HelpableScreen):
 			"blue": (self.getTarget, _("select target bouquet ")),
 			"menu": (self.showMenu, _("select action")),
 			"clearInputs": (self.clearInputs, _("clear selection")),
-#			"moving": (self.startMoving, _("enable/disable moving bouquet")),
-			"next": self.moveDown,
-			"prev": self.moveUp,
+			"moving": (self.startMoving, _("enable/disable moving bouquet")),
+			"next": (self.moveDown, _("move item down")),
+			"prev": (self.moveUp, _("move item up")),
 			}, -2)
 
 		self.edit = 0
@@ -161,7 +161,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		self.infotext = _("Select or source or target or source and target bouquets!") + " "
 		self.infotext += _("Source select with 'yellow' button, target with 'blue' button. Selection can be cleared with '0'.") + " "
 		self.infotext += _("Use the context 'menu' or 'green' buttons to select operation.") + " "
-#		self.infotext += _("Button '6' enable/disable moving bouquets with '<' and '>' buttons.")
+		self.infotext += _("Button '6' enable/disable moving bouquets with '<' and '>' buttons.") + " Moving is in construct!"
 		self["info"] = Label(self.infotext)
 
 		self.sourceItem = None
@@ -191,7 +191,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			self["h_prev"].hide()
 			self["h_next"].hide()
 			# if self.changes:
-			#	here call rebuild and reload bouquets
+			#	here call rebuild and reload bouquets list
 			# 	self.changes=False
 	def moveUp(self):
 		if self.edit and self.idx -1 >= 0:
@@ -208,6 +208,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			self["config"].modifyEntry(self.idx+direction, tmp)
 			self.idx+=direction
 			self.changes=True
+
 	def exit(self):
 		self.Servicelist.servicelist.resetRoot()
 		if cfg.on_end.value:
@@ -256,6 +257,10 @@ class refreshBouquet(Screen, HelpableScreen):
 		buttons += [""]
 		if self["config"].getCurrent():
 			name = self["config"].getCurrent()[0]
+			menu.append((_("Rename bouquet '%s'") % name,14))
+			buttons += [""]
+		if self["config"].getCurrent():
+			name = self["config"].getCurrent()[0]
 			menu.append((_("Remove bouquet '%s'") % name,15))
 			buttons += [""]
 		if self.isDeletedBouquet():
@@ -285,6 +290,8 @@ class refreshBouquet(Screen, HelpableScreen):
 			self.options()
 		elif choice[1] == 13:
 			self.newBouquet()
+		elif choice[1] == 14:
+			self.renameBouquet()
 		elif choice[1] == 15:
 			self.removeBouquet()
 		elif choice[1] == 18:
@@ -790,23 +797,48 @@ class refreshBouquet(Screen, HelpableScreen):
 			return False
 
 ###
+# Rename Bouquet
+###
+	def renameBouquet(self):
+		def renameEntryCallback(name):
+			if name:
+				mode = config.servicelist.lastmode.value
+				serviceHandler = eServiceCenter.getInstance()
+				bouquet_root = self.getRoot()
+				mutableBouquetList = serviceHandler.list(bouquet_root).startEdit()
+				if mutableBouquetList:
+					cur_ref = self["config"].getCurrent()[1]
+					cur_ref.setName(name)
+					index = self["config"].getIndex()
+					if not mutableBouquetList.removeService(cur_ref, False):
+						mutableBouquetList.addService(cur_ref)
+						mutableBouquetList.moveService(cur_ref, index)
+						mutableBouquetList.flushChanges()
+						eDVBDB.getInstance().reloadBouquets()
+						self.clearInput(name)
+						self.getBouquetList()
+		currname = self["config"].getCurrent()[0]
+		if currname:
+			self.session.openWithCallback(renameEntryCallback, VirtualKeyBoard, title=_("Please enter new bouquet name"), text=currname)
+
+###
 # Remove Bouquet
 ###
 	def removeBouquet(self):
 		def callbackErase(answer):
 			if answer:
 				name = self["config"].getCurrent()[0]
-				ref = self["config"].getCurrent()[1]
+				cur_ref = self["config"].getCurrent()[1]
 				mode = config.servicelist.lastmode.value
 				serviceHandler = eServiceCenter.getInstance()
 				bouquet_root = self.getRoot()
 				mutableBouquetList = serviceHandler.list(bouquet_root).startEdit()
 				if mutableBouquetList:
-					if not mutableBouquetList.removeService(ref, False):
+					if not mutableBouquetList.removeService(cur_ref, False):
 						mutableBouquetList.flushChanges()
 						eDVBDB.getInstance().reloadBouquets()
-				self.clearInput(name)
-				self.getBouquetList()
+						self.clearInput(name)
+						self.getBouquetList()
 
 		if self["config"].getCurrent():
 			name = self["config"].getCurrent()[0]
@@ -2418,7 +2450,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		self["key_green"] = Label(_("OK"))
 
 		self["description"] = Label()
-		self["statusbar"] = Label("ims (c) 2018. v%s" % VERSION)
+		self["statusbar"] = Label("ims (c) 2019. v%s" % VERSION)
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{

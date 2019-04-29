@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: refreshBouquet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-28 23:42+0200\n"
-"PO-Revision-Date: 2019-04-28 23:45+0200\n"
+"POT-Creation-Date: 2019-04-29 09:05+0200\n"
+"PO-Revision-Date: 2019-04-29 09:08+0200\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -185,6 +185,12 @@ msgstr "Неправильный выбор!"
 msgid "enable/disable moving bouquet"
 msgstr ""
 
+msgid "move item down"
+msgstr ""
+
+msgid "move item up"
+msgstr ""
+
 msgid "Run"
 msgstr "Запуск"
 
@@ -250,6 +256,10 @@ msgid "New bouquet"
 msgstr "исходный букет"
 
 #, fuzzy, python-format
+msgid "Rename bouquet '%s'"
+msgstr "Обновление букета %s"
+
+#, fuzzy, python-format
 msgid "Remove bouquet '%s'"
 msgstr "Обновление букета %s"
 
@@ -305,6 +315,10 @@ msgstr "неизвестный"
 
 #, fuzzy
 msgid "Enter new bouquet name"
+msgstr "Отображать имя букета"
+
+#, fuzzy
+msgid "Please enter new bouquet name"
 msgstr "Отображать имя букета"
 
 #, fuzzy

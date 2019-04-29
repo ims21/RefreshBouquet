@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-28 23:42+0200\n"
+"POT-Creation-Date: 2019-04-29 09:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -176,6 +176,12 @@ msgstr ""
 msgid "enable/disable moving bouquet"
 msgstr ""
 
+msgid "move item down"
+msgstr ""
+
+msgid "move item up"
+msgstr ""
+
 msgid "Run"
 msgstr ""
 
@@ -237,6 +243,10 @@ msgid "New bouquet"
 msgstr ""
 
 #, python-format
+msgid "Rename bouquet '%s'"
+msgstr ""
+
+#, python-format
 msgid "Remove bouquet '%s'"
 msgstr ""
 
@@ -285,6 +295,9 @@ msgid "unknown"
 msgstr ""
 
 msgid "Enter new bouquet name"
+msgstr ""
+
+msgid "Please enter new bouquet name"
 msgstr ""
 
 msgid "Are You sure to remove bouquet?"

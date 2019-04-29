@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GithubIMS 21\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-28 23:42+0200\n"
-"PO-Revision-Date: 2019-04-28 23:44+0200\n"
+"POT-Creation-Date: 2019-04-29 09:05+0200\n"
+"PO-Revision-Date: 2019-04-29 09:07+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -187,6 +187,12 @@ msgstr "Mauvaise sélection!"
 msgid "enable/disable moving bouquet"
 msgstr ""
 
+msgid "move item down"
+msgstr ""
+
+msgid "move item up"
+msgstr ""
+
 msgid "Run"
 msgstr "Exécuter"
 
@@ -250,6 +256,10 @@ msgid "New bouquet"
 msgstr "bouquet source"
 
 #, fuzzy, python-format
+msgid "Rename bouquet '%s'"
+msgstr "RafraîchirBouquet %s"
+
+#, fuzzy, python-format
 msgid "Remove bouquet '%s'"
 msgstr "RafraîchirBouquet %s"
 
@@ -305,6 +315,10 @@ msgstr ""
 
 #, fuzzy
 msgid "Enter new bouquet name"
+msgstr "Afficher le nom du bouquet"
+
+#, fuzzy
+msgid "Please enter new bouquet name"
 msgstr "Afficher le nom du bouquet"
 
 #, fuzzy
