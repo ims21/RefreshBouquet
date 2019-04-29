@@ -161,7 +161,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		self.infotext = _("Select or source or target or source and target bouquets!") + " "
 		self.infotext += _("Source select with 'yellow' button, target with 'blue' button. Selection can be cleared with '0'.") + " "
 		self.infotext += _("Use the context 'menu' or 'green' buttons to select operation.") + " "
-		self.infotext += _("Button '6' enable/disable moving bouquets with '<' and '>' buttons.")
+		self.infotext += _("Button '6' enable/disable moving bouquet with 'prev' and 'next' buttons.")
 		self["info"] = Label(self.infotext)
 
 		self.sourceItem = None
@@ -750,9 +750,9 @@ class refreshBouquet(Screen, HelpableScreen):
 		self.l.setList(differences)
 		return differences, length
 
-
+###
 # add new bouquet	
-
+###
 	def newBouquet(self):
 		def runCreate(searchString = None):
 			if searchString:
@@ -760,8 +760,9 @@ class refreshBouquet(Screen, HelpableScreen):
 				self.getBouquetList()
 		self.session.openWithCallback(runCreate, VirtualKeyBoard, title = _("Enter new bouquet name"), text = "")
 
+###
 # add bouquet with bName
-
+###
 	def addBouquet(self, bName, services):
 		mode = config.servicelist.lastmode.value
 		serviceHandler = eServiceCenter.getInstance()
@@ -799,7 +800,6 @@ class refreshBouquet(Screen, HelpableScreen):
 ###
 # update moved Bouquet
 ###
-
 	def updateMovedBouquet(self):
 		mode = config.servicelist.lastmode.value
 		serviceHandler = eServiceCenter.getInstance()
@@ -1157,7 +1157,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			info = serviceHandler.info(bouquet_root)
 			if info:
 				bouquets.append((info.getName(bouquet_root), bouquet_root))
-				self['list'].setList(bouquets)
+				self['config'].setList(bouquets)
 				return bouquets
 			return None
 
