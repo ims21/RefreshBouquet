@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.96"
+VERSION = "1.97"
 #  by ims (c) 2016-2019 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -161,7 +161,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		self.infotext = _("Select or source or target or source and target bouquets!") + " "
 		self.infotext += _("Source select with 'yellow' button, target with 'blue' button. Selection can be cleared with '0'.") + " "
 		self.infotext += _("Use the context 'menu' or 'green' buttons to select operation.") + " "
-		self.infotext += _("Button '6' enable/disable moving bouquets with '<' and '>' buttons.") + " Moving is in construct!"
+		self.infotext += _("Button '6' enable/disable moving bouquets with '<' and '>' buttons.")
 		self["info"] = Label(self.infotext)
 
 		self.sourceItem = None
@@ -190,9 +190,9 @@ class refreshBouquet(Screen, HelpableScreen):
 		else:
 			self["h_prev"].hide()
 			self["h_next"].hide()
-			# if self.changes:
-			#	here call rebuild and reload bouquets list
-			# 	self.changes=False
+			if self.changes:
+				self.updateMovedBouquet()
+				self.changes=False
 	def moveUp(self):
 		if self.edit and self.idx -1 >= 0:
 			self.moveDirection(-1)
@@ -795,6 +795,27 @@ class refreshBouquet(Screen, HelpableScreen):
 		else:
 			print "[RefreshBouquet] bouquetlist is not editable"
 			return False
+
+###
+# update moved Bouquet
+###
+
+	def updateMovedBouquet(self):
+		mode = config.servicelist.lastmode.value
+		serviceHandler = eServiceCenter.getInstance()
+		bouquet_root = self.getRoot()
+		mutableBouquetList = serviceHandler.list(bouquet_root).startEdit()
+		if mutableBouquetList:
+			name = self["config"].getCurrent()[0]
+			cur_ref = self["config"].getCurrent()[1]
+			index = self["config"].getIndex()
+			if not mutableBouquetList.removeService(cur_ref, False):
+				mutableBouquetList.addService(cur_ref)
+				mutableBouquetList.moveService(cur_ref, index)
+				mutableBouquetList.flushChanges()
+				eDVBDB.getInstance().reloadBouquets()
+				self.clearInput(name)
+				self.getBouquetList()
 
 ###
 # Rename Bouquet
