@@ -253,7 +253,7 @@ msgid "Remove selected services from bouquet"
 msgstr "Verwijder de geselecteerde zenders in het bronboeket"
 
 #, fuzzy
-msgid "New bouquet"
+msgid "Create new bouquet"
 msgstr "bronboeket"
 
 #, fuzzy, python-format

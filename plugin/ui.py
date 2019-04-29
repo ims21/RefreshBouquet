@@ -254,7 +254,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			buttons = ["6","8"]
 			rbbItems(menu,buttons,bName)
 		self["info"].setText(self.infotext)
-		menu.append((_("New bouquet"),13))
+		menu.append((_("Create new bouquet"),13))
 		buttons += [""]
 		if self["config"].getCurrent():
 			name = self["config"].getCurrent()[0]

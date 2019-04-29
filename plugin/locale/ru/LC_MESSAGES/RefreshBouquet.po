@@ -256,7 +256,7 @@ msgid "Remove selected services from bouquet"
 msgstr "Удалить ыбранные сервисы из исходного букета"
 
 #, fuzzy
-msgid "New bouquet"
+msgid "Create new bouquet"
 msgstr "исходный букет"
 
 #, fuzzy, python-format

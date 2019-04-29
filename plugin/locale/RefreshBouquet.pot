@@ -243,7 +243,7 @@ msgstr ""
 msgid "Remove selected services from bouquet"
 msgstr ""
 
-msgid "New bouquet"
+msgid "Create new bouquet"
 msgstr ""
 
 #, python-format
