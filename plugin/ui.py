@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.97"
+VERSION = "1.98"
 #  by ims (c) 2016-2019 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -236,9 +236,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			if self.sourceItem == self.targetItem:	# source == target
 				menu.append((_("Move selected services in source bouquet"),5))
 				menu.append((_("Remove selected services in source bouquet"),3))
-				menu.append((_("Create '%s.rbb' file") % bName,20))
 				buttons = ["6","8"]
-				rbbItems(menu,buttons,bName)
 			else:				# source != target
 				menu.append((_("Manually replace services"),0))
 				menu.append((_("Add selected services to target bouquet"),1))
@@ -247,13 +245,12 @@ class refreshBouquet(Screen, HelpableScreen):
 				menu.append((_("Move selected services in source bouquet"),5))
 				menu.append((_("Remove selected services in source bouquet"),3))
 				buttons = ["1","2","3","green","6","8"]
-				rbbItems(menu,buttons,bName)
+			rbbItems(menu,buttons,bName)
 		elif self.sourceItem and not self.targetItem or self.targetItem and not self.sourceItem: # or source only or target only
 			menu.append((_("Move selected services in bouquet"),5))
 			menu.append((_("Remove selected services from bouquet"),3))
 			buttons = ["6","8"]
 			rbbItems(menu,buttons,bName)
-		self["info"].setText(self.infotext)
 		menu.append((_("Create new bouquet"),13))
 		buttons += [""]
 		if self["config"].getCurrent():
@@ -270,6 +267,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		menu.append((_("Settings..."),10))
 		buttons.append("menu")
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_("Select action for bouquet:"), list=menu, keys=buttons)
+		self["info"].setText(self.infotext)
 
 	def menuCallback(self, choice):
 		if choice is None:
