@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: refreshBouquet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-29 13:57+0200\n"
-"PO-Revision-Date: 2019-04-29 17:41+0200\n"
+"POT-Creation-Date: 2019-05-01 21:17+0200\n"
+"PO-Revision-Date: 2019-05-01 21:26+0200\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -215,10 +215,10 @@ msgid ""
 "be cleared with '0'."
 msgstr ""
 
-msgid "Use the context 'menu' or 'green' buttons to select operation."
+msgid "For some operations, a selector on the bouquet is sufficient."
 msgstr ""
 
-msgid "For some operations, a selector on the bouquet is sufficient."
+msgid "Use the context 'menu' or 'green' buttons to select operation."
 msgstr ""
 
 msgid ""
@@ -232,12 +232,6 @@ msgstr ""
 msgid "Create bouquet from rbb file"
 msgstr ""
 
-msgid "Move selected services in source bouquet"
-msgstr "Переместить выбранные сервисы в исходный букет"
-
-msgid "Remove selected services in source bouquet"
-msgstr "Удалить ыбранные сервисы из исходного букета"
-
 msgid "Add selected services to target bouquet"
 msgstr "Добавить выбранные сервисы в целевой букет"
 
@@ -247,13 +241,19 @@ msgstr "Добавить выбранные отсутствующие серв�
 msgid "Refresh services in target bouquet"
 msgstr "Обновить сервисы в целевом букете"
 
+msgid "Move selected services in source bouquet"
+msgstr "Переместить выбранные сервисы в исходный букет"
+
+msgid "Remove selected services in source bouquet"
+msgstr "Удалить ыбранные сервисы из исходного букета"
+
 #, fuzzy
 msgid "Move selected services in bouquet"
 msgstr "Переместить выбранные сервисы в исходный букет"
 
 #, fuzzy
-msgid "Remove selected services from bouquet"
-msgstr "Удалить ыбранные сервисы из исходного букета"
+msgid "Remove selected services in bouquet"
+msgstr "Переместить выбранные сервисы в исходный букет"
 
 #, fuzzy
 msgid "Create new bouquet"
@@ -310,6 +310,17 @@ msgid ""
 msgstr "Нет сервисов в исходном букете !"
 
 #, python-format
+msgid "File %s is empty!"
+msgstr ""
+
+msgid "Source bouquet is empty!"
+msgstr "Исходный букет пустой !"
+
+#, python-format
+msgid "No item in '%s.rbb' file matches item in selected source bouquet!"
+msgstr ""
+
+#, python-format
 msgid "Bouquet '%s' was not created!"
 msgstr ""
 
@@ -328,9 +339,6 @@ msgstr "Отображать имя букета"
 #, fuzzy
 msgid "Are You sure to remove bouquet?"
 msgstr "Вы действительно хотите удалить этот %d сервис?"
-
-msgid "Source bouquet is empty!"
-msgstr "Исходный букет пустой !"
 
 msgid "No services in source bouquet!"
 msgstr "Нет сервисов в исходном букете !"
@@ -682,6 +690,10 @@ msgid ""
 "'Manage deleted userbouquets' will display full filenames instead bouquet "
 "names only."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Remove selected services from bouquet"
+#~ msgstr "Удалить ыбранные сервисы из исходного букета"
 
 #, fuzzy
 #~ msgid "Sort source bouquet services in manually replace"

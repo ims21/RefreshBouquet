@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-29 13:57+0200\n"
+"POT-Creation-Date: 2019-05-01 21:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -205,10 +205,10 @@ msgid ""
 "be cleared with '0'."
 msgstr ""
 
-msgid "Use the context 'menu' or 'green' buttons to select operation."
+msgid "For some operations, a selector on the bouquet is sufficient."
 msgstr ""
 
-msgid "For some operations, a selector on the bouquet is sufficient."
+msgid "Use the context 'menu' or 'green' buttons to select operation."
 msgstr ""
 
 msgid ""
@@ -222,12 +222,6 @@ msgstr ""
 msgid "Create bouquet from rbb file"
 msgstr ""
 
-msgid "Move selected services in source bouquet"
-msgstr ""
-
-msgid "Remove selected services in source bouquet"
-msgstr ""
-
 msgid "Add selected services to target bouquet"
 msgstr ""
 
@@ -237,10 +231,16 @@ msgstr ""
 msgid "Refresh services in target bouquet"
 msgstr ""
 
+msgid "Move selected services in source bouquet"
+msgstr ""
+
+msgid "Remove selected services in source bouquet"
+msgstr ""
+
 msgid "Move selected services in bouquet"
 msgstr ""
 
-msgid "Remove selected services from bouquet"
+msgid "Remove selected services in bouquet"
 msgstr ""
 
 msgid "Create new bouquet"
@@ -292,6 +292,17 @@ msgid ""
 msgstr ""
 
 #, python-format
+msgid "File %s is empty!"
+msgstr ""
+
+msgid "Source bouquet is empty!"
+msgstr ""
+
+#, python-format
+msgid "No item in '%s.rbb' file matches item in selected source bouquet!"
+msgstr ""
+
+#, python-format
 msgid "Bouquet '%s' was not created!"
 msgstr ""
 
@@ -305,9 +316,6 @@ msgid "Please enter new bouquet name"
 msgstr ""
 
 msgid "Are You sure to remove bouquet?"
-msgstr ""
-
-msgid "Source bouquet is empty!"
 msgstr ""
 
 msgid "No services in source bouquet!"

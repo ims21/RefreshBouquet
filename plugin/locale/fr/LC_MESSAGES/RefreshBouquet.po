@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GithubIMS 21\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-29 13:57+0200\n"
-"PO-Revision-Date: 2019-04-29 17:40+0200\n"
+"POT-Creation-Date: 2019-05-01 21:17+0200\n"
+"PO-Revision-Date: 2019-05-01 21:24+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -217,10 +217,10 @@ msgid ""
 "be cleared with '0'."
 msgstr ""
 
-msgid "Use the context 'menu' or 'green' buttons to select operation."
+msgid "For some operations, a selector on the bouquet is sufficient."
 msgstr ""
 
-msgid "For some operations, a selector on the bouquet is sufficient."
+msgid "Use the context 'menu' or 'green' buttons to select operation."
 msgstr ""
 
 msgid ""
@@ -234,12 +234,6 @@ msgstr "Créer un fichier RBB"
 msgid "Create bouquet from rbb file"
 msgstr "Créer un bouquet à partir d’un fichier rob"
 
-msgid "Move selected services in source bouquet"
-msgstr "Déplacer les services sélectionnés dans le bouquet source"
-
-msgid "Remove selected services in source bouquet"
-msgstr "Supprimer les services sélectionnés dans le bouquet source"
-
 msgid "Add selected services to target bouquet"
 msgstr "Ajouter des services sélectionnés au bouquet cible"
 
@@ -249,11 +243,19 @@ msgstr "Ajouter les services manquants sélectionnés au bouquet cible"
 msgid "Refresh services in target bouquet"
 msgstr "Actualiser les services dans le bouquet cible"
 
+msgid "Move selected services in source bouquet"
+msgstr "Déplacer les services sélectionnés dans le bouquet source"
+
+msgid "Remove selected services in source bouquet"
+msgstr "Supprimer les services sélectionnés dans le bouquet source"
+
 msgid "Move selected services in bouquet"
 msgstr "Déplacer les services sélectionnés dans bouquet"
 
-msgid "Remove selected services from bouquet"
-msgstr "Supprimer les services sélectionnés du bouquet"
+#, fuzzy
+#| msgid "Move selected services in bouquet"
+msgid "Remove selected services in bouquet"
+msgstr "Déplacer les services sélectionnés dans bouquet"
 
 #, fuzzy
 msgid "Create new bouquet"
@@ -311,6 +313,17 @@ msgid ""
 msgstr "Aucun service dans le bouquet source!"
 
 #, python-format
+msgid "File %s is empty!"
+msgstr ""
+
+msgid "Source bouquet is empty!"
+msgstr "Le bouquet source est vide!"
+
+#, python-format
+msgid "No item in '%s.rbb' file matches item in selected source bouquet!"
+msgstr ""
+
+#, python-format
 msgid "Bouquet '%s' was not created!"
 msgstr "Bouquet ‘%s’ n’a pas été créé!"
 
@@ -328,9 +341,6 @@ msgstr "Afficher le nom du bouquet"
 #, fuzzy
 msgid "Are You sure to remove bouquet?"
 msgstr "Êtes-vous sûr de supprimer ce %d service?"
-
-msgid "Source bouquet is empty!"
-msgstr "Le bouquet source est vide!"
 
 msgid "No services in source bouquet!"
 msgstr "Aucun service dans le bouquet source!"
@@ -669,6 +679,9 @@ msgid ""
 "'Manage deleted userbouquets' will display full filenames instead bouquet "
 "names only."
 msgstr ""
+
+#~ msgid "Remove selected services from bouquet"
+#~ msgstr "Supprimer les services sélectionnés du bouquet"
 
 #~ msgid "Information"
 #~ msgstr "Informations"

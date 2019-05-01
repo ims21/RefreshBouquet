@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-29 13:57+0200\n"
-"PO-Revision-Date: 2019-04-29 17:41+0200\n"
+"POT-Creation-Date: 2019-05-01 21:17+0200\n"
+"PO-Revision-Date: 2019-05-01 21:26+0200\n"
 "Last-Translator: Frenske <voorzitter@openpli.org>\n"
 "Language-Team: PLi <translators@openpli.org>\n"
 "Language: nl\n"
@@ -212,10 +212,10 @@ msgid ""
 "be cleared with '0'."
 msgstr ""
 
-msgid "Use the context 'menu' or 'green' buttons to select operation."
+msgid "For some operations, a selector on the bouquet is sufficient."
 msgstr ""
 
-msgid "For some operations, a selector on the bouquet is sufficient."
+msgid "Use the context 'menu' or 'green' buttons to select operation."
 msgstr ""
 
 msgid ""
@@ -229,12 +229,6 @@ msgstr ""
 msgid "Create bouquet from rbb file"
 msgstr ""
 
-msgid "Move selected services in source bouquet"
-msgstr "Verplaats de geselecteerde zenders vanuit het bronboeket"
-
-msgid "Remove selected services in source bouquet"
-msgstr "Verwijder de geselecteerde zenders in het bronboeket"
-
 msgid "Add selected services to target bouquet"
 msgstr "Voeg de gemarkeerde zender(s) toe aan het doelboeket"
 
@@ -244,13 +238,19 @@ msgstr "Voeg de gemarkeerde ontbrekende zenders toe aan het doelboeket"
 msgid "Refresh services in target bouquet"
 msgstr "Actualiseer de zenders in het doelboeket"
 
+msgid "Move selected services in source bouquet"
+msgstr "Verplaats de geselecteerde zenders vanuit het bronboeket"
+
+msgid "Remove selected services in source bouquet"
+msgstr "Verwijder de geselecteerde zenders in het bronboeket"
+
 #, fuzzy
 msgid "Move selected services in bouquet"
 msgstr "Verplaats de geselecteerde zenders vanuit het bronboeket"
 
 #, fuzzy
-msgid "Remove selected services from bouquet"
-msgstr "Verwijder de geselecteerde zenders in het bronboeket"
+msgid "Remove selected services in bouquet"
+msgstr "Verplaats de geselecteerde zenders vanuit het bronboeket"
 
 #, fuzzy
 msgid "Create new bouquet"
@@ -307,6 +307,17 @@ msgid ""
 msgstr "Geen zender(s) aanwezig in het bronboeket !"
 
 #, python-format
+msgid "File %s is empty!"
+msgstr ""
+
+msgid "Source bouquet is empty!"
+msgstr "Het bronboeket is leeg !"
+
+#, python-format
+msgid "No item in '%s.rbb' file matches item in selected source bouquet!"
+msgstr ""
+
+#, python-format
 msgid "Bouquet '%s' was not created!"
 msgstr ""
 
@@ -325,9 +336,6 @@ msgstr "Toon de boeketnaam"
 #, fuzzy
 msgid "Are You sure to remove bouquet?"
 msgstr "Weet je zeker dat je dit %d kanaal wilt verwijderen?"
-
-msgid "Source bouquet is empty!"
-msgstr "Het bronboeket is leeg !"
 
 msgid "No services in source bouquet!"
 msgstr "Geen zender(s) aanwezig in het bronboeket !"
@@ -673,6 +681,10 @@ msgid ""
 "'Manage deleted userbouquets' will display full filenames instead bouquet "
 "names only."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Remove selected services from bouquet"
+#~ msgstr "Verwijder de geselecteerde zenders in het bronboeket"
 
 #, fuzzy
 #~ msgid "Sort source bouquet services in manually replace"
