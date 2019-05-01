@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.98"
+VERSION = "1.99"
 #  by ims (c) 2016-2019 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -223,7 +223,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		config.plugins.refreshbouquet.used_services.value = config.plugins.refreshbouquet.used_services.default
 
 	def showMenu(self):
-		def rbbItems(menu,buttons,bName):
+		def rbbItems(menu, buttons, bName):
 			menu.append((_("Create '%s.rbb' file") % bName,20))
 			buttons += [""]
 			if self.isRbbFile():
@@ -232,25 +232,23 @@ class refreshBouquet(Screen, HelpableScreen):
 		buttons = []
 		menu = []
 		bName =self.getSelectedBouquetName()
-		if self.sourceItem and self.targetItem:	# both are selected
-			if self.sourceItem == self.targetItem:	# source == target
+		if self.sourceItem or self.targetItem:			# at least one is selected
+			if self.sourceItem and self.targetItem:		# both are selected
+				if self.sourceItem != self.targetItem:	# source != target
+					menu.append((_("Manually replace services"),0))
+					menu.append((_("Add selected services to target bouquet"),1))
+					menu.append((_("Add selected missing services to target bouquet"),2))
+					menu.append((_("Refresh services in target bouquet"),4))
+					buttons = ["1","2","3","green"]
 				menu.append((_("Move selected services in source bouquet"),5))
 				menu.append((_("Remove selected services in source bouquet"),3))
+				buttons += ["6","8"]
+			else:						# or source or target only
+				menu.append((_("Move selected services in bouquet"),5))
+				menu.append((_("Remove selected services in bouquet"),3))
 				buttons = ["6","8"]
-			else:				# source != target
-				menu.append((_("Manually replace services"),0))
-				menu.append((_("Add selected services to target bouquet"),1))
-				menu.append((_("Add selected missing services to target bouquet"),2))
-				menu.append((_("Refresh services in target bouquet"),4))
-				menu.append((_("Move selected services in source bouquet"),5))
-				menu.append((_("Remove selected services in source bouquet"),3))
-				buttons = ["1","2","3","green","6","8"]
-			rbbItems(menu,buttons,bName)
-		elif self.sourceItem and not self.targetItem or self.targetItem and not self.sourceItem: # or source only or target only
-			menu.append((_("Move selected services in bouquet"),5))
-			menu.append((_("Remove selected services from bouquet"),3))
-			buttons = ["6","8"]
-			rbbItems(menu,buttons,bName)
+			if 1:#self.sourceItem: # rbb for sources only
+				rbbItems(menu, buttons, bName)
 		menu.append((_("Create new bouquet"),13))
 		buttons += [""]
 		if self["config"].getCurrent():
@@ -292,7 +290,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		elif choice[1] == 14:
 			self.renameBouquet()
 		elif choice[1] == 15:
-			self.removeBouquet()
+			self.removeBouquetFromList()
 		elif choice[1] == 18:
 			self.ManageDeletedBouquets()
 		elif choice[1] == 20:
@@ -618,8 +616,9 @@ class refreshBouquet(Screen, HelpableScreen):
 # call screen for selection rbb file
 
 	def createRbbBouquet(self):
-		from rbbmanager import refreshBouquetRbbManager
-		self.session.openWithCallback(self.fillRbbBouquet, refreshBouquetRbbManager)
+		if self.sourceItem: # must be selected source bouquet
+			from rbbmanager import refreshBouquetRbbManager
+			self.session.openWithCallback(self.fillRbbBouquet, refreshBouquetRbbManager)
 
 # create bouquet as valid source services filled to bouquet created from rbb file
 
@@ -633,25 +632,29 @@ class refreshBouquet(Screen, HelpableScreen):
 				list.append((line.replace('\n','')))
 			fi.close()
 			return list
+
 		if self.addBouquet(rbb_name, None):
 			data = MySelectionList([])
-			if self.sourceItem:  # predpoklada se spravne nacteny soubor .rbb
+			if self.sourceItem:  # must be selected source bouquet (f.eg. lastscanned)
 				target = getRbbBouquetContent("%s/%s.rbb" % (E2, rbb_name))
 				source = self.getServices(self.sourceItem[0])
 				if not len(target):
-					self["info"].setText(_("Target bouquet is empty !"))
+					self["info"].setText(_("File %s is empty!") % rbb_name)
 					return
 				if not len(source):
-					self["info"].setText(_("Source bouquet is empty !"))
+					self["info"].setText(_("Source bouquet is empty!"))
 					return
 				setIcon() # icons for selecting must be set before adding to list in compareServices
 				(data, length) = self.compareRbbServices(source, target, cfg.rbb_dotted.value)
 				if length:
-					def reloadList():
-						self.getBouquetList()
+					def reloadList(remove=False):
+						if remove: # it was canceled by user => remove created empty bouquet
+							self.removeBouquetNameRef(self.targetItem)
+						else:
+							self.getBouquetList()
 					self.session.openWithCallback(reloadList, refreshBouquetCopyServices, data, self.targetItem)
 				else:
-					self.session.open(MessageBox, _("No differences found"), type = MessageBox.TYPE_INFO, timeout = 5)
+					self.session.open(MessageBox, _("No item in '%s.rbb' file matches item in selected source bouquet!") % rbb_name, type = MessageBox.TYPE_INFO, timeout = 10)
 		else:
 			self.session.open(MessageBox, _("Bouquet '%s' was not created!"), type = MessageBox.TYPE_ERROR, timeout = 5)
 
@@ -842,27 +845,39 @@ class refreshBouquet(Screen, HelpableScreen):
 			self.session.openWithCallback(renameEntryCallback, VirtualKeyBoard, title=_("Please enter new bouquet name"), text=currname)
 
 ###
-# Remove Bouquet
+# Remove Bouquet as current item from list
 ###
-	def removeBouquet(self):
+	def removeBouquetFromList(self):
 		def callbackErase(answer):
 			if answer:
-				name = self["config"].getCurrent()[0]
-				cur_ref = self["config"].getCurrent()[1]
-				mode = config.servicelist.lastmode.value
-				serviceHandler = eServiceCenter.getInstance()
-				bouquet_root = self.getRoot()
-				mutableBouquetList = serviceHandler.list(bouquet_root).startEdit()
-				if mutableBouquetList:
-					if not mutableBouquetList.removeService(cur_ref, False):
-						mutableBouquetList.flushChanges()
-						eDVBDB.getInstance().reloadBouquets()
-						self.clearInput(name)
-						self.getBouquetList()
-
+				name, cur_ref = self["config"].getCurrent()
+				self.removeBouquet(name, cur_ref)
 		if self["config"].getCurrent():
 			name = self["config"].getCurrent()[0]
 			self.session.openWithCallback(callbackErase, MessageBox, _("Are You sure to remove bouquet?") + "\n\n%s" % name, type=MessageBox.TYPE_YESNO, default=False)
+
+###
+# Remove Bouquet as (name , cur_ref)
+###
+	def removeBouquetNameRef(self, target):
+		name, cur_ref = target
+		self.removeBouquet(name, cur_ref)
+
+###
+# Remove Bouquet
+###
+	def removeBouquet(self, name, cur_ref):
+		if name and cur_ref:
+			mode = config.servicelist.lastmode.value
+			serviceHandler = eServiceCenter.getInstance()
+			bouquet_root = self.getRoot()
+			mutableBouquetList = serviceHandler.list(bouquet_root).startEdit()
+			if mutableBouquetList:
+				if not mutableBouquetList.removeService(cur_ref, False):
+					mutableBouquetList.flushChanges()
+					eDVBDB.getInstance().reloadBouquets()
+					self.clearInput(name)
+					self.getBouquetList()
 
 ###
 # Prepare bouquet and text for operation with one bouquet (moveServices, removeServices)
@@ -1986,7 +2001,7 @@ class refreshBouquetCopyServices(Screen):
 
 	def callBackExit(self, answer):
 		if answer == True:
-			self.close()
+			self.close(True) # True = remove empty bouquet
 
 # remove services from source list
 class refreshBouquetRemoveServices(Screen):
