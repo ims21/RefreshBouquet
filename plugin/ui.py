@@ -225,12 +225,6 @@ class refreshBouquet(Screen, HelpableScreen):
 		config.plugins.refreshbouquet.used_services.value = config.plugins.refreshbouquet.used_services.default
 
 	def showMenu(self):
-		def rbbItems(menu, buttons, bName):
-			menu.append((_("Create '%s.rbb' file") % bName,20))
-			buttons += [""]
-			if self.isRbbFile():
-				menu.append((_("Create bouquet from rbb file"),21))
-				buttons += [""]
 		buttons = []
 		menu = []
 		bName =self.getSelectedBouquetName()
@@ -250,7 +244,11 @@ class refreshBouquet(Screen, HelpableScreen):
 				menu.append((_("Remove selected services in bouquet"),3))
 				buttons = ["6","8"]
 			if self.sourceItem: # rbb for sources only
-				rbbItems(menu, buttons, bName)
+				menu.append((_("Create '%s.rbb' file") % bName,20))
+				buttons += [""]
+				if self.isRbbFile():
+					menu.append((_("Create bouquet from rbb file"),21))
+					buttons += [""]
 		menu.append((_("Create new bouquet"),13))
 		buttons += [""]
 		if self["config"].getCurrent():
