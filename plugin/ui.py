@@ -154,10 +154,12 @@ class refreshBouquet(Screen, HelpableScreen):
 
 		self.list = List([])
 		self["config"] = self.list
+
 		self["source_text"] = Label(_("Source bouquet:"))
 		self["target_text"] = Label(_("Target bouquet:"))
 		self["source_name"] = Label()
 		self["target_name"] = Label()
+
 		self.infotext = _("Select or source or target or source and target bouquets!") + " "
 		self.infotext += _("Source select with 'yellow' button, target with 'blue' button. Selection can be cleared with '0'.") + " "
 		self.infotext += _("For some operations, a selector on the bouquet is sufficient.") + " "
@@ -247,7 +249,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				menu.append((_("Move selected services in bouquet"),5))
 				menu.append((_("Remove selected services in bouquet"),3))
 				buttons = ["6","8"]
-			if 1:#self.sourceItem: # rbb for sources only
+			if self.sourceItem: # rbb for sources only
 				rbbItems(menu, buttons, bName)
 		menu.append((_("Create new bouquet"),13))
 		buttons += [""]
@@ -270,7 +272,6 @@ class refreshBouquet(Screen, HelpableScreen):
 	def menuCallback(self, choice):
 		if choice is None:
 			return
-
 		if choice[1] == 0:
 			self.replaceSelectedServicesManually()
 		elif choice[1] == 1:
@@ -354,9 +355,9 @@ class refreshBouquet(Screen, HelpableScreen):
 			elif orb_pos == 0xffff:
 				return _("Cable")
 			if orb_pos > 1800:
-				return str((float(3600 - orb_pos)) / 10.0) + "° W"
+				return str((float(3600 - orb_pos)) / 10.0) + _("° W")
 			elif orb_pos > 0:
-				return str((float(orb_pos)) / 10.0) + "° E"
+				return str((float(orb_pos)) / 10.0) + _("° E")
 			return "unknown"
 		op = []
 		new_choices = [("x",_("no"))]
@@ -423,7 +424,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				if cfg.orbital.value != "x": # only on selected op
 					if s_splited[6][:-4] != cfg.orbital.value:
 						continue
-				if t_name == self.prepareStr(s[0]): # services with same name founded
+				if t_name == self.prepareStr(s[0]): # found services with equal name
 					s_splited = s[1].split(':') # split ref
 					if t_op == s_splited[6][:-4]: # same orbital position only
 						if t_core != s_core and not t_splited[10] and not s_splited[10]: # is different ref ([3]-[6])and is not stream
