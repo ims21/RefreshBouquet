@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: refreshBouquet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-02 11:52+0200\n"
-"PO-Revision-Date: 2019-05-02 11:55+0200\n"
+"POT-Creation-Date: 2019-05-02 12:18+0200\n"
+"PO-Revision-Date: 2019-05-02 12:26+0200\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -21,7 +21,7 @@ msgid "Actualize services in bouquets"
 msgstr "Актуализировать сервисы в букетах"
 
 #, fuzzy
-msgid "Manage deleted userbouquets"
+msgid "Manage deleted bouquets"
 msgstr "Переместить выбранные сервисы в исходный букет"
 
 msgid "Cancel"
@@ -38,11 +38,11 @@ msgstr "Инверсия"
 
 msgid ""
 "On deleted userbouquet press 'Restore' or 'Remove' or mark more deleted "
-"userbouquets with 'OK' and then use 'Restore' or 'Remove'."
+"bouquets with 'OK' and then use 'Restore' or 'Remove'."
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Are you sure to remove %s selected deleted userbouquets?"
+msgid "Are you sure to remove %s selected deleted bouquets?"
 msgstr "Вы действительно хотите удалить этот %d сервис?"
 
 #, fuzzy, python-format
@@ -55,7 +55,7 @@ msgstr "Вы действительно хотите удалить этот %d 
 #, fuzzy, python-format
 #| msgid "Are you sure to refresh this %d service?"
 #| msgid_plural "Are you sure to refresh this %d services?"
-msgid "Are you sure to restore %s selected deleted userbouquets?"
+msgid "Are you sure to restore %s selected deleted bouquets?"
 msgstr "Вы действительно хотите обновить этот %d сервис?"
 
 #, fuzzy, python-format
@@ -172,10 +172,14 @@ msgstr "выход из плагина"
 msgid "select action"
 msgstr "выбор действия"
 
-msgid "select source bouquet "
+#, fuzzy
+#| msgid "select source bouquet "
+msgid "select source bouquet"
 msgstr "выбор исходного букета "
 
-msgid "select target bouquet "
+#, fuzzy
+#| msgid "select target bouquet "
+msgid "select target bouquet"
 msgstr "выбор целевого букета "
 
 #, fuzzy
@@ -225,13 +229,6 @@ msgid ""
 "Button '6' enable/disable moving bouquet with 'preview' and 'next' buttons."
 msgstr ""
 
-#, python-format
-msgid "Create '%s.rbb' file"
-msgstr ""
-
-msgid "Create bouquet from rbb file"
-msgstr ""
-
 msgid "Add selected services to target bouquet"
 msgstr "Добавить выбранные сервисы в целевой букет"
 
@@ -254,6 +251,13 @@ msgstr "Переместить выбранные сервисы в исходн
 #, fuzzy
 msgid "Remove selected services in bouquet"
 msgstr "Переместить выбранные сервисы в исходный букет"
+
+#, python-format
+msgid "Create '%s.rbb' file"
+msgstr ""
+
+msgid "Create bouquet from rbb file"
+msgstr ""
 
 #, fuzzy
 msgid "Create new bouquet"
@@ -370,10 +374,15 @@ msgid ""
 "Or toggle with 'Prev/Next', which trying to find a similar name in source."
 msgstr ""
 
+#, fuzzy
+#| msgid ""
+#| "Prepare replacement target's service by service in source bouquet (both "
+#| "select with 'OK') and replace it with 'Replace'. Repeat it as you need. "
+#| "Finish all with 'Apply and close'"
 msgid ""
 "Prepare replacement target's service by service in source bouquet (both "
 "select with 'OK') and replace it with 'Replace'. Repeat it as you need. "
-"Finish all with 'Apply and close'"
+"Finish all with 'Apply and close'."
 msgstr ""
 "Подготовьте замену сервиса в целевой букет на сервис из исходного букета "
 "(выбор с помощью 'ОК') и замените с помощью 'Замена'. Повторите это, как Вам "
@@ -476,13 +485,12 @@ msgstr "- выбор сервиса(ов) для добавления с пом�
 msgid "Copy selected"
 msgstr "Копировать выбранное"
 
-#, fuzzy
 msgid ""
 "Mark services with OK button or use group selection (Ch+/Ch-) and then copy "
-"these with 'Copy selected'"
+"these with 'Copy selected'."
 msgstr ""
 "Пометить сервисы с помощью OK и затем копировать с помощью 'Копировать "
-"выбранное'"
+"выбранное'."
 
 msgid "Use 'Menu' for sorting."
 msgstr ""
@@ -500,7 +508,6 @@ msgstr[0] "Вы действительно хотите копировать э�
 msgstr[1] "Вы действительно хотите копировать эти %d сервиса?"
 msgstr[2] "Вы действительно хотите копировать эти %d сервисов?"
 
-#, fuzzy
 msgid "Yes"
 msgstr "Да"
 
@@ -516,12 +523,11 @@ msgstr "- выбор сервиса(ов) для удаления с помощ�
 msgid "Remove selected"
 msgstr "Удалить выбранное"
 
-#, fuzzy
 msgid ""
 "Mark services with OK button or use group selection (Ch+/Ch-) and then "
-"remove these with 'Remove selected'"
+"remove these with 'Remove selected'."
 msgstr ""
-"Пометить сервисы с помощью OK и затем удалить с помощью 'Удалить выбранное'"
+"Пометить сервисы с помощью OK и затем удалить с помощью 'Удалить выбранное'."
 
 #, python-format
 msgid "Are you sure to remove this %d service?"
@@ -536,7 +542,6 @@ msgstr "- выбор сервиса(ов) для перемещения с по�
 msgid "Move selected"
 msgstr "Переместить выбранное"
 
-#, fuzzy
 msgid ""
 "Mark service(s) with OK button or use group selection (Ch+/Ch-), move "
 "selector to new position and finish with 'Move selected'. Selected "
@@ -568,7 +573,7 @@ msgstr "Сравнивать с учетом регистра"
 msgid "Skip 1st nonstandard char in name"
 msgstr "Пропустить 1-ый нестандартный символ в названии"
 
-msgid "Omit any control character in service name. Default set 'yes'"
+msgid "Omit any control character in service name. Default set 'yes'."
 msgstr ""
 
 msgid "Omit last char in target names"
@@ -648,13 +653,12 @@ msgstr ""
 "При запуске плагина использовать текущий букет в качестве исходника/целевого "
 "букета"
 
-#, fuzzy
 msgid ""
 "When the plugin is launched, current bouquet can be set as source or target "
 "bouquet."
 msgstr ""
 "При запуске плагина использовать текущий букет в качестве исходника/целевого "
-"букета"
+"букета."
 
 #, fuzzy
 msgid "Selector to current bouquet"
@@ -668,7 +672,7 @@ msgstr ""
 msgid "Display bouquet name"
 msgstr "Отображать имя букета"
 
-msgid "Display bouquet name in the screen header or above the list"
+msgid "Display bouquet name in the screen header or above the list."
 msgstr ""
 
 msgid "Debug info"
@@ -686,15 +690,15 @@ msgstr ""
 
 msgid ""
 "When is creating a bouquet from 'rbb' file, dotted names can be compared "
-"too. You need then manually remove duplicates. Default set is 'no'"
+"too. You need then manually remove duplicates. Default set is 'no'."
 msgstr ""
 
 msgid "Show full filenames for deleted bouquets"
 msgstr ""
 
 msgid ""
-"'Manage deleted userbouquets' will display full filenames instead bouquet "
-"names only."
+"'Manage deleted bouquets' will display full filenames instead bouquet names "
+"only."
 msgstr ""
 
 #, fuzzy

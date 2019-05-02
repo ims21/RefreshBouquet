@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-02 11:52+0200\n"
+"POT-Creation-Date: 2019-05-02 12:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Actualize services in bouquets"
 msgstr ""
 
-msgid "Manage deleted userbouquets"
+msgid "Manage deleted bouquets"
 msgstr ""
 
 msgid "Cancel"
@@ -41,11 +41,11 @@ msgstr ""
 
 msgid ""
 "On deleted userbouquet press 'Restore' or 'Remove' or mark more deleted "
-"userbouquets with 'OK' and then use 'Restore' or 'Remove'."
+"bouquets with 'OK' and then use 'Restore' or 'Remove'."
 msgstr ""
 
 #, python-format
-msgid "Are you sure to remove %s selected deleted userbouquets?"
+msgid "Are you sure to remove %s selected deleted bouquets?"
 msgstr ""
 
 #, python-format
@@ -56,7 +56,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "Are you sure to restore %s selected deleted userbouquets?"
+msgid "Are you sure to restore %s selected deleted bouquets?"
 msgstr ""
 
 #, python-format
@@ -164,10 +164,10 @@ msgstr ""
 msgid "select action"
 msgstr ""
 
-msgid "select source bouquet "
+msgid "select source bouquet"
 msgstr ""
 
-msgid "select target bouquet "
+msgid "select target bouquet"
 msgstr ""
 
 msgid "clear selection"
@@ -215,13 +215,6 @@ msgid ""
 "Button '6' enable/disable moving bouquet with 'preview' and 'next' buttons."
 msgstr ""
 
-#, python-format
-msgid "Create '%s.rbb' file"
-msgstr ""
-
-msgid "Create bouquet from rbb file"
-msgstr ""
-
 msgid "Add selected services to target bouquet"
 msgstr ""
 
@@ -241,6 +234,13 @@ msgid "Move selected services in bouquet"
 msgstr ""
 
 msgid "Remove selected services in bouquet"
+msgstr ""
+
+#, python-format
+msgid "Create '%s.rbb' file"
+msgstr ""
+
+msgid "Create bouquet from rbb file"
 msgstr ""
 
 msgid "Create new bouquet"
@@ -350,7 +350,7 @@ msgstr ""
 msgid ""
 "Prepare replacement target's service by service in source bouquet (both "
 "select with 'OK') and replace it with 'Replace'. Repeat it as you need. "
-"Finish all with 'Apply and close'"
+"Finish all with 'Apply and close'."
 msgstr ""
 
 msgid "Marking can be canceled with key '0'."
@@ -440,7 +440,7 @@ msgstr ""
 
 msgid ""
 "Mark services with OK button or use group selection (Ch+/Ch-) and then copy "
-"these with 'Copy selected'"
+"these with 'Copy selected'."
 msgstr ""
 
 msgid "Use 'Menu' for sorting."
@@ -475,7 +475,7 @@ msgstr ""
 
 msgid ""
 "Mark services with OK button or use group selection (Ch+/Ch-) and then "
-"remove these with 'Remove selected'"
+"remove these with 'Remove selected'."
 msgstr ""
 
 #, python-format
@@ -517,7 +517,7 @@ msgstr ""
 msgid "Skip 1st nonstandard char in name"
 msgstr ""
 
-msgid "Omit any control character in service name. Default set 'yes'"
+msgid "Omit any control character in service name. Default set 'yes'."
 msgstr ""
 
 msgid "Omit last char in target names"
@@ -608,7 +608,7 @@ msgstr ""
 msgid "Display bouquet name"
 msgstr ""
 
-msgid "Display bouquet name in the screen header or above the list"
+msgid "Display bouquet name in the screen header or above the list."
 msgstr ""
 
 msgid "Debug info"
@@ -625,13 +625,13 @@ msgstr ""
 
 msgid ""
 "When is creating a bouquet from 'rbb' file, dotted names can be compared "
-"too. You need then manually remove duplicates. Default set is 'no'"
+"too. You need then manually remove duplicates. Default set is 'no'."
 msgstr ""
 
 msgid "Show full filenames for deleted bouquets"
 msgstr ""
 
 msgid ""
-"'Manage deleted userbouquets' will display full filenames instead bouquet "
-"names only."
+"'Manage deleted bouquets' will display full filenames instead bouquet names "
+"only."
 msgstr ""

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-02 11:52+0200\n"
-"PO-Revision-Date: 2019-05-02 11:54+0200\n"
+"POT-Creation-Date: 2019-05-02 12:18+0200\n"
+"PO-Revision-Date: 2019-05-02 12:23+0200\n"
 "Last-Translator: Frenske <voorzitter@openpli.org>\n"
 "Language-Team: PLi <translators@openpli.org>\n"
 "Language: nl\n"
@@ -20,7 +20,7 @@ msgid "Actualize services in bouquets"
 msgstr "Actualiseer de zenders in de boeketten"
 
 #, fuzzy
-msgid "Manage deleted userbouquets"
+msgid "Manage deleted bouquets"
 msgstr "Verplaats de geselecteerde zenders vanuit het bronboeket"
 
 msgid "Cancel"
@@ -37,11 +37,11 @@ msgstr "Inverteer"
 
 msgid ""
 "On deleted userbouquet press 'Restore' or 'Remove' or mark more deleted "
-"userbouquets with 'OK' and then use 'Restore' or 'Remove'."
+"bouquets with 'OK' and then use 'Restore' or 'Remove'."
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Are you sure to remove %s selected deleted userbouquets?"
+msgid "Are you sure to remove %s selected deleted bouquets?"
 msgstr "Weet je zeker dat je dit %d kanaal wilt verwijderen?"
 
 #, fuzzy, python-format
@@ -54,7 +54,7 @@ msgstr "Weet je zeker dat je dit %d kanaal wilt verwijderen?"
 #, fuzzy, python-format
 #| msgid "Are you sure to refresh this %d service?"
 #| msgid_plural "Are you sure to refresh this %d services?"
-msgid "Are you sure to restore %s selected deleted userbouquets?"
+msgid "Are you sure to restore %s selected deleted bouquets?"
 msgstr "Weet je zeker dat je dit %d kanaal wilt actualiseren?"
 
 #, fuzzy, python-format
@@ -169,10 +169,14 @@ msgstr "plugin beëindigen"
 msgid "select action"
 msgstr "kies een aktie"
 
-msgid "select source bouquet "
+#, fuzzy
+#| msgid "select source bouquet "
+msgid "select source bouquet"
 msgstr "selecteer het doelboeket"
 
-msgid "select target bouquet "
+#, fuzzy
+#| msgid "select target bouquet "
+msgid "select target bouquet"
 msgstr "selecteer het doelboeket"
 
 #, fuzzy
@@ -222,13 +226,6 @@ msgid ""
 "Button '6' enable/disable moving bouquet with 'preview' and 'next' buttons."
 msgstr ""
 
-#, python-format
-msgid "Create '%s.rbb' file"
-msgstr ""
-
-msgid "Create bouquet from rbb file"
-msgstr ""
-
 msgid "Add selected services to target bouquet"
 msgstr "Voeg de gemarkeerde zender(s) toe aan het doelboeket"
 
@@ -251,6 +248,13 @@ msgstr "Verplaats de geselecteerde zenders vanuit het bronboeket"
 #, fuzzy
 msgid "Remove selected services in bouquet"
 msgstr "Verplaats de geselecteerde zenders vanuit het bronboeket"
+
+#, python-format
+msgid "Create '%s.rbb' file"
+msgstr ""
+
+msgid "Create bouquet from rbb file"
+msgstr ""
 
 #, fuzzy
 msgid "Create new bouquet"
@@ -367,10 +371,15 @@ msgid ""
 "Or toggle with 'Prev/Next', which trying to find a similar name in source."
 msgstr ""
 
+#, fuzzy
+#| msgid ""
+#| "Prepare replacement target's service by service in source bouquet (both "
+#| "select with 'OK') and replace it with 'Replace'. Repeat it as you need. "
+#| "Finish all with 'Apply and close'"
 msgid ""
 "Prepare replacement target's service by service in source bouquet (both "
 "select with 'OK') and replace it with 'Replace'. Repeat it as you need. "
-"Finish all with 'Apply and close'"
+"Finish all with 'Apply and close'."
 msgstr ""
 "Bereid het vervangen voor met tweemaal drukken van 'Ok', en vervang deze met "
 "de blauwe toets 'Vervangen'. Herhaal dit voor ieder kanaal."
@@ -475,10 +484,10 @@ msgstr "Actualiseer"
 
 msgid ""
 "Mark services with OK button or use group selection (Ch+/Ch-) and then copy "
-"these with 'Copy selected'"
+"these with 'Copy selected'."
 msgstr ""
 "Markeer de zenders met 'Ok' of gebruik de groepsselectie (Ch+/Ch-) en "
-"kopieer deze via 'kopieer de selectie'"
+"kopieer deze via 'kopieer de selectie'."
 
 msgid "Use 'Menu' for sorting."
 msgstr ""
@@ -513,10 +522,10 @@ msgstr "Verwijderen"
 
 msgid ""
 "Mark services with OK button or use group selection (Ch+/Ch-) and then "
-"remove these with 'Remove selected'"
+"remove these with 'Remove selected'."
 msgstr ""
 "Markeer de zenders met 'Ok' of gebruik de groepsselectie (Ch+/Ch-) and "
-"verwijder deze vervolgens via 'verwijder de selectie'"
+"verwijder deze vervolgens via 'verwijder de selectie'."
 
 #, python-format
 msgid "Are you sure to remove this %d service?"
@@ -561,7 +570,7 @@ msgstr "Vergelijk hoofdlettergevoeligheid"
 msgid "Skip 1st nonstandard char in name"
 msgstr "Negeer het 1e niet standaard karakter in de naam"
 
-msgid "Omit any control character in service name. Default set 'yes'"
+msgid "Omit any control character in service name. Default set 'yes'."
 msgstr ""
 
 msgid "Omit last char in target names"
@@ -640,12 +649,12 @@ msgid "On plugin start use current bouquet as source or as target"
 msgstr ""
 "Gebruik het huidige boeket als bron of als doel zodra de plugin wordt gestart"
 
-#, fuzzy
 msgid ""
 "When the plugin is launched, current bouquet can be set as source or target "
 "bouquet."
 msgstr ""
-"Gebruik het huidige boeket als bron of als doel zodra de plugin wordt gestart"
+"Gebruik het huidige boeket als bron of als doel zodra de plugin wordt "
+"gestart."
 
 #, fuzzy
 msgid "Selector to current bouquet"
@@ -659,7 +668,7 @@ msgstr ""
 msgid "Display bouquet name"
 msgstr "Toon de boeketnaam"
 
-msgid "Display bouquet name in the screen header or above the list"
+msgid "Display bouquet name in the screen header or above the list."
 msgstr ""
 
 msgid "Debug info"
@@ -677,15 +686,15 @@ msgstr ""
 
 msgid ""
 "When is creating a bouquet from 'rbb' file, dotted names can be compared "
-"too. You need then manually remove duplicates. Default set is 'no'"
+"too. You need then manually remove duplicates. Default set is 'no'."
 msgstr ""
 
 msgid "Show full filenames for deleted bouquets"
 msgstr ""
 
 msgid ""
-"'Manage deleted userbouquets' will display full filenames instead bouquet "
-"names only."
+"'Manage deleted bouquets' will display full filenames instead bouquet names "
+"only."
 msgstr ""
 
 #, fuzzy

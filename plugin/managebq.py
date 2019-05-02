@@ -37,7 +37,7 @@ from ui import E2, cfg
 
 class refreshBouquetManageDeletedBouquets(Screen):
 	skin = """
-		<screen name="refreshBouquetManageDeletedBouquets" position="center,center" size="560,410" title="refreshBouquet - manage deleted userbouquets">
+		<screen name="refreshBouquetManageDeletedBouquets" position="center,center" size="560,410" title="refreshBouquet - manage deleted bouquets">
 		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on"/>
 		<ePixmap name="green"  position="140,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on"/>
 		<ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on"/>
@@ -58,7 +58,7 @@ class refreshBouquetManageDeletedBouquets(Screen):
 		self.skin = refreshBouquetManageDeletedBouquets.skin
 		self.skinName = ["refreshBouquetManageDeletedBouquets"]
 
-		self.setTitle(_("Manage deleted userbouquets"))
+		self.setTitle(_("Manage deleted bouquets"))
 
 		self.original_selectionpng = None
 		self.changePng()
@@ -90,12 +90,12 @@ class refreshBouquetManageDeletedBouquets(Screen):
 		self["key_yellow"] = Button(_("Remove"))
 		self["key_blue"] = Button(_("Inversion"))
 
-		self["text"].setText(_("On deleted userbouquet press 'Restore' or 'Remove' or mark more deleted userbouquets with 'OK' and then use 'Restore' or 'Remove'."))
+		self["text"].setText(_("On deleted userbouquet press 'Restore' or 'Remove' or mark more deleted bouquets with 'OK' and then use 'Restore' or 'Remove'."))
 
 	def removeCurrentEntries(self):
 		marked = len(self.list.getSelectionsList())
 		if marked:
-			text = _("Are you sure to remove %s selected deleted userbouquets?") % marked
+			text = _("Are you sure to remove %s selected deleted bouquets?") % marked
 		else:
 			text = _("Are you sure to remove deleted userbouquet?\n\n%s") % self.fileName(self["config"].getCurrent()[0][1])
 		self.session.openWithCallback(self.removeFromSource, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
@@ -116,7 +116,7 @@ class refreshBouquetManageDeletedBouquets(Screen):
 	def restoreCurrentEntries(self):
 		marked = len(self.list.getSelectionsList())
 		if marked:
-			text = _("Are you sure to restore %s selected deleted userbouquets?") % marked
+			text = _("Are you sure to restore %s selected deleted bouquets?") % marked
 		else:
 			text = _("Are you sure to restore deleted userbouquet?\n\n%s") % self.fileName(self["config"].getCurrent()[0][1])
 		self.session.openWithCallback(self.restoreSelected, MessageBox, text, MessageBox.TYPE_YESNO, default=False )

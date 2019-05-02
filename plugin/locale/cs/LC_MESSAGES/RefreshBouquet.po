@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-02 11:52+0200\n"
-"PO-Revision-Date: 2019-05-02 11:53+0200\n"
+"POT-Creation-Date: 2019-05-02 12:18+0200\n"
+"PO-Revision-Date: 2019-05-02 12:20+0200\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi\n"
 "Language: cs_CZ\n"
@@ -19,7 +19,7 @@ msgstr "RefreshBouquet"
 msgid "Actualize services in bouquets"
 msgstr "Aktualizace programů v přehledech"
 
-msgid "Manage deleted userbouquets"
+msgid "Manage deleted bouquets"
 msgstr "Správa odstraněných přehledů"
 
 msgid "Cancel"
@@ -36,14 +36,14 @@ msgstr "Invertovat"
 
 msgid ""
 "On deleted userbouquet press 'Restore' or 'Remove' or mark more deleted "
-"userbouquets with 'OK' and then use 'Restore' or 'Remove'."
+"bouquets with 'OK' and then use 'Restore' or 'Remove'."
 msgstr ""
 "Na smazaném přehledu stiskněte 'Obnovit' nebo 'Odstranit' nebo označte více "
 "smazaných přehledů pomocí tlačítka 'OK' a poté použijte 'Obnovit' nebo "
 "'Odstranit'."
 
 #, python-format
-msgid "Are you sure to remove %s selected deleted userbouquets?"
+msgid "Are you sure to remove %s selected deleted bouquets?"
 msgstr "Opravdu chcete odstranit %s označené smazané přehledy?"
 
 #, python-format
@@ -57,7 +57,7 @@ msgstr ""
 "%s"
 
 #, python-format
-msgid "Are you sure to restore %s selected deleted userbouquets?"
+msgid "Are you sure to restore %s selected deleted bouquets?"
 msgstr "Opravdu chcete obnovit %s označené smazané přehledy?"
 
 #, python-format
@@ -170,10 +170,10 @@ msgstr "ukončit plugin"
 msgid "select action"
 msgstr "výběr akce"
 
-msgid "select source bouquet "
+msgid "select source bouquet"
 msgstr "výběr zdrojového přehledu"
 
-msgid "select target bouquet "
+msgid "select target bouquet"
 msgstr "výběr cílového přehledu"
 
 msgid "clear selection"
@@ -211,7 +211,7 @@ msgid ""
 "be cleared with '0'."
 msgstr ""
 "Zdrojový přehled vyberte žlutým tlačítkem, cílový přehled modrým tlačítkem. "
-"Výběr můžete zrušit pomocí '0'. "
+"Výběr můžete zrušit pomocí '0'."
 
 msgid "For some operations, a selector on the bouquet is sufficient."
 msgstr "Pro některé operace postačuje kurzor na přehledu."
@@ -224,13 +224,6 @@ msgid ""
 msgstr ""
 "Tlačítko '6' povoluje/zakazuje přesun přehledu pomocí kláves 'preview' a "
 "'next' ."
-
-#, python-format
-msgid "Create '%s.rbb' file"
-msgstr "Založit '%s.rbb' soubor"
-
-msgid "Create bouquet from rbb file"
-msgstr "Vytvořit přehled z rbb souboru"
 
 msgid "Add selected services to target bouquet"
 msgstr "Přidat vybrané programy do cílového přehledu"
@@ -252,6 +245,13 @@ msgstr "Přesouvat vybrané programy v přehledu"
 
 msgid "Remove selected services in bouquet"
 msgstr "Odstranit vybrané programy z přehledu"
+
+#, python-format
+msgid "Create '%s.rbb' file"
+msgstr "Založit '%s.rbb' soubor"
+
+msgid "Create bouquet from rbb file"
+msgstr "Vytvořit přehled z rbb souboru"
 
 msgid "Create new bouquet"
 msgstr "Založit nový přehled"
@@ -299,7 +299,7 @@ msgstr "Ve zdrojovém přehledu nejsou programy nebo nejsou odlišnosti!"
 
 #, python-format
 msgid "File %s.rbb was created."
-msgstr "Soubor '%s' byl založen!"
+msgstr "Soubor '%s' byl založen."
 
 #, python-format
 msgid ""
@@ -363,7 +363,7 @@ msgstr ""
 msgid ""
 "Prepare replacement target's service by service in source bouquet (both "
 "select with 'OK') and replace it with 'Replace'. Repeat it as you need. "
-"Finish all with 'Apply and close'"
+"Finish all with 'Apply and close'."
 msgstr ""
 "Připravte nahrazení programu programem ze zdrojového přehledu (oba označte "
 "pomocí 'OK') a proveďte tlačítkem 'Nahradit'. Opakujte jak potřebujete. "
@@ -466,7 +466,7 @@ msgstr "Zkopírovat vybrané"
 
 msgid ""
 "Mark services with OK button or use group selection (Ch+/Ch-) and then copy "
-"these with 'Copy selected'"
+"these with 'Copy selected'."
 msgstr ""
 "Označte programy pomocí 'OK' nebo skupinového výběru (Ch+/Ch-)  a pak je "
 "zkopírujte  tlačítkem 'Zkopírovat vybrané'."
@@ -504,7 +504,7 @@ msgstr "Odstranit vybrané"
 
 msgid ""
 "Mark services with OK button or use group selection (Ch+/Ch-) and then "
-"remove these with 'Remove selected'"
+"remove these with 'Remove selected'."
 msgstr ""
 "Označte programy pomocí 'OK' nebo skupinového výběru (Ch+/Ch-) a pak je "
 "odstraňte tlačítkem 'Odstranit vybrané'."
@@ -551,9 +551,9 @@ msgid "Compare case sensitive"
 msgstr "Rozlišovat velikost písmen"
 
 msgid "Skip 1st nonstandard char in name"
-msgstr "Přeskočit počáteční nestandardní znak v názvu "
+msgstr "Přeskočit počáteční nestandardní znak v názvu"
 
-msgid "Omit any control character in service name. Default set 'yes'"
+msgid "Omit any control character in service name. Default set 'yes'."
 msgstr ""
 "Vynechání případného řídícího znaku v názvu programu. Výchozí nastavení je "
 "\"Ano\"."
@@ -661,7 +661,7 @@ msgstr ""
 msgid "Display bouquet name"
 msgstr "Zobrazovat název přehledu"
 
-msgid "Display bouquet name in the screen header or above the list"
+msgid "Display bouquet name in the screen header or above the list."
 msgstr "Zobrazovat název přehledu v záhlaví obrazovky nebo nad seznamem."
 
 msgid "Debug info"
@@ -671,14 +671,14 @@ msgid "Pre-fill first 'n' servicename chars to virtual keyboard"
 msgstr "Předvyplnit prvních 'n' znaků názvu programu do virtuální klávesnice"
 
 msgid "Compare virtual keyboard input as case sensitive"
-msgstr "Rozlišovat velikost písmen při zadání z virtuální klávesnice "
+msgstr "Rozlišovat velikost písmen při zadání z virtuální klávesnice"
 
 msgid "Use dotted service name for 'rbb' files"
 msgstr "Používat otečkované názvy programů pro 'rbb' soubory"
 
 msgid ""
 "When is creating a bouquet from 'rbb' file, dotted names can be compared "
-"too. You need then manually remove duplicates. Default set is 'no'"
+"too. You need then manually remove duplicates. Default set is 'no'."
 msgstr ""
 "Při vytváření přehledu z 'rbb' souboru mohou být porovnávány i tečkované "
 "názvy programů. Budete ale muset ručně odstraňovat duplicity."
@@ -687,8 +687,8 @@ msgid "Show full filenames for deleted bouquets"
 msgstr "Zobrazovat plné názvy smazaných přehledů"
 
 msgid ""
-"'Manage deleted userbouquets' will display full filenames instead bouquet "
-"names only."
+"'Manage deleted bouquets' will display full filenames instead bouquet names "
+"only."
 msgstr ""
 "'Správa odstraněných přehledů' bude zobrazovat úplné názvy souborů místo "
 "jednoduchých názvů přehledů."

@@ -131,8 +131,8 @@ class refreshBouquet(Screen, HelpableScreen):
 			{
 			"red": (self.exit, _("exit plugin")),
 			"green": (self.showMenu, _("select action")),
-			"yellow": (self.getSource, _("select source bouquet ")),
-			"blue": (self.getTarget, _("select target bouquet ")),
+			"yellow": (self.getSource, _("select source bouquet")),
+			"blue": (self.getTarget, _("select target bouquet")),
 			"menu": (self.showMenu, _("select action")),
 			"clearInputs": (self.clearInputs, _("clear selection")),
 			"moving": (self.startMoving, _("enable/disable moving bouquet")),
@@ -260,7 +260,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			menu.append((_("Remove bouquet '%s'") % name,15))
 			buttons += [""]
 		if self.isDeletedBouquet():
-			menu.append((_("Manage deleted userbouquets"),18))
+			menu.append((_("Manage deleted bouquets"),18))
 			buttons += [""]
 		menu.append((_("Settings..."),10))
 		buttons.append("menu")
@@ -1339,7 +1339,7 @@ class refreshBouquetManualSelection(Screen):
 
 		text =  _("Toggle source and target bouquets with Bouq +/- .") + " "
 		text += _("Or toggle with 'Prev/Next', which trying to find a similar name in source.") + " "
-		text += _("Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'")+ " "
+		text += _("Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'.")+ " "
 		text += _("Marking can be canceled with key '0'.") + " "
 		text += _("Source can be sorted with 'Menu'.") + " "
 		text += _("Epg or Info toggles between EPG and Info text.") + " "
@@ -1838,7 +1838,7 @@ class refreshBouquetCopyServices(Screen):
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = Button(_("Inversion"))
 
-		text =_("Mark services with OK button or use group selection (Ch+/Ch-) and then copy these with 'Copy selected'") + " "
+		text =_("Mark services with OK button or use group selection (Ch+/Ch-) and then copy these with 'Copy selected'.") + " "
 		text += _("Use 'Menu' for sorting.") + " "
 		text += _("Epg or Info toggles between EPG and Info text.") + " "
 		text += _("'Stop' button stops Preview.")
@@ -2047,7 +2047,7 @@ class refreshBouquetRemoveServices(Screen):
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = Button(_("Inversion"))
 
-		text = _("Mark services with OK button or use group selection (Ch+/Ch-) and then remove these with 'Remove selected'") + " "
+		text = _("Mark services with OK button or use group selection (Ch+/Ch-) and then remove these with 'Remove selected'.") + " "
 		text += _("Use 'Menu' for sorting.") + " "
 		text += _("Epg or Info toggles between EPG and Info text.") + " "
 		text += _("'Stop' button stops Preview.")
@@ -2496,7 +2496,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 
 		refreshBouquetCfglist = []
 		refreshBouquetCfglist.append(getConfigListEntry(_("Compare case sensitive"), cfg.case_sensitive))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Skip 1st nonstandard char in name"), cfg.omit_first, _("Omit any control character in service name. Default set 'yes'")))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Skip 1st nonstandard char in name"), cfg.omit_first, _("Omit any control character in service name. Default set 'yes'.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Omit last char in target names"), cfg.ignore_last_char, _("You can omit last service name char if provider added it for his planned 're-tuning' and You want use 'Refresh services' for this services too.")+" "+_("On plugin exit it will be set to 'no' again.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Auto toggle in manually replacing"), cfg.autotoggle, _("In 'Manually replacing' automaticaly toggles between columns when is used 'OK' button.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Missing source services for manually replace only"), cfg.diff, _("In 'Manually replacing' in source services column will be displayed missing services in target column only.")))
@@ -2508,13 +2508,13 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Return to previous service on end"), cfg.on_end, _("The service being played before the plugin is started on exit again.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("On plugin start use current bouquet as source or as target"), cfg.current_bouquet, _("When the plugin is launched, current bouquet can be set as source or target bouquet.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Selector to current bouquet"), cfg.selector2bouquet, _("When the plugin is launched, the selector will be set in the bouquets list on current bouquet.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Display bouquet name"), cfg.bouquet_name, _("Display bouquet name in the screen header or above the list")))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Display bouquet name"), cfg.bouquet_name, _("Display bouquet name in the screen header or above the list.")))
 #		refreshBouquetCfglist.append(getConfigListEntry(_("Save log for manual replace"), cfg.log))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Debug info"), cfg.debug))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Pre-fill first 'n' servicename chars to virtual keyboard"), cfg.vk_length))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Compare virtual keyboard input as case sensitive"), cfg.vk_sensitive))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Use dotted service name for 'rbb' files"), cfg.rbb_dotted, _("When is creating a bouquet from 'rbb' file, dotted names can be compared too. You need then manually remove duplicates. Default set is 'no'")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Show full filenames for deleted bouquets"), cfg.deleted_bq_fullname, _("'Manage deleted userbouquets' will display full filenames instead bouquet names only.")))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Use dotted service name for 'rbb' files"), cfg.rbb_dotted, _("When is creating a bouquet from 'rbb' file, dotted names can be compared too. You need then manually remove duplicates. Default set is 'no'.")))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Show full filenames for deleted bouquets"), cfg.deleted_bq_fullname, _("'Manage deleted bouquets' will display full filenames instead bouquet names only.")))
 		ConfigListScreen.__init__(self, refreshBouquetCfglist, session, on_change = self.changedEntry)
 
 		self.onChangedEntry = []

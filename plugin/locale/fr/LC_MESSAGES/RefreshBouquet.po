@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GithubIMS 21\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-02 11:52+0200\n"
-"PO-Revision-Date: 2019-05-02 11:54+0200\n"
+"POT-Creation-Date: 2019-05-02 12:18+0200\n"
+"PO-Revision-Date: 2019-05-02 12:20+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -26,7 +26,7 @@ msgstr "Actualiser les services en bouquets"
 
 #, fuzzy
 #| msgid "Move selected services in bouquet"
-msgid "Manage deleted userbouquets"
+msgid "Manage deleted bouquets"
 msgstr "Déplacer les services sélectionnés dans bouquet"
 
 msgid "Cancel"
@@ -43,11 +43,11 @@ msgstr "Inversion"
 
 msgid ""
 "On deleted userbouquet press 'Restore' or 'Remove' or mark more deleted "
-"userbouquets with 'OK' and then use 'Restore' or 'Remove'."
+"bouquets with 'OK' and then use 'Restore' or 'Remove'."
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Are you sure to remove %s selected deleted userbouquets?"
+msgid "Are you sure to remove %s selected deleted bouquets?"
 msgstr "Êtes-vous sûr de supprimer ce %d service?"
 
 #, fuzzy, python-format
@@ -60,7 +60,7 @@ msgstr "Êtes-vous sûr de supprimer ce %d service?"
 #, fuzzy, python-format
 #| msgid "Are you sure to refresh this %d service?"
 #| msgid_plural "Are you sure to refresh this %d services?"
-msgid "Are you sure to restore %s selected deleted userbouquets?"
+msgid "Are you sure to restore %s selected deleted bouquets?"
 msgstr "Êtes-vous sûr d'actualiser ce %d service?"
 
 #, fuzzy, python-format
@@ -174,10 +174,14 @@ msgstr "quitter le plugin"
 msgid "select action"
 msgstr "﻿sélectionnez une action"
 
-msgid "select source bouquet "
+#, fuzzy
+#| msgid "select source bouquet "
+msgid "select source bouquet"
 msgstr "sélectionnez le bouquet source "
 
-msgid "select target bouquet "
+#, fuzzy
+#| msgid "select target bouquet "
+msgid "select target bouquet"
 msgstr "sélectionnez le bouquet cible "
 
 #, fuzzy
@@ -227,13 +231,6 @@ msgid ""
 "Button '6' enable/disable moving bouquet with 'preview' and 'next' buttons."
 msgstr ""
 
-#, fuzzy, python-format
-msgid "Create '%s.rbb' file"
-msgstr "Créer un fichier RBB"
-
-msgid "Create bouquet from rbb file"
-msgstr "Créer un bouquet à partir d’un fichier rob"
-
 msgid "Add selected services to target bouquet"
 msgstr "Ajouter des services sélectionnés au bouquet cible"
 
@@ -256,6 +253,13 @@ msgstr "Déplacer les services sélectionnés dans bouquet"
 #| msgid "Move selected services in bouquet"
 msgid "Remove selected services in bouquet"
 msgstr "Déplacer les services sélectionnés dans bouquet"
+
+#, fuzzy, python-format
+msgid "Create '%s.rbb' file"
+msgstr "Créer un fichier RBB"
+
+msgid "Create bouquet from rbb file"
+msgstr "Créer un bouquet à partir d’un fichier rob"
 
 #, fuzzy
 msgid "Create new bouquet"
@@ -371,10 +375,15 @@ msgid ""
 "Or toggle with 'Prev/Next', which trying to find a similar name in source."
 msgstr ""
 
+#, fuzzy
+#| msgid ""
+#| "Prepare replacement target's service by service in source bouquet (both "
+#| "select with 'OK') and replace it with 'Replace'. Repeat it as you need. "
+#| "Finish all with 'Apply and close'"
 msgid ""
 "Prepare replacement target's service by service in source bouquet (both "
 "select with 'OK') and replace it with 'Replace'. Repeat it as you need. "
-"Finish all with 'Apply and close'"
+"Finish all with 'Apply and close'."
 msgstr ""
 "Préparez le service cible du remplacement par le service dans le bouquet "
 "source (sélectionnez avec ‘OK’) et remplacez-le par ‘Replacer’. Répétez-le "
@@ -474,9 +483,13 @@ msgstr "- sélectionnez le(s) service(s) à ajouter avec OK"
 msgid "Copy selected"
 msgstr "Copier la sélection"
 
+#, fuzzy
+#| msgid ""
+#| "Mark services with OK button or use group selection (Ch+/Ch-) and then "
+#| "copy these with 'Copy selected'"
 msgid ""
 "Mark services with OK button or use group selection (Ch+/Ch-) and then copy "
-"these with 'Copy selected'"
+"these with 'Copy selected'."
 msgstr ""
 "Marquez les services avec le bouton OK ou utilisez la sélection de groupe "
 "(ch +/ch-), puis copiez-les avec 'Copier la sélection’"
@@ -512,9 +525,13 @@ msgstr "- sélectionnez le(s) service(s) à supprimer avec OK"
 msgid "Remove selected"
 msgstr "Retirer la sélection"
 
+#, fuzzy
+#| msgid ""
+#| "Mark services with OK button or use group selection (Ch+/Ch-) and then "
+#| "remove these with 'Remove selected'"
 msgid ""
 "Mark services with OK button or use group selection (Ch+/Ch-) and then "
-"remove these with 'Remove selected'"
+"remove these with 'Remove selected'."
 msgstr ""
 "Marquez les services avec le bouton OK ou utilisez la sélection de groupe "
 "(ch +/ch-), puis supprimez-les avec ‘Supprimer la sélection’"
@@ -562,7 +579,7 @@ msgstr "Comparaison sensible à la case"
 msgid "Skip 1st nonstandard char in name"
 msgstr "Passer le 1er caractère non-standard dans le nom"
 
-msgid "Omit any control character in service name. Default set 'yes'"
+msgid "Omit any control character in service name. Default set 'yes'."
 msgstr ""
 
 msgid "Omit last char in target names"
@@ -657,7 +674,7 @@ msgstr ""
 msgid "Display bouquet name"
 msgstr "Afficher le nom du bouquet"
 
-msgid "Display bouquet name in the screen header or above the list"
+msgid "Display bouquet name in the screen header or above the list."
 msgstr ""
 
 msgid "Debug info"
@@ -675,15 +692,15 @@ msgstr ""
 
 msgid ""
 "When is creating a bouquet from 'rbb' file, dotted names can be compared "
-"too. You need then manually remove duplicates. Default set is 'no'"
+"too. You need then manually remove duplicates. Default set is 'no'."
 msgstr ""
 
 msgid "Show full filenames for deleted bouquets"
 msgstr ""
 
 msgid ""
-"'Manage deleted userbouquets' will display full filenames instead bouquet "
-"names only."
+"'Manage deleted bouquets' will display full filenames instead bouquet names "
+"only."
 msgstr ""
 
 #~ msgid "Remove selected services from bouquet"
