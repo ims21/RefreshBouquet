@@ -69,8 +69,8 @@ class refreshBouquetRbbManager(Screen):
 				"ok": self.ok,
 				"red": self.exit,
 				"green": self.style,
-				"blue": self.remove,
-				"yellow": self.rename,
+				"blue": self.rename,
+				"yellow": self.remove,
 				"menu": self.menu,
 			})
 
@@ -112,8 +112,8 @@ class refreshBouquetRbbManager(Screen):
 		self.list.sort()
 		self["config"] = self.list
 		if nr:
-			self["key_blue"].setText(_("Erase"))
-			self["key_yellow"].setText(_("Rename"))
+			self["key_blue"].setText(_("Rename"))
+			self["key_yellow"].setText(_("Erase"))
 		else:
 			self["key_blue"].setText("")
 			self["key_yellow"].setText("")

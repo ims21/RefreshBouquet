@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "1.99"
+VERSION = "2.00"
 #  by ims (c) 2016-2019 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -246,9 +246,9 @@ class refreshBouquet(Screen, HelpableScreen):
 			if self.sourceItem: # rbb for sources only
 				menu.append((_("Create '%s.rbb' file") % bName,20))
 				buttons += [""]
-				if self.isRbbFile():
-					menu.append((_("Create bouquet from rbb file"),21))
-					buttons += [""]
+				#if self.isRbbFile():
+				menu.append((_("Create bouquet from rbb file"),21))
+				buttons += [""]
 		menu.append((_("Create new bouquet"),13))
 		buttons += [""]
 		if self["config"].getCurrent():
@@ -258,7 +258,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		if self["config"].getCurrent():
 			name = self["config"].getCurrent()[0]
 			menu.append((_("Remove bouquet '%s'") % name,15))
-			buttons += [""]
+			buttons += ["red"]
 		if self.isDeletedBouquet():
 			menu.append((_("Manage deleted bouquets"),18))
 			buttons += [""]
