@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.00"
+VERSION = "2.01"
 #  by ims (c) 2016-2019 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -357,7 +357,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			elif orb_pos > 0:
 				return str((float(orb_pos)) / 10.0) + _("° E")
 			return "unknown"
-		op = []
+		positions = []
 		new_choices = [("x",_("no"))]
 		source = self.getServices(sourceItem[0])
 		if not source:
@@ -366,12 +366,11 @@ class refreshBouquet(Screen, HelpableScreen):
 			if self.isNotService(service[1]):
 				continue
 			op_hex_str = service[1].split(':')[6][0:-4]
-			op_txt = op2human(int(op_hex_str,16)) if op_hex_str else op_hex_str
-			try:
-				tmp = op.index((op_hex_str, op_txt))
-			except:
-				op.append((op_hex_str, op_txt))
-				new_choices.append(("%s" % op_hex_str ,"%s" % op_txt))
+			positions.append(op_hex_str)
+		unique_choices = set(positions)
+		for op in unique_choices:
+			op_txt = op2human(int(op,16)) if op else op
+			new_choices.append(("%s" % op ,"%s" % op_txt))
 		config.plugins.refreshbouquet.orbital = NoSave(ConfigSelection(default = "x", choices = new_choices))
 
 # call refreshService as replace		
