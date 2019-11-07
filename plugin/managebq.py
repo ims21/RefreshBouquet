@@ -27,13 +27,14 @@ from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
-from Components.SelectionList import SelectionList
 from Screens.ChoiceBox import ChoiceBox
 from Components.config import config
 from enigma import eDVBDB
 import skin
 import os
 from ui import E2, cfg
+from ui import MySelectionList
+from ui import setIcon
 
 class refreshBouquetManageDeletedBouquets(Screen):
 	skin = """
@@ -60,10 +61,9 @@ class refreshBouquetManageDeletedBouquets(Screen):
 
 		self.setTitle(_("Manage deleted bouquets"))
 
-		self.original_selectionpng = None
-		self.changePng()
+		setIcon(True)
 
-		data = SelectionList([])
+		data = MySelectionList([])
 		nr = 0
 		for x in os.listdir(E2):
 			if x.startswith("userbouquet") and x.endswith(".del"):
@@ -110,7 +110,7 @@ class refreshBouquetManageDeletedBouquets(Screen):
 			else:
 				os.unlink(self["config"].getCurrent()[0][1])
 				self.list.removeSelection(self["config"].getCurrent()[0])
-		if not self.list.len():
+		if not len(self.list.list):
 			self.exit()
 
 	def restoreCurrentEntries(self):
@@ -139,20 +139,10 @@ class refreshBouquetManageDeletedBouquets(Screen):
 		if not self.list.len():
 			self.exit()
 
-	def changePng(self):
-		path = resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/mark_select.png")
-		if os.path.exists(path):
-			import Components.SelectionList
-			self.original_selectionpng = Components.SelectionList.selectionpng
-			Components.SelectionList.selectionpng = LoadPixmap(cached=True, path=path)
-
 	def fileName(self, filename):
 		if cfg.deleted_bq_fullname.value:
 			return filename
 		return filename.split('.')[1]
 
 	def exit(self):
-		if self.original_selectionpng:
-			import Components.SelectionList
-			Components.SelectionList.selectionpng = self.original_selectionpng
 		self.close()
