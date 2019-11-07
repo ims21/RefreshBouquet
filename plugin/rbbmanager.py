@@ -23,7 +23,6 @@ from Screens.Screen import Screen
 from Components.Button import Button
 from Components.Label import Label
 from Components.ActionMap import ActionMap
-from Components.SelectionList import SelectionList
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.MessageBox import MessageBox
 import skin
@@ -32,6 +31,7 @@ from Screens.ChoiceBox import ChoiceBox
 from shutil import copy2
 from plugin import plugin_path
 from ui import E2, cfg
+from myselectionlist import MySelectionList
 
 
 class refreshBouquetRbbManager(Screen):
@@ -59,7 +59,7 @@ class refreshBouquetRbbManager(Screen):
 		self["key_blue"] = Button()
 		self["key_yellow"] = Button()
 
-		self.list = SelectionList([])
+		self.list = MySelectionList([])
 		self.reloadList()
 		self["text"] = Label()
 
