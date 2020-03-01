@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: refreshBouquet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-02 12:18+0200\n"
-"PO-Revision-Date: 2019-05-02 12:26+0200\n"
+"POT-Creation-Date: 2020-03-01 09:54+0100\n"
+"PO-Revision-Date: 2020-03-01 09:59+0100\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -101,12 +101,12 @@ msgid "Select action:"
 msgstr "выбор действия"
 
 #, fuzzy
-msgid "Erase"
-msgstr "Очистка"
-
-#, fuzzy
 msgid "Rename"
 msgstr "Переименовать"
+
+#, fuzzy
+msgid "Erase"
+msgstr "Очистка"
 
 #, fuzzy, python-format
 msgid "The path %s already exists."
@@ -609,6 +609,15 @@ msgstr "Фильтр сервисов по орбитальной позиции
 msgid ""
 "You can select valid orbital position as filter for display services in "
 "source bouquet."
+msgstr ""
+
+msgid "Using 'service type' in automatic replacing"
+msgstr ""
+
+msgid "Take into account 'service type' in automatic replacing too."
+msgstr ""
+
+msgid "Fastcans changing 'service type' parameter to 'basic' value."
 msgstr ""
 
 msgid "Programs with 'HD/4K(UHD)' in name only for source"

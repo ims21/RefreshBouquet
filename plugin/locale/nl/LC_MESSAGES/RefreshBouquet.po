@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-02 12:18+0200\n"
-"PO-Revision-Date: 2019-05-02 12:23+0200\n"
+"POT-Creation-Date: 2020-03-01 09:54+0100\n"
+"PO-Revision-Date: 2020-03-01 09:59+0100\n"
 "Last-Translator: Frenske <voorzitter@openpli.org>\n"
 "Language-Team: PLi <translators@openpli.org>\n"
 "Language: nl\n"
@@ -99,12 +99,12 @@ msgstr ""
 msgid "Select action:"
 msgstr "kies een aktie"
 
-msgid "Erase"
-msgstr ""
-
 #, fuzzy
 msgid "Rename"
 msgstr "Wijzigen"
+
+msgid "Erase"
+msgstr ""
 
 #, fuzzy, python-format
 msgid "The path %s already exists."
@@ -606,6 +606,15 @@ msgstr "Filter de bronzenders op orbitale positie"
 msgid ""
 "You can select valid orbital position as filter for display services in "
 "source bouquet."
+msgstr ""
+
+msgid "Using 'service type' in automatic replacing"
+msgstr ""
+
+msgid "Take into account 'service type' in automatic replacing too."
+msgstr ""
+
+msgid "Fastcans changing 'service type' parameter to 'basic' value."
 msgstr ""
 
 msgid "Programs with 'HD/4K(UHD)' in name only for source"

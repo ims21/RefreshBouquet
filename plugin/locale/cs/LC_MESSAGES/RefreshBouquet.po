@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-02 12:18+0200\n"
-"PO-Revision-Date: 2019-05-02 12:20+0200\n"
+"POT-Creation-Date: 2020-03-01 09:54+0100\n"
+"PO-Revision-Date: 2020-03-01 09:57+0100\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi\n"
 "Language: cs_CZ\n"
@@ -105,11 +105,11 @@ msgstr "Kopírovat předdefinované 'rbb' soubor(y) do seznamu"
 msgid "Select action:"
 msgstr "Zvolte akci:"
 
-msgid "Erase"
-msgstr "Odstranit"
-
 msgid "Rename"
 msgstr "Přejmenovat"
+
+msgid "Erase"
+msgstr "Odstranit"
 
 #, python-format
 msgid "The path %s already exists."
@@ -601,6 +601,15 @@ msgid ""
 msgstr ""
 "Můžete použít platnou orbitální pozici jako filtr pro zobrazení programů ve "
 "zdrojovém přehledu."
+
+msgid "Using 'service type' in automatic replacing"
+msgstr "Používat 'service type' v automatickém nahrazování"
+
+msgid "Take into account 'service type' in automatic replacing too."
+msgstr "Bere v úvahu i typ programu v automatickém nahrazování."
+
+msgid "Fastcans changing 'service type' parameter to 'basic' value."
+msgstr "Fastscan obvykle mění typ programu na základní hodnotu."
 
 msgid "Programs with 'HD/4K(UHD)' in name only for source"
 msgstr "Ve zdroji zobrazit pouze jména s 'HD/4K(UHD)'"

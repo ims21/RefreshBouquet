@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GithubIMS 21\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-02 12:18+0200\n"
-"PO-Revision-Date: 2019-05-02 12:20+0200\n"
+"POT-Creation-Date: 2020-03-01 09:54+0100\n"
+"PO-Revision-Date: 2020-03-01 09:58+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -108,10 +108,10 @@ msgstr ""
 msgid "Select action:"
 msgstr "﻿sélectionnez une action"
 
-msgid "Erase"
+msgid "Rename"
 msgstr ""
 
-msgid "Rename"
+msgid "Erase"
 msgstr ""
 
 #, python-format
@@ -615,6 +615,15 @@ msgstr "Filtrer les services par position orbitale dans la source"
 msgid ""
 "You can select valid orbital position as filter for display services in "
 "source bouquet."
+msgstr ""
+
+msgid "Using 'service type' in automatic replacing"
+msgstr ""
+
+msgid "Take into account 'service type' in automatic replacing too."
+msgstr ""
+
+msgid "Fastcans changing 'service type' parameter to 'basic' value."
 msgstr ""
 
 msgid "Programs with 'HD/4K(UHD)' in name only for source"

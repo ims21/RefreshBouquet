@@ -4,8 +4,8 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.03"
-#  by ims (c) 2016-2019 ims21@users.sourceforge.net
+VERSION = "2.04"
+#  by ims (c) 2016-2020 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -58,6 +58,7 @@ config.plugins.refreshbouquet.preview = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.autotoggle = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.on_end = ConfigYesNo(default = True)
 config.plugins.refreshbouquet.orbital = ConfigSelection(default = "x", choices = [("x",_("no")),])
+config.plugins.refreshbouquet.stype = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.current_bouquet = ConfigSelection(default = "0", choices = [("0",_("no")),("source",_("source bouquet")),("target",_("target bouquet"))])
 config.plugins.refreshbouquet.selector2bouquet = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.bouquet_name = ConfigYesNo(default = True)
@@ -412,12 +413,16 @@ class refreshBouquet(Screen, HelpableScreen):
 			t_name = self.prepareStr(t[0]).replace(cfg.ignore_last_char.value,'') if cfg.ignore_last_char.value else self.prepareStr(t[0])
 			t_splited = t[1].split(':') # split target service_reference
 			t_core = ":".join((t_splited[3],t_splited[4],t_splited[5],t_splited[6]))
+			if cfg.stype.value: # differences in service type too
+				t_core = ":".join((t_splited[2],t_core))
 			t_op = t_splited[6][:-4]
 			for s in source_services: # source bouquet - with fresh scan - f.eg. created by Fastscan or Last Scanned
 				if self.isNotService(s[1]): # skip all non playable
 					continue
 				s_splited = s[1].split(':') # split service_reference
 				s_core = ":".join((s_splited[3],s_splited[4],s_splited[5],s_splited[6]))
+				if cfg.stype.value: # differences in service type too
+					s_core = ":".join((s_splited[2],s_core))
 				if cfg.orbital.value != "x": # only on selected op
 					if s_splited[6][:-4] != cfg.orbital.value:
 						continue
@@ -2500,6 +2505,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Auto toggle in manually replacing"), cfg.autotoggle, _("In 'Manually replacing' automaticaly toggles between columns when is used 'OK' button.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Missing source services for manually replace only"), cfg.diff, _("In 'Manually replacing' in source services column will be displayed missing services in target column only.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Filter services by orbital position in source"), cfg.orbital, _("You can select valid orbital position as filter for display services in source bouquet.")+" "+_("On plugin exit it will be set to 'no' again.")))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Using 'service type' in automatic replacing"), cfg.stype, _("Take into account 'service type' in automatic replacing too.")+" "+_("Fastcans changing 'service type' parameter to 'basic' value.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Programs with 'HD/4K(UHD)' in name only for source"), cfg.used_services,_("Plugin will be display in service bouquet services with HD,4K/UHD in service name only.")+" "+_("On plugin exit it will be set to 'no' again.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Preview on selection"), cfg.preview, _("Automaticaly preview current service in bouquet list.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Confirm services moving"), cfg.confirm_move, _("It will require confirmation for moving selected services in the source bouquet.")))
