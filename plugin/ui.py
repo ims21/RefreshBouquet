@@ -1959,7 +1959,7 @@ class refreshBouquetCopyServices(Screen):
 			text = ngettext("Are you sure to copy this %d service?", "Are you sure to copy this %d services?", nr_items) % nr_items
 			list = [(_("Yes"), True), (_("No"), False)]
 			if self.missing: # for 'Add selected missing services to target bouquet' only 
-				 list.append((_("Yes, add to new bouquet..."), "new"))
+				list.append((_("Yes, add to new bouquet..."), "new"))
 			self.session.openWithCallback(self.copyToTarget, MessageBox, text, MessageBox.TYPE_YESNO, default=False, list=list )
 		else:
 			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3 )
