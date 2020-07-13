@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.04"
+VERSION = "2.05"
 #  by ims (c) 2016-2020 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -46,6 +46,8 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 from ServiceReference import ServiceReference
 from Components.Sources.Boolean import Boolean
 from Components.Pixmap import Pixmap
+from Components.About import GetIPsFromNetworkInterfaces
+import socket
 
 config.plugins.refreshbouquet.case_sensitive = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.omit_first = ConfigYesNo(default = True)
@@ -250,6 +252,8 @@ class refreshBouquet(Screen, HelpableScreen):
 				#if self.isRbbFile():
 				menu.append((_("Create bouquet from rbb file"),21))
 				buttons += [""]
+				menu.append((_("Create TE file '%s-%s.ini' to '/tmp'") % (socket.gethostname().upper(), bName.replace(' ','_')),30))
+				buttons += [""]
 		menu.append((_("Create new bouquet"),13))
 		buttons += [""]
 		if self["config"].getCurrent():
@@ -297,6 +301,8 @@ class refreshBouquet(Screen, HelpableScreen):
 			self.saveRbbBouquet()
 		elif choice[1] == 21:
 			self.createRbbBouquet()
+		elif choice[1] == 30:
+			self.saveTEIniFile()
 		else:
 			self["info"].setText(_("Wrong selection!"))
 			return
@@ -573,6 +579,46 @@ class refreshBouquet(Screen, HelpableScreen):
 	def ManageDeletedBouquets(self):
 		from managebq import refreshBouquetManageDeletedBouquets
 		self.session.openWithCallback(self.getBouquetList, refreshBouquetManageDeletedBouquets)
+
+#
+# Save BOX_BOUQUET TransEdit ini file to /tmp/BOX-BOUQUET.ini file
+#
+	def saveTEIniFile(self):
+		boxIP = "http://%s:%s" % (GetIPsFromNetworkInterfaces()[0][1], "8001")
+		boxName = socket.gethostname().upper()
+		bouquet, t1, t2 = self.prepareSingleBouquetOperation()
+		if bouquet:
+			item = self.getServices(bouquet[0])
+			if not len(item):
+				self["info"].setText("%s" % t1)
+				return
+			new = []
+			new = self.addToBouquetFiltered(item)
+			if not len(new):
+				self["info"].setText("s" % t2)
+				return
+			# fill tmp with services
+			num = 1
+			tmp = []
+			for t in new: # bouquet for save
+				if self.isNotService(t[1]):
+					continue
+				name = self.prepareStr(t[0])
+				if name.upper() == '<N/A>':
+					continue
+				tmp.append(("%s=%s/%s|%s\n" % (num, boxIP, t[1], name.replace('|', '-'))))
+				num += 1
+			bouqName = bouquet[0].replace(' ','_')
+			fileName = "/tmp/%s-%s.ini" % (boxName, bouqName)
+			fo = open(filename, "wt")
+			# head
+			fo.write("[SATTYPE]\n" + "1=6500\n" + "2=%s - %s\n\n" % (boxName, bouquet[0]) + "[DVB]\n")
+			# services
+			fo.write("0=%s\n" % len(tmp))
+			for i in tmp:
+				fo.write(i)
+			fo.close()
+			self.session.open(MessageBox, _("TE file %s.ini was created.") % filename, type = MessageBox.TYPE_INFO, timeout = 3)
 
 #
 # Save RefreshBouquetBackup name:orbital_position services parameters in selected bouquet to /etc/enigma2/bouquetname.rbb file
