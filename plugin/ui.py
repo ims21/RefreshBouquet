@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.05"
+VERSION = "2.06"
 #  by ims (c) 2016-2020 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -48,6 +48,7 @@ from Components.Sources.Boolean import Boolean
 from Components.Pixmap import Pixmap
 from Components.About import GetIPsFromNetworkInterfaces
 import socket
+import unicodedata
 
 config.plugins.refreshbouquet.case_sensitive = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.omit_first = ConfigYesNo(default = True)
@@ -264,8 +265,8 @@ class refreshBouquet(Screen, HelpableScreen):
 			menu.append((_("Manage deleted bouquets"),18))
 			buttons += [""]
 		if self["config"].getCurrent():
-			name = self["config"].getCurrent()[0]
-			menu.append((_("Create TE file '%s-%s.ini' to '/tmp'") % (socket.gethostname().upper(), name.replace(' ','_')),30))
+			name =  self.plainString(self["config"].getCurrent()[0]).replace(' ','_')
+			menu.append((_("Create TE file '%s-%s.ini' to '/tmp'") % (socket.gethostname().upper(),name),30))
 			buttons += [""]
 		menu.append((_("Settings..."),10))
 		buttons.append("menu")
@@ -306,6 +307,10 @@ class refreshBouquet(Screen, HelpableScreen):
 		else:
 			self["info"].setText(_("Wrong selection!"))
 			return
+
+# get plain string
+	def plainString(self, string):
+		return unicodedata.normalize('NFKD', unicode(string, "utf-8")).encode('ASCII', 'ignore')
 
 # set selector to selected bouquet
 	def setSelector(self):
@@ -352,18 +357,21 @@ class refreshBouquet(Screen, HelpableScreen):
 			current = self["config"].getCurrent()
 		self["target_name"].setText(current[0])
 		self.targetItem = current
+
+# get human orbital position
+	def op2human(self, orb_pos, TE=False):
+		if orb_pos == 0xeeee:
+			return _("Terrestrial") if not TE else _("T")
+		elif orb_pos == 0xffff:
+			return _("Cable") if not TE else _("C")
+		if orb_pos > 1800:
+			return str((float(3600 - orb_pos)) / 10.0) + (_("° W") if not TE else _("W"))
+		elif orb_pos > 0:
+			return str((float(orb_pos)) / 10.0) + (_("° E") if not TE else _("E"))
+		return "unknown" if not TE else "-"
+
 # get all orbital positions in source bouquet to config for filtering
 	def setBouquetsOrbitalPositionsConfigFilter(self, sourceItem):
-		def op2human(orb_pos):
-			if orb_pos == 0xeeee:
-				return _("Terrestrial")
-			elif orb_pos == 0xffff:
-				return _("Cable")
-			if orb_pos > 1800:
-				return str((float(3600 - orb_pos)) / 10.0) + _("° W")
-			elif orb_pos > 0:
-				return str((float(orb_pos)) / 10.0) + _("° E")
-			return "unknown"
 		positions = []
 		new_choices = [("x",_("no"))]
 		source = self.getServices(sourceItem[0])
@@ -376,7 +384,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			positions.append(op_hex_str)
 		unique_choices = set(positions)
 		for op in unique_choices:
-			op_txt = op2human(int(op,16)) if op else op
+			op_txt = self.op2human(int(op,16)) if op else op
 			new_choices.append(("%s" % op ,"%s" % op_txt))
 		config.plugins.refreshbouquet.orbital = NoSave(ConfigSelection(default = "x", choices = new_choices))
 
@@ -586,9 +594,9 @@ class refreshBouquet(Screen, HelpableScreen):
 	def saveTEIniFile(self):
 		boxIP = "http://%s:%s" % (GetIPsFromNetworkInterfaces()[0][1], "8001")
 		boxName = socket.gethostname().upper()
-		bouquet, t1, t2 = self.prepareSingleBouquetOperation()
-		if bouquet:
-			item = self.getServices(bouquet[0])
+		if self["config"].getCurrent():
+			bouqName = self["config"].getCurrent()[0]
+			item = self.getServices(bouqName)
 			if not len(item):
 				self["info"].setText("%s" % t1)
 				return
@@ -606,13 +614,14 @@ class refreshBouquet(Screen, HelpableScreen):
 				name = self.prepareStr(t[0])
 				if name.upper() == '<N/A>':
 					continue
-				tmp.append(("%s=%s/%s|%s\n" % (num, boxIP, t[1], name.replace('|', '-'))))
+				splited = t[1].split(':')
+				op = self.op2human(int(splited[6][0:-4],16), TE=True)
+				tmp.append(("%s=%s/%s|%s   (%s)\n" % (num, boxIP, t[1], name.replace('|', '-'), op)))
 				num += 1
-			bouqName = bouquet[0].replace(' ','_')
-			fileName = "/tmp/%s-%s.ini" % (boxName, bouqName)
+			fileName = "/tmp/%s-%s.ini" % (boxName, self.plainString(bouqName).replace(' ','_'))
 			fo = open(fileName, "wt")
 			# head
-			fo.write("[SATTYPE]\n" + "1=6500\n" + "2=%s - %s\n\n" % (boxName, bouquet[0]) + "[DVB]\n")
+			fo.write("[SATTYPE]\n" + "1=6500\n" + "2=%s - %s\n\n" % (boxName, bouqName) + "[DVB]\n")
 			# services
 			fo.write("0=%s\n" % len(tmp))
 			for i in tmp:
