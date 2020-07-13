@@ -252,20 +252,20 @@ class refreshBouquet(Screen, HelpableScreen):
 				#if self.isRbbFile():
 				menu.append((_("Create bouquet from rbb file"),21))
 				buttons += [""]
-				menu.append((_("Create TE file '%s-%s.ini' to '/tmp'") % (socket.gethostname().upper(), bName.replace(' ','_')),30))
-				buttons += [""]
 		menu.append((_("Create new bouquet"),13))
 		buttons += [""]
 		if self["config"].getCurrent():
 			name = self["config"].getCurrent()[0]
 			menu.append((_("Rename bouquet '%s'") % name,14))
 			buttons += [""]
-		if self["config"].getCurrent():
-			name = self["config"].getCurrent()[0]
 			menu.append((_("Remove bouquet '%s'") % name,15))
 			buttons += ["red"]
 		if self.isDeletedBouquet():
 			menu.append((_("Manage deleted bouquets"),18))
+			buttons += [""]
+		if self["config"].getCurrent():
+			name = self["config"].getCurrent()[0]
+			menu.append((_("Create TE file '%s-%s.ini' to '/tmp'") % (socket.gethostname().upper(), name.replace(' ','_')),30))
 			buttons += [""]
 		menu.append((_("Settings..."),10))
 		buttons.append("menu")
@@ -618,7 +618,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			for i in tmp:
 				fo.write(i)
 			fo.close()
-			self.session.open(MessageBox, _("TE file was created.") % fileName, type = MessageBox.TYPE_INFO, timeout = 3)
+			self.session.open(MessageBox, _("TE file was created."), type = MessageBox.TYPE_INFO, timeout = 3)
 
 #
 # Save RefreshBouquetBackup name:orbital_position services parameters in selected bouquet to /etc/enigma2/bouquetname.rbb file
