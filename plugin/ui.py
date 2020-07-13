@@ -610,7 +610,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				num += 1
 			bouqName = bouquet[0].replace(' ','_')
 			fileName = "/tmp/%s-%s.ini" % (boxName, bouqName)
-			fo = open(filename, "wt")
+			fo = open(fileName, "wt")
 			# head
 			fo.write("[SATTYPE]\n" + "1=6500\n" + "2=%s - %s\n\n" % (boxName, bouquet[0]) + "[DVB]\n")
 			# services
@@ -618,7 +618,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			for i in tmp:
 				fo.write(i)
 			fo.close()
-			self.session.open(MessageBox, _("TE file %s.ini was created.") % filename, type = MessageBox.TYPE_INFO, timeout = 3)
+			self.session.open(MessageBox, _("TE file was created.") % fileName, type = MessageBox.TYPE_INFO, timeout = 3)
 
 #
 # Save RefreshBouquetBackup name:orbital_position services parameters in selected bouquet to /etc/enigma2/bouquetname.rbb file

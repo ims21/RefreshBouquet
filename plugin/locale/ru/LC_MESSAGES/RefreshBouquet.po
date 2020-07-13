@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: refreshBouquet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-01 09:54+0100\n"
+"POT-Creation-Date: 2020-07-13 10:11+0200\n"
 "PO-Revision-Date: 2020-03-01 09:59+0100\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: \n"
@@ -11,408 +11,87 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-msgid "RefreshBouquet"
-msgstr "Обновление букета"
-
-msgid "Actualize services in bouquets"
-msgstr "Актуализировать сервисы в букетах"
-
-#, fuzzy
-msgid "Manage deleted bouquets"
-msgstr "Переместить выбранные сервисы в исходный букет"
-
-msgid "Cancel"
-msgstr "Отмена"
-
-msgid "Restore"
-msgstr ""
-
-msgid "Remove"
-msgstr ""
-
-msgid "Inversion"
-msgstr "Инверсия"
-
-msgid ""
-"On deleted userbouquet press 'Restore' or 'Remove' or mark more deleted "
-"bouquets with 'OK' and then use 'Restore' or 'Remove'."
-msgstr ""
-
-#, fuzzy, python-format
-msgid "Are you sure to remove %s selected deleted bouquets?"
-msgstr "Вы действительно хотите удалить этот %d сервис?"
-
-#, fuzzy, python-format
-msgid ""
-"Are you sure to remove deleted userbouquet?\n"
-"\n"
-"%s"
-msgstr "Вы действительно хотите удалить этот %d сервис?"
-
-#, fuzzy, python-format
-#| msgid "Are you sure to refresh this %d service?"
-#| msgid_plural "Are you sure to refresh this %d services?"
-msgid "Are you sure to restore %s selected deleted bouquets?"
-msgstr "Вы действительно хотите обновить этот %d сервис?"
-
-#, fuzzy, python-format
-msgid ""
-"Are you sure to restore deleted userbouquet?\n"
-"\n"
-"%s"
-msgstr "Вы действительно хотите удалить этот %d сервис?"
-
-msgid "Select rbb file"
-msgstr ""
-
-msgid "Dotted"
-msgstr ""
-
-msgid "Default"
-msgstr ""
-
-msgid "Select rbb file with 'OK' and create bouquet with same name."
-msgstr ""
-
-msgid "Use 'Menu' for predefined 'rbb' files."
-msgstr ""
-
-#, python-format
-msgid ""
-"If You will add to bouquet some missing services (start with '---'), You can "
-"then finalize created bouquet with '%s' etc."
-msgstr ""
-
-msgid "Manually replace services"
-msgstr "Ручная замена сервисов"
-
-msgid "You can try toggle 'Standard/Dotted' service names too."
-msgstr ""
-
-msgid "Copy predefined 'rbb' file(s) to list"
-msgstr ""
-
-#, fuzzy
-#| msgid "select action"
-msgid "Select action:"
-msgstr "выбор действия"
-
-#, fuzzy
-msgid "Rename"
-msgstr "Переименовать"
-
-#, fuzzy
-msgid "Erase"
-msgstr "Очистка"
-
-#, fuzzy, python-format
-msgid "The path %s already exists."
-msgstr "Этот путь %s уже существует."
-
-#, fuzzy
-msgid "Error"
-msgstr "Ошибка"
-
-#, fuzzy
-msgid "Are You sure to remove file?"
-msgstr "Вы действительно хотите удалить этот %d сервис?"
-
-#, fuzzy
-msgid "Original"
-msgstr "Оригинал"
-
-msgid "A-z sort"
-msgstr ""
-
-msgid "Z-a sort"
-msgstr ""
-
-msgid "no"
-msgstr "нет"
-
-msgid "HD"
-msgstr "HD"
-
-msgid "4K/UHD"
-msgstr "4K/UHD"
-
-msgid "HD or 4K/UHD"
-msgstr "HD или 4K/UHD"
-
-msgid "source bouquet"
-msgstr "исходный букет"
-
-msgid "target bouquet"
-msgstr "целевой букет"
-
-msgid "No"
-msgstr ""
-
-#, fuzzy
-msgid "All"
-msgstr "Все"
-
-#, fuzzy
-msgid "Selected top"
-msgstr "Выбор"
-
-msgid "Original - reverted"
-msgstr ""
-
-#, python-format
-msgid "RefreshBouquet v. %s"
-msgstr "Обновление букета вер. %s"
-
-msgid "exit plugin"
-msgstr "выход из плагина"
-
-msgid "select action"
-msgstr "выбор действия"
-
-#, fuzzy
-#| msgid "select source bouquet "
-msgid "select source bouquet"
-msgstr "выбор исходного букета "
-
-#, fuzzy
-#| msgid "select target bouquet "
-msgid "select target bouquet"
-msgstr "выбор целевого букета "
-
-#, fuzzy
-msgid "clear selection"
-msgstr "Неправильный выбор!"
-
-msgid "enable/disable moving bouquet"
-msgstr ""
-
-msgid "move item down"
-msgstr ""
-
-msgid "move item up"
-msgstr ""
-
-msgid "Run"
-msgstr "Запуск"
-
-msgid "Set source"
-msgstr "Установить исходник"
-
-msgid "Set target"
-msgstr "Установить целевой"
-
-msgid "Source bouquet:"
-msgstr "Исходный букет:"
-
-msgid "Target bouquet:"
-msgstr "Целевой букет:"
-
-#, fuzzy
-msgid "Select or source or target or source and target bouquets!"
-msgstr "Выбор исходных или исходных/целевых букетов!"
-
-msgid ""
-"Source select with 'yellow' button, target with 'blue' button. Selection can "
-"be cleared with '0'."
-msgstr ""
-
-msgid "For some operations, a selector on the bouquet is sufficient."
-msgstr ""
-
-msgid "Use the context 'menu' or 'green' buttons to select operation."
-msgstr ""
-
-msgid ""
-"Button '6' enable/disable moving bouquet with 'preview' and 'next' buttons."
-msgstr ""
-
-msgid "Add selected services to target bouquet"
-msgstr "Добавить выбранные сервисы в целевой букет"
-
-msgid "Add selected missing services to target bouquet"
-msgstr "Добавить выбранные отсутствующие сервисы в целевой букет"
-
-msgid "Refresh services in target bouquet"
-msgstr "Обновить сервисы в целевом букете"
-
-msgid "Move selected services in source bouquet"
-msgstr "Переместить выбранные сервисы в исходный букет"
-
-msgid "Remove selected services in source bouquet"
-msgstr "Удалить ыбранные сервисы из исходного букета"
-
-#, fuzzy
-msgid "Move selected services in bouquet"
-msgstr "Переместить выбранные сервисы в исходный букет"
-
-#, fuzzy
-msgid "Remove selected services in bouquet"
-msgstr "Переместить выбранные сервисы в исходный букет"
-
-#, python-format
-msgid "Create '%s.rbb' file"
-msgstr ""
-
-msgid "Create bouquet from rbb file"
-msgstr ""
-
-#, fuzzy
-msgid "Create new bouquet"
-msgstr "исходный букет"
-
-#, fuzzy, python-format
-msgid "Rename bouquet '%s'"
-msgstr "Обновление букета %s"
-
-#, fuzzy, python-format
-msgid "Remove bouquet '%s'"
-msgstr "Обновление букета %s"
-
-msgid "Settings..."
-msgstr "Настройки..."
-
-msgid "Select action for bouquet:"
-msgstr "Выбор действия для букета:"
-
-msgid "Wrong selection!"
-msgstr "Неправильный выбор!"
-
-msgid "Terrestrial"
-msgstr "Наземные"
-
-msgid "Cable"
-msgstr "Кабельные"
-
-msgid "° W"
-msgstr ""
-
-msgid "° E"
-msgstr ""
-
-#, fuzzy
-#| msgid "Target bouquet is empty!"
-msgid "Target bouquet is empty !"
-msgstr "Целевой букет пустой !"
-
-#, fuzzy
-#| msgid "Source bouquet is empty!"
-msgid "Source bouquet is empty !"
-msgstr "Исходный букет пустой !"
-
-msgid "No differences found"
-msgstr "Никаких различий не найдено"
-
-#, fuzzy
-msgid "No services in source bouquet or no differences in bouquets!"
-msgstr "Нет сервисов в исходном букете !"
-
-#, python-format
-msgid "File %s.rbb was created."
-msgstr ""
-
+#: ../ui.py:650
 #, fuzzy, python-format
 msgid ""
 "%s\n"
 "<N/A> items in source bouquet: %s"
 msgstr "Нет сервисов в исходном букете !"
 
-#, python-format
-msgid "File %s is empty!"
+#: ../ui.py:2568
+msgid "'Manage deleted bouquets' will display full filenames instead bouquet names only."
 msgstr ""
 
-msgid "Source bouquet is empty!"
-msgstr "Исходный букет пустой !"
-
-#, python-format
-msgid "No item in '%s.rbb' file matches item in selected source bouquet!"
+#: ../ui.py:1396 ../ui.py:1686 ../ui.py:1894 ../ui.py:2103 ../ui.py:2303
+msgid "'Stop' button stops Preview."
 msgstr ""
 
-#, python-format
-msgid "Bouquet '%s' was not created!"
+#: ../ui.py:1648
+msgid "- results"
+msgstr "- результаты"
+
+#: ../ui.py:1326
+msgid "- select service for replace with OK"
+msgstr "- выбрать сервис для замены с помощью OK"
+
+#: ../ui.py:1856
+msgid "- select service(s) for adding with OK"
+msgstr "- выбор сервиса(ов) для добавления с помощью OK"
+
+#: ../ui.py:2264
+msgid "- select service(s) for move with OK"
+msgstr "- выбор сервиса(ов) для перемещения с помощью ОК"
+
+#: ../ui.py:2065
+msgid "- select service(s) for remove with OK"
+msgstr "- выбор сервиса(ов) для удаления с помощью OK"
+
+#: ../ui.py:57
+msgid "4K/UHD"
+msgstr "4K/UHD"
+
+#: ../ui.py:56 ../ui.py:76
+msgid "A-z sort"
 msgstr ""
 
-#, fuzzy
-msgid "unknown"
-msgstr "неизвестный"
+#: ../plugin.py:40
+msgid "Actualize services in bouquets"
+msgstr "Актуализировать сервисы в букетах"
 
-#, fuzzy
-msgid "Enter new bouquet name"
-msgstr "Отображать имя букета"
+#: ../ui.py:239
+msgid "Add selected missing services to target bouquet"
+msgstr "Добавить выбранные отсутствующие сервисы в целевой букет"
 
-#, fuzzy
-msgid "Please enter new bouquet name"
-msgstr "Отображать имя букета"
+#: ../ui.py:238
+msgid "Add selected services to target bouquet"
+msgstr "Добавить выбранные сервисы в целевой букет"
 
+#: ../ui.py:1973 ../ui.py:2183 ../ui.py:2352
+msgid "Add to selection (starts with...)"
+msgstr ""
+
+#: ../ui.py:74
+#, fuzzy
+msgid "All"
+msgstr "Все"
+
+#: ../ui.py:1505
+msgid "Apply and close"
+msgstr "Применить и закрыть"
+
+#: ../ui.py:906
 #, fuzzy
 msgid "Are You sure to remove bouquet?"
 msgstr "Вы действительно хотите удалить этот %d сервис?"
 
-msgid "No services in source bouquet!"
-msgstr "Нет сервисов в исходном букете !"
-
-msgid "Target bouquet is empty!"
-msgstr "Целевой букет пустой !"
-
+#: ../rbbmanager.py:160
 #, fuzzy
-msgid "No services in target bouquet!"
-msgstr "Обновить сервисы в целевом букете"
+msgid "Are You sure to remove file?"
+msgstr "Вы действительно хотите удалить этот %d сервис?"
 
-msgid "- select service for replace with OK"
-msgstr "- выбрать сервис для замены с помощью OK"
-
-#, python-format
-msgid "RefreshBouquet %s"
-msgstr "Обновление букета %s"
-
-msgid "Toggle source and target bouquets with Bouq +/- ."
-msgstr "Смена исходного и целевых букетов с помощью Bouq +/- ."
-
-msgid ""
-"Or toggle with 'Prev/Next', which trying to find a similar name in source."
-msgstr ""
-
-#, fuzzy
-#| msgid ""
-#| "Prepare replacement target's service by service in source bouquet (both "
-#| "select with 'OK') and replace it with 'Replace'. Repeat it as you need. "
-#| "Finish all with 'Apply and close'"
-msgid ""
-"Prepare replacement target's service by service in source bouquet (both "
-"select with 'OK') and replace it with 'Replace'. Repeat it as you need. "
-"Finish all with 'Apply and close'."
-msgstr ""
-"Подготовьте замену сервиса в целевой букет на сервис из исходного букета "
-"(выбор с помощью 'ОК') и замените с помощью 'Замена'. Повторите это, как Вам "
-"нужно. Завершить все с помощью 'Применить и закрыть'"
-
-msgid "Marking can be canceled with key '0'."
-msgstr ""
-
-msgid "Source can be sorted with 'Menu'."
-msgstr ""
-
-msgid "Epg or Info toggles between EPG and Info text."
-msgstr ""
-
-msgid "'Stop' button stops Preview."
-msgstr ""
-
-#, fuzzy
-msgid "Sort source bouquet:"
-msgstr "Исходный букет:"
-
-msgid "Replace"
-msgstr "Замена"
-
-msgid "Apply and close"
-msgstr "Применить и закрыть"
-
-msgid "Preview"
-msgstr "Превью"
-
+#: ../ui.py:1584
 #, python-format
 msgid "Are you sure to apply %d change and close?"
 msgid_plural "Are you sure to apply all %d changes and close?"
@@ -420,9 +99,7 @@ msgstr[0] "Вы действительно хотите применить %d и
 msgstr[1] "Вы действительно хотите применить все %d изменения и закрыть?"
 msgstr[2] "Вы действительно хотите применить все %d изменения и закрыть?"
 
-msgid "Nothing for processing..."
-msgstr "Нет ничего для обработки .."
-
+#: ../ui.py:1629
 #, python-format
 msgid "Are you sure to close and lost %d change?"
 msgid_plural "Are you sure to close and lost all %d changes?"
@@ -430,48 +107,7 @@ msgstr[0] "Вы действительно хотите закрыть и пот
 msgstr[1] "Вы действительно хотите закрыть и потерять все %d изменения?"
 msgstr[2] "Вы действительно хотите закрыть и потерять все %d изменения?"
 
-msgid "- results"
-msgstr "- результаты"
-
-msgid "Refresh selected"
-msgstr "Обновить выбраннное"
-
-msgid ""
-"This feature looking for differences in service parameters with same names "
-"in source and target bouquets. Parameters for marked services will be "
-"replaced."
-msgstr ""
-"Эта функция ищет различия в параметрах сервиса с одинаковыми именами в "
-"исходных и целевых букетах. Параметры для отмеченных сервисов будут заменены."
-
-msgid ""
-"It can be in most cases useful for bouquets with services gained by Fastscan "
-"searching."
-msgstr ""
-"Это может быть в большинстве случаев полезно для букетов с сервисами, "
-"полученными при сканировании через 'Fastscan'."
-
-msgid ""
-"Possible duplicates will not be marked in list. Check validity with "
-"'Preview' before mark and before 'Refresh selected'."
-msgstr ""
-"Возможные дубликаты не будут отмечены в списке. Проверьте достоверность с "
-"помощью 'Превью' Перед меткой и перед 'Обновление выбранного'."
-
-#, fuzzy
-msgid "Sort bouquet:"
-msgstr "Исходный букет:"
-
-msgid "Position"
-msgstr "Позиция"
-
-#, python-format
-msgid "Are you sure to refresh this %d service?"
-msgid_plural "Are you sure to refresh this %d services?"
-msgstr[0] "Вы действительно хотите обновить этот %d сервис?"
-msgstr[1] "Вы действительно хотите обновить эти %d сервисы?"
-msgstr[2] "Вы действительно хотите обновить эти %d сервисы?"
-
+#: ../ui.py:1808 ../ui.py:2046 ../ui.py:2245 ../ui.py:2500
 #, python-format
 msgid "Are you sure to close and lost %d selection?"
 msgid_plural "Are you sure to close and lost all %d selections?"
@@ -479,28 +115,7 @@ msgstr[0] "Вы действительно хотите закрыть и пот
 msgstr[1] "Вы действительно хотите закрыть и потерять все %d выбранных?"
 msgstr[2] "Вы действительно хотите закрыть и потерять все %d выбранных?"
 
-msgid "- select service(s) for adding with OK"
-msgstr "- выбор сервиса(ов) для добавления с помощью OK"
-
-msgid "Copy selected"
-msgstr "Копировать выбранное"
-
-msgid ""
-"Mark services with OK button or use group selection (Ch+/Ch-) and then copy "
-"these with 'Copy selected'."
-msgstr ""
-"Пометить сервисы с помощью OK и затем копировать с помощью 'Копировать "
-"выбранное'."
-
-msgid "Use 'Menu' for sorting."
-msgstr ""
-
-msgid "Add to selection (starts with...)"
-msgstr ""
-
-msgid "Remove from selection (starts with...)"
-msgstr ""
-
+#: ../ui.py:2005
 #, python-format
 msgid "Are you sure to copy this %d service?"
 msgid_plural "Are you sure to copy this %d services?"
@@ -508,52 +123,7 @@ msgstr[0] "Вы действительно хотите копировать э�
 msgstr[1] "Вы действительно хотите копировать эти %d сервиса?"
 msgstr[2] "Вы действительно хотите копировать эти %d сервисов?"
 
-msgid "Yes"
-msgstr "Да"
-
-msgid "Yes, add to new bouquet..."
-msgstr ""
-
-msgid "You did not enter the bouquet name!"
-msgstr ""
-
-msgid "- select service(s) for remove with OK"
-msgstr "- выбор сервиса(ов) для удаления с помощью OK"
-
-msgid "Remove selected"
-msgstr "Удалить выбранное"
-
-msgid ""
-"Mark services with OK button or use group selection (Ch+/Ch-) and then "
-"remove these with 'Remove selected'."
-msgstr ""
-"Пометить сервисы с помощью OK и затем удалить с помощью 'Удалить выбранное'."
-
-#, python-format
-msgid "Are you sure to remove this %d service?"
-msgid_plural "Are you sure to remove this %d services?"
-msgstr[0] "Вы действительно хотите удалить этот %d сервис?"
-msgstr[1] "Вы действительно хотите удалить эти %d сервиса?"
-msgstr[2] "Вы действительно хотите удалить эти %d сервиса?"
-
-msgid "- select service(s) for move with OK"
-msgstr "- выбор сервиса(ов) для перемещения с помощью ОК"
-
-msgid "Move selected"
-msgstr "Переместить выбранное"
-
-msgid ""
-"Mark service(s) with OK button or use group selection (Ch+/Ch-), move "
-"selector to new position and finish with 'Move selected'. Selected "
-"service(s) will be moved top new position."
-msgstr ""
-"Отметьте сервис(ы) с помощью кнопки ОК, переместите селектор в новое "
-"положение и закончите с помощью 'Переместить выбранное'. Выбранные сервисы "
-"будут перемещены на новую позицию."
-
-msgid "Sorting has not effect for finaly bouquet sorting."
-msgstr ""
-
+#: ../ui.py:2429
 #, fuzzy, python-format
 msgid "Are you sure to move this %d service?"
 msgid_plural "Are you sure to move this %d services?"
@@ -561,174 +131,694 @@ msgstr[0] "Вы действительно хотите переместить �
 msgstr[1] "Вы действительно хотите переместить эти %d сервиса?"
 msgstr[2] "Вы действительно хотите переместить эти %d сервисов?"
 
-msgid "RefreshBouquet Setup"
-msgstr "Настройки обновления букета"
+#: ../ui.py:1768
+#, python-format
+msgid "Are you sure to refresh this %d service?"
+msgid_plural "Are you sure to refresh this %d services?"
+msgstr[0] "Вы действительно хотите обновить этот %d сервис?"
+msgstr[1] "Вы действительно хотите обновить эти %d сервисы?"
+msgstr[2] "Вы действительно хотите обновить эти %d сервисы?"
 
-msgid "OK"
-msgstr "ОК"
+#: ../managebq.py:98
+#, fuzzy, python-format
+msgid "Are you sure to remove %s selected deleted bouquets?"
+msgstr "Вы действительно хотите удалить этот %d сервис?"
 
-msgid "Compare case sensitive"
-msgstr "Сравнивать с учетом регистра"
-
-msgid "Skip 1st nonstandard char in name"
-msgstr "Пропустить 1-ый нестандартный символ в названии"
-
-msgid "Omit any control character in service name. Default set 'yes'."
-msgstr ""
-
-msgid "Omit last char in target names"
-msgstr ""
-
+#: ../managebq.py:100
+#, fuzzy, python-format
 msgid ""
-"You can omit last service name char if provider added it for his planned 're-"
-"tuning' and You want use 'Refresh services' for this services too."
-msgstr ""
+"Are you sure to remove deleted userbouquet?\n"
+"\n"
+"%s"
+msgstr "Вы действительно хотите удалить этот %d сервис?"
 
-msgid "On plugin exit it will be set to 'no' again."
-msgstr ""
+#: ../ui.py:2215
+#, python-format
+msgid "Are you sure to remove this %d service?"
+msgid_plural "Are you sure to remove this %d services?"
+msgstr[0] "Вы действительно хотите удалить этот %d сервис?"
+msgstr[1] "Вы действительно хотите удалить эти %d сервиса?"
+msgstr[2] "Вы действительно хотите удалить эти %d сервиса?"
 
+#: ../managebq.py:119
+#, fuzzy, python-format
+msgid "Are you sure to restore %s selected deleted bouquets?"
+msgstr "Вы действительно хотите обновить этот %d сервис?"
+
+#: ../managebq.py:121
+#, fuzzy, python-format
+msgid ""
+"Are you sure to restore deleted userbouquet?\n"
+"\n"
+"%s"
+msgstr "Вы действительно хотите удалить этот %d сервис?"
+
+#: ../ui.py:2551
 msgid "Auto toggle in manually replacing"
 msgstr "Авто переключение в ручной замене"
 
-msgid ""
-"In 'Manually replacing' automaticaly toggles between columns when is used "
-"'OK' button."
-msgstr ""
-
-msgid "Missing source services for manually replace only"
-msgstr "Отсутствующие сервисы исходника для ручной замены только"
-
-msgid ""
-"In 'Manually replacing' in source services column will be displayed missing "
-"services in target column only."
-msgstr ""
-
-msgid "Filter services by orbital position in source"
-msgstr "Фильтр сервисов по орбитальной позиции в исходнике"
-
-msgid ""
-"You can select valid orbital position as filter for display services in "
-"source bouquet."
-msgstr ""
-
-msgid "Using 'service type' in automatic replacing"
-msgstr ""
-
-msgid "Take into account 'service type' in automatic replacing too."
-msgstr ""
-
-msgid "Fastcans changing 'service type' parameter to 'basic' value."
-msgstr ""
-
-msgid "Programs with 'HD/4K(UHD)' in name only for source"
-msgstr "Программы с 'HD/4K(UHD)' в названии только для исходника"
-
-msgid ""
-"Plugin will be display in service bouquet services with HD,4K/UHD in service "
-"name only."
-msgstr ""
-
-msgid "Preview on selection"
-msgstr "Превью при выборе"
-
+#: ../ui.py:2556
 #, fuzzy
 msgid "Automaticaly preview current service in bouquet list."
 msgstr "Актуализировать сервисы в букетах"
 
-msgid "Confirm services moving"
-msgstr "Подтверждение при перемещении сервисов"
-
-#, fuzzy
-msgid ""
-"It will require confirmation for moving selected services in the source "
-"bouquet."
-msgstr "Удалить ыбранные сервисы из исходного букета"
-
-msgid "Display in Channellist context menu"
-msgstr "Показать в контекстном меню селектора каналов"
-
-#, fuzzy
-msgid "Plugin will be placed into Channellist menu."
-msgstr "Показать в контекстном меню селектора каналов"
-
-msgid "Return to previous service on end"
-msgstr "Возврат к предыдущему сервису по окончании"
-
-msgid "The service being played before the plugin is started on exit again."
+#: ../ui.py:708
+#, python-format
+msgid "Bouquet '%s' was not created!"
 msgstr ""
 
-msgid "On plugin start use current bouquet as source or as target"
-msgstr ""
-"При запуске плагина использовать текущий букет в качестве исходника/целевого "
-"букета"
-
-msgid ""
-"When the plugin is launched, current bouquet can be set as source or target "
-"bouquet."
-msgstr ""
-"При запуске плагина использовать текущий букет в качестве исходника/целевого "
-"букета."
-
-#, fuzzy
-msgid "Selector to current bouquet"
-msgstr "выбор целевого букета "
-
-msgid ""
-"When the plugin is launched, the selector will be set in the bouquets list "
-"on current bouquet."
+#: ../ui.py:170
+msgid "Button '6' enable/disable moving bouquet with 'preview' and 'next' buttons."
 msgstr ""
 
-msgid "Display bouquet name"
-msgstr "Отображать имя букета"
+#: ../ui.py:361
+msgid "Cable"
+msgstr "Кабельные"
 
-msgid "Display bouquet name in the screen header or above the list."
-msgstr ""
+#: ../managebq.py:88 ../rbbmanager.py:57 ../ui.py:153 ../ui.py:1380
+#: ../ui.py:1675 ../ui.py:1886 ../ui.py:2095 ../ui.py:2294 ../ui.py:2533
+msgid "Cancel"
+msgstr "Отмена"
 
-msgid "Debug info"
-msgstr "Информация отладки"
+#: ../ui.py:2548
+msgid "Compare case sensitive"
+msgstr "Сравнивать с учетом регистра"
 
-msgid "Pre-fill first 'n' servicename chars to virtual keyboard"
-msgstr ""
-
+#: ../ui.py:2566
 #, fuzzy
 msgid "Compare virtual keyboard input as case sensitive"
 msgstr "Сравнивать с учетом регистра"
 
-msgid "Use dotted service name for 'rbb' files"
+#: ../ui.py:2557
+msgid "Confirm services moving"
+msgstr "Подтверждение при перемещении сервисов"
+
+#: ../rbbmanager.py:86
+msgid "Copy predefined 'rbb' file(s) to list"
 msgstr ""
 
-msgid ""
-"When is creating a bouquet from 'rbb' file, dotted names can be compared "
-"too. You need then manually remove duplicates. Default set is 'no'."
+#: ../ui.py:1887
+msgid "Copy selected"
+msgstr "Копировать выбранное"
+
+#: ../ui.py:250
+#, python-format
+msgid "Create '%s.rbb' file"
 msgstr ""
 
+#: ../ui.py:255
+#, python-format
+msgid "Create TE file '%s-%s.ini' to '/tmp'"
+msgstr ""
+
+#: ../ui.py:253
+msgid "Create bouquet from rbb file"
+msgstr ""
+
+#: ../ui.py:257
+#, fuzzy
+msgid "Create new bouquet"
+msgstr "исходный букет"
+
+#: ../ui.py:2564
+msgid "Debug info"
+msgstr "Информация отладки"
+
+#: ../rbbmanager.py:58 ../rbbmanager.py:91
+msgid "Default"
+msgstr ""
+
+#: ../ui.py:2562
+msgid "Display bouquet name"
+msgstr "Отображать имя букета"
+
+#: ../ui.py:2562
+msgid "Display bouquet name in the screen header or above the list."
+msgstr ""
+
+#: ../ui.py:2558
+msgid "Display in Channellist context menu"
+msgstr "Показать в контекстном меню селектора каналов"
+
+#: ../rbbmanager.py:58 ../rbbmanager.py:91
+msgid "Dotted"
+msgstr ""
+
+#: ../ui.py:812 ../ui.py:2035
+#, fuzzy
+msgid "Enter new bouquet name"
+msgstr "Отображать имя букета"
+
+#: ../ui.py:1395 ../ui.py:1685 ../ui.py:1893 ../ui.py:2102 ../ui.py:2302
+msgid "Epg or Info toggles between EPG and Info text."
+msgstr ""
+
+#: ../rbbmanager.py:116
+#, fuzzy
+msgid "Erase"
+msgstr "Очистка"
+
+#: ../rbbmanager.py:141 ../rbbmanager.py:146
+#, fuzzy
+msgid "Error"
+msgstr "Ошибка"
+
+#: ../ui.py:2554
+msgid "Fastcans changing 'service type' parameter to 'basic' value."
+msgstr ""
+
+#: ../ui.py:691
+#, python-format
+msgid "File %s is empty!"
+msgstr ""
+
+#: ../ui.py:649
+#, python-format
+msgid "File %s.rbb was created."
+msgstr ""
+
+#: ../ui.py:2553
+msgid "Filter services by orbital position in source"
+msgstr "Фильтр сервисов по орбитальной позиции в исходнике"
+
+#: ../ui.py:168
+msgid "For some operations, a selector on the bouquet is sufficient."
+msgstr ""
+
+#: ../ui.py:57
+msgid "HD"
+msgstr "HD"
+
+#: ../ui.py:57
+msgid "HD or 4K/UHD"
+msgstr "HD или 4K/UHD"
+
+#: ../rbbmanager.py:79
+#, python-format
+msgid "If You will add to bouquet some missing services (start with '---'), You can then finalize created bouquet with '%s' etc."
+msgstr ""
+
+#: ../ui.py:2551
+msgid "In 'Manually replacing' automaticaly toggles between columns when is used 'OK' button."
+msgstr ""
+
+#: ../ui.py:2552
+msgid "In 'Manually replacing' in source services column will be displayed missing services in target column only."
+msgstr ""
+
+#: ../managebq.py:91 ../ui.py:1678 ../ui.py:1889 ../ui.py:2098
+msgid "Inversion"
+msgstr "Инверсия"
+
+#: ../ui.py:1683
+msgid "It can be in most cases useful for bouquets with services gained by Fastscan searching."
+msgstr "Это может быть в большинстве случаев полезно для букетов с сервисами, полученными при сканировании через 'Fastscan'."
+
+#: ../ui.py:2557
+#, fuzzy
+msgid "It will require confirmation for moving selected services in the source bouquet."
+msgstr "Удалить ыбранные сервисы из исходного букета"
+
+#: ../managebq.py:62 ../ui.py:268
+#, fuzzy
+msgid "Manage deleted bouquets"
+msgstr "Переместить выбранные сервисы в исходный букет"
+
+#: ../rbbmanager.py:79 ../ui.py:237
+msgid "Manually replace services"
+msgstr "Ручная замена сервисов"
+
+#: ../ui.py:2299
+msgid "Mark service(s) with OK button or use group selection (Ch+/Ch-), move selector to new position and finish with 'Move selected'. Selected service(s) will be moved top new position."
+msgstr "Отметьте сервис(ы) с помощью кнопки ОК, переместите селектор в новое положение и закончите с помощью 'Переместить выбранное'. Выбранные сервисы будут перемещены на новую позицию."
+
+#: ../ui.py:1891
+msgid "Mark services with OK button or use group selection (Ch+/Ch-) and then copy these with 'Copy selected'."
+msgstr "Пометить сервисы с помощью OK и затем копировать с помощью 'Копировать выбранное'."
+
+#: ../ui.py:2100
+msgid "Mark services with OK button or use group selection (Ch+/Ch-) and then remove these with 'Remove selected'."
+msgstr "Пометить сервисы с помощью OK и затем удалить с помощью 'Удалить выбранное'."
+
+#: ../ui.py:1393
+msgid "Marking can be canceled with key '0'."
+msgstr ""
+
+#: ../ui.py:2552
+msgid "Missing source services for manually replace only"
+msgstr "Отсутствующие сервисы исходника для ручной замены только"
+
+#: ../ui.py:2295
+msgid "Move selected"
+msgstr "Переместить выбранное"
+
+#: ../ui.py:246
+#, fuzzy
+msgid "Move selected services in bouquet"
+msgstr "Переместить выбранные сервисы в исходный букет"
+
+#: ../ui.py:242
+msgid "Move selected services in source bouquet"
+msgstr "Переместить выбранные сервисы в исходный букет"
+
+#: ../ui.py:74 ../ui.py:2006
+msgid "No"
+msgstr ""
+
+#: ../ui.py:406
+msgid "No differences found"
+msgstr "Никаких различий не найдено"
+
+#: ../ui.py:706
+#, python-format
+msgid "No item in '%s.rbb' file matches item in selected source bouquet!"
+msgstr ""
+
+#: ../ui.py:477
+#, fuzzy
+msgid "No services in source bouquet or no differences in bouquets!"
+msgstr "Нет сервисов в исходном букете !"
+
+#: ../ui.py:938 ../ui.py:1032 ../ui.py:1098
+msgid "No services in source bouquet!"
+msgstr "Нет сервисов в исходном букете !"
+
+#: ../ui.py:943
+#, fuzzy
+msgid "No services in target bouquet!"
+msgstr "Обновить сервисы в целевом букете"
+
+#: ../ui.py:1587 ../ui.py:1771 ../ui.py:2011 ../ui.py:2218 ../ui.py:2436
+msgid "Nothing for processing..."
+msgstr "Нет ничего для обработки .."
+
+#: ../ui.py:2534
+msgid "OK"
+msgstr "ОК"
+
+#: ../ui.py:2549
+msgid "Omit any control character in service name. Default set 'yes'."
+msgstr ""
+
+#: ../ui.py:2550
+msgid "Omit last char in target names"
+msgstr ""
+
+#: ../managebq.py:93
+msgid "On deleted userbouquet press 'Restore' or 'Remove' or mark more deleted bouquets with 'OK' and then use 'Restore' or 'Remove'."
+msgstr ""
+
+#: ../ui.py:2550 ../ui.py:2553 ../ui.py:2555
+msgid "On plugin exit it will be set to 'no' again."
+msgstr ""
+
+#: ../ui.py:2560
+msgid "On plugin start use current bouquet as source or as target"
+msgstr "При запуске плагина использовать текущий букет в качестве исходника/целевого букета"
+
+#: ../ui.py:1391
+msgid "Or toggle with 'Prev/Next', which trying to find a similar name in source."
+msgstr ""
+
+#: ../ui.py:56 ../ui.py:76
+#, fuzzy
+msgid "Original"
+msgstr "Оригинал"
+
+#: ../ui.py:76
+msgid "Original - reverted"
+msgstr ""
+
+#: ../ui.py:894
+#, fuzzy
+msgid "Please enter new bouquet name"
+msgstr "Отображать имя букета"
+
+#: ../ui.py:2555
+msgid "Plugin will be display in service bouquet services with HD,4K/UHD in service name only."
+msgstr ""
+
+#: ../ui.py:2558
+#, fuzzy
+msgid "Plugin will be placed into Channellist menu."
+msgstr "Показать в контекстном меню селектора каналов"
+
+#: ../ui.py:1735
+msgid "Position"
+msgstr "Позиция"
+
+#: ../ui.py:1684
+msgid "Possible duplicates will not be marked in list. Check validity with 'Preview' before mark and before 'Refresh selected'."
+msgstr "Возможные дубликаты не будут отмечены в списке. Проверьте достоверность с помощью 'Превью' Перед меткой и перед 'Обновление выбранного'."
+
+#: ../ui.py:2565
+msgid "Pre-fill first 'n' servicename chars to virtual keyboard"
+msgstr ""
+
+#: ../ui.py:1392
+#, fuzzy
+msgid "Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'."
+msgstr "Подготовьте замену сервиса в целевой букет на сервис из исходного букета (выбор с помощью 'ОК') и замените с помощью 'Замена'. Повторите это, как Вам нужно. Завершить все с помощью 'Применить и закрыть'"
+
+#: ../ui.py:1521 ../ui.py:1748 ../ui.py:1954 ../ui.py:2164 ../ui.py:2409
+msgid "Preview"
+msgstr "Превью"
+
+#: ../ui.py:2556
+msgid "Preview on selection"
+msgstr "Превью при выборе"
+
+#: ../ui.py:2555
+msgid "Programs with 'HD/4K(UHD)' in name only for source"
+msgstr "Программы с 'HD/4K(UHD)' в названии только для исходника"
+
+#: ../ui.py:1676
+msgid "Refresh selected"
+msgstr "Обновить выбраннное"
+
+#: ../ui.py:240
+msgid "Refresh services in target bouquet"
+msgstr "Обновить сервисы в целевом букете"
+
+#: ../plugin.py:39
+msgid "RefreshBouquet"
+msgstr "Обновление букета"
+
+#: ../ui.py:1326 ../ui.py:1648 ../ui.py:1856 ../ui.py:2065 ../ui.py:2264
+#, python-format
+msgid "RefreshBouquet %s"
+msgstr "Обновление букета %s"
+
+#: ../ui.py:2531 ../ui.py:2587
+msgid "RefreshBouquet Setup"
+msgstr "Настройки обновления букета"
+
+#: ../ui.py:126
+#, python-format
+msgid "RefreshBouquet v. %s"
+msgstr "Обновление букета вер. %s"
+
+#: ../managebq.py:90
+msgid "Remove"
+msgstr ""
+
+#: ../ui.py:265
+#, fuzzy, python-format
+msgid "Remove bouquet '%s'"
+msgstr "Обновление букета %s"
+
+#: ../ui.py:1975 ../ui.py:2185 ../ui.py:2354
+msgid "Remove from selection (starts with...)"
+msgstr ""
+
+#: ../ui.py:2096
+msgid "Remove selected"
+msgstr "Удалить выбранное"
+
+#: ../ui.py:247
+#, fuzzy
+msgid "Remove selected services in bouquet"
+msgstr "Переместить выбранные сервисы в исходный букет"
+
+#: ../ui.py:243
+msgid "Remove selected services in source bouquet"
+msgstr "Удалить ыбранные сервисы из исходного букета"
+
+#: ../rbbmanager.py:115 ../rbbmanager.py:151
+#, fuzzy
+msgid "Rename"
+msgstr "Переименовать"
+
+#: ../ui.py:261
+#, fuzzy, python-format
+msgid "Rename bouquet '%s'"
+msgstr "Обновление букета %s"
+
+#: ../ui.py:1447
+msgid "Replace"
+msgstr "Замена"
+
+#: ../managebq.py:89
+msgid "Restore"
+msgstr ""
+
+#: ../ui.py:2559
+msgid "Return to previous service on end"
+msgstr "Возврат к предыдущему сервису по окончании"
+
+#: ../ui.py:154
+msgid "Run"
+msgstr "Запуск"
+
+#: ../ui.py:272
+msgid "Select action for bouquet:"
+msgstr "Выбор действия для букета:"
+
+#: ../rbbmanager.py:87
+#, fuzzy
+msgid "Select action:"
+msgstr "выбор действия"
+
+#: ../ui.py:166
+#, fuzzy
+msgid "Select or source or target or source and target bouquets!"
+msgstr "Выбор исходных или исходных/целевых букетов!"
+
+#: ../rbbmanager.py:55
+msgid "Select rbb file"
+msgstr ""
+
+#: ../rbbmanager.py:77
+msgid "Select rbb file with 'OK' and create bouquet with same name."
+msgstr ""
+
+#: ../ui.py:76
+#, fuzzy
+msgid "Selected top"
+msgstr "Выбор"
+
+#: ../ui.py:2561
+#, fuzzy
+msgid "Selector to current bouquet"
+msgstr "выбор целевого букета "
+
+#: ../ui.py:155
+msgid "Set source"
+msgstr "Установить исходник"
+
+#: ../ui.py:156
+msgid "Set target"
+msgstr "Установить целевой"
+
+#: ../ui.py:270
+msgid "Settings..."
+msgstr "Настройки..."
+
+#: ../ui.py:2568
 msgid "Show full filenames for deleted bouquets"
 msgstr ""
 
-msgid ""
-"'Manage deleted bouquets' will display full filenames instead bouquet names "
-"only."
+#: ../ui.py:2549
+msgid "Skip 1st nonstandard char in name"
+msgstr "Пропустить 1-ый нестандартный символ в названии"
+
+#: ../ui.py:1698 ../ui.py:1909 ../ui.py:2118 ../ui.py:2318
+#, fuzzy
+msgid "Sort bouquet:"
+msgstr "Исходный букет:"
+
+#: ../ui.py:1415
+#, fuzzy
+msgid "Sort source bouquet:"
+msgstr "Исходный букет:"
+
+#: ../ui.py:2301
+msgid "Sorting has not effect for finaly bouquet sorting."
 msgstr ""
 
+#: ../ui.py:399 ../ui.py:467
 #, fuzzy
-#~ msgid "Remove selected services from bouquet"
-#~ msgstr "Удалить ыбранные сервисы из исходного букета"
+msgid "Source bouquet is empty !"
+msgstr "Исходный букет пустой !"
 
+#: ../ui.py:694 ../ui.py:937 ../ui.py:1024 ../ui.py:1093
+msgid "Source bouquet is empty!"
+msgstr "Исходный букет пустой !"
+
+#: ../ui.py:161
+msgid "Source bouquet:"
+msgstr "Исходный букет:"
+
+#: ../ui.py:1394
+msgid "Source can be sorted with 'Menu'."
+msgstr ""
+
+#: ../ui.py:167
+msgid "Source select with 'yellow' button, target with 'blue' button. Selection can be cleared with '0'."
+msgstr ""
+
+#: ../ui.py:621
+msgid "TE file was created."
+msgstr ""
+
+#: ../ui.py:2554
+msgid "Take into account 'service type' in automatic replacing too."
+msgstr ""
+
+#: ../ui.py:396
 #, fuzzy
-#~ msgid "Sort source bouquet services in manually replace"
-#~ msgstr "Отсутствующие сервисы исходника для ручной замены только"
+msgid "Target bouquet is empty !"
+msgstr "Целевой букет пустой !"
 
-#~ msgid "Question"
-#~ msgstr "Вопрос"
+#: ../ui.py:942 ../ui.py:1021
+msgid "Target bouquet is empty!"
+msgstr "Целевой букет пустой !"
 
-#~ msgid "Select"
-#~ msgstr "Выбор"
+#: ../ui.py:162
+msgid "Target bouquet:"
+msgstr "Целевой букет:"
 
-#~ msgid "Information"
-#~ msgstr "Информация"
+#: ../ui.py:359
+msgid "Terrestrial"
+msgstr "Наземные"
 
-#~ msgid "Really close without saving settings?"
-#~ msgstr "Действительно закрыть без сохранения настроек?"
+#: ../rbbmanager.py:139
+#, fuzzy, python-format
+msgid "The path %s already exists."
+msgstr "Этот путь %s уже существует."
 
-#~ msgid "Sort services in source bouquets"
-#~ msgstr "Сортировка сервисов в исходных букетах"
+#: ../ui.py:2559
+msgid "The service being played before the plugin is started on exit again."
+msgstr ""
+
+#: ../ui.py:1682
+msgid "This feature looking for differences in service parameters with same names in source and target bouquets. Parameters for marked services will be replaced."
+msgstr "Эта функция ищет различия в параметрах сервиса с одинаковыми именами в исходных и целевых букетах. Параметры для отмеченных сервисов будут заменены."
+
+#: ../ui.py:1390
+msgid "Toggle source and target bouquets with Bouq +/- ."
+msgstr "Смена исходного и целевых букетов с помощью Bouq +/- ."
+
+#: ../rbbmanager.py:78
+msgid "Use 'Menu' for predefined 'rbb' files."
+msgstr ""
+
+#: ../ui.py:1892 ../ui.py:2101 ../ui.py:2300
+msgid "Use 'Menu' for sorting."
+msgstr ""
+
+#: ../ui.py:2567
+msgid "Use dotted service name for 'rbb' files"
+msgstr ""
+
+#: ../ui.py:169
+msgid "Use the context 'menu' or 'green' buttons to select operation."
+msgstr ""
+
+#: ../ui.py:2554
+msgid "Using 'service type' in automatic replacing"
+msgstr ""
+
+#: ../ui.py:2567
+msgid "When is creating a bouquet from 'rbb' file, dotted names can be compared too. You need then manually remove duplicates. Default set is 'no'."
+msgstr ""
+
+#: ../ui.py:2560
+msgid "When the plugin is launched, current bouquet can be set as source or target bouquet."
+msgstr "При запуске плагина использовать текущий букет в качестве исходника/целевого букета."
+
+#: ../ui.py:2561
+msgid "When the plugin is launched, the selector will be set in the bouquets list on current bouquet."
+msgstr ""
+
+#: ../ui.py:307
+msgid "Wrong selection!"
+msgstr "Неправильный выбор!"
+
+#: ../ui.py:2006
+msgid "Yes"
+msgstr "Да"
+
+#: ../ui.py:2008
+msgid "Yes, add to new bouquet..."
+msgstr ""
+
+#: ../ui.py:2550
+msgid "You can omit last service name char if provider added it for his planned 're-tuning' and You want use 'Refresh services' for this services too."
+msgstr ""
+
+#: ../ui.py:2553
+msgid "You can select valid orbital position as filter for display services in source bouquet."
+msgstr ""
+
+#: ../rbbmanager.py:80
+msgid "You can try toggle 'Standard/Dotted' service names too."
+msgstr ""
+
+#: ../ui.py:2029
+msgid "You did not enter the bouquet name!"
+msgstr ""
+
+#: ../ui.py:56 ../ui.py:76
+msgid "Z-a sort"
+msgstr ""
+
+#: ../ui.py:140
+#, fuzzy
+msgid "clear selection"
+msgstr "Неправильный выбор!"
+
+#: ../ui.py:141
+msgid "enable/disable moving bouquet"
+msgstr ""
+
+#: ../ui.py:130 ../ui.py:135
+msgid "exit plugin"
+msgstr "выход из плагина"
+
+#: ../ui.py:142
+msgid "move item down"
+msgstr ""
+
+#: ../ui.py:143
+msgid "move item up"
+msgstr ""
+
+#: ../ui.py:57 ../ui.py:62 ../ui.py:64 ../ui.py:68 ../ui.py:368
+msgid "no"
+msgstr "нет"
+
+#: ../ui.py:131 ../ui.py:136 ../ui.py:139
+msgid "select action"
+msgstr "выбор действия"
+
+#: ../ui.py:137
+#, fuzzy
+msgid "select source bouquet"
+msgstr "выбор исходного букета "
+
+#: ../ui.py:138
+#, fuzzy
+msgid "select target bouquet"
+msgstr "выбор целевого букета "
+
+#: ../ui.py:64 ../ui.py:1387
+msgid "source bouquet"
+msgstr "исходный букет"
+
+#: ../ui.py:64 ../ui.py:1388
+msgid "target bouquet"
+msgstr "целевой букет"
+
+#: ../ui.py:730
+#, fuzzy
+msgid "unknown"
+msgstr "неизвестный"
+
+#: ../ui.py:365
+msgid "° E"
+msgstr ""
+
+#: ../ui.py:363
+msgid "° W"
+msgstr ""
