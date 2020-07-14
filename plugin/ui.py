@@ -609,7 +609,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		text = ngettext("For %s bouquet of %s was TE file created." ,"For %s bouquets of %s were TE files created.", n) % (n, ns)
 		w = ns - n
 		if w:
-			wtext = ngettext("\nBut not for this %s empty bouquet:\n","\nBut not for these %s empty bouquets:\n", w) % w + wrong
+			wtext = ngettext("\nUnfortunately not for this %s empty bouquet:\n","\nUnfortunately not for these %s empty bouquets:\n", w) % w + wrong
 		text += wtext if w else ""
 		self.session.open(MessageBox, text, type = MessageBox.TYPE_INFO, timeout = 10)
 #
