@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.06"
+VERSION = "2.07"
 #  by ims (c) 2016-2020 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -77,6 +77,7 @@ config.plugins.refreshbouquet.vk_sensitive = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.sortmenu = ConfigSelection(default = "0", choices = [("0", _("Original")),("1", _("A-z sort")),("2", _("Z-a sort")),("3", _("Selected top")),("4", _("Original - reverted"))])
 config.plugins.refreshbouquet.rbb_dotted = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.deleted_bq_fullname = ConfigYesNo(default=False)
+config.plugins.refreshbouquet.transedit = ConfigYesNo(default = False)
 
 cfg = config.plugins.refreshbouquet
 
@@ -264,9 +265,11 @@ class refreshBouquet(Screen, HelpableScreen):
 		if self.isDeletedBouquet():
 			menu.append((_("Manage deleted bouquets"),18))
 			buttons += [""]
-		if self["config"].getCurrent():
+		if cfg.transedit.value and self["config"].getCurrent():
 			name =  self.plainString(self["config"].getCurrent()[0]).replace(' ','_')
 			menu.append((_("Create TE file '%s-%s.ini' to '/tmp'") % (socket.gethostname().upper(),name),30))
+			buttons += [""]
+			menu.append((_("Create TE files from all bouquets to '/tmp'"), 31))
 			buttons += [""]
 		menu.append((_("Settings..."),10))
 		buttons.append("menu")
@@ -303,7 +306,9 @@ class refreshBouquet(Screen, HelpableScreen):
 		elif choice[1] == 21:
 			self.createRbbBouquet()
 		elif choice[1] == 30:
-			self.saveTEIniFile()
+			self.saveTEIniFile(self["config"].getCurrent()[0])
+		elif choice[1] == 31:
+			self.saveTEIniFiles()
 		else:
 			self["info"].setText(_("Wrong selection!"))
 			return
@@ -589,45 +594,66 @@ class refreshBouquet(Screen, HelpableScreen):
 		self.session.openWithCallback(self.getBouquetList, refreshBouquetManageDeletedBouquets)
 
 #
+# Save all BOX_BOUQUET TransEdit ini files to /tmp/BOX-BOUQUET.ini files
+#
+	def saveTEIniFiles(self):
+		n = 0
+		ns = 0
+		wrong = ""
+		for bouquet in self.getBouquetList():
+			if self.saveTEIniFile(bouquet[0], True):
+				n += 1
+			else:
+				wrong += "    %s\n" % bouquet[0]
+			ns += 1
+		text = ngettext("For %s bouquet of %s was TE file created." ,"For %s bouquets of %s were TE files created.", n) % (n, ns)
+		w = ns - n
+		if w:
+			wtext = ngettext("\nBut not for this %s empty bouquet:\n","\nBut not for these %s empty bouquets:\n", w) % w + wrong
+		text += wtext if w else ""
+		self.session.open(MessageBox, text, type = MessageBox.TYPE_INFO, timeout = 10)
+#
 # Save BOX_BOUQUET TransEdit ini file to /tmp/BOX-BOUQUET.ini file
 #
-	def saveTEIniFile(self):
+	def saveTEIniFile(self, bouqName, multi=False):
 		boxIP = "http://%s:%s" % (GetIPsFromNetworkInterfaces()[0][1], "8001")
 		boxName = socket.gethostname().upper()
-		if self["config"].getCurrent():
-			bouqName = self["config"].getCurrent()[0]
-			item = self.getServices(bouqName)
-			if not len(item):
-				self["info"].setText("%s" % t1)
-				return
-			new = []
-			new = self.addToBouquetFiltered(item)
-			if not len(new):
-				self["info"].setText("s" % t2)
-				return
-			# fill tmp with services
-			num = 1
-			tmp = []
-			for t in new: # bouquet for save
-				if self.isNotService(t[1]):
-					continue
-				name = self.prepareStr(t[0])
-				if name.upper() == '<N/A>':
-					continue
-				splited = t[1].split(':')
-				op = self.op2human(int(splited[6][0:-4],16), TE=True)
-				tmp.append(("%s=%s/%s|%s   (%s)\n" % (num, boxIP, t[1], name.replace('|', '-'), op)))
-				num += 1
-			fileName = "/tmp/%s-%s.ini" % (boxName, self.plainString(bouqName).replace(' ','_'))
-			fo = open(fileName, "wt")
-			# head
-			fo.write("[SATTYPE]\n" + "1=6500\n" + "2=%s - %s\n\n" % (boxName, bouqName) + "[DVB]\n")
-			# services
-			fo.write("0=%s\n" % len(tmp))
-			for i in tmp:
-				fo.write(i)
-			fo.close()
+		item = self.getServices(bouqName)
+		if not len(item):
+			if not multi:
+				self.session.open(MessageBox, _("Bouquet is empty!"), type = MessageBox.TYPE_WARNING, timeout = 3)
+			return False
+		new = []
+		new = self.addToBouquetFiltered(item)
+		if not len(new):
+			if not multi:
+				self.session.open(MessageBox, _("No services in bouquet!"), type = MessageBox.TYPE_WARNING, timeout = 3)
+			return False
+		# fill tmp with services
+		num = 1
+		tmp = []
+		for t in new: # bouquet for save
+			if self.isNotService(t[1]):
+				continue
+			name = self.prepareStr(t[0])
+			if name.upper() == '<N/A>':
+				continue
+			splited = t[1].split(':')
+			op = self.op2human(int(splited[6][0:-4],16), TE=True)
+			tmp.append(("%s=%s/%s|%s   (%s)\n" % (num, boxIP, t[1], name.replace('|', '-'), op)))
+			num += 1
+		fileName = "/tmp/%s-%s.ini" % (boxName, self.plainString(bouqName).replace(' ','_'))
+		fo = open(fileName, "wt")
+		# head
+		fo.write("[SATTYPE]\n" + "1=6500\n" + "2=%s - %s\n\n" % (boxName, bouqName) + "[DVB]\n")
+		# services
+		fo.write("0=%s\n" % len(tmp))
+		for i in tmp:
+			fo.write(i)
+		fo.close()
+		if not multi:
 			self.session.open(MessageBox, _("TE file was created."), type = MessageBox.TYPE_INFO, timeout = 3)
+		return True
 
 #
 # Save RefreshBouquetBackup name:orbital_position services parameters in selected bouquet to /etc/enigma2/bouquetname.rbb file
@@ -2574,6 +2600,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Pre-fill first 'n' servicename chars to virtual keyboard"), cfg.vk_length))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Compare virtual keyboard input as case sensitive"), cfg.vk_sensitive))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Use dotted service name for 'rbb' files"), cfg.rbb_dotted, _("When is creating a bouquet from 'rbb' file, dotted names can be compared too. You need then manually remove duplicates. Default set is 'no'.")))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Transedit file support"), cfg.transedit, _("Add items to menu for creating transedit files from bouquets.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Show full filenames for deleted bouquets"), cfg.deleted_bq_fullname, _("'Manage deleted bouquets' will display full filenames instead bouquet names only.")))
 		ConfigListScreen.__init__(self, refreshBouquetCfglist, session, on_change = self.changedEntry)
 
