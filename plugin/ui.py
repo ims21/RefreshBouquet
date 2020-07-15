@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.07"
+VERSION = "2.08"
 #  by ims (c) 2016-2020 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -78,6 +78,7 @@ config.plugins.refreshbouquet.sortmenu = ConfigSelection(default = "0", choices 
 config.plugins.refreshbouquet.rbb_dotted = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.deleted_bq_fullname = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.transedit = ConfigYesNo(default = False)
+config.plugins.refreshbouquet.allstypes = ConfigYesNo(default = False)
 
 cfg = config.plugins.refreshbouquet
 
@@ -1177,7 +1178,9 @@ class refreshBouquet(Screen, HelpableScreen):
 				if s_splited[6][:-4] != cfg.orbital.value:
 					continue
 			if s_splited[10] == '' or s_splited[10].startswith('--- '): # it is not stream
-				if mode == "tv":
+				if cfg.allstypes.value:
+					new.append((s[0], s[1]))
+				elif mode == "tv":
 					if int(s_splited[2],16) in TV:
 						new.append((s[0], s[1]))
 				else:
@@ -2579,6 +2582,11 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 			"cancel": self.exit
 		}, -2)
 
+		self.menu()
+		self.onChangedEntry = []
+		self.onShown.append(self.setWindowTitle)
+
+	def menu(self):
 		refreshBouquetCfglist = []
 		refreshBouquetCfglist.append(getConfigListEntry(_("Compare case sensitive"), cfg.case_sensitive))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Skip 1st nonstandard char in name"), cfg.omit_first, _("Omit any control character in service name. Default set 'yes'.")))
@@ -2602,10 +2610,8 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Use dotted service name for 'rbb' files"), cfg.rbb_dotted, _("When is creating a bouquet from 'rbb' file, dotted names can be compared too. You need then manually remove duplicates. Default set is 'no'.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Transedit file support"), cfg.transedit, _("Add items to menu for creating transedit files from bouquets.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Show full filenames for deleted bouquets"), cfg.deleted_bq_fullname, _("'Manage deleted bouquets' will display full filenames instead bouquet names only.")))
-		ConfigListScreen.__init__(self, refreshBouquetCfglist, session, on_change = self.changedEntry)
-
-		self.onChangedEntry = []
-		self.onShown.append(self.setWindowTitle)
+		refreshBouquetCfglist.append(getConfigListEntry(_("Use all service types"), cfg.allstypes, _("In almost all cases should be this option disabled, because TV and Radio service are most used types.")))
+		ConfigListScreen.__init__(self, refreshBouquetCfglist, self.session, on_change = self.changedEntry)
 
 	# for summary:
 	def changedEntry(self):
