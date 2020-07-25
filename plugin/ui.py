@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.08"
+VERSION = "2.09"
 #  by ims (c) 2016-2020 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -1177,7 +1177,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			if cfg.orbital.value != "x":
 				if s_splited[6][:-4] != cfg.orbital.value:
 					continue
-			if s_splited[10] == '' or s_splited[10].startswith('--- '): # it is not stream
+			if s_splited[10] == '' or s_splited[10].startswith('--- ') or cfg.allstypes.value: # it is not stream or All
 				if cfg.allstypes.value:
 					new.append((s[0], s[1]))
 				elif mode == "tv":
@@ -1194,6 +1194,8 @@ class refreshBouquet(Screen, HelpableScreen):
 # test for "noplayable" service
 
 	def isNotService(self, refstr):
+		if cfg.allstypes.value:
+			return False
 		if eServiceReference(refstr).flags & (eServiceReference.isDirectory | eServiceReference.isMarker | eServiceReference.isGroup | eServiceReference.isNumberedMarker):
 			return True
 		return False
@@ -1300,6 +1302,7 @@ class refreshBouquet(Screen, HelpableScreen):
 #			for service in services:
 #				print ">>>>>>", service[0], "\t\t", service[1]
 			return services
+		return ""
 
 # call Options
 
