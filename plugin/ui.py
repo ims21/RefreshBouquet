@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.09"
+VERSION = "2.10"
 #  by ims (c) 2016-2020 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -246,8 +246,8 @@ class refreshBouquet(Screen, HelpableScreen):
 				menu.append((_("Remove selected services in source bouquet"),3))
 				buttons += ["6","8"]
 			else:						# or source or target only
-				menu.append((_("Move selected services in bouquet"),5))
-				menu.append((_("Remove selected services in bouquet"),3))
+				menu.append((_("Move selected services in bouquet") + " '%s'" % bName,5))
+				menu.append((_("Remove selected services in bouquet") + " '%s'" % bName,3))
 				buttons = ["6","8"]
 			if self.sourceItem: # rbb for sources only
 				menu.append((_("Create '%s.rbb' file") % bName,20))
@@ -255,13 +255,17 @@ class refreshBouquet(Screen, HelpableScreen):
 				#if self.isRbbFile():
 				menu.append((_("Create bouquet from rbb file"),21))
 				buttons += [""]
+		else:	# current item, nothing is marked
+			if self["config"].getCurrent():
+				menu.append((_("Move selected services in bouquet") + " '%s'" % bName,5))
+				menu.append((_("Remove selected services in bouquet") + " '%s'" % bName,3))
+				buttons = ["6","8"]
 		menu.append((_("Create new bouquet"),13))
 		buttons += [""]
 		if self["config"].getCurrent():
-			name = self["config"].getCurrent()[0]
-			menu.append((_("Rename bouquet '%s'") % name,14))
+			menu.append((_("Rename bouquet '%s'") % bName,14))
 			buttons += [""]
-			menu.append((_("Remove bouquet '%s'") % name,15))
+			menu.append((_("Remove bouquet '%s'") % bName,15))
 			buttons += ["red"]
 		if self.isDeletedBouquet():
 			menu.append((_("Manage deleted bouquets"),18))
@@ -969,16 +973,18 @@ class refreshBouquet(Screen, HelpableScreen):
 ###
 	def prepareSingleBouquetOperation(self):
 		if self.sourceItem and not self.targetItem or self.sourceItem:
-			Bouquet = self.sourceItem
+			bouquet = self.sourceItem
 			t1 = _("Source bouquet is empty!")
 			t2 = _("No services in source bouquet!")
-			return self.sourceItem, t1, t2
 		elif self.targetItem and not self.sourceItem:
-			Bouquet = self.targetItem
+			bouquet = self.targetItem
 			t1 = _("Target bouquet is empty!")
 			t2 = _("No services in target bouquet!")
-			return self.targetItem, t1, t2
-		return None, None, None
+		else:
+			bouquet = self["config"].getCurrent()
+			t1 = _("Selected bouquet is empty!")
+			t2 = _("No services in selected bouquet!")
+		return bouquet, t1, t2
 
 ###
 # get selected bouquet valid for operation: or source, or target or source if both are selected
