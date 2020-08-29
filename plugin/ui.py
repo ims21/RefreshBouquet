@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.10"
+VERSION = "2.11"
 #  by ims (c) 2016-2020 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -75,6 +75,7 @@ choicelist.append(("20","20"))
 config.plugins.refreshbouquet.vk_length = ConfigSelection(default = "3", choices = [("0", _("No"))] + choicelist + [("255", _("All"))])
 config.plugins.refreshbouquet.vk_sensitive = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.sortmenu = ConfigSelection(default = "0", choices = [("0", _("Original")),("1", _("A-z sort")),("2", _("Z-a sort")),("3", _("Selected top")),("4", _("Original - reverted"))])
+config.plugins.refreshbouquet.rbbfiles = ConfigYesNo(default = False)
 config.plugins.refreshbouquet.rbb_dotted = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.deleted_bq_fullname = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.transedit = ConfigYesNo(default = False)
@@ -242,24 +243,16 @@ class refreshBouquet(Screen, HelpableScreen):
 					menu.append((_("Add selected missing services to target bouquet"),2))
 					menu.append((_("Refresh services in target bouquet"),4))
 					buttons = ["1","2","3","green"]
-				menu.append((_("Move selected services in source bouquet"),5))
-				menu.append((_("Remove selected services in source bouquet"),3))
-				buttons += ["6","8"]
-			else:						# or source or target only
-				menu.append((_("Move selected services in bouquet") + " '%s'" % bName,5))
-				menu.append((_("Remove selected services in bouquet") + " '%s'" % bName,3))
-				buttons = ["6","8"]
-			if self.sourceItem: # rbb for sources only
-				menu.append((_("Create '%s.rbb' file") % bName,20))
-				buttons += [""]
-				#if self.isRbbFile():
+		if self["config"].getCurrent():
+			menu.append((_("Move selected services in bouquet") + " '%s'" % bName,5))
+			menu.append((_("Remove selected services in bouquet") + " '%s'" % bName,3))
+			buttons = ["6","8"]
+		if cfg.rbbfiles.value: # rbb for sources only
+			menu.append((_("Create '%s.rbb' file") % bName,20))
+			buttons += [""]
+			if self.isRbbFile():
 				menu.append((_("Create bouquet from rbb file"),21))
 				buttons += [""]
-		else:	# current item, nothing is marked
-			if self["config"].getCurrent():
-				menu.append((_("Move selected services in bouquet") + " '%s'" % bName,5))
-				menu.append((_("Remove selected services in bouquet") + " '%s'" % bName,3))
-				buttons = ["6","8"]
 		menu.append((_("Create new bouquet"),13))
 		buttons += [""]
 		if self["config"].getCurrent():
@@ -2616,6 +2609,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Debug info"), cfg.debug))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Pre-fill first 'n' servicename chars to virtual keyboard"), cfg.vk_length))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Compare virtual keyboard input as case sensitive"), cfg.vk_sensitive))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Support for 'rbb' files"), cfg.rbbfiles, _("Enable menu items for 'rbb' files.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Use dotted service name for 'rbb' files"), cfg.rbb_dotted, _("When is creating a bouquet from 'rbb' file, dotted names can be compared too. You need then manually remove duplicates. Default set is 'no'.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Transedit file support"), cfg.transedit, _("Add items to menu for creating transedit files from bouquets.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Show full filenames for deleted bouquets"), cfg.deleted_bq_fullname, _("'Manage deleted bouquets' will display full filenames instead bouquet names only.")))

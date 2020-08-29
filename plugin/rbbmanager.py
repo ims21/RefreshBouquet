@@ -30,9 +30,7 @@ import os
 from Screens.ChoiceBox import ChoiceBox
 from shutil import copy2
 from plugin import plugin_path
-from ui import E2, cfg
-from myselectionlist import MySelectionList
-
+from ui import E2, cfg, MySelectionList
 
 class refreshBouquetRbbManager(Screen):
 	skin = """
