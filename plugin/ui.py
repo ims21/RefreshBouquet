@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.11"
+VERSION = "2.12"
 #  by ims (c) 2016-2020 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -242,11 +242,11 @@ class refreshBouquet(Screen, HelpableScreen):
 					menu.append((_("Add selected services to target bouquet"),1))
 					menu.append((_("Add selected missing services to target bouquet"),2))
 					menu.append((_("Refresh services in target bouquet"),4))
-					buttons = ["1","2","3","green"]
+					buttons += ["1","2","3","green"]
 		if self["config"].getCurrent():
 			menu.append((_("Move selected services in bouquet") + " '%s'" % bName,5))
 			menu.append((_("Remove selected services in bouquet") + " '%s'" % bName,3))
-			buttons = ["6","8"]
+			buttons += ["6","8"]
 		if cfg.rbbfiles.value: # rbb for sources only
 			menu.append((_("Create '%s.rbb' file") % bName,20))
 			buttons += [""]
@@ -270,7 +270,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			menu.append((_("Create TE files from all bouquets to '/tmp'"), 31))
 			buttons += [""]
 		menu.append((_("Settings..."),10))
-		buttons.append("menu")
+		buttons += ["menu"]
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_("Select action for bouquet:"), list=menu, keys=["dummy" if key=="" else key for key in buttons])
 		self["info"].setText(self.infotext)
 
