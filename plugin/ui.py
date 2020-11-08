@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.12"
+VERSION = "2.13"
 #  by ims (c) 2016-2020 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -242,7 +242,7 @@ class refreshBouquet(Screen, HelpableScreen):
 					menu.append((_("Add selected services to target bouquet"),1))
 					menu.append((_("Add selected missing services to target bouquet"),2))
 					menu.append((_("Refresh services in target bouquet"),4))
-					buttons += ["1","2","3","green"]
+					buttons += ["blue"," ","yellow","green"]
 		if self["config"].getCurrent():
 			menu.append((_("Move selected services in bouquet") + " '%s'" % bName,5))
 			menu.append((_("Remove selected services in bouquet") + " '%s'" % bName,3))
@@ -257,9 +257,9 @@ class refreshBouquet(Screen, HelpableScreen):
 		buttons += [""]
 		if self["config"].getCurrent():
 			menu.append((_("Rename bouquet '%s'") % bName,14))
-			buttons += [""]
+			buttons += ["2"]
 			menu.append((_("Remove bouquet '%s'") % bName,15))
-			buttons += ["red"]
+			buttons += [""]
 		if self.isDeletedBouquet():
 			menu.append((_("Manage deleted bouquets"),18))
 			buttons += [""]
