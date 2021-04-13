@@ -398,7 +398,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			new_choices.append(("%s" % op, "%s" % op_txt))
 		config.plugins.refreshbouquet.orbital = NoSave(ConfigSelection(default="x", choices=new_choices))
 
-# call refreshService as replace		
+# call refreshService as replace
 	def refreshServices(self):
 		self.actualizeServices()
 
@@ -845,7 +845,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		return differences, length
 
 ###
-# add new bouquet	
+# add new bouquet
 ###
 	def newBouquet(self):
 		def runCreate(searchString=None):
@@ -1059,7 +1059,7 @@ class refreshBouquet(Screen, HelpableScreen):
 ###
 # replace service in target manually by user (all sources)
 ###
-	def replaceSelectedServicesManually(self): 
+	def replaceSelectedServicesManually(self):
 		if self.sourceItem and self.targetItem:
 			target = self.getServices(self.targetItem[0])
 			source = self.getServices(self.sourceItem[0])
@@ -1242,7 +1242,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				bouquet_rootstr = '%s FROM BOUQUET "userbouquet.favourites.radio" ORDER BY bouquet' % (service_types)
 		self.bouquet_rootstr = bouquet_rootstr
 		self.bouquet_root = eServiceReference(self.bouquet_rootstr)
-		bouquet_root = eServiceReference(bouquet_rootstr)	
+		bouquet_root = eServiceReference(bouquet_rootstr)
 		return bouquet_root
 
 # returns bouquets list
@@ -1371,7 +1371,7 @@ class refreshBouquetManualSelection(Screen):
 	def __init__(self, session, sourceList, target_services, source_name, target):
 		self.skin = refreshBouquetManualSelection.skin
 		Screen.__init__(self, session)
-	
+
 		self["Service"] = ServiceEvent()
 		self["TransponderInfo"] = ServiceEvent()
 		self.display_epg = False
@@ -1411,12 +1411,12 @@ class refreshBouquetManualSelection(Screen):
 
 				"prevBouquet": self.switchLists,
 				"nextBouquet": self.switchLists,
-	
+
 				"up": self.up,
 				"upRepeated": self.up,
 				"down": self.down,
 				"downRepeated": self.down,
-	
+
 				"left": self.left,
 				"leftRepeated": self.left,
 				"right": self.right,
@@ -1549,7 +1549,7 @@ class refreshBouquetManualSelection(Screen):
 			del self.target_services[position]
 								# new name, new ref, index replaced service in target bouquet
 			self.target_services.insert(position, (self.sourceRecord[0], self.sourceRecord[1], self.targetRecord[2]))
-							# new name, new ref, old ref, index replaced service in target bouquet, old name 
+							# new name, new ref, old ref, index replaced service in target bouquet, old name
 			self.changedTargetdata.append((self.sourceRecord[0], self.targetRecord[1], self.sourceRecord[1], self.targetRecord[2], self.targetRecord[0]))
 			if self.currList == "sources": # only for refresh
 				self.switchToTargetList()
@@ -1597,7 +1597,7 @@ class refreshBouquetManualSelection(Screen):
 		self["target"].setText("")
 		self["source"].setText("")
 		self["key_blue"].setText("")
-	
+
 	def switchLists(self):
 		if self.currList == "sources":
 			self.switchToTargetList()
@@ -2066,7 +2066,7 @@ class refreshBouquetCopyServices(Screen):
 		if nr_items:
 			text = ngettext("Are you sure to copy this %d service?", "Are you sure to copy this %d services?", nr_items) % nr_items
 			list = [(_("Yes"), True), (_("No"), False)]
-			if self.missing: # for 'Add selected missing services to target bouquet' only 
+			if self.missing: # for 'Add selected missing services to target bouquet' only
 				list.append((_("Yes, add to new bouquet..."), "new"))
 			self.session.openWithCallback(self.copyToTarget, MessageBox, text, MessageBox.TYPE_YESNO, default=False, list=list)
 		else:
@@ -2773,4 +2773,3 @@ def freeMemory():
 
 def closed(ret=False):
 	freeMemory()
-

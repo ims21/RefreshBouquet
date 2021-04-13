@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# for localized messages  	 
+# for localized messages
 from . import _
 #
 #  Refresh Bouqurt - Plugin E2 for OpenPLi
