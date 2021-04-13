@@ -36,6 +36,7 @@ from ui import E2, cfg
 from ui import MySelectionList
 from ui import setIcon
 
+
 class refreshBouquetManageDeletedBouquets(Screen):
 	skin = """
 		<screen name="refreshBouquetManageDeletedBouquets" position="center,center" size="560,410" title="refreshBouquet - manage deleted bouquets">

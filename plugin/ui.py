@@ -91,6 +91,7 @@ E2 = "/etc/enigma2"
 
 sel_position = None
 
+
 class refreshBouquet(Screen, HelpableScreen):
 	skin = """
 	<screen name="refreshBouquet" position="center,center" size="560,375" title="Refresh Bouquet">
@@ -194,6 +195,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		self.edit = not self.edit
 		self.idx = self["config"].getIndex()
 		self.showPrevNext()
+
 	def showPrevNext(self):
 		if self.edit:
 			self["h_prev"].show()
@@ -204,12 +206,15 @@ class refreshBouquet(Screen, HelpableScreen):
 			if self.changes:
 				self.updateMovedBouquet()
 				self.changes = False
+
 	def moveUp(self):
 		if self.edit and self.idx - 1 >= 0:
 			self.moveDirection(-1)
+
 	def moveDown(self):
 		if self.edit and self.idx + 1 < self["config"].count():
 			self.moveDirection(1)
+
 	def moveDirection(self, direction):
 			self["config"].setIndex(self.idx)
 			tmp = self["config"].getCurrent()
@@ -354,6 +359,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		self.sourceItem = current
 		self.setBouquetsOrbitalPositionsConfigFilter(self.sourceItem)
 # get name for target bouquet
+
 	def getTarget(self, currentBouquet=None):
 		if currentBouquet is not None: # set current bouquet
 			current = currentBouquet
@@ -470,6 +476,7 @@ class refreshBouquet(Screen, HelpableScreen):
 ###
 # Add missing services to source bouquet or all services to empty bouquet
 ###
+
 	def addMissingServices(self):
 		data = MySelectionList([])
 		if self.sourceItem and self.targetItem:
@@ -614,6 +621,7 @@ class refreshBouquet(Screen, HelpableScreen):
 #
 # Save BOX_BOUQUET TransEdit ini file to /tmp/BOX-BOUQUET.ini file
 #
+
 	def saveTEIniFile(self, bouqName, multi=False):
 		boxIP = "http://%s:%s" % (GetIPsFromNetworkInterfaces()[0][1], "8001")
 		boxName = socket.gethostname().upper()
@@ -708,6 +716,7 @@ class refreshBouquet(Screen, HelpableScreen):
 	def fillRbbBouquet(self, rbb_name):
 		if not rbb_name:
 			return
+
 		def getRbbBouquetContent(path):
 			list = []
 			fi = open(path, "rt")
@@ -991,6 +1000,7 @@ class refreshBouquet(Screen, HelpableScreen):
 ###
 # move selected service (by user) in source bouquet
 ###
+
 	def moveServices(self):
 		data = MySelectionList([])
 		bouquet, t1, t2 = self.prepareSingleBouquetOperation()
@@ -1315,6 +1325,8 @@ class refreshBouquet(Screen, HelpableScreen):
 		self.showMenu()
 
 # manual replace
+
+
 class refreshBouquetManualSelection(Screen):
 	y = 25 * 4 if getDesktop(0).size().height() > 576 else 0 # added 4 bouquet's rows if screen height > 576
 	pars = (511 + y, 250 + y, 250 + y, 343 + y, 347 + y, 370 + y, 375 + y, 398 + y, 492 + y, 373 + y)
@@ -1494,12 +1506,14 @@ class refreshBouquetManualSelection(Screen):
 			if source[0] == name:
 				return idx
 		return 0
+
 	def getSourceIndexUpper(self, name):
 		name = name.upper()
 		for idx, source in enumerate(self["sources"].list):
 			if source[0].upper() == name:
 				return idx
 		return 0
+
 	def getSourceSimilarIndexUpper(self, name):
 		uName = name.upper().replace(' ', '')
 		for n in range(len(uName), 0, -1):
@@ -1569,6 +1583,7 @@ class refreshBouquetManualSelection(Screen):
 		ref = self[self.currList].getCurrent()[1]
 		if not self.isNotService(ref):
 			self.session.nav.playService(eServiceReference(ref))
+
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
 
@@ -1677,6 +1692,8 @@ class refreshBouquetManualSelection(Screen):
 			self.close()
 
 # display and refresh services with different service references
+
+
 class refreshBouquetRefreshServices(Screen):
 	def __init__(self, session, list, target):
 		self.skin = refreshBouquetCopyServices.skin
@@ -1796,6 +1813,7 @@ class refreshBouquetRefreshServices(Screen):
 		ref = self["services"].getCurrent()[0][1][0]
 		if not self.isNotService(ref):
 			self.session.nav.playService(eServiceReference(ref))
+
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
 
@@ -1856,6 +1874,8 @@ class refreshBouquetRefreshServices(Screen):
 			self.close()
 
 # copy services from source list
+
+
 class refreshBouquetCopyServices(Screen):
 	skin = """
 		<screen name="refreshBouquetDisplayServices" position="center,center" size="710,505" title="RefreshBouquet - results">
@@ -2002,6 +2022,7 @@ class refreshBouquetCopyServices(Screen):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
 			self.session.nav.playService(eServiceReference(ref))
+
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
 
@@ -2094,6 +2115,8 @@ class refreshBouquetCopyServices(Screen):
 			self.close(True) # True = remove empty bouquet
 
 # remove services from source list
+
+
 class refreshBouquetRemoveServices(Screen):
 	def __init__(self, session, list, source):
 		self.skin = refreshBouquetCopyServices.skin
@@ -2212,6 +2235,7 @@ class refreshBouquetRemoveServices(Screen):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
 			self.session.nav.playService(eServiceReference(ref))
+
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
 
@@ -2293,6 +2317,8 @@ class refreshBouquetRemoveServices(Screen):
 			self.close()
 
 # move services in source list
+
+
 class refreshBouquetMoveServices(Screen):
 	def __init__(self, session, list, source, services):
 		self.skin = refreshBouquetCopyServices.skin
@@ -2457,6 +2483,7 @@ class refreshBouquetMoveServices(Screen):
 		ref = self["services"].getCurrent()[0][1]
 		if not self.isNotService(ref):
 			self.session.nav.playService(eServiceReference(ref))
+
 	def stopPreview(self):
 		self.session.nav.playService(self.playingRef)
 
@@ -2548,6 +2575,8 @@ class refreshBouquetMoveServices(Screen):
 			self.close(True)
 
 # options
+
+
 class refreshBouquetCfg(Screen, ConfigListScreen):
 	skin = """
 	<screen name="refreshBouquetCfg" position="center,center" size="560,380" title="RefreshBouquet Setup" >
@@ -2621,14 +2650,18 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 	def changedEntry(self):
 		for x in self.onChangedEntry:
 			x()
+
 	def getCurrentEntry(self):
 		return self["config"].getCurrent()[0]
+
 	def getCurrentValue(self):
 		return str(self["config"].getCurrent()[1].getText())
+
 	def createSummary(self):
 		from Screens.Setup import SetupSummary
 		return SetupSummary
 	###
+
 	def setWindowTitle(self):
 		self.setTitle(_("RefreshBouquet Setup"))
 
@@ -2640,7 +2673,9 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 
 # change select icons in list operation
 
+
 select_PNG = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/lock_on.png"))
+
 
 def setIcon(delete=False):
 	global select_PNG
@@ -2656,6 +2691,7 @@ def setIcon(delete=False):
 	if select_PNG is None:
 		select_PNG = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/lock_on.png"))
 
+
 def MySelectionEntryComponent(description, value, index, selected):
 	dx, dy, dw, dh = skin.parameters.get("ImsSelectionListDescr", (35, 2, 650, 30))
 	res = [
@@ -2666,6 +2702,7 @@ def MySelectionEntryComponent(description, value, index, selected):
 		ix, iy, iw, ih = skin.parameters.get("ImsSelectionListLock", (0, 0, 24, 24))
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, ix, iy, iw, ih, select_PNG))
 	return res
+
 
 class MySelectionList(MenuList):
 	def __init__(self, list=None, enableWrapAround=False):
@@ -2717,18 +2754,22 @@ class MySelectionList(MenuList):
 	def len(self):
 		return len(self.list)
 
+
 def addBouqetName(bouquet_name):
 	if cfg.bouquet_name.value:
 		return " <%s>" % bouquet_name
 	return ""
 
+
 def debug(message):
 	print "[RefreshBouquet] %s" % message
+
 
 def freeMemory():
 	import os
 	os.system("sync")
 	os.system("echo 3 > /proc/sys/vm/drop_caches")
+
 
 def closed(ret=False):
 	freeMemory()

@@ -25,6 +25,7 @@ config.plugins.refreshbouquet.channel_context_menu = ConfigYesNo(default=True)
 
 plugin_path = None
 
+
 def main(session, servicelist=None, **kwargs):
 	import Screens.InfoBar
 	Servicelist = servicelist or Screens.InfoBar.InfoBar.instance.servicelist
@@ -32,6 +33,7 @@ def main(session, servicelist=None, **kwargs):
 	if currentBouquet is not None:
 		import ui
 		session.openWithCallback(ui.closed, ui.refreshBouquet, Servicelist, currentBouquet)
+
 
 def Plugins(path, **kwargs):
 	global plugin_path

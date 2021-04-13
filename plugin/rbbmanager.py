@@ -32,6 +32,7 @@ from shutil import copy2
 from plugin import plugin_path
 from ui import E2, cfg, MySelectionList
 
+
 class refreshBouquetRbbManager(Screen):
 	skin = """
 		<screen name="refreshBouquetRbbManager" position="center,center" size="560,417" title="RefreshBouquet - rbb files">
