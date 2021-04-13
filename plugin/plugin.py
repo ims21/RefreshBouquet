@@ -36,8 +36,8 @@ def main(session, servicelist=None, **kwargs):
 def Plugins(path,**kwargs):
 	global plugin_path
 	plugin_path = path
-	name= _("RefreshBouquet")
-	descr=_("Actualize services in bouquets")
+	name = _("RefreshBouquet")
+	descr = _("Actualize services in bouquets")
 	list = [PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_PLUGINMENU, icon="refreshbouquet.png", needsRestart=False, fnc=main)]
 	if config.plugins.refreshbouquet.channel_context_menu.value:
 		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU, needsRestart=False, fnc=main))
