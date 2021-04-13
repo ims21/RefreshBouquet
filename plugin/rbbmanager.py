@@ -32,6 +32,7 @@ from shutil import copy2
 from plugin import plugin_path
 from ui import E2, cfg, MySelectionList
 
+
 class refreshBouquetRbbManager(Screen):
 	skin = """
 		<screen name="refreshBouquetRbbManager" position="center,center" size="560,417" title="RefreshBouquet - rbb files">
@@ -81,7 +82,7 @@ class refreshBouquetRbbManager(Screen):
 	def menu(self):
 		buttons = []
 		menu = []
-		menu.append((_("Copy predefined 'rbb' file(s) to list"),0))
+		menu.append((_("Copy predefined 'rbb' file(s) to list"), 0))
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_("Select action:"), list=menu, keys=buttons)
 
 	def style(self):
@@ -96,7 +97,7 @@ class refreshBouquetRbbManager(Screen):
 			if os.path.exists(dir_src):
 				for filename in os.listdir(dir_src):
 					if filename.endswith('.rbb'):
-						copy2( dir_src + filename, E2)
+						copy2(dir_src + filename, E2)
 				self.reloadList()
 
 	def reloadList(self):
@@ -105,7 +106,7 @@ class refreshBouquetRbbManager(Screen):
 		nr = 0
 		for x in os.listdir(E2):
 			if x.endswith(".rbb"):
-				self.list.addSelection(x, "%s/%s" % (E2,x), nr, False)
+				self.list.addSelection(x, "%s/%s" % (E2, x), nr, False)
 				nr += 1
 		self.list.sort()
 		self["config"] = self.list
@@ -127,7 +128,7 @@ class refreshBouquetRbbManager(Screen):
 			msg = ""
 			try:
 				path = self["config"].getCurrent()[0][1]
-				newpath = "%s/%s.rbb" % (E2,name)
+				newpath = "%s/%s.rbb" % (E2, name)
 				os.rename(path, newpath)
 				self.reloadList()
 				return
@@ -143,10 +144,10 @@ class refreshBouquetRbbManager(Screen):
 				traceback.print_exc()
 				msg = _("Error") + '\n' + str(e)
 			if msg:
-				self.session.open(MessageBox, msg, type = MessageBox.TYPE_ERROR, timeout = 5)
+				self.session.open(MessageBox, msg, type=MessageBox.TYPE_ERROR, timeout=5)
 		if self["config"].getCurrent():
 			name = self["config"].getCurrent()[0][0].split('.')[0]
-			self.session.openWithCallback(renameCallback, VirtualKeyBoard, title = _("Rename"), text = name)
+			self.session.openWithCallback(renameCallback, VirtualKeyBoard, title=_("Rename"), text=name)
 
 	def remove(self):
 		def callbackErase(answer):

@@ -36,6 +36,7 @@ from ui import E2, cfg
 from ui import MySelectionList
 from ui import setIcon
 
+
 class refreshBouquetManageDeletedBouquets(Screen):
 	skin = """
 		<screen name="refreshBouquetManageDeletedBouquets" position="center,center" size="560,410" title="refreshBouquet - manage deleted bouquets">
@@ -67,7 +68,7 @@ class refreshBouquetManageDeletedBouquets(Screen):
 		nr = 0
 		for x in os.listdir(E2):
 			if x.startswith("userbouquet") and x.endswith(".del"):
-				data.addSelection(self.fileName(x), "%s/%s" % (E2,x), nr, False)
+				data.addSelection(self.fileName(x), "%s/%s" % (E2, x), nr, False)
 				nr += 1
 		self.list = data
 		self.list.sort()
@@ -98,7 +99,7 @@ class refreshBouquetManageDeletedBouquets(Screen):
 			text = _("Are you sure to remove %s selected deleted bouquets?") % marked
 		else:
 			text = _("Are you sure to remove deleted userbouquet?\n\n%s") % self.fileName(self["config"].getCurrent()[0][1])
-		self.session.openWithCallback(self.removeFromSource, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+		self.session.openWithCallback(self.removeFromSource, MessageBox, text, MessageBox.TYPE_YESNO, default=False)
 
 	def removeFromSource(self, answer):
 		if answer == True:
@@ -119,7 +120,7 @@ class refreshBouquetManageDeletedBouquets(Screen):
 			text = _("Are you sure to restore %s selected deleted bouquets?") % marked
 		else:
 			text = _("Are you sure to restore deleted userbouquet?\n\n%s") % self.fileName(self["config"].getCurrent()[0][1])
-		self.session.openWithCallback(self.restoreSelected, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+		self.session.openWithCallback(self.restoreSelected, MessageBox, text, MessageBox.TYPE_YESNO, default=False)
 
 	def restoreSelected(self, answer):
 		if answer == True:
