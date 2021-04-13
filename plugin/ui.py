@@ -55,27 +55,27 @@ config.plugins.refreshbouquet.case_sensitive = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.omit_first = ConfigYesNo(default=True)
 config.plugins.refreshbouquet.debug = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.log = ConfigYesNo(default=False)
-config.plugins.refreshbouquet.mr_sortsource = ConfigSelection(default="0", choices=[("0", _("Original")),("1", _("A-z sort")),("2", _("Z-a sort"))])
-config.plugins.refreshbouquet.used_services = ConfigSelection(default="all", choices=[("all",_("no")),("HD",_("HD")),("4K",_("4K/UHD")),("HD4K",_("HD or 4K/UHD"))])
+config.plugins.refreshbouquet.mr_sortsource = ConfigSelection(default="0", choices=[("0", _("Original")), ("1", _("A-z sort")), ("2", _("Z-a sort"))])
+config.plugins.refreshbouquet.used_services = ConfigSelection(default="all", choices=[("all", _("no")), ("HD", _("HD")), ("4K", _("4K/UHD")), ("HD4K", _("HD or 4K/UHD"))])
 config.plugins.refreshbouquet.diff = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.preview = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.autotoggle = ConfigYesNo(default=True)
 config.plugins.refreshbouquet.on_end = ConfigYesNo(default=True)
-config.plugins.refreshbouquet.orbital = ConfigSelection(default="x", choices=[("x",_("no")),])
+config.plugins.refreshbouquet.orbital = ConfigSelection(default="x", choices=[("x", _("no")), ])
 config.plugins.refreshbouquet.stype = ConfigYesNo(default=False)
-config.plugins.refreshbouquet.current_bouquet = ConfigSelection(default="0", choices=[("0",_("no")),("source",_("source bouquet")),("target",_("target bouquet"))])
+config.plugins.refreshbouquet.current_bouquet = ConfigSelection(default="0", choices=[("0", _("no")), ("source", _("source bouquet")), ("target", _("target bouquet"))])
 config.plugins.refreshbouquet.selector2bouquet = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.bouquet_name = ConfigYesNo(default=True)
 config.plugins.refreshbouquet.confirm_move = ConfigYesNo(default=True)
-config.plugins.refreshbouquet.ignore_last_char = ConfigSelection(default=None, choices=[(None,_("no")),(".",".")])
+config.plugins.refreshbouquet.ignore_last_char = ConfigSelection(default=None, choices=[(None, _("no")), (".", ".")])
 choicelist = []
 for i in range(1, 11, 1):
 	choicelist.append(("%d" % i))
-choicelist.append(("15","15"))
-choicelist.append(("20","20"))
+choicelist.append(("15", "15"))
+choicelist.append(("20", "20"))
 config.plugins.refreshbouquet.vk_length = ConfigSelection(default="3", choices=[("0", _("No"))] + choicelist + [("255", _("All"))])
 config.plugins.refreshbouquet.vk_sensitive = ConfigYesNo(default=False)
-config.plugins.refreshbouquet.sortmenu = ConfigSelection(default="0", choices=[("0", _("Original")),("1", _("A-z sort")),("2", _("Z-a sort")),("3", _("Selected top")),("4", _("Original - reverted"))])
+config.plugins.refreshbouquet.sortmenu = ConfigSelection(default="0", choices=[("0", _("Original")), ("1", _("A-z sort")), ("2", _("Z-a sort")), ("3", _("Selected top")), ("4", _("Original - reverted"))])
 config.plugins.refreshbouquet.rbbfiles = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.rbb_dotted = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.deleted_bq_fullname = ConfigYesNo(default=False)
@@ -239,38 +239,38 @@ class refreshBouquet(Screen, HelpableScreen):
 		if self.sourceItem or self.targetItem:			# at least one is selected
 			if self.sourceItem and self.targetItem:		# both are selected
 				if self.sourceItem != self.targetItem:	# source != target
-					menu.append((_("Manually replace services"),0))
-					menu.append((_("Add selected services to target bouquet"),1))
-					menu.append((_("Add selected missing services to target bouquet"),2))
-					menu.append((_("Refresh services in target bouquet"),4))
-					buttons += ["blue"," ","yellow","green"]
+					menu.append((_("Manually replace services"), 0))
+					menu.append((_("Add selected services to target bouquet"), 1))
+					menu.append((_("Add selected missing services to target bouquet"), 2))
+					menu.append((_("Refresh services in target bouquet"), 4))
+					buttons += ["blue", " ", "yellow", "green"]
 		if self["config"].getCurrent():
-			menu.append((_("Move selected services in bouquet") + " '%s'" % bName,5))
-			menu.append((_("Remove selected services in bouquet") + " '%s'" % bName,3))
-			buttons += ["6","8"]
+			menu.append((_("Move selected services in bouquet") + " '%s'" % bName, 5))
+			menu.append((_("Remove selected services in bouquet") + " '%s'" % bName, 3))
+			buttons += ["6", "8"]
 		if cfg.rbbfiles.value: # rbb for sources only
-			menu.append((_("Create '%s.rbb' file") % bName,20))
+			menu.append((_("Create '%s.rbb' file") % bName, 20))
 			buttons += [""]
 			if self.isRbbFile():
-				menu.append((_("Create bouquet from rbb file"),21))
+				menu.append((_("Create bouquet from rbb file"), 21))
 				buttons += [""]
-		menu.append((_("Create new bouquet"),13))
+		menu.append((_("Create new bouquet"), 13))
 		buttons += [""]
 		if self["config"].getCurrent():
-			menu.append((_("Rename bouquet '%s'") % bName,14))
+			menu.append((_("Rename bouquet '%s'") % bName, 14))
 			buttons += ["2"]
-			menu.append((_("Remove bouquet '%s'") % bName,15))
+			menu.append((_("Remove bouquet '%s'") % bName, 15))
 			buttons += [""]
 		if self.isDeletedBouquet():
-			menu.append((_("Manage deleted bouquets"),18))
+			menu.append((_("Manage deleted bouquets"), 18))
 			buttons += [""]
 		if cfg.transedit.value and self["config"].getCurrent():
-			name = self.plainString(self["config"].getCurrent()[0]).replace(' ','_')
-			menu.append((_("Create TE file '%s-%s.ini' to '/tmp'") % (socket.gethostname().upper(),name),30))
+			name = self.plainString(self["config"].getCurrent()[0]).replace(' ', '_')
+			menu.append((_("Create TE file '%s-%s.ini' to '/tmp'") % (socket.gethostname().upper(), name), 30))
 			buttons += [""]
 			menu.append((_("Create TE files from all bouquets to '/tmp'"), 31))
 			buttons += [""]
-		menu.append((_("Settings..."),10))
+		menu.append((_("Settings..."), 10))
 		buttons += ["menu"]
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_("Select action for bouquet:"), list=menu, keys=["dummy" if key == "" else key for key in buttons])
 		self["info"].setText(self.infotext)
@@ -377,7 +377,7 @@ class refreshBouquet(Screen, HelpableScreen):
 # get all orbital positions in source bouquet to config for filtering
 	def setBouquetsOrbitalPositionsConfigFilter(self, sourceItem):
 		positions = []
-		new_choices = [("x",_("no"))]
+		new_choices = [("x", _("no"))]
 		source = self.getServices(sourceItem[0])
 		if not source:
 			return
@@ -388,8 +388,8 @@ class refreshBouquet(Screen, HelpableScreen):
 			positions.append(op_hex_str)
 		unique_choices = set(positions)
 		for op in unique_choices:
-			op_txt = self.op2human(int(op,16)) if op else op
-			new_choices.append(("%s" % op,"%s" % op_txt))
+			op_txt = self.op2human(int(op, 16)) if op else op
+			new_choices.append(("%s" % op, "%s" % op_txt))
 		config.plugins.refreshbouquet.orbital = NoSave(ConfigSelection(default="x", choices=new_choices))
 
 # call refreshService as replace		
@@ -428,19 +428,19 @@ class refreshBouquet(Screen, HelpableScreen):
 			if self.isNotService(t[1]):
 				i += 1
 				continue
-			t_name = self.prepareStr(t[0]).replace(cfg.ignore_last_char.value,'') if cfg.ignore_last_char.value else self.prepareStr(t[0])
+			t_name = self.prepareStr(t[0]).replace(cfg.ignore_last_char.value, '') if cfg.ignore_last_char.value else self.prepareStr(t[0])
 			t_splited = t[1].split(':') # split target service_reference
-			t_core = ":".join((t_splited[3],t_splited[4],t_splited[5],t_splited[6]))
+			t_core = ":".join((t_splited[3], t_splited[4], t_splited[5], t_splited[6]))
 			if cfg.stype.value: # differences in service type too
-				t_core = ":".join((t_splited[2],t_core))
+				t_core = ":".join((t_splited[2], t_core))
 			t_op = t_splited[6][:-4]
 			for s in source_services: # source bouquet - with fresh scan - f.eg. created by Fastscan or Last Scanned
 				if self.isNotService(s[1]): # skip all non playable
 					continue
 				s_splited = s[1].split(':') # split service_reference
-				s_core = ":".join((s_splited[3],s_splited[4],s_splited[5],s_splited[6]))
+				s_core = ":".join((s_splited[3], s_splited[4], s_splited[5], s_splited[6]))
 				if cfg.stype.value: # differences in service type too
-					s_core = ":".join((s_splited[2],s_core))
+					s_core = ":".join((s_splited[2], s_core))
 				if cfg.orbital.value != "x": # only on selected op
 					if s_splited[6][:-4] != cfg.orbital.value:
 						continue
@@ -494,7 +494,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			for i in new:
 				nr += 1
 				if cfg.debug.value:
-					debug("nr:\t%s %s\t\t%s" % (nr, i[0],i[1]))
+					debug("nr:\t%s %s\t\t%s" % (nr, i[0], i[1]))
 				# service name, service reference, index, selected
 				data.list.append(MySelectionEntryComponent(i[0], i[1], nr, False))
 			self.l = MySelectionList(data)
@@ -546,10 +546,10 @@ class refreshBouquet(Screen, HelpableScreen):
 				t_splited = t[1].split(':') # split ref
 				if t_splited[10] == '' and s_splited[10] == '': # it is not stream
 					if mode == "tv":
-						if int(s_splited[2],16) in TV:
+						if int(s_splited[2], 16) in TV:
 							differences.append((s[0], s[1]))
 					else:
-						if int(s_splited[2],16) in RADIO:
+						if int(s_splited[2], 16) in RADIO:
 							differences.append((s[0], s[1]))
 				else:
 					if cfg.debug.value:
@@ -605,10 +605,10 @@ class refreshBouquet(Screen, HelpableScreen):
 			else:
 				wrong += "    %s\n" % bouquet[0]
 			ns += 1
-		text = ngettext("For %s bouquet of %s was TE file created.","For %s bouquets of %s were TE files created.", n) % (n, ns)
+		text = ngettext("For %s bouquet of %s was TE file created.", "For %s bouquets of %s were TE files created.", n) % (n, ns)
 		w = ns - n
 		if w:
-			wtext = ngettext("\nUnfortunately not for this %s empty bouquet:\n","\nUnfortunately not for these %s empty bouquets:\n", w) % w + wrong
+			wtext = ngettext("\nUnfortunately not for this %s empty bouquet:\n", "\nUnfortunately not for these %s empty bouquets:\n", w) % w + wrong
 		text += wtext if w else ""
 		self.session.open(MessageBox, text, type=MessageBox.TYPE_INFO, timeout=10)
 #
@@ -638,10 +638,10 @@ class refreshBouquet(Screen, HelpableScreen):
 			if name.upper() == '<N/A>':
 				continue
 			splited = t[1].split(':')
-			op = self.op2human(int(splited[6][0:-4],16), TE=True)
+			op = self.op2human(int(splited[6][0:-4], 16), TE=True)
 			tmp.append(("%s=%s/%s|%s   (%s)\n" % (num, boxIP, t[1], name.replace('|', '-'), op)))
 			num += 1
-		fileName = "/tmp/%s-%s.ini" % (boxName, self.plainString(bouqName).replace(' ','_'))
+		fileName = "/tmp/%s-%s.ini" % (boxName, self.plainString(bouqName).replace(' ', '_'))
 		fo = open(fileName, "wt")
 		# head
 		fo.write("[SATTYPE]\n" + "1=6500\n" + "2=%s - %s\n\n" % (boxName, bouqName) + "[DVB]\n")
@@ -670,7 +670,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			if not len(new):
 				self["info"].setText("s" % t2)
 				return
-			fo = open("%s/%s.rbb" % (E2,bouquet[0]), "wt")
+			fo = open("%s/%s.rbb" % (E2, bouquet[0]), "wt")
 			for t in new: # bouquet for save
 				if self.isNotService(t[1]):
 					continue
@@ -678,7 +678,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				if name.upper() == '<N/A>':
 					nr += 1
 				splited = t[1].split(':') # split target service_reference
-				fo.write("%s:%s\n" % (name.replace(':','%3a'), splited[6]))
+				fo.write("%s:%s\n" % (name.replace(':', '%3a'), splited[6]))
 			fo.close()
 			txt = _("File %s.rbb was created.") % bouquet[0]
 			text, delay, msgtype = (_("%s\n<N/A> items in source bouquet: %s") % (txt, nr), 8, MessageBox.TYPE_WARNING) if nr else (txt, 3, MessageBox.TYPE_INFO)
@@ -712,7 +712,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			list = []
 			fi = open(path, "rt")
 			for line in fi:
-				list.append((line.replace('\n','')))
+				list.append((line.replace('\n', '')))
 			fi.close()
 			return list
 
@@ -759,7 +759,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				freq = int(ts[2].strip())
 			###
 
-			target_name = self.prepareStr(ts[0]).replace('%3A',':').replace('%3a',':')
+			target_name = self.prepareStr(ts[0]).replace('%3A', ':').replace('%3a', ':')
 			if target_name == '<N/A>':
 				target_name = _("unknown")
 			target_op = ts[1]
@@ -784,7 +784,7 @@ class refreshBouquet(Screen, HelpableScreen):
 							### for rbb with freq
 							same_service = False
 							if freq:
-								frequency = self.getTransponderInfo(source[1],"frequency") / 1000
+								frequency = self.getTransponderInfo(source[1], "frequency") / 1000
 								if abs(frequency - freq) < 10:
 									same_service = True
 							###
@@ -819,7 +819,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			if not found:
 				target_name = "--- %s" % target_name
 				mode = "1" if config.servicelist.lastmode.value == "tv" else "2"
-				target_pars = ":".join(("1","0",mode,"0","0","0",target_op,"0","0","0", target_name))
+				target_pars = ":".join(("1", "0", mode, "0", "0", "0", target_op, "0", "0", "0", target_name))
 				results.append((target_name, target_pars, i, False))
 				names.append(target_name)
 				i += 1
@@ -855,7 +855,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		mutableBouquetList = serviceHandler.list(bouquet_root).startEdit()
 		if mutableBouquetList:
 			name = unicodedata.normalize('NFKD', unicode(bName, 'utf_8', errors='ignore')).encode('ASCII', 'ignore').translate(None, '<>:"/\\|?*() ')
-			while os.path.isfile((mode == "tv" and '%s/userbouquet.%s.tv' or '%s/userbouquet.%s.radio') % (E2,name)):
+			while os.path.isfile((mode == "tv" and '%s/userbouquet.%s.tv' or '%s/userbouquet.%s.radio') % (E2, name)):
 				name = name.rsplit('_', 1)
 				name = ('_').join((name[0], len(name) == 2 and name[1].isdigit() and str(int(name[1]) + 1) or '1'))
 			new_bouquet_ref = eServiceReference((mode == "tv" and '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.%s.tv" ORDER BY bouquet' or '1:7:2:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.%s.radio" ORDER BY bouquet') % name)
@@ -1010,7 +1010,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			for i in new:
 				nr += 1
 				if cfg.debug.value:
-					debug("nr: %s %s\t\t%s" % (nr, i[0],i[1]))
+					debug("nr: %s %s\t\t%s" % (nr, i[0], i[1]))
 				# service name, service reference, index, selected
 				data.list.append(MySelectionEntryComponent(i[0], i[1], nr, False))
 			self.l = MySelectionList(data)
@@ -1039,7 +1039,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			for i in new:
 				nr += 1
 				if cfg.debug.value:
-					debug("nr: %s %s\t\t%s" % (nr, i[0],i[1]))
+					debug("nr: %s %s\t\t%s" % (nr, i[0], i[1]))
 				# service name, service reference, index, selected
 				data.list.append(MySelectionEntryComponent(i[0], i[1], nr, False))
 			self.l = MySelectionList(data)
@@ -1086,11 +1086,11 @@ class refreshBouquet(Screen, HelpableScreen):
 			s_splited = s[1].split(':') # split ref
 			if s_splited[10] == '' or s_splited[10].startswith('--- '): # it is not stream
 				if mode == "tv":
-					if int(s_splited[2],16) in TV:
+					if int(s_splited[2], 16) in TV:
 						new.append((s[0], s[1], index))
 						index += 1
 				else:
-					if int(s_splited[2],16) in RADIO:
+					if int(s_splited[2], 16) in RADIO:
 						new.append((s[0], s[1], index))
 						index += 1
 			else:
@@ -1139,7 +1139,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			for i in new:
 				nr += 1
 				if cfg.debug.value:
-					debug("nr:\t%s %s\t\t%s" % (nr, i[0],i[1]))
+					debug("nr:\t%s %s\t\t%s" % (nr, i[0], i[1]))
 				# service name, service reference, index, selected
 				data.list.append(MySelectionEntryComponent(i[0], i[1], nr, False))
 			self.l = MySelectionList(data)
@@ -1181,10 +1181,10 @@ class refreshBouquet(Screen, HelpableScreen):
 				if cfg.allstypes.value:
 					new.append((s[0], s[1]))
 				elif mode == "tv":
-					if int(s_splited[2],16) in TV:
+					if int(s_splited[2], 16) in TV:
 						new.append((s[0], s[1]))
 				else:
-					if int(s_splited[2],16) in RADIO:
+					if int(s_splited[2], 16) in RADIO:
 						new.append((s[0], s[1]))
 			else:
 				if cfg.debug.value:
@@ -1317,7 +1317,7 @@ class refreshBouquet(Screen, HelpableScreen):
 # manual replace
 class refreshBouquetManualSelection(Screen):
 	y = 25 * 4 if getDesktop(0).size().height() > 576 else 0 # added 4 bouquet's rows if screen height > 576
-	pars = (511 + y,250 + y,250 + y,343 + y,347 + y,370 + y,375 + y,398 + y,492 + y,373 + y)
+	pars = (511 + y, 250 + y, 250 + y, 343 + y, 347 + y, 370 + y, 375 + y, 398 + y, 492 + y, 373 + y)
 	skin = """
 	<screen name="refreshBouquetManualSelection" position="center,center" size="700,%d" title="RefreshBouquet - manual">
 		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on"/>
@@ -1416,7 +1416,7 @@ class refreshBouquetManualSelection(Screen):
 				"prev": self.lookServiceInSource,
 
 				"epg": self.displayEPG,
-			},-2)
+			}, -2)
 
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = StaticText("")
@@ -1489,22 +1489,22 @@ class refreshBouquetManualSelection(Screen):
 		if cfg.autotoggle.value:
 			self.switchLists()
 
-	def getSourceIndex(self,name):
+	def getSourceIndex(self, name):
 		for idx, source in enumerate(self["sources"].list):
 			if source[0] == name:
 				return idx
 		return 0
-	def getSourceIndexUpper(self,name):
+	def getSourceIndexUpper(self, name):
 		name = name.upper()
 		for idx, source in enumerate(self["sources"].list):
 			if source[0].upper() == name:
 				return idx
 		return 0
-	def getSourceSimilarIndexUpper(self,name):
-		uName = name.upper().replace(' ','')
-		for n in range(len(uName),0,-1):
+	def getSourceSimilarIndexUpper(self, name):
+		uName = name.upper().replace(' ', '')
+		for n in range(len(uName), 0, -1):
 			for idx, source in enumerate(self["sources"].list):
-				sName = source[0].upper().replace(' ','')
+				sName = source[0].upper().replace(' ', '')
 				if uName[0] != sName[0]:
 					continue
 				if sName.startswith(uName[:n]):
@@ -1622,7 +1622,7 @@ class refreshBouquetManualSelection(Screen):
 	def replaceService(self):
 		nr_items = len(self.changedTargetdata)
 		if nr_items:
-			text = ngettext("Are you sure to apply %d change and close?","Are you sure to apply all %d changes and close?", nr_items) % nr_items
+			text = ngettext("Are you sure to apply %d change and close?", "Are you sure to apply all %d changes and close?", nr_items) % nr_items
 			self.session.openWithCallback(self.replaceTargetBouquet, MessageBox, text, MessageBox.TYPE_YESNO, default=False)
 		else:
 			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3)
@@ -1653,7 +1653,7 @@ class refreshBouquetManualSelection(Screen):
 						mutableList.moveService(new, index)
 						mutableList.flushChanges()
 						if cfg.log.value:
-							fo.write("%s|%s| replaced with |%s|%s| at |%s\n" % (data[4],data[1],data[0],data[2],data[3] + 1))
+							fo.write("%s|%s| replaced with |%s|%s| at |%s\n" % (data[4], data[1], data[0], data[2], data[3] + 1))
 			if cfg.log.value:
 				fo.close()
 			self.close()
@@ -2598,7 +2598,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Missing source services for manually replace only"), cfg.diff, _("In 'Manually replacing' in source services column will be displayed missing services in target column only.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Filter services by orbital position in source"), cfg.orbital, _("You can select valid orbital position as filter for display services in source bouquet.") + " " + _("On plugin exit it will be set to 'no' again.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Using 'service type' in automatic replacing"), cfg.stype, _("Take into account 'service type' in automatic replacing too.") + " " + _("Fastcans changing 'service type' parameter to 'basic' value.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Programs with 'HD/4K(UHD)' in name only for source"), cfg.used_services,_("Plugin will be display in service bouquet services with HD,4K/UHD in service name only.") + " " + _("On plugin exit it will be set to 'no' again.")))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Programs with 'HD/4K(UHD)' in name only for source"), cfg.used_services, _("Plugin will be display in service bouquet services with HD,4K/UHD in service name only.") + " " + _("On plugin exit it will be set to 'no' again.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Preview on selection"), cfg.preview, _("Automaticaly preview current service in bouquet list.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Confirm services moving"), cfg.confirm_move, _("It will require confirmation for moving selected services in the source bouquet.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Display in Channellist context menu"), cfg.channel_context_menu, _("Plugin will be placed into Channellist menu.")))
@@ -2657,13 +2657,13 @@ def setIcon(delete=False):
 		select_PNG = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/lock_on.png"))
 
 def MySelectionEntryComponent(description, value, index, selected):
-	dx, dy, dw, dh = skin.parameters.get("ImsSelectionListDescr",(35, 2, 650, 30))
+	dx, dy, dw, dh = skin.parameters.get("ImsSelectionListDescr", (35, 2, 650, 30))
 	res = [
 		(description, value, index, selected),
 		(eListboxPythonMultiContent.TYPE_TEXT, dx, dy, dw, dh, 0, RT_HALIGN_LEFT, description)
 	]
 	if selected:
-		ix, iy, iw, ih = skin.parameters.get("ImsSelectionListLock",(0, 0, 24, 24))
+		ix, iy, iw, ih = skin.parameters.get("ImsSelectionListLock", (0, 0, 24, 24))
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, ix, iy, iw, ih, select_PNG))
 	return res
 
@@ -2689,7 +2689,7 @@ class MySelectionList(MenuList):
 		return [(item[0][0], item[0][1], item[0][2]) for item in self.list if item[0][3]]
 
 	def toggleAllSelection(self):
-		for idx,item in enumerate(self.list):
+		for idx, item in enumerate(self.list):
 			item = self.list[idx][0]
 			self.list[idx] = MySelectionEntryComponent(item[0], item[1], item[2], not item[3])
 		self.setList(self.list)
@@ -2711,7 +2711,7 @@ class MySelectionList(MenuList):
 
 	def sort(self, sortType=False, flag=False):
 		# sorting by sortType: # 0 - name, 1 - item, 2 - index, 3 - selected
-		self.list.sort(key=lambda x: x[0][sortType],reverse=flag)
+		self.list.sort(key=lambda x: x[0][sortType], reverse=flag)
 		self.setList(self.list)
 
 	def len(self):

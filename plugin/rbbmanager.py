@@ -81,7 +81,7 @@ class refreshBouquetRbbManager(Screen):
 	def menu(self):
 		buttons = []
 		menu = []
-		menu.append((_("Copy predefined 'rbb' file(s) to list"),0))
+		menu.append((_("Copy predefined 'rbb' file(s) to list"), 0))
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_("Select action:"), list=menu, keys=buttons)
 
 	def style(self):
@@ -105,7 +105,7 @@ class refreshBouquetRbbManager(Screen):
 		nr = 0
 		for x in os.listdir(E2):
 			if x.endswith(".rbb"):
-				self.list.addSelection(x, "%s/%s" % (E2,x), nr, False)
+				self.list.addSelection(x, "%s/%s" % (E2, x), nr, False)
 				nr += 1
 		self.list.sort()
 		self["config"] = self.list
@@ -127,7 +127,7 @@ class refreshBouquetRbbManager(Screen):
 			msg = ""
 			try:
 				path = self["config"].getCurrent()[0][1]
-				newpath = "%s/%s.rbb" % (E2,name)
+				newpath = "%s/%s.rbb" % (E2, name)
 				os.rename(path, newpath)
 				self.reloadList()
 				return

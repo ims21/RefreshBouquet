@@ -33,7 +33,7 @@ def main(session, servicelist=None, **kwargs):
 		import ui
 		session.openWithCallback(ui.closed, ui.refreshBouquet, Servicelist, currentBouquet)
 
-def Plugins(path,**kwargs):
+def Plugins(path, **kwargs):
 	global plugin_path
 	plugin_path = path
 	name = _("RefreshBouquet")

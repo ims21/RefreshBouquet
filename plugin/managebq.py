@@ -67,7 +67,7 @@ class refreshBouquetManageDeletedBouquets(Screen):
 		nr = 0
 		for x in os.listdir(E2):
 			if x.startswith("userbouquet") and x.endswith(".del"):
-				data.addSelection(self.fileName(x), "%s/%s" % (E2,x), nr, False)
+				data.addSelection(self.fileName(x), "%s/%s" % (E2, x), nr, False)
 				nr += 1
 		self.list = data
 		self.list.sort()
