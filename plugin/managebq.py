@@ -98,7 +98,7 @@ class refreshBouquetManageDeletedBouquets(Screen):
 			text = _("Are you sure to remove %s selected deleted bouquets?") % marked
 		else:
 			text = _("Are you sure to remove deleted userbouquet?\n\n%s") % self.fileName(self["config"].getCurrent()[0][1])
-		self.session.openWithCallback(self.removeFromSource, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+		self.session.openWithCallback(self.removeFromSource, MessageBox, text, MessageBox.TYPE_YESNO, default=False)
 
 	def removeFromSource(self, answer):
 		if answer == True:
@@ -119,7 +119,7 @@ class refreshBouquetManageDeletedBouquets(Screen):
 			text = _("Are you sure to restore %s selected deleted bouquets?") % marked
 		else:
 			text = _("Are you sure to restore deleted userbouquet?\n\n%s") % self.fileName(self["config"].getCurrent()[0][1])
-		self.session.openWithCallback(self.restoreSelected, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+		self.session.openWithCallback(self.restoreSelected, MessageBox, text, MessageBox.TYPE_YESNO, default=False)
 
 	def restoreSelected(self, answer):
 		if answer == True:

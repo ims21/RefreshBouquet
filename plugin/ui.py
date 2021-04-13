@@ -127,7 +127,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		HelpableScreen.__init__(self)
 
 		self.Servicelist = Servicelist
-		currentBouquet = ( ServiceReference(currentBouquet).getServiceName(), currentBouquet)
+		currentBouquet = (ServiceReference(currentBouquet).getServiceName(), currentBouquet)
 		self.setTitle(_("RefreshBouquet v. %s" % VERSION))
 
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
@@ -389,7 +389,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		unique_choices = set(positions)
 		for op in unique_choices:
 			op_txt = self.op2human(int(op,16)) if op else op
-			new_choices.append(("%s" % op ,"%s" % op_txt))
+			new_choices.append(("%s" % op,"%s" % op_txt))
 		config.plugins.refreshbouquet.orbital = NoSave(ConfigSelection(default="x", choices=new_choices))
 
 # call refreshService as replace		
@@ -605,7 +605,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			else:
 				wrong += "    %s\n" % bouquet[0]
 			ns += 1
-		text = ngettext("For %s bouquet of %s was TE file created." ,"For %s bouquets of %s were TE files created.", n) % (n, ns)
+		text = ngettext("For %s bouquet of %s was TE file created.","For %s bouquets of %s were TE files created.", n) % (n, ns)
 		w = ns - n
 		if w:
 			wtext = ngettext("\nUnfortunately not for this %s empty bouquet:\n","\nUnfortunately not for these %s empty bouquets:\n", w) % w + wrong
@@ -1367,7 +1367,7 @@ class refreshBouquetManualSelection(Screen):
 		self.setTitle(_("RefreshBouquet %s" % _("- select service for replace with OK")))
 		self.session = session
 
-		( self.target_bouquetname, self.target ) = target
+		(self.target_bouquetname, self.target) = target
 
 		self.listSource = sourceList
 		self["sources"] = self.listSource
@@ -1425,8 +1425,8 @@ class refreshBouquetManualSelection(Screen):
 
 		name_s = " " + addBouqetName(source_name)
 		name_t = " " + addBouqetName(self.target_bouquetname)
-		self["source_label"] = Label(_("source bouquet") + name_s )
-		self["target_label"] = Label(_("target bouquet") + name_t )
+		self["source_label"] = Label(_("source bouquet") + name_s)
+		self["target_label"] = Label(_("target bouquet") + name_t)
 
 		text =  _("Toggle source and target bouquets with Bouq +/- .") + " "
 		text += _("Or toggle with 'Prev/Next', which trying to find a similar name in source.") + " "
@@ -1622,10 +1622,10 @@ class refreshBouquetManualSelection(Screen):
 	def replaceService(self):
 		nr_items = len(self.changedTargetdata)
 		if nr_items:
-			text = ngettext("Are you sure to apply %d change and close?" ,"Are you sure to apply all %d changes and close?", nr_items) % nr_items
-			self.session.openWithCallback(self.replaceTargetBouquet, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+			text = ngettext("Are you sure to apply %d change and close?","Are you sure to apply all %d changes and close?", nr_items) % nr_items
+			self.session.openWithCallback(self.replaceTargetBouquet, MessageBox, text, MessageBox.TYPE_YESNO, default=False)
 		else:
-			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3 )
+			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3)
 
 	def replaceTargetBouquet(self, answer): # self.target_services: [0] - new name, [1] - old ref, [2] - new ref, [3] - index,
 		if answer == True:
@@ -1668,7 +1668,7 @@ class refreshBouquetManualSelection(Screen):
 		nr_items = len(self.changedTargetdata)
 		if nr_items:
 			text = ngettext("Are you sure to close and lost %d change?", "Are you sure to close and lost all %d changes?", nr_items) % nr_items
-			self.session.openWithCallback(self.callBackExit, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+			self.session.openWithCallback(self.callBackExit, MessageBox, text, MessageBox.TYPE_YESNO, default=False)
 		else:
 			self.close()
 
@@ -1683,7 +1683,7 @@ class refreshBouquetRefreshServices(Screen):
 		Screen.__init__(self, session)
 		self.skinName = ["refreshBouquetRefreshServices", "refreshBouquetCopyServices"]
 
-		( self.target_bouquetname, self.target ) = target
+		(self.target_bouquetname, self.target) = target
 
 		name = addBouqetName(self.target_bouquetname) + " "
 		self.texttitle = _("RefreshBouquet %s") % name + _("- results")
@@ -1807,9 +1807,9 @@ class refreshBouquetRefreshServices(Screen):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
 			text = ngettext("Are you sure to refresh this %d service?", "Are you sure to refresh this %d services?", nr_items) % nr_items
-			self.session.openWithCallback(self.replaceService, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+			self.session.openWithCallback(self.replaceService, MessageBox, text, MessageBox.TYPE_YESNO, default=False)
 		else:
-			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3 )
+			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3)
 
 	def replaceService(self, answer):
 		if answer == True:
@@ -1847,7 +1847,7 @@ class refreshBouquetRefreshServices(Screen):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
 			text = ngettext("Are you sure to close and lost %d selection?", "Are you sure to close and lost all %d selections?", nr_items) % nr_items
-			self.session.openWithCallback(self.callBackExit, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+			self.session.openWithCallback(self.callBackExit, MessageBox, text, MessageBox.TYPE_YESNO, default=False)
 		else:
 			self.close()
 
@@ -1892,7 +1892,7 @@ class refreshBouquetCopyServices(Screen):
 		self.missing = missing
 		self.parent = parent
 
-		( self.target_bouquetname, self.target ) = target
+		(self.target_bouquetname, self.target) = target
 		name = addBouqetName(self.target_bouquetname)
 		self.setTitle(_("RefreshBouquet %s" % _("- select service(s) for adding with OK")) + name)
 
@@ -2047,9 +2047,9 @@ class refreshBouquetCopyServices(Screen):
 			list = [(_("Yes"), True), (_("No"), False)]
 			if self.missing: # for 'Add selected missing services to target bouquet' only 
 				list.append((_("Yes, add to new bouquet..."), "new"))
-			self.session.openWithCallback(self.copyToTarget, MessageBox, text, MessageBox.TYPE_YESNO, default=False, list=list )
+			self.session.openWithCallback(self.copyToTarget, MessageBox, text, MessageBox.TYPE_YESNO, default=False, list=list)
 		else:
-			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3 )
+			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3)
 
 	def copyToTarget(self, answer):
 		if answer == True:
@@ -2067,7 +2067,7 @@ class refreshBouquetCopyServices(Screen):
 		elif answer == "new":
 			def runCreate(searchString=None):
 				if not searchString:
-					self.session.open(MessageBox, _("You did not enter the bouquet name!"), MessageBox.TYPE_WARNING, timeout=3 )
+					self.session.open(MessageBox, _("You did not enter the bouquet name!"), MessageBox.TYPE_WARNING, timeout=3)
 					return
 				services = self.list.getSelectionsList()
 				self.parent.addBouquet(searchString, services)
@@ -2085,7 +2085,7 @@ class refreshBouquetCopyServices(Screen):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
 			text = ngettext("Are you sure to close and lost %d selection?", "Are you sure to close and lost all %d selections?", nr_items) % nr_items
-			self.session.openWithCallback(self.callBackExit, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+			self.session.openWithCallback(self.callBackExit, MessageBox, text, MessageBox.TYPE_YESNO, default=False)
 		else:
 			self.close()
 
@@ -2101,7 +2101,7 @@ class refreshBouquetRemoveServices(Screen):
 		self.session = session
 		self.skinName = ["refreshBouquetRemoveServices", "refreshBouquetCopyServices"]
 
-		( self.source_bouquetname, self.source ) = source
+		(self.source_bouquetname, self.source) = source
 		name = addBouqetName(self.source_bouquetname)
 		self.setTitle(_("RefreshBouquet %s" % _("- select service(s) for remove with OK")) + name)
 
@@ -2254,9 +2254,9 @@ class refreshBouquetRemoveServices(Screen):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
 			text = ngettext("Are you sure to remove this %d service?", "Are you sure to remove this %d services?", nr_items) % nr_items
-			self.session.openWithCallback(self.removeFromSource, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+			self.session.openWithCallback(self.removeFromSource, MessageBox, text, MessageBox.TYPE_YESNO, default=False)
 		else:
-			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3 )
+			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3)
 
 	def removeFromSource(self, answer):
 		if answer == True:
@@ -2284,7 +2284,7 @@ class refreshBouquetRemoveServices(Screen):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
 			text = ngettext("Are you sure to close and lost %d selection?", "Are you sure to close and lost all %d selections?", nr_items) % nr_items
-			self.session.openWithCallback(self.callBackExit, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+			self.session.openWithCallback(self.callBackExit, MessageBox, text, MessageBox.TYPE_YESNO, default=False)
 		else:
 			self.close()
 
@@ -2300,7 +2300,7 @@ class refreshBouquetMoveServices(Screen):
 		self.session = session
 		self.skinName = ["refreshBouquetMoveServices", "refreshBouquetCopyServices"]
 
-		( self.source_bouquetname, self.source ) = source
+		(self.source_bouquetname, self.source) = source
 		name = addBouqetName(self.source_bouquetname)
 		self.setTitle(_("RefreshBouquet %s" % _("- select service(s) for move with OK")) + name)
 
@@ -2470,11 +2470,11 @@ class refreshBouquetMoveServices(Screen):
 			text = ngettext("Are you sure to move this %d service?", "Are you sure to move this %d services?", nr_items) % nr_items
 			self.index = index
 			if cfg.confirm_move.value:
-				self.session.openWithCallback(self.moveFromSource, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+				self.session.openWithCallback(self.moveFromSource, MessageBox, text, MessageBox.TYPE_YESNO, default=False)
 			else:
 				self.moveFromSource(True)
 		else:
-			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3 )
+			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3)
 
 	def moveFromSource(self, answer):
 		if answer == True:
@@ -2539,7 +2539,7 @@ class refreshBouquetMoveServices(Screen):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
 			text = ngettext("Are you sure to close and lost %d selection?", "Are you sure to close and lost all %d selections?", nr_items) % nr_items
-			self.session.openWithCallback(self.callBackExit, MessageBox, text, MessageBox.TYPE_YESNO, default=False )
+			self.session.openWithCallback(self.callBackExit, MessageBox, text, MessageBox.TYPE_YESNO, default=False)
 		else:
 			self.close(True)
 
@@ -2686,7 +2686,7 @@ class MySelectionList(MenuList):
 			self.setList(self.list)
 
 	def getSelectionsList(self):
-		return [ (item[0][0], item[0][1], item[0][2]) for item in self.list if item[0][3] ]
+		return [(item[0][0], item[0][1], item[0][2]) for item in self.list if item[0][3]]
 
 	def toggleAllSelection(self):
 		for idx,item in enumerate(self.list):

@@ -96,7 +96,7 @@ class refreshBouquetRbbManager(Screen):
 			if os.path.exists(dir_src):
 				for filename in os.listdir(dir_src):
 					if filename.endswith('.rbb'):
-						copy2( dir_src + filename, E2)
+						copy2(dir_src + filename, E2)
 				self.reloadList()
 
 	def reloadList(self):
