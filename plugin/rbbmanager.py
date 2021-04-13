@@ -143,10 +143,10 @@ class refreshBouquetRbbManager(Screen):
 				traceback.print_exc()
 				msg = _("Error") + '\n' + str(e)
 			if msg:
-				self.session.open(MessageBox, msg, type = MessageBox.TYPE_ERROR, timeout = 5)
+				self.session.open(MessageBox, msg, type=MessageBox.TYPE_ERROR, timeout=5)
 		if self["config"].getCurrent():
 			name = self["config"].getCurrent()[0][0].split('.')[0]
-			self.session.openWithCallback(renameCallback, VirtualKeyBoard, title = _("Rename"), text = name)
+			self.session.openWithCallback(renameCallback, VirtualKeyBoard, title=_("Rename"), text=name)
 
 	def remove(self):
 		def callbackErase(answer):
