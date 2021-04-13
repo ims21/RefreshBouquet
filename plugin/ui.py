@@ -39,7 +39,8 @@ from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 from Tools.BoundFunction import boundFunction
 from Tools.Transponder import ConvertToHumanReadable
-import os, unicodedata
+import os
+import unicodedata
 import skin
 from plugin import plugin_path
 from Screens.VirtualKeyBoard import VirtualKeyBoard
