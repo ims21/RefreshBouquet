@@ -4,8 +4,8 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.13"
-#  by ims (c) 2016-2020 ims21@users.sourceforge.net
+VERSION = "2.14"
+#  by ims (c) 2016-2022 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -708,12 +708,12 @@ class refreshBouquet(Screen, HelpableScreen):
 		if not rbb_name:
 			return
 		def getRbbBouquetContent(path):
-			list = []
+			rBlist = []
 			fi = open(path, "rt")
 			for line in fi:
-				list.append((line.replace('\n','')))
+				rBlist.append((line.replace('\n','')))
 			fi.close()
-			return list
+			return rBlist
 
 		if self.addBouquet(rbb_name, None):
 			data = MySelectionList([])
@@ -867,18 +867,18 @@ class refreshBouquet(Screen, HelpableScreen):
 					if services is not None:
 						for service in services:
 							if mutableBouquet.addService(eServiceReference(service[1])):
-								print "[RefreshBouquet] add", service, "to new bouquet failed"
+								print("[RefreshBouquet] add", service, "to new bouquet failed")
 					mutableBouquet.flushChanges()
 				else:
-					print "[RefreshBouquet] get mutable list for new created bouquet failed"
+					print("[RefreshBouquet] get mutable list for new created bouquet failed")
 					return False
 				self.getTarget((bName, new_bouquet_ref))
 				return True
 			else:
-				print "[RefreshBouquet] add", str, "to bouquets failed"
+				print("[RefreshBouquet] add", str, "to bouquets failed")
 				return False
 		else:
-			print "[RefreshBouquet] bouquetlist is not editable"
+			print("[RefreshBouquet] bouquetlist is not editable")
 			return False
 
 ###
@@ -1241,16 +1241,16 @@ class refreshBouquet(Screen, HelpableScreen):
 		serviceHandler = eServiceCenter.getInstance()
 		bouquets = []
 		if config.usage.multibouquet.value:
-			list = serviceHandler.list(bouquet_root)
-			if list:
+			blist = serviceHandler.list(bouquet_root)
+			if blist:
 				while True:
-					bouquet = list.getNext()
+					bouquet = blist.getNext()
 					if not bouquet.valid():
 						break
 					if bouquet.flags & eServiceReference.isDirectory and not bouquet.flags & eServiceReference.isInvisible:
 						info = serviceHandler.info(bouquet)
 						if info:
-							#print ">>> ", info.getName(bouquet), bouquet
+							#print(">>> ", info.getName(bouquet), bouquet)
 							bouquets.append((info.getName(bouquet), bouquet))
 				self["config"].setList(bouquets)
 				return bouquets
@@ -1269,10 +1269,10 @@ class refreshBouquet(Screen, HelpableScreen):
 		bouquet_root = self.getRoot()
 		serviceHandler = eServiceCenter.getInstance()
 		if config.usage.multibouquet.value:
-			list = serviceHandler.list(bouquet_root)
-			if list:
+			blist = serviceHandler.list(bouquet_root)
+			if blist:
 				while True:
-					bouquet = list.getNext()
+					bouquet = blist.getNext()
 					if not bouquet.valid():
 						break
 					if bouquet.flags & eServiceReference.isDirectory and not bouquet.flags & eServiceReference.isInvisible:
@@ -1295,11 +1295,11 @@ class refreshBouquet(Screen, HelpableScreen):
 		if bouquet is None:
 			return ""
 		serviceHandler = eServiceCenter.getInstance()
-		list = serviceHandler.list(bouquet)
-		services = list.getContent("NS", False)
-		if list:
+		slist = serviceHandler.list(bouquet)
+		services = slist.getContent("NS", False)
+		if slist:
 #			for service in services:
-#				print ">>>>>>", service[0], "\t\t", service[1]
+#				print(">>>>>>", service[0], "\t\t", service[1])
 			return services
 		return ""
 
@@ -1638,9 +1638,9 @@ class refreshBouquetManualSelection(Screen):
 				if cfg.case_sensitive.value == False: # trick for changing name - it cannot be made in one step, imho
 					old.setName(data[0])
 				serviceHandler = eServiceCenter.getInstance()
-				list = self.target and serviceHandler.list(self.target)
-				if list is not None:
-					mutableList = list.startEdit()
+				tlist = self.target and serviceHandler.list(self.target)
+				if tlist is not None:
+					mutableList = tlist.startEdit()
 					if mutableList:
 						if cfg.case_sensitive.value == False: # trick for changing name - it cannot be made in one step
 							mutableList.removeService(old, False)
@@ -1677,7 +1677,7 @@ class refreshBouquetManualSelection(Screen):
 
 # display and refresh services with different service references
 class refreshBouquetRefreshServices(Screen):
-	def __init__(self, session, list, target):
+	def __init__(self, session, slist, target):
 		self.skin = refreshBouquetCopyServices.skin
 		Screen.__init__(self, session)
 		self.skinName = ["refreshBouquetRefreshServices", "refreshBouquetCopyServices"]
@@ -1692,7 +1692,7 @@ class refreshBouquetRefreshServices(Screen):
 		self["TransponderInfo"] = ServiceEvent()
 		self.display_epg = False
 
-		self.list = list
+		self.list = slist
 		self["services"] = self.list
 		self.sortList()
 
@@ -1814,10 +1814,10 @@ class refreshBouquetRefreshServices(Screen):
 		if answer == True:
 			refresh = self.list.getSelectionsList() # data: [0] - name, [1][0] - new ref, [1][1] - old ref, [2] - index,
 			serviceHandler = eServiceCenter.getInstance()
-			list = self.target and serviceHandler.list(self.target)
-			if list is not None:
+			slist = self.target and serviceHandler.list(self.target)
+			if slist is not None:
 				for data in refresh:
-					mutableList = list.startEdit()
+					mutableList = slist.startEdit()
 					if mutableList:
 						index = data[2]
 						old = eServiceReference(data[1][1])
@@ -1884,7 +1884,7 @@ class refreshBouquetCopyServices(Screen):
 		<widget name="info" position="5,380" zPosition="2" size="705,120" valign="center" halign="left" font="Regular;20" foregroundColor="#00c0c0c0"/>
 	</screen>"""
 
-	def __init__(self, session, list, target, missing=None, parent=None):
+	def __init__(self, session, slist, target, missing=None, parent=None):
 		self.skin = refreshBouquetCopyServices.skin
 		Screen.__init__(self, session, parent=None)
 		self.session = session
@@ -1903,7 +1903,7 @@ class refreshBouquetCopyServices(Screen):
 
 		setIcon()
 
-		self.list = list
+		self.list = slist
 		self["services"] = self.list
 		self.sortList()
 
@@ -2043,10 +2043,10 @@ class refreshBouquetCopyServices(Screen):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
 			text = ngettext("Are you sure to copy this %d service?", "Are you sure to copy this %d services?", nr_items) % nr_items
-			list = [(_("Yes"), True), (_("No"), False)]
+			olist = [(_("Yes"), True), (_("No"), False)]
 			if self.missing: # for 'Add selected missing services to target bouquet' only 
-				list.append((_("Yes, add to new bouquet..."), "new"))
-			self.session.openWithCallback(self.copyToTarget, MessageBox, text, MessageBox.TYPE_YESNO, default=False, list=list )
+				olist.append((_("Yes, add to new bouquet..."), "new"))
+			self.session.openWithCallback(self.copyToTarget, MessageBox, text, MessageBox.TYPE_YESNO, default=False, list=olist )
 		else:
 			self.session.open(MessageBox, _("Nothing for processing..."), MessageBox.TYPE_INFO, timeout=3 )
 
@@ -2054,9 +2054,9 @@ class refreshBouquetCopyServices(Screen):
 		if answer == True:
 			data = self.list.getSelectionsList()
 			serviceHandler = eServiceCenter.getInstance()
-			list = self.target and serviceHandler.list(self.target)
-			if list is not None:
-				mutableList = list.startEdit()
+			tlist = self.target and serviceHandler.list(self.target)
+			if tlist is not None:
+				mutableList = tlist.startEdit()
 				if mutableList:
 					for item in data:
 						new = eServiceReference(item[1])
@@ -2094,7 +2094,7 @@ class refreshBouquetCopyServices(Screen):
 
 # remove services from source list
 class refreshBouquetRemoveServices(Screen):
-	def __init__(self, session, list, source):
+	def __init__(self, session, rlist, source):
 		self.skin = refreshBouquetCopyServices.skin
 		Screen.__init__(self, session)
 		self.session = session
@@ -2106,7 +2106,7 @@ class refreshBouquetRemoveServices(Screen):
 
 		setIcon(True)
 
-		self.list = list
+		self.list = rlist
 		self["services"] = self.list
 		self.sortList()
 
@@ -2261,9 +2261,9 @@ class refreshBouquetRemoveServices(Screen):
 		if answer == True:
 			data = self.list.getSelectionsList()
 			serviceHandler = eServiceCenter.getInstance()
-			list = self.source and serviceHandler.list(self.source)
-			if list is not None:
-				mutableList = list.startEdit()
+			rlist = self.source and serviceHandler.list(self.source)
+			if rlist is not None:
+				mutableList = rlist.startEdit()
 				if mutableList:
 					for item in data:
 						removed = eServiceReference(item[1])
@@ -2293,7 +2293,7 @@ class refreshBouquetRemoveServices(Screen):
 
 # move services in source list
 class refreshBouquetMoveServices(Screen):
-	def __init__(self, session, list, source, services):
+	def __init__(self, session, mlist, source, services):
 		self.skin = refreshBouquetCopyServices.skin
 		Screen.__init__(self, session)
 		self.session = session
@@ -2306,7 +2306,7 @@ class refreshBouquetMoveServices(Screen):
 		setIcon(False)
 
 		self.services = services
-		self.list = list
+		self.list = mlist
 		self["services"] = self.list
 		self.sortList()
 
@@ -2480,9 +2480,9 @@ class refreshBouquetMoveServices(Screen):
 			new_list = self.rebuildList()
 			data = self.services
 			serviceHandler = eServiceCenter.getInstance()
-			list = self.source and serviceHandler.list(self.source)
-			if list is not None:
-				mutableList = list.startEdit()
+			slist = self.source and serviceHandler.list(self.source)
+			if slist is not None:
+				mutableList = slist.startEdit()
 				if mutableList:
 					for item in data:
 						removed = eServiceReference(item[1])
@@ -2492,9 +2492,9 @@ class refreshBouquetMoveServices(Screen):
 							mutableList.flushChanges()
 			data = new_list
 			serviceHandler = eServiceCenter.getInstance()
-			list = self.source and serviceHandler.list(self.source)
-			if list is not None:
-				mutableList = list.startEdit()
+			slist = self.source and serviceHandler.list(self.source)
+			if slist is not None:
+				mutableList = slist.startEdit()
 				if mutableList:
 					for item in data:
 						new = eServiceReference(item[1])
@@ -2722,7 +2722,7 @@ def addBouqetName(bouquet_name):
 	return ""
 
 def debug(message):
-	print "[RefreshBouquet] %s" % message
+	print("[RefreshBouquet] %s" % message)
 
 def freeMemory():
 	import os

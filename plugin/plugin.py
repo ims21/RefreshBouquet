@@ -4,7 +4,7 @@ from . import _
 #
 #  Refresh Bouqurt - Plugin E2 for OpenPLi
 #
-#  by ims (c) 2016-2020 ims21@users.sourceforge.net
+#  by ims (c) 2016-2022 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@ def Plugins(path,**kwargs):
 	plugin_path = path
 	name= _("RefreshBouquet")
 	descr=_("Actualize services in bouquets")
-	list = [PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_PLUGINMENU, icon = "refreshbouquet.png", needsRestart = False, fnc=main)]
+	plugin = [PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_PLUGINMENU, icon = "refreshbouquet.png", needsRestart = False, fnc=main)]
 	if config.plugins.refreshbouquet.channel_context_menu.value:
-		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU, needsRestart = False, fnc=main))
-	return list
+		plugin.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU, needsRestart = False, fnc=main))
+	return plugin

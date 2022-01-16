@@ -2,7 +2,7 @@
 #  RefreshBouquet
 #
 #
-#  Coded by ims (c) 2016-2019
+#  Coded by ims (c) 2016-2022
 #  Support: openpli.org
 #
 #  This program is free software; you can redistribute it and/or
@@ -132,14 +132,14 @@ class refreshBouquetRbbManager(Screen):
 				self.reloadList()
 				return
 			except OSError, e:
-				print "Error %s:" % e.errno, e
+				print("Error %s:" % e.errno, e)
 				if e.errno == 17:
 					msg = _("The path %s already exists.") % name
 				else:
 					msg = _("Error") + '\n' + str(e)
 			except Exception, e:
 				import traceback
-				print "[ML] Unexpected error:", e
+				print("[ML] Unexpected error:", e)
 				traceback.print_exc()
 				msg = _("Error") + '\n' + str(e)
 			if msg:

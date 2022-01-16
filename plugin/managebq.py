@@ -2,7 +2,7 @@
 #  RefreshBouquet
 #
 #
-#  Coded by ims (c) 2016-2019
+#  Coded by ims (c) 2016-2022
 #  Support: openpli.org
 #
 #  This program is free software; you can redistribute it and/or
