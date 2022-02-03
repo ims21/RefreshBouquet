@@ -131,13 +131,13 @@ class refreshBouquetRbbManager(Screen):
 				os.rename(path, newpath)
 				self.reloadList()
 				return
-			except OSError, e:
+			except OSError as e:
 				print("Error %s:" % e.errno, e)
 				if e.errno == 17:
 					msg = _("The path %s already exists.") % name
 				else:
 					msg = _("Error") + '\n' + str(e)
-			except Exception, e:
+			except Exception as e:
 				import traceback
 				print("[ML] Unexpected error:", e)
 				traceback.print_exc()
