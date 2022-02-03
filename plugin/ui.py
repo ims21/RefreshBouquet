@@ -701,6 +701,8 @@ class refreshBouquet(Screen, HelpableScreen):
 		if self.sourceItem: # must be selected source bouquet
 			from rbbmanager import refreshBouquetRbbManager
 			self.session.openWithCallback(self.fillRbbBouquet, refreshBouquetRbbManager)
+		else:
+			self.session.open(MessageBox, _("No source bouquet is selected!"), type = MessageBox.TYPE_ERROR, timeout = 4)
 
 # create bouquet as valid source services filled to bouquet created from rbb file
 
