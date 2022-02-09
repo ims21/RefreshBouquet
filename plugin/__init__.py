@@ -6,7 +6,7 @@ import gettext
 
 def localeInit():
 	localedir = resolveFilename(SCOPE_PLUGINS, "Extensions/RefreshBouquet/locale")
-	gettext.bindtextdomain('RefreshBouquet', localedir )
+	gettext.bindtextdomain('RefreshBouquet', localedir)
 
 def _(txt):
 	t = gettext.dgettext("RefreshBouquet", txt)

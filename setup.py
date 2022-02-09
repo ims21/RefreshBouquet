@@ -2,7 +2,7 @@ from distutils.core import setup
 import setup_translate
 
 pkg = 'Extensions.RefreshBouquet'
-setup (name = 'enigma2-plugin-extensions-refreshbouquet',
+setup(name = 'enigma2-plugin-extensions-refreshbouquet',
 	version = '2.14',
 	description = 'actualize services in bouquets',
 	packages = [pkg],
