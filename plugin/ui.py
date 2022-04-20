@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.14"
+VERSION = "2.15"
 #  by ims (c) 2016-2022 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -81,6 +81,7 @@ config.plugins.refreshbouquet.rbb_dotted = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.deleted_bq_fullname = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.transedit = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.allstypes = ConfigYesNo(default=False)
+config.plugins.refreshbouquet.move_selector = ConfigYesNo(default=False)
 
 cfg = config.plugins.refreshbouquet
 
@@ -1703,7 +1704,7 @@ class refreshBouquetRefreshServices(Screen):
 			{
 				"cancel": self.exit,
 				"red": self.exit,
-				"ok": self.list.toggleSelection,
+				"ok": self.toggleSelection,
 				"green": self.replaceSelectedEntries,
 				"yellow": self.previewService,
 				"blue": self.list.toggleAllSelection,
@@ -1733,6 +1734,12 @@ class refreshBouquetRefreshServices(Screen):
 		self.onSelectionChanged = []
 		self["services"].onSelectionChanged.append(self.displayService)
 		self.onLayoutFinish.append(self.displayService)
+
+	def toggleSelection(self):
+		self.list.toggleSelection()
+		if cfg.move_selector.value:
+			idx = self.list.list.index(self["services"].getCurrent())
+			self["services"].moveToIndex(idx+1)
 
 	def sortMenu(self):
 		menu = []
@@ -1913,7 +1920,7 @@ class refreshBouquetCopyServices(Screen):
 		self["actions"] = ActionMap(["OkCancelActions", "RefreshBouquetActions"],
 			{
 				"cancel": self.exit,
-				"ok": self.list.toggleSelection,
+				"ok": self.toggleSelection,
 				"red": self.exit,
 				"green": self.copyCurrentEntries,
 				"blue": self.list.toggleAllSelection,
@@ -1944,6 +1951,12 @@ class refreshBouquetCopyServices(Screen):
 		self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		if cfg.debug.value:
 			debug("changed bouquet: %s" % self.target_bouquetname)
+
+	def toggleSelection(self):
+		self.list.toggleSelection()
+		if cfg.move_selector.value:
+			idx = self.list.list.index(self["services"].getCurrent())
+			self["services"].moveToIndex(idx+1)
 
 	def sortMenu(self):
 		menu = []
@@ -2122,7 +2135,7 @@ class refreshBouquetRemoveServices(Screen):
 		self["actions"] = ActionMap(["OkCancelActions", "RefreshBouquetActions"],
 			{
 				"cancel": self.exit,
-				"ok": self.list.toggleSelection,
+				"ok": self.toggleSelection,
 				"red": self.exit,
 				"green": self.removeCurrentEntries,
 				"blue": self.list.toggleAllSelection,
@@ -2153,6 +2166,12 @@ class refreshBouquetRemoveServices(Screen):
 		self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		if cfg.debug.value:
 			debug("changed bouquet: %s" % self.source_bouquetname)
+
+	def toggleSelection(self):
+		self.list.toggleSelection()
+		if cfg.move_selector.value:
+			idx = self.list.list.index(self["services"].getCurrent())
+			self["services"].moveToIndex(idx+1)
 
 	def sortMenu(self):
 		menu = []
@@ -2322,7 +2341,7 @@ class refreshBouquetMoveServices(Screen):
 		self["actions"] = ActionMap(["OkCancelActions", "RefreshBouquetActions"],
 			{
 				"cancel": self.exit,
-				"ok": self.list.toggleSelection,
+				"ok": self.toggleSelection,
 				"red": self.exit,
 				"green": self.actionGreen,
 				"yellow": self.previewService,
@@ -2353,6 +2372,12 @@ class refreshBouquetMoveServices(Screen):
 		self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		if cfg.debug.value:
 			debug("changed bouquet: %s" % self.source_bouquetname)
+
+	def toggleSelection(self):
+		self.list.toggleSelection()
+		if cfg.move_selector.value:
+			idx = self.list.list.index(self["services"].getCurrent())
+			self["services"].moveToIndex(idx+1)
 
 	def sortMenu(self):
 		menu = []
@@ -2617,6 +2642,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Transedit file support"), cfg.transedit, _("Add items to menu for creating transedit files from bouquets.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Show full filenames for deleted bouquets"), cfg.deleted_bq_fullname, _("'Manage deleted bouquets' will display full filenames instead bouquet names only.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Use all service types"), cfg.allstypes, _("In almost all cases should be this option disabled, because TV and Radio service are most used types.")))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Move selector to next item"), cfg.move_selector, _("Select/unselect with 'OK' moves the selector to next item in the list.")))
 		ConfigListScreen.__init__(self, refreshBouquetCfglist, self.session, on_change=self.changedEntry)
 
 	# for summary:
