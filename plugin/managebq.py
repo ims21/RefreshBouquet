@@ -32,9 +32,9 @@ from Components.config import config
 from enigma import eDVBDB
 import skin
 import os
-from ui import E2, cfg
-from ui import MySelectionList
-from ui import setIcon
+from .ui import E2, cfg
+from .ui import MySelectionList
+from .ui import setIcon
 
 
 class refreshBouquetManageDeletedBouquets(Screen):

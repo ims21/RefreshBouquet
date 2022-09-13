@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.15"
+VERSION = "2.16"
 #  by ims (c) 2016-2022 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -42,14 +42,14 @@ from Tools.Transponder import ConvertToHumanReadable
 import os
 import unicodedata
 import skin
-from plugin import plugin_path
+from .plugin import plugin_path
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from ServiceReference import ServiceReference
 from Components.Sources.Boolean import Boolean
 from Components.Pixmap import Pixmap
 from Components.About import GetIPsFromNetworkInterfaces
 import socket
-import unicodedata
+
 
 config.plugins.refreshbouquet.case_sensitive = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.omit_first = ConfigYesNo(default=True)
@@ -266,7 +266,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			menu.append((_("Manage deleted bouquets"), 18))
 			buttons += [""]
 		if cfg.transedit.value and self["config"].getCurrent():
-			name =  self.plainString(self["config"].getCurrent()[0]).replace(' ', '_')
+			name =  self.plainString(self["config"].getCurrent()[0]).decode().replace(' ', '_')
 			menu.append((_("Create TE file '%s-%s.ini' to '/tmp'") % (socket.gethostname().upper(), name), 30))
 			buttons += [""]
 			menu.append((_("Create TE files from all bouquets to '/tmp'"), 31))
@@ -314,8 +314,9 @@ class refreshBouquet(Screen, HelpableScreen):
 			return
 
 # get plain string
-	def plainString(self, string):
-		return unicodedata.normalize('NFKD', unicode(string, "utf-8")).encode('ASCII', 'ignore')
+	def plainString(self, text):
+		return unicodedata.normalize('NFKD', text).encode('ASCII', 'ignore')
+
 
 # set selector to selected bouquet
 	def setSelector(self):
@@ -590,7 +591,7 @@ class refreshBouquet(Screen, HelpableScreen):
 # call refreshBouquetRemoveBouquets screen
 
 	def ManageDeletedBouquets(self):
-		from managebq import refreshBouquetManageDeletedBouquets
+		from .managebq import refreshBouquetManageDeletedBouquets
 		self.session.openWithCallback(self.getBouquetList, refreshBouquetManageDeletedBouquets)
 
 #
@@ -642,7 +643,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			op = self.op2human(int(splited[6][0:-4],16), TE=True)
 			tmp.append(("%s=%s/%s|%s   (%s)\n" % (num, boxIP, t[1], name.replace('|', '-'), op)))
 			num += 1
-		fileName = "/tmp/%s-%s.ini" % (boxName, self.plainString(bouqName).replace(' ', '_'))
+		fileName = "/tmp/%s-%s.ini" % (boxName, self.plainString(bouqName).decode().replace(' ', '_'))
 		fo = open(fileName, "wt")
 		# head
 		fo.write("[SATTYPE]\n" + "1=6500\n" + "2=%s - %s\n\n" % (boxName, bouqName) + "[DVB]\n")
@@ -701,7 +702,7 @@ class refreshBouquet(Screen, HelpableScreen):
 
 	def createRbbBouquet(self):
 		if self.sourceItem: # must be selected source bouquet
-			from rbbmanager import refreshBouquetRbbManager
+			from .rbbmanager import refreshBouquetRbbManager
 			self.session.openWithCallback(self.fillRbbBouquet, refreshBouquetRbbManager)
 		else:
 			self.session.open(MessageBox, _("No source bouquet is selected!"), type=MessageBox.TYPE_ERROR, timeout=4)
@@ -857,7 +858,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		bouquet_root = self.getRoot()
 		mutableBouquetList = serviceHandler.list(bouquet_root).startEdit()
 		if mutableBouquetList:
-			name = unicodedata.normalize('NFKD', unicode(bName, 'utf_8', errors='ignore')).encode('ASCII', 'ignore').translate(None, '<>:"/\\|?*() ')
+			name = unicodedata.normalize('NFKD', str(bName)).encode('ASCII', 'ignore').decode('ASCII', 'ignore')#.translate({ord(i): None for i in '<>:"/\\|?*() '})
 			while os.path.isfile((mode == "tv" and '%s/userbouquet.%s.tv' or '%s/userbouquet.%s.radio') % (E2, name)):
 				name = name.rsplit('_', 1)
 				name = ('_').join((name[0], len(name) == 2 and name[1].isdigit() and str(int(name[1]) + 1) or '1'))
