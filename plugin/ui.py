@@ -514,7 +514,7 @@ class refreshBouquet(Screen, HelpableScreen):
 					debug("Drop: %s %s" % (s[0], s[1]))
 				continue
 			if cfg.used_services.value != "all":
-				if cfg.used_services.value is "HD4K":
+				if cfg.used_services.value == "HD4K":
 					if not self.isHDinName(s[0]) and not self.isUHDinName(s[0]):
 						if cfg.debug.value:
 							debug("Drop (SD): %s %s" % (s[0], s[1]))
@@ -1162,7 +1162,7 @@ class refreshBouquet(Screen, HelpableScreen):
 					debug("Drop: %s %s" % (s[0], s[1]))
 				continue
 			if cfg.used_services.value != "all":
-				if cfg.used_services.value is "HD4K":
+				if cfg.used_services.value == "HD4K":
 					if not self.isHDinName(s[0]) and not self.isUHDinName(s[0]):
 						if cfg.debug.value:
 							debug("Drop (SD): %s %s" % (s[0], s[1]))
