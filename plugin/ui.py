@@ -4,8 +4,8 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.16"
-#  by ims (c) 2016-2022 ims21@users.sourceforge.net
+VERSION = "2.17"
+#  by ims (c) 2016-2023 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -1239,6 +1239,50 @@ class refreshBouquet(Screen, HelpableScreen):
 		bouquet_root = eServiceReference(bouquet_rootstr)	
 		return bouquet_root
 
+# This part is part for adding Last Scanned bouquet to radio bouquets.
+# Last Scanned bouquet is placed to TV bouquets, but for terrestrial it has radio services too
+
+	# getLastScannedRoot - returns bouquet root for "Last Scanned" regardless config.servicelist.lastmode.value:
+
+	def getLastScannedRoot(self):
+		from Screens.ChannelSelection import service_types_tv
+		service_types = service_types_tv
+		if config.usage.multibouquet.value:
+			bouquet_rootstr = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouquet'
+		else:
+			bouquet_rootstr = '%s FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet'%(service_types)
+		self.bouquet_rootstr = bouquet_rootstr
+		self.bouquet_root = eServiceReference(self.bouquet_rootstr)
+		bouquet_root = eServiceReference(bouquet_rootstr)
+		return bouquet_root
+
+	# get "Last Scanned" bouquet:
+
+	def getLastScannedBouquet(self):
+		bouquet_root = self.getLastScannedRoot()
+		serviceHandler = eServiceCenter.getInstance()
+		if config.usage.multibouquet.value:
+			blist = serviceHandler.list(bouquet_root)
+			if blist:
+				while True:
+					bouquet = blist.getNext()
+					if not bouquet.valid():
+						break
+					if bouquet.flags & eServiceReference.isDirectory and not bouquet.flags & eServiceReference.isInvisible:
+						info = serviceHandler.info(bouquet)
+						if info:
+							#print(">>> ", info.getName(bouquet), bouquet)
+							if info.getName(bouquet) == "Last Scanned":
+								return bouquet
+				return None
+			return None
+		else:
+			info = serviceHandler.info(bouquet_root)
+			if info:
+				if info.getName(bouquet) == "Last Scanned":
+					return bouquet
+			return None
+
 # returns bouquets list
 
 	def getBouquetList(self):
@@ -1257,6 +1301,10 @@ class refreshBouquet(Screen, HelpableScreen):
 						if info:
 							#print(">>> ", info.getName(bouquet), bouquet)
 							bouquets.append((info.getName(bouquet), bouquet))
+				if config.servicelist.lastmode.value == "radio":
+					lastScanned = self.getLastScannedBouquet()
+					if lastScanned:
+						bouquets.append((info.getName(lastScanned), lastScanned))
 				self["config"].setList(bouquets)
 				return bouquets
 			return None
@@ -1264,6 +1312,10 @@ class refreshBouquet(Screen, HelpableScreen):
 			info = serviceHandler.info(bouquet_root)
 			if info:
 				bouquets.append((info.getName(bouquet_root), bouquet_root))
+				if config.servicelist.lastmode.value == "radio":
+					lastScanned = self.getLastScannedBouquet()
+					if lastScanned:
+						bouquets.append((info.getName(lastScanned), lastScanned))
 				self['config'].setList(bouquets)
 				return bouquets
 			return None
@@ -1296,15 +1348,18 @@ class refreshBouquet(Screen, HelpableScreen):
 # returns services in bouquet Name, Service reference
 
 	def getServices(self, bouquet_name):
-		bouquet = self.getBouquet(bouquet_name)
+		if config.servicelist.lastmode.value == "radio" and bouquet_name == "Last Scanned":
+			bouquet = self.getLastScannedBouquet()
+		else:
+			bouquet = self.getBouquet(bouquet_name)
 		if bouquet is None:
 			return ""
 		serviceHandler = eServiceCenter.getInstance()
 		slist = serviceHandler.list(bouquet)
 		services = slist.getContent("NS", False)
 		if slist:
-#			for service in services:
-#				print(">>>>>>", service[0], "\t\t", service[1])
+			#for service in services:
+			#	print(">>>>>>", service[0], "\t\t", service[1])
 			return services
 		return ""
 
