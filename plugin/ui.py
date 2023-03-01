@@ -1273,15 +1273,33 @@ class refreshBouquet(Screen, HelpableScreen):
 						if info:
 							#print(">>> ", info.getName(bouquet), bouquet)
 							if info.getName(bouquet) == "Last Scanned":
-								return bouquet
+								if self.isRadioInLastScanned(bouquet):
+									return bouquet
+								return None
 				return None
 			return None
 		else:
 			info = serviceHandler.info(bouquet_root)
 			if info:
 				if info.getName(bouquet) == "Last Scanned":
+					self.isRadioInLastScanned(bouquet)
 					return bouquet
 			return None
+
+	# test for radio services in Last Scanned bouquet
+
+	def isRadioInLastScanned(self, bouquet):
+		if bouquet is None:
+			return False
+		serviceHandler = eServiceCenter.getInstance()
+		slist = serviceHandler.list(bouquet)
+		services = slist.getContent("NS", False)
+		if slist:
+			for service in services:
+				if int(service[1].split(':')[2], 16) in RADIO:
+					#print(">>>>>>", service[0], "\t\t", service[1])
+					return True
+		return False
 
 # returns bouquets list
 
@@ -2690,7 +2708,6 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Selector to current bouquet"), cfg.selector2bouquet, _("When the plugin is launched, the selector will be set in the bouquets list on current bouquet.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Display bouquet name"), cfg.bouquet_name, _("Display bouquet name in the screen header or above the list.")))
 #		refreshBouquetCfglist.append(getConfigListEntry(_("Save log for manual replace"), cfg.log))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Debug info"), cfg.debug))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Pre-fill first 'n' servicename chars to virtual keyboard"), cfg.vk_length))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Compare virtual keyboard input as case sensitive"), cfg.vk_sensitive))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Support for 'rbb' files"), cfg.rbbfiles, _("Enable menu items for 'rbb' files.")))
@@ -2699,6 +2716,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Show full filenames for deleted bouquets"), cfg.deleted_bq_fullname, _("'Manage deleted bouquets' will display full filenames instead bouquet names only.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Use all service types"), cfg.allstypes, _("In almost all cases should be this option disabled, because TV and Radio service are most used types.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Move selector to next item"), cfg.move_selector, _("Select/unselect with 'OK' moves the selector to next item in the list.")))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Debug info"), cfg.debug))
 		ConfigListScreen.__init__(self, refreshBouquetCfglist, self.session, on_change=self.changedEntry)
 
 	# for summary:
