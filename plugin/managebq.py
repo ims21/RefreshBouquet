@@ -79,7 +79,7 @@ class refreshBouquetManageDeletedBouquets(Screen):
 		self["actions"] = ActionMap(["OkCancelActions", "RefreshBouquetActions"],
 			{
 				"cancel": self.exit,
-				"ok": self.list.toggleSelection,
+				"ok": self.toggleSelection,
 				"red": self.exit,
 				"green": self.restoreCurrentEntries,
 				"yellow": self.removeCurrentEntries,
@@ -92,6 +92,12 @@ class refreshBouquetManageDeletedBouquets(Screen):
 		self["key_blue"] = Button(_("Inversion"))
 
 		self["text"].setText(_("On deleted userbouquet press 'Restore' or 'Remove' or mark more deleted bouquets with 'OK' and then use 'Restore' or 'Remove'."))
+
+	def toggleSelection(self):
+		self.list.toggleSelection()
+		if cfg.move_selector.value:
+			idx = self.list.list.index(self["config"].getCurrent())
+			self["config"].moveToIndex(idx+1)
 
 	def removeCurrentEntries(self):
 		marked = len(self.list.getSelectionsList())
