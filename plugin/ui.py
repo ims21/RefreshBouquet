@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.17"
+VERSION = "2.18"
 #  by ims (c) 2016-2023 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -2107,20 +2107,19 @@ class refreshBouquetCopyServices(Screen):
 		length = int(cfg.vk_length.value)
 		name = ""
 		if item and length:
-			name = item[0][0].decode('UTF-8', 'replace')[0:length]
+			name = item[0][0][0:length]
 			txt += "\t%s" % length
 		self.session.openWithCallback(boundFunction(self.changeItems, mark), VirtualKeyBoard, title=txt, text=name)
 
 	def changeItems(self, mark, searchString=None):
 		if searchString:
-			searchString = searchString.decode('UTF-8', 'replace')
 			if not cfg.vk_sensitive.value:
 				searchString = searchString.lower()
 			for item in self.list.list:
 				if cfg.vk_sensitive.value:
-					exist = item[0][0].decode('UTF-8', 'replace').startswith(searchString)
+					exist = item[0][0].startswith(searchString)
 				else:
-					exist = item[0][0].decode('UTF-8', 'replace').lower().startswith(searchString)
+					exist = item[0][0].lower().startswith(searchString)
 				if exist:
 					if mark:
 						if not item[0][3]:
