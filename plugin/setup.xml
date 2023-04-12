@@ -1,0 +1,15 @@
+<setupxml>
+	<setup key="refreshbouquet" title="RefreshBouquet" showOpenWebIf="1">
+		<item level="0" text="Display in Channellist context menu">config.plugins.refreshbouquet.channel_context_menu</item>
+		<item level="0" text="Compare case sensitive">config.plugins.refreshbouquet.case_sensitive</item>
+		<item level="0" text="Auto toggle in manually replacing">config.plugins.refreshbouquet.autotoggle</item>
+		<item level="0" text="Missing source services for manually replace only">config.plugins.refreshbouquet.diff</item>
+		<item level="0" text="Preview on selection">config.plugins.refreshbouquet.preview</item>
+		<item level="0" text="Confirm services moving">config.plugins.refreshbouquet.confirm_move</item>
+		<item level="0" text="Return to previous service on end">config.plugins.refreshbouquet.on_end</item>
+		<item level="0" text="Pre-fill first 'n' servicename chars to virtual keyboard">config.plugins.refreshbouquet.vk_length</item>
+		<item level="0" text="Compare virtual keyboard input as case sensitive">config.plugins.refreshbouquet.vk_sensitive</item>
+		<item level="0" text="Move selector to next item">config.plugins.refreshbouquet.move_selector</item>
+		<item level="0" text="Debug info">config.plugins.refreshbouquet.debug</item>
+	</setup>
+</setupxml>

@@ -4,7 +4,7 @@ from . import _
 #
 #  Refresh Bouqurt - Plugin E2 for OpenPLi
 #
-#  by ims (c) 2016-2022 ims21@users.sourceforge.net
+#  by ims (c) 2016-2023 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -18,10 +18,25 @@ from . import _
 #
 
 from Plugins.Plugin import PluginDescriptor
-from Components.config import ConfigSubsection, config, ConfigYesNo
+from Components.config import ConfigSubsection, config, ConfigYesNo, ConfigSelection
 
 config.plugins.refreshbouquet = ConfigSubsection()
 config.plugins.refreshbouquet.channel_context_menu = ConfigYesNo(default=True)
+config.plugins.refreshbouquet.case_sensitive = ConfigYesNo(default=False)
+config.plugins.refreshbouquet.autotoggle = ConfigYesNo(default=True)
+config.plugins.refreshbouquet.diff = ConfigYesNo(default=False)
+config.plugins.refreshbouquet.preview = ConfigYesNo(default=False)
+config.plugins.refreshbouquet.confirm_move = ConfigYesNo(default=True)
+config.plugins.refreshbouquet.on_end = ConfigYesNo(default=True)
+choicelist = []
+for i in range(1, 11, 1):
+	choicelist.append(("%d" % i, "%d" % i))
+choicelist.append(("15","15"))
+choicelist.append(("20","20"))
+config.plugins.refreshbouquet.vk_length = ConfigSelection(default="3", choices=[("0", _("No"))] + choicelist + [("255", _("All"))])
+config.plugins.refreshbouquet.vk_sensitive = ConfigYesNo(default=False)
+config.plugins.refreshbouquet.move_selector = ConfigYesNo(default=False)
+config.plugins.refreshbouquet.debug = ConfigYesNo(default=False)
 
 plugin_path = None
 
