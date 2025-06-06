@@ -4,8 +4,8 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.19"
-#  by ims (c) 2016-2023 ims21@users.sourceforge.net
+VERSION = "2.20"
+#  by ims (c) 2016-2025 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@ VERSION = "2.19"
 #
 
 from ServiceReference import ServiceReference
-from enigma import eServiceCenter, iServiceInformation, eServiceReference, eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, getDesktop, eDVBDB
+from enigma import eServiceCenter, iServiceInformation, eServiceReference, eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, getDesktop, eDVBDB, eTimer
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
@@ -54,6 +54,7 @@ import socket
 #config.plugins.refreshbouquet.case_sensitive = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.omit_first = ConfigYesNo(default=True)
 #config.plugins.refreshbouquet.debug = ConfigYesNo(default=False)
+config.plugins.refreshbouquet.autozap = ConfigSelection(default="0", choices=[("0", _("no")), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("8", "8"), ("10", "10"), ("15", "15"), ("20", "20")])
 config.plugins.refreshbouquet.log = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.mr_sortsource = ConfigSelection(default="0", choices=[("0", _("Original")), ("1", _("A-z sort")), ("2", _("Z-a sort"))])
 config.plugins.refreshbouquet.used_services = ConfigSelection(default="all", choices=[("all", _("no")), ("HD", _("HD")), ("4K", _("4K/UHD")), ("HD4K", _("HD or 4K/UHD"))])
@@ -262,6 +263,9 @@ class refreshBouquet(Screen, HelpableScreen):
 			buttons += ["2"]
 			menu.append((_("Remove bouquet '%s'") % bName, 15))
 			buttons += [""]
+			if cfg.autozap.value > "0":
+				menu.append((_("Autozap across '%s' bouquet") % bName, 50))
+				buttons += [""]
 		if self.isDeletedBouquet():
 			menu.append((_("Manage deleted bouquets"), 18))
 			buttons += [""]
@@ -309,6 +313,8 @@ class refreshBouquet(Screen, HelpableScreen):
 			self.saveTEIniFile(self["config"].getCurrent()[0])
 		elif choice[1] == 31:
 			self.saveTEIniFiles()
+		elif choice[1] == 50:
+			self.zapInBouquet()
 		else:
 			self["info"].setText(_("Wrong selection!"))
 			return
@@ -1120,6 +1126,40 @@ class refreshBouquet(Screen, HelpableScreen):
 		if name[0] < ' ':
 			return name[1:]
 		return name
+
+###
+# zap services in Bouquet with delay
+###
+	def zapInBouquet(self):
+		def zapService():
+			if self.servicesInBouquetIndex >= len(self.servicesInBouquet):
+				self.zapTimer.stop()
+				self["info"].setText(self.infotext)
+				self.session.nav.playService(self.playingRef)
+				return
+			self["info"].setText(_("Progress: %s of %s") % (self.servicesInBouquetIndex + 1, len(self.servicesInBouquet)))
+			self.session.nav.playService(eServiceReference(self.servicesInBouquet[self.servicesInBouquetIndex][1]))
+			self.servicesInBouquetIndex += 1
+			delay = int(cfg.autozap.value) * 1000
+			self.zapTimer.start(delay, True)
+
+		bouquet, t1, t2 = self.prepareSingleBouquetOperation()
+		if bouquet:
+			item = self.getServices(bouquet[0])
+			if not len(item):
+				self["info"].setText("%s" % t1)
+				return
+			self.servicesInBouquet = []
+			self.servicesInBouquet = self.addToBouquetFiltered(item)
+			if not len(self.servicesInBouquet):
+				self["info"].setText("%s" % t1)
+				return
+			self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+			self.servicesInBouquetIndex = 0
+			self.zapTimer = eTimer()
+			self.zapTimer.timeout.get().append(zapService)
+			self.zapTimer.start(0, True)
+
 
 ###
 # Add selected services (by user) to target bouquet
@@ -2675,7 +2715,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		self["key_green"] = Label(_("OK"))
 
 		self["description"] = Label()
-		self["statusbar"] = Label("ims (c) 2019. v%s" % VERSION)
+		self["statusbar"] = Label("ims (c) 2025. v%s" % VERSION)
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -2715,6 +2755,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Show full filenames for deleted bouquets"), cfg.deleted_bq_fullname, _("'Manage deleted bouquets' will display full filenames instead bouquet names only.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Use all service types"), cfg.allstypes, _("In almost all cases should be this option disabled, because TV and Radio service are most used types.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Move selector to next item"), cfg.move_selector, _("Select/unselect with 'OK' moves the selector to next item in the list.")))
+		refreshBouquetCfglist.append(getConfigListEntry(_("Autozap accros bouquet"), cfg.autozap, _("Enable menu item for autozap services across bouquet with selected time interval (in second).")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Debug info"), cfg.debug))
 		ConfigListScreen.__init__(self, refreshBouquetCfglist, self.session, on_change=self.changedEntry)
 
