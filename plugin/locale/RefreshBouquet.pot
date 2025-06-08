@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-06 13:23+0200\n"
+"POT-Creation-Date: 2025-06-08 21:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: ../ui.py:619
+#: ../ui.py:616
 #, python-format
 msgid ""
 "\n"
@@ -29,38 +29,38 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../ui.py:692
+#: ../ui.py:689
 #, python-format
 msgid ""
 "%s\n"
 "<N/A> items in source bouquet: %s"
 msgstr ""
 
-#: ../ui.py:2755
+#: ../ui.py:2752
 msgid "'Manage deleted bouquets' will display full filenames instead bouquet names only."
 msgstr ""
 
-#: ../ui.py:1554 ../ui.py:1844 ../ui.py:2058 ../ui.py:2272 ../ui.py:2478
+#: ../ui.py:1551 ../ui.py:1841 ../ui.py:2055 ../ui.py:2269 ../ui.py:2475
 msgid "'Stop' button stops Preview."
 msgstr ""
 
-#: ../ui.py:1806
+#: ../ui.py:1803
 msgid "- results"
 msgstr ""
 
-#: ../ui.py:1484
+#: ../ui.py:1481
 msgid "- select service for replace with OK"
 msgstr ""
 
-#: ../ui.py:2020
+#: ../ui.py:2017
 msgid "- select service(s) for adding with OK"
 msgstr ""
 
-#: ../ui.py:2439
+#: ../ui.py:2436
 msgid "- select service(s) for move with OK"
 msgstr ""
 
-#: ../ui.py:2234
+#: ../ui.py:2231
 msgid "- select service(s) for remove with OK"
 msgstr ""
 
@@ -76,8 +76,12 @@ msgstr ""
 msgid "Actualize services in bouquets"
 msgstr ""
 
-#: ../ui.py:2754
+#: ../ui.py:2751
 msgid "Add items to menu for creating transedit files from bouquets."
+msgstr ""
+
+#: ../ui.py:245
+msgid "Add one or more selected programs from the source bouquet to the target bouquet at once."
 msgstr ""
 
 #: ../ui.py:246
@@ -88,7 +92,7 @@ msgstr ""
 msgid "Add selected services to target bouquet"
 msgstr ""
 
-#: ../ui.py:2143 ../ui.py:2358 ../ui.py:2533
+#: ../ui.py:2140 ../ui.py:2355 ../ui.py:2530
 msgid "Add to selection (starts with...)"
 msgstr ""
 
@@ -96,11 +100,11 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: ../ui.py:1663
+#: ../ui.py:1660
 msgid "Apply and close"
 msgstr ""
 
-#: ../ui.py:950
+#: ../ui.py:947
 msgid "Are You sure to remove bouquet?"
 msgstr ""
 
@@ -108,42 +112,42 @@ msgstr ""
 msgid "Are You sure to remove file?"
 msgstr ""
 
-#: ../ui.py:1742
+#: ../ui.py:1739
 #, python-format
 msgid "Are you sure to apply %d change and close?"
 msgid_plural "Are you sure to apply all %d changes and close?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../ui.py:1787
+#: ../ui.py:1784
 #, python-format
 msgid "Are you sure to close and lost %d change?"
 msgid_plural "Are you sure to close and lost all %d changes?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../ui.py:1972 ../ui.py:2215 ../ui.py:2420 ../ui.py:2681
+#: ../ui.py:1969 ../ui.py:2212 ../ui.py:2417 ../ui.py:2678
 #, python-format
 msgid "Are you sure to close and lost %d selection?"
 msgid_plural "Are you sure to close and lost all %d selections?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../ui.py:2174
+#: ../ui.py:2171
 #, python-format
 msgid "Are you sure to copy this %d service?"
 msgid_plural "Are you sure to copy this %d services?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../ui.py:2610
+#: ../ui.py:2607
 #, python-format
 msgid "Are you sure to move this %d service?"
 msgid_plural "Are you sure to move this %d services?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../ui.py:1932
+#: ../ui.py:1929
 #, python-format
 msgid "Are you sure to refresh this %d service?"
 msgid_plural "Are you sure to refresh this %d services?"
@@ -163,7 +167,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../ui.py:2390
+#: ../ui.py:2387
 #, python-format
 msgid "Are you sure to remove this %d service?"
 msgid_plural "Are you sure to remove this %d services?"
@@ -183,15 +187,19 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../ui.py:2737
+#: ../ui.py:2734
 msgid "Auto toggle in manually replacing"
 msgstr ""
 
-#: ../ui.py:2742
+#: ../ui.py:267
+msgid "Automatically switches between programs in the bouquet at the time interval set in Settings."
+msgstr ""
+
+#: ../ui.py:2739
 msgid "Automaticaly preview current service in bouquet list."
 msgstr ""
 
-#: ../ui.py:2758
+#: ../ui.py:2755
 msgid "Autozap accros bouquet"
 msgstr ""
 
@@ -200,12 +208,12 @@ msgstr ""
 msgid "Autozap across '%s' bouquet"
 msgstr ""
 
-#: ../ui.py:752
+#: ../ui.py:749
 #, python-format
 msgid "Bouquet '%s' was not created!"
 msgstr ""
 
-#: ../ui.py:631
+#: ../ui.py:628
 msgid "Bouquet is empty!"
 msgstr ""
 
@@ -213,28 +221,32 @@ msgstr ""
 msgid "Button '6' enable/disable moving bouquet with 'preview' and 'next' buttons."
 msgstr ""
 
-#: ../ui.py:378
+#: ../ui.py:375
 msgid "C"
 msgstr ""
 
-#: ../ui.py:378
+#: ../ui.py:375
 msgid "Cable"
 msgstr ""
 
-#: ../managebq.py:89 ../rbbmanager.py:55 ../ui.py:160 ../ui.py:1538
-#: ../ui.py:1833 ../ui.py:2050 ../ui.py:2264 ../ui.py:2469 ../ui.py:2714
+#: ../managebq.py:89 ../rbbmanager.py:55 ../ui.py:160 ../ui.py:1535
+#: ../ui.py:1830 ../ui.py:2047 ../ui.py:2261 ../ui.py:2466 ../ui.py:2711
 msgid "Cancel"
 msgstr ""
 
-#: ../ui.py:2734
+#: ../ui.py:2731
 msgid "Compare case sensitive"
 msgstr ""
 
-#: ../ui.py:2751
+#: ../ui.py:2748
 msgid "Compare virtual keyboard input as case sensitive"
 msgstr ""
 
-#: ../ui.py:2743
+#: ../ui.py:247
+msgid "Compares the parameters of identical programs in the source and target bouquet, and if differences are found, offers them for selection and replacement with the parameters from the source bouquet."
+msgstr ""
+
+#: ../ui.py:2740
 msgid "Confirm services moving"
 msgstr ""
 
@@ -242,7 +254,7 @@ msgstr ""
 msgid "Copy predefined 'rbb' file(s) to list"
 msgstr ""
 
-#: ../ui.py:2051
+#: ../ui.py:2048
 msgid "Copy selected"
 msgstr ""
 
@@ -251,13 +263,17 @@ msgstr ""
 msgid "Create '%s.rbb' file"
 msgstr ""
 
-#: ../ui.py:274
+#: ../ui.py:271
 #, python-format
 msgid "Create TE file '%s-%s.ini' to '/tmp'"
 msgstr ""
 
-#: ../ui.py:276
+#: ../ui.py:273
 msgid "Create TE files from all bouquets to '/tmp'"
+msgstr ""
+
+#: ../ui.py:259
+msgid "Create a new bouquet with the specified name."
 msgstr ""
 
 #: ../ui.py:257
@@ -268,7 +284,7 @@ msgstr ""
 msgid "Create new bouquet"
 msgstr ""
 
-#: ../ui.py:2759
+#: ../ui.py:2756
 msgid "Debug info"
 msgstr ""
 
@@ -276,15 +292,23 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: ../ui.py:2748
+#: ../ui.py:251
+msgid "Delete one service or more marked services from bouquet."
+msgstr ""
+
+#: ../ui.py:264
+msgid "Delete selected bouquet."
+msgstr ""
+
+#: ../ui.py:2745
 msgid "Display bouquet name"
 msgstr ""
 
-#: ../ui.py:2748
+#: ../ui.py:2745
 msgid "Display bouquet name in the screen header or above the list."
 msgstr ""
 
-#: ../ui.py:2744
+#: ../ui.py:2741
 msgid "Display in Channellist context menu"
 msgstr ""
 
@@ -292,23 +316,23 @@ msgstr ""
 msgid "Dotted"
 msgstr ""
 
-#: ../ui.py:382
+#: ../ui.py:379
 msgid "E"
 msgstr ""
 
-#: ../ui.py:2758
+#: ../ui.py:2755
 msgid "Enable menu item for autozap services across bouquet with selected time interval (in second)."
 msgstr ""
 
-#: ../ui.py:2752
+#: ../ui.py:2749
 msgid "Enable menu items for 'rbb' files."
 msgstr ""
 
-#: ../ui.py:856 ../ui.py:2204
+#: ../ui.py:853 ../ui.py:2201
 msgid "Enter new bouquet name"
 msgstr ""
 
-#: ../ui.py:1553 ../ui.py:1843 ../ui.py:2057 ../ui.py:2271 ../ui.py:2477
+#: ../ui.py:1550 ../ui.py:1840 ../ui.py:2054 ../ui.py:2268 ../ui.py:2474
 msgid "Epg or Info toggles between EPG and Info text."
 msgstr ""
 
@@ -320,25 +344,25 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: ../ui.py:2740
+#: ../ui.py:2737
 msgid "Fastcans changing 'service type' parameter to 'basic' value."
 msgstr ""
 
-#: ../ui.py:735
+#: ../ui.py:732
 #, python-format
 msgid "File %s is empty!"
 msgstr ""
 
-#: ../ui.py:691
+#: ../ui.py:688
 #, python-format
 msgid "File %s.rbb was created."
 msgstr ""
 
-#: ../ui.py:2739
+#: ../ui.py:2736
 msgid "Filter services by orbital position in source"
 msgstr ""
 
-#: ../ui.py:616
+#: ../ui.py:613
 #, python-format
 msgid "For %s bouquet of %s was TE file created."
 msgid_plural "For %s bouquets of %s were TE files created."
@@ -362,59 +386,67 @@ msgstr ""
 msgid "If You will add to bouquet some missing services (start with '---'), You can then finalize created bouquet with '%s' etc."
 msgstr ""
 
-#: ../ui.py:2737
+#: ../ui.py:2734
 msgid "In 'Manually replacing' automaticaly toggles between columns when is used 'OK' button."
 msgstr ""
 
-#: ../ui.py:2738
+#: ../ui.py:2735
 msgid "In 'Manually replacing' in source services column will be displayed missing services in target column only."
 msgstr ""
 
-#: ../ui.py:2756
+#: ../ui.py:2753
 msgid "In almost all cases should be this option disabled, because TV and Radio service are most used types."
 msgstr ""
 
-#: ../managebq.py:92 ../ui.py:1836 ../ui.py:2053 ../ui.py:2267
+#: ../managebq.py:92 ../ui.py:1833 ../ui.py:2050 ../ui.py:2264
 msgid "Inversion"
 msgstr ""
 
-#: ../ui.py:1841
+#: ../ui.py:1838
 msgid "It can be in most cases useful for bouquets with services gained by Fastscan searching."
 msgstr ""
 
-#: ../ui.py:2743
+#: ../ui.py:2740
 msgid "It will require confirmation for moving selected services in the source bouquet."
 msgstr ""
 
-#: ../managebq.py:63 ../ui.py:270
+#: ../managebq.py:63
 msgid "Manage deleted bouquets"
+msgstr ""
+
+#: ../ui.py:244
+msgid "Manually replace programs in the target bouquet with programs from the source bouquet."
 msgstr ""
 
 #: ../rbbmanager.py:77 ../ui.py:244
 msgid "Manually replace services"
 msgstr ""
 
-#: ../ui.py:2474
+#: ../ui.py:2471
 msgid "Mark service(s) with OK button or use group selection (Ch+/Ch-), move selector to new position and finish with 'Move selected'. Selected service(s) will be moved top new position."
 msgstr ""
 
-#: ../ui.py:2055
+#: ../ui.py:2052
 msgid "Mark services with OK button or use group selection (Ch+/Ch-) and then copy these with 'Copy selected'."
 msgstr ""
 
-#: ../ui.py:2269
+#: ../ui.py:2266
 msgid "Mark services with OK button or use group selection (Ch+/Ch-) and then remove these with 'Remove selected'."
 msgstr ""
 
-#: ../ui.py:1551
+#: ../ui.py:1548
 msgid "Marking can be canceled with key '0'."
 msgstr ""
 
-#: ../ui.py:2738
+#: ../ui.py:2735
 msgid "Missing source services for manually replace only"
 msgstr ""
 
-#: ../ui.py:2470
+#: ../ui.py:250
+msgid "Move one service or more selected services in bouquet to new position."
+msgstr ""
+
+#: ../ui.py:2467
 msgid "Move selected"
 msgstr ""
 
@@ -422,60 +454,60 @@ msgstr ""
 msgid "Move selected services in bouquet"
 msgstr ""
 
-#: ../ui.py:2757
+#: ../ui.py:2754
 msgid "Move selector to next item"
 msgstr ""
 
-#: ../plugin.py:36 ../ui.py:2175
+#: ../plugin.py:36 ../ui.py:2172
 msgid "No"
 msgstr ""
 
-#: ../ui.py:426
+#: ../ui.py:423
 msgid "No differences found"
 msgstr ""
 
-#: ../ui.py:750
+#: ../ui.py:747
 #, python-format
 msgid "No item in '%s.rbb' file matches item in selected source bouquet!"
 msgstr ""
 
-#: ../ui.py:637
+#: ../ui.py:634
 msgid "No services in bouquet!"
 msgstr ""
 
-#: ../ui.py:990
+#: ../ui.py:987
 msgid "No services in selected bouquet!"
 msgstr ""
 
-#: ../ui.py:497
+#: ../ui.py:494
 msgid "No services in source bouquet or no differences in bouquets!"
 msgstr ""
 
-#: ../ui.py:982 ../ui.py:1078 ../ui.py:1178
+#: ../ui.py:979 ../ui.py:1075 ../ui.py:1175
 msgid "No services in source bouquet!"
 msgstr ""
 
-#: ../ui.py:986
+#: ../ui.py:983
 msgid "No services in target bouquet!"
 msgstr ""
 
-#: ../ui.py:714
+#: ../ui.py:711
 msgid "No source bouquet is selected!"
 msgstr ""
 
-#: ../ui.py:1745 ../ui.py:1935 ../ui.py:2180 ../ui.py:2393 ../ui.py:2617
+#: ../ui.py:1742 ../ui.py:1932 ../ui.py:2177 ../ui.py:2390 ../ui.py:2614
 msgid "Nothing for processing..."
 msgstr ""
 
-#: ../ui.py:2715
+#: ../ui.py:2712
 msgid "OK"
 msgstr ""
 
-#: ../ui.py:2735
+#: ../ui.py:2732
 msgid "Omit any control character in service name. Default set 'yes'."
 msgstr ""
 
-#: ../ui.py:2736
+#: ../ui.py:2733
 msgid "Omit last char in target names"
 msgstr ""
 
@@ -483,15 +515,19 @@ msgstr ""
 msgid "On deleted userbouquet press 'Restore' or 'Remove' or mark more deleted bouquets with 'OK' and then use 'Restore' or 'Remove'."
 msgstr ""
 
-#: ../ui.py:2736 ../ui.py:2739 ../ui.py:2741
+#: ../ui.py:2733 ../ui.py:2736 ../ui.py:2738
 msgid "On plugin exit it will be set to 'no' again."
 msgstr ""
 
-#: ../ui.py:2746
+#: ../ui.py:2743
 msgid "On plugin start use current bouquet as source or as target"
 msgstr ""
 
-#: ../ui.py:1549
+#: ../ui.py:246
+msgid "Only the programs from the source bouquet that are missing in the target bouquet are displayed. The user can select these programs and transfer them to the target bouquet all at once."
+msgstr ""
+
+#: ../ui.py:1546
 msgid "Or toggle with 'Prev/Next', which trying to find a similar name in source."
 msgstr ""
 
@@ -503,52 +539,52 @@ msgstr ""
 msgid "Original - reverted"
 msgstr ""
 
-#: ../ui.py:938
+#: ../ui.py:935
 msgid "Please enter new bouquet name"
 msgstr ""
 
-#: ../ui.py:2741
+#: ../ui.py:2738
 msgid "Plugin will be display in service bouquet services with HD,4K/UHD in service name only."
 msgstr ""
 
-#: ../ui.py:2744
+#: ../ui.py:2741
 msgid "Plugin will be placed into Channellist menu."
 msgstr ""
 
-#: ../ui.py:1899
+#: ../ui.py:1896
 msgid "Position"
 msgstr ""
 
-#: ../ui.py:1842
+#: ../ui.py:1839
 msgid "Possible duplicates will not be marked in list. Check validity with 'Preview' before mark and before 'Refresh selected'."
 msgstr ""
 
-#: ../ui.py:2750
+#: ../ui.py:2747
 msgid "Pre-fill first 'n' servicename chars to virtual keyboard"
 msgstr ""
 
-#: ../ui.py:1550
+#: ../ui.py:1547
 msgid "Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'."
 msgstr ""
 
-#: ../ui.py:1679 ../ui.py:1912 ../ui.py:2124 ../ui.py:2339 ../ui.py:2590
+#: ../ui.py:1676 ../ui.py:1909 ../ui.py:2121 ../ui.py:2336 ../ui.py:2587
 msgid "Preview"
 msgstr ""
 
-#: ../ui.py:2742
+#: ../ui.py:2739
 msgid "Preview on selection"
 msgstr ""
 
-#: ../ui.py:2741
+#: ../ui.py:2738
 msgid "Programs with 'HD/4K(UHD)' in name only for source"
 msgstr ""
 
-#: ../ui.py:1140
+#: ../ui.py:1137
 #, python-format
 msgid "Progress: %s of %s"
 msgstr ""
 
-#: ../ui.py:1834
+#: ../ui.py:1831
 msgid "Refresh selected"
 msgstr ""
 
@@ -560,12 +596,12 @@ msgstr ""
 msgid "RefreshBouquet"
 msgstr ""
 
-#: ../ui.py:1484 ../ui.py:1806 ../ui.py:2020 ../ui.py:2234 ../ui.py:2439
+#: ../ui.py:1481 ../ui.py:1803 ../ui.py:2017 ../ui.py:2231 ../ui.py:2436
 #, python-format
 msgid "RefreshBouquet %s"
 msgstr ""
 
-#: ../ui.py:2712 ../ui.py:2775
+#: ../ui.py:2709 ../ui.py:2772
 msgid "RefreshBouquet Setup"
 msgstr ""
 
@@ -583,11 +619,11 @@ msgstr ""
 msgid "Remove bouquet '%s'"
 msgstr ""
 
-#: ../ui.py:2145 ../ui.py:2360 ../ui.py:2535
+#: ../ui.py:2142 ../ui.py:2357 ../ui.py:2532
 msgid "Remove from selection (starts with...)"
 msgstr ""
 
-#: ../ui.py:2265
+#: ../ui.py:2262
 msgid "Remove selected"
 msgstr ""
 
@@ -604,7 +640,11 @@ msgstr ""
 msgid "Rename bouquet '%s'"
 msgstr ""
 
-#: ../ui.py:1605
+#: ../ui.py:262
+msgid "Rename selected bouquet."
+msgstr ""
+
+#: ../ui.py:1602
 msgid "Replace"
 msgstr ""
 
@@ -612,7 +652,7 @@ msgstr ""
 msgid "Restore"
 msgstr ""
 
-#: ../ui.py:2745
+#: ../ui.py:2742
 msgid "Return to previous service on end"
 msgstr ""
 
@@ -620,7 +660,7 @@ msgstr ""
 msgid "Run"
 msgstr ""
 
-#: ../ui.py:280
+#: ../ui.py:277
 msgid "Select action for bouquet:"
 msgstr ""
 
@@ -640,11 +680,11 @@ msgstr ""
 msgid "Select rbb file with 'OK' and create bouquet with same name."
 msgstr ""
 
-#: ../ui.py:2757
+#: ../ui.py:2754
 msgid "Select/unselect with 'OK' moves the selector to next item in the list."
 msgstr ""
 
-#: ../ui.py:989
+#: ../ui.py:986
 msgid "Selected bouquet is empty!"
 msgstr ""
 
@@ -652,7 +692,7 @@ msgstr ""
 msgid "Selected top"
 msgstr ""
 
-#: ../ui.py:2747
+#: ../ui.py:2744
 msgid "Selector to current bouquet"
 msgstr ""
 
@@ -664,35 +704,39 @@ msgstr ""
 msgid "Set target"
 msgstr ""
 
-#: ../ui.py:278
+#: ../ui.py:275
+msgid "Setting various plugin options."
+msgstr ""
+
+#: ../ui.py:275
 msgid "Settings..."
 msgstr ""
 
-#: ../ui.py:2755
+#: ../ui.py:2752
 msgid "Show full filenames for deleted bouquets"
 msgstr ""
 
-#: ../ui.py:2735
+#: ../ui.py:2732
 msgid "Skip 1st nonstandard char in name"
 msgstr ""
 
-#: ../ui.py:1862 ../ui.py:2079 ../ui.py:2293 ../ui.py:2499
+#: ../ui.py:1859 ../ui.py:2076 ../ui.py:2290 ../ui.py:2496
 msgid "Sort bouquet:"
 msgstr ""
 
-#: ../ui.py:1573
+#: ../ui.py:1570
 msgid "Sort source bouquet:"
 msgstr ""
 
-#: ../ui.py:2476
+#: ../ui.py:2473
 msgid "Sorting has not effect for finaly bouquet sorting."
 msgstr ""
 
-#: ../ui.py:419 ../ui.py:487
+#: ../ui.py:416 ../ui.py:484
 msgid "Source bouquet is empty !"
 msgstr ""
 
-#: ../ui.py:738 ../ui.py:981 ../ui.py:1070 ../ui.py:1173
+#: ../ui.py:735 ../ui.py:978 ../ui.py:1067 ../ui.py:1170
 msgid "Source bouquet is empty!"
 msgstr ""
 
@@ -700,7 +744,7 @@ msgstr ""
 msgid "Source bouquet:"
 msgstr ""
 
-#: ../ui.py:1552
+#: ../ui.py:1549
 msgid "Source can be sorted with 'Menu'."
 msgstr ""
 
@@ -708,27 +752,27 @@ msgstr ""
 msgid "Source select with 'yellow' button, target with 'blue' button. Selection can be cleared with '0'."
 msgstr ""
 
-#: ../ui.py:2752
+#: ../ui.py:2749
 msgid "Support for 'rbb' files"
 msgstr ""
 
-#: ../ui.py:376
+#: ../ui.py:373
 msgid "T"
 msgstr ""
 
-#: ../ui.py:662
+#: ../ui.py:659
 msgid "TE file was created."
 msgstr ""
 
-#: ../ui.py:2740
+#: ../ui.py:2737
 msgid "Take into account 'service type' in automatic replacing too."
 msgstr ""
 
-#: ../ui.py:416
+#: ../ui.py:413
 msgid "Target bouquet is empty !"
 msgstr ""
 
-#: ../ui.py:985 ../ui.py:1067
+#: ../ui.py:982 ../ui.py:1064
 msgid "Target bouquet is empty!"
 msgstr ""
 
@@ -736,7 +780,7 @@ msgstr ""
 msgid "Target bouquet:"
 msgstr ""
 
-#: ../ui.py:376
+#: ../ui.py:373
 msgid "Terrestrial"
 msgstr ""
 
@@ -745,19 +789,19 @@ msgstr ""
 msgid "The path %s already exists."
 msgstr ""
 
-#: ../ui.py:2745
+#: ../ui.py:2742
 msgid "The service being played before the plugin is started on exit again."
 msgstr ""
 
-#: ../ui.py:1840
+#: ../ui.py:1837
 msgid "This feature looking for differences in service parameters with same names in source and target bouquets. Parameters for marked services will be replaced."
 msgstr ""
 
-#: ../ui.py:1548
+#: ../ui.py:1545
 msgid "Toggle source and target bouquets with Bouq +/- ."
 msgstr ""
 
-#: ../ui.py:2754
+#: ../ui.py:2751
 msgid "Transedit file support"
 msgstr ""
 
@@ -765,15 +809,15 @@ msgstr ""
 msgid "Use 'Menu' for predefined 'rbb' files."
 msgstr ""
 
-#: ../ui.py:2056 ../ui.py:2270 ../ui.py:2475
+#: ../ui.py:2053 ../ui.py:2267 ../ui.py:2472
 msgid "Use 'Menu' for sorting."
 msgstr ""
 
-#: ../ui.py:2756
+#: ../ui.py:2753
 msgid "Use all service types"
 msgstr ""
 
-#: ../ui.py:2753
+#: ../ui.py:2750
 msgid "Use dotted service name for 'rbb' files"
 msgstr ""
 
@@ -781,43 +825,43 @@ msgstr ""
 msgid "Use the context 'menu' or 'green' buttons to select operation."
 msgstr ""
 
-#: ../ui.py:2740
+#: ../ui.py:2737
 msgid "Using 'service type' in automatic replacing"
 msgstr ""
 
-#: ../ui.py:380
+#: ../ui.py:377
 msgid "W"
 msgstr ""
 
-#: ../ui.py:2753
+#: ../ui.py:2750
 msgid "When is creating a bouquet from 'rbb' file, dotted names can be compared too. You need then manually remove duplicates. Default set is 'no'."
 msgstr ""
 
-#: ../ui.py:2746
+#: ../ui.py:2743
 msgid "When the plugin is launched, current bouquet can be set as source or target bouquet."
 msgstr ""
 
-#: ../ui.py:2747
+#: ../ui.py:2744
 msgid "When the plugin is launched, the selector will be set in the bouquets list on current bouquet."
 msgstr ""
 
-#: ../ui.py:319
+#: ../ui.py:316
 msgid "Wrong selection!"
 msgstr ""
 
-#: ../ui.py:2175
+#: ../ui.py:2172
 msgid "Yes"
 msgstr ""
 
-#: ../ui.py:2177
+#: ../ui.py:2174
 msgid "Yes, add to new bouquet..."
 msgstr ""
 
-#: ../ui.py:2736
+#: ../ui.py:2733
 msgid "You can omit last service name char if provider added it for his planned 're-tuning' and You want use 'Refresh services' for this services too."
 msgstr ""
 
-#: ../ui.py:2739
+#: ../ui.py:2736
 msgid "You can select valid orbital position as filter for display services in source bouquet."
 msgstr ""
 
@@ -825,7 +869,7 @@ msgstr ""
 msgid "You can try toggle 'Standard/Dotted' service names too."
 msgstr ""
 
-#: ../ui.py:2198
+#: ../ui.py:2195
 msgid "You did not enter the bouquet name!"
 msgstr ""
 
@@ -853,7 +897,7 @@ msgstr ""
 msgid "move item up"
 msgstr ""
 
-#: ../ui.py:57 ../ui.py:60 ../ui.py:65 ../ui.py:67 ../ui.py:71 ../ui.py:388
+#: ../ui.py:57 ../ui.py:60 ../ui.py:65 ../ui.py:67 ../ui.py:71 ../ui.py:385
 msgid "no"
 msgstr ""
 
@@ -869,22 +913,22 @@ msgstr ""
 msgid "select target bouquet"
 msgstr ""
 
-#: ../ui.py:67 ../ui.py:1545
+#: ../ui.py:67 ../ui.py:1542
 msgid "source bouquet"
 msgstr ""
 
-#: ../ui.py:67 ../ui.py:1546
+#: ../ui.py:67 ../ui.py:1543
 msgid "target bouquet"
 msgstr ""
 
-#: ../ui.py:774
+#: ../ui.py:771
 msgid "unknown"
 msgstr ""
 
-#: ../ui.py:382
+#: ../ui.py:379
 msgid "° E"
 msgstr ""
 
-#: ../ui.py:380
+#: ../ui.py:377
 msgid "° W"
 msgstr ""

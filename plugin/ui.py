@@ -243,7 +243,7 @@ class refreshBouquet(Screen, HelpableScreen):
 				if self.sourceItem != self.targetItem:	# source != target
 					menu.append((_("Manually replace services"), 0, _("Manually replace programs in the target bouquet with programs from the source bouquet.")))
 					menu.append((_("Add selected services to target bouquet"), 1, _("Add one or more selected programs from the source bouquet to the target bouquet at once.")))
-					menu.append((_("Add selected missing services to target bouquet"), 2, _("Only the programs from the source overview that are missing in the target bouquet are displayed. The user can select these programs and transfer them to the target bouquet all at once.")))
+					menu.append((_("Add selected missing services to target bouquet"), 2, _("Only the programs from the source bouquet that are missing in the target bouquet are displayed. The user can select these programs and transfer them to the target bouquet all at once.")))
 					menu.append((_("Refresh services in target bouquet"), 4, _("Compares the parameters of identical programs in the source and target bouquet, and if differences are found, offers them for selection and replacement with the parameters from the source bouquet.")))
 					buttons += ["blue", " ", "yellow", "green"]
 		if self["config"].getCurrent():
@@ -256,7 +256,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			if self.isRbbFile():
 				menu.append((_("Create bouquet from rbb file"), 21))
 				buttons += [""]
-		menu.append((_("Create new bouquet"), 13, _("Creates a new bouquet with the specified name.")))
+		menu.append((_("Create new bouquet"), 13, _("Create a new bouquet with the specified name.")))
 		buttons += [""]
 		if self["config"].getCurrent():
 			menu.append((_("Rename bouquet '%s'") % bName, 14, _("Rename selected bouquet.")))
@@ -264,7 +264,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			menu.append((_("Remove bouquet '%s'") % bName, 15, _("Delete selected bouquet.")))
 			buttons += [""]
 			if cfg.autozap.value > "0":
-				menu.append((_("Autozap across '%s' bouquet") % bName, 50, _("Automatically switches between programs in the bouquet at the time interval set in 'Settings...'")))
+				menu.append((_("Autozap across '%s' bouquet") % bName, 50, _("Automatically switches between programs in the bouquet at the time interval set in Settings.")))
 			buttons += [""]
 		if cfg.transedit.value and self["config"].getCurrent():
 			name =  self.plainString(self["config"].getCurrent()[0]).decode().replace(' ', '_')
@@ -272,7 +272,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			buttons += [""]
 			menu.append((_("Create TE files from all bouquets to '/tmp'"), 31))
 			buttons += [""]
-		menu.append((_("Settings..."), 10, _("Setting various plugin options")))
+		menu.append((_("Settings..."), 10, _("Setting various plugin options.")))
 		buttons += ["menu"]
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_("Select action for bouquet:"), list=menu, keys=["dummy" if key=="" else key for key in buttons])
 		self["info"].setText(self.infotext)
