@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-08 21:44+0200\n"
-"PO-Revision-Date: 2025-06-08 21:46+0200\n"
+"POT-Creation-Date: 2026-05-17 23:54+0200\n"
+"PO-Revision-Date: 2026-05-17 23:58+0200\n"
 "Last-Translator: ims <ims@openpli.org>\n"
 "Language-Team: PLi\n"
 "Language: cs_CZ\n"
@@ -11,9 +11,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.9\n"
 
-#: ../ui.py:616
+#: ../ui.py:618
 #, python-format
 msgid ""
 "\n"
@@ -31,7 +31,7 @@ msgstr[2] ""
 "\n"
 "Bohužel ne pro těchto %s prázdných přehledů:\n"
 
-#: ../ui.py:689
+#: ../ui.py:691
 #, python-format
 msgid ""
 "%s\n"
@@ -40,39 +40,55 @@ msgstr ""
 "%s\n"
 "<N/A> položek ve zdrojovém přehledu: %s"
 
-#: ../ui.py:2752
+#: ../ui.py:2779
 msgid "'Manage deleted bouquets' will display full filenames instead bouquet names only."
 msgstr "'Správa odstraněných přehledů' bude zobrazovat úplné názvy souborů místo jednoduchých názvů přehledů."
 
-#: ../ui.py:1551 ../ui.py:1841 ../ui.py:2055 ../ui.py:2269 ../ui.py:2475
+#: ../ui.py:1578 ../ui.py:1868 ../ui.py:2082 ../ui.py:2296 ../ui.py:2502
 msgid "'Stop' button stops Preview."
 msgstr "'Stop' zastavuje Náhled."
 
-#: ../ui.py:1803
+#: ../ui.py:1830
 msgid "- results"
 msgstr "- výsledky"
 
-#: ../ui.py:1481
+#: ../ui.py:1508
 msgid "- select service for replace with OK"
 msgstr "- označte program(y) pro nahrazení pomocí OK"
 
-#: ../ui.py:2017
+#: ../ui.py:2044
 msgid "- select service(s) for adding with OK"
 msgstr "- označte program(y) pro přidání pomocí OK"
 
-#: ../ui.py:2436
+#: ../ui.py:2463
 msgid "- select service(s) for move with OK"
 msgstr "- označte program(y) pro přesun pomocí OK"
 
-#: ../ui.py:2231
+#: ../ui.py:2258
 msgid "- select service(s) for remove with OK"
 msgstr "- označte program(y) pro smazání pomocí OK"
 
-#: ../ui.py:60
+#: ../ui.py:59
+msgid "0.8W"
+msgstr "0.8W"
+
+#: ../ui.py:59
+msgid "13.0E"
+msgstr "13.0E"
+
+#: ../ui.py:59
+msgid "19.2E"
+msgstr "19.2E"
+
+#: ../ui.py:59
+msgid "23.5E"
+msgstr "23.5E"
+
+#: ../ui.py:62
 msgid "4K/UHD"
 msgstr "4K/UHD"
 
-#: ../ui.py:59 ../ui.py:79
+#: ../ui.py:61 ../ui.py:81
 msgid "A-z sort"
 msgstr "A-z"
 
@@ -80,35 +96,35 @@ msgstr "A-z"
 msgid "Actualize services in bouquets"
 msgstr "Aktualizace programů v přehledech"
 
-#: ../ui.py:2751
+#: ../ui.py:2778
 msgid "Add items to menu for creating transedit files from bouquets."
 msgstr "Přidá položky do menu pro vytváření TransEdit.ini souborů z přehledů."
 
-#: ../ui.py:245
+#: ../ui.py:247
 msgid "Add one or more selected programs from the source bouquet to the target bouquet at once."
 msgstr "Přidat jeden nebo více zvolených programů ze zdrojového do cílového přehledu."
 
-#: ../ui.py:246
+#: ../ui.py:248
 msgid "Add selected missing services to target bouquet"
 msgstr "Přidat vybrané chybějící programy do cílového přehledu"
 
-#: ../ui.py:245
+#: ../ui.py:247
 msgid "Add selected services to target bouquet"
 msgstr "Přidat vybrané programy do cílového přehledu"
 
-#: ../ui.py:2140 ../ui.py:2355 ../ui.py:2530
+#: ../ui.py:2167 ../ui.py:2382 ../ui.py:2557
 msgid "Add to selection (starts with...)"
 msgstr "Přidat do výběru (začíná na...)"
 
-#: ../plugin.py:36
+#: ../plugin.py:36 ../ui.py:59
 msgid "All"
 msgstr "Vše"
 
-#: ../ui.py:1660
+#: ../ui.py:1687
 msgid "Apply and close"
 msgstr "Provést a zavřít"
 
-#: ../ui.py:947
+#: ../ui.py:949
 msgid "Are You sure to remove bouquet?"
 msgstr "Opravdu chcete smazat přehled?"
 
@@ -116,7 +132,7 @@ msgstr "Opravdu chcete smazat přehled?"
 msgid "Are You sure to remove file?"
 msgstr "Opravdu chcete smazat soubor ?"
 
-#: ../ui.py:1739
+#: ../ui.py:1766
 #, python-format
 msgid "Are you sure to apply %d change and close?"
 msgid_plural "Are you sure to apply all %d changes and close?"
@@ -124,7 +140,7 @@ msgstr[0] "Opravdu chcete provést %d změnu a zavřít?"
 msgstr[1] "Opravdu chcete provést %d změny a zavřít?"
 msgstr[2] "Opravdu chcete provést %d změn a zavřít?"
 
-#: ../ui.py:1784
+#: ../ui.py:1811
 #, python-format
 msgid "Are you sure to close and lost %d change?"
 msgid_plural "Are you sure to close and lost all %d changes?"
@@ -132,7 +148,7 @@ msgstr[0] "Opravdu chcete zavřít a zapomenout %d změnu?"
 msgstr[1] "Opravdu chcete zavřít a zapomenout %d změny?"
 msgstr[2] "Opravdu chcete zavřít a zapomenout %d změn?"
 
-#: ../ui.py:1969 ../ui.py:2212 ../ui.py:2417 ../ui.py:2678
+#: ../ui.py:1996 ../ui.py:2239 ../ui.py:2444 ../ui.py:2705
 #, python-format
 msgid "Are you sure to close and lost %d selection?"
 msgid_plural "Are you sure to close and lost all %d selections?"
@@ -140,7 +156,7 @@ msgstr[0] "Opravdu chcete zavřít a zapomenout %d označení?"
 msgstr[1] "Opravdu chcete zavřít a zapomenout %d označení?"
 msgstr[2] "Opravdu chcete zavřít a zapomenout %d označení?"
 
-#: ../ui.py:2171
+#: ../ui.py:2198
 #, python-format
 msgid "Are you sure to copy this %d service?"
 msgid_plural "Are you sure to copy this %d services?"
@@ -148,7 +164,7 @@ msgstr[0] "Opravdu chcete zkopírovat %d zvolený program?"
 msgstr[1] "Opravdu chcete zkopírovat %d zvolené programy?"
 msgstr[2] "Opravdu chcete zkopírovat %d zvolených programů?"
 
-#: ../ui.py:2607
+#: ../ui.py:2634
 #, python-format
 msgid "Are you sure to move this %d service?"
 msgid_plural "Are you sure to move this %d services?"
@@ -156,7 +172,7 @@ msgstr[0] "Opravdu chcete přesunout %d zvolený program?"
 msgstr[1] "Opravdu chcete přesunout %d zvolené programy?"
 msgstr[2] "Opravdu chcete přesunout %d zvolených programů?"
 
-#: ../ui.py:1929
+#: ../ui.py:1956
 #, python-format
 msgid "Are you sure to refresh this %d service?"
 msgid_plural "Are you sure to refresh this %d services?"
@@ -180,7 +196,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../ui.py:2387
+#: ../ui.py:2414
 #, python-format
 msgid "Are you sure to remove this %d service?"
 msgid_plural "Are you sure to remove this %d services?"
@@ -204,65 +220,73 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../ui.py:2734
+#: ../ui.py:2761
 msgid "Auto toggle in manually replacing"
 msgstr "Automatické přepínání pro ruční nahrazování"
 
-#: ../ui.py:267
+#: ../ui.py:269
 msgid "Automatically switches between programs in the bouquet at the time interval set in Settings."
 msgstr "Postupně automaticky přepíná programy v přehledu podle nastaveného časového intervalu z Nastavení."
 
-#: ../ui.py:2739
+#: ../ui.py:2766
 msgid "Automaticaly preview current service in bouquet list."
 msgstr "Automaticky přehrává aktuální program v přehledu."
 
-#: ../ui.py:2755
+#: ../ui.py:2782
 msgid "Autozap accros bouquet"
 msgstr "Automatické přepínání v přehledu"
 
-#: ../ui.py:267
+#: ../ui.py:269
 #, python-format
 msgid "Autozap across '%s' bouquet"
 msgstr "Automatické přepínání v přehledu '%s'"
 
-#: ../ui.py:749
+#: ../ui.py:2784
+msgid "Autozap across bouquet only for encrypted services (skip FTA)."
+msgstr "Automatické přepínání v přehledu pouze pro kódované programy (přeskakovat FTA)."
+
+#: ../ui.py:2785
+msgid "Autozap across bouquet only for services on selected orbital position."
+msgstr "Automatické přepínání v přehledu pouze pro programy zvolené orbitální pozice."
+
+#: ../ui.py:751
 #, python-format
 msgid "Bouquet '%s' was not created!"
 msgstr "Přehled '%s' nebyl založen!"
 
-#: ../ui.py:628
+#: ../ui.py:630
 msgid "Bouquet is empty!"
 msgstr "Přehled je prázdný!"
 
-#: ../ui.py:177
+#: ../ui.py:179
 msgid "Button '6' enable/disable moving bouquet with 'preview' and 'next' buttons."
 msgstr "Tlačítko '6' povoluje/zakazuje přesun přehledu pomocí kláves 'preview' a 'next' ."
 
-#: ../ui.py:375
+#: ../ui.py:377
 msgid "C"
 msgstr "C"
 
-#: ../ui.py:375
+#: ../ui.py:377
 msgid "Cable"
 msgstr "Kabel"
 
-#: ../managebq.py:89 ../rbbmanager.py:55 ../ui.py:160 ../ui.py:1535 ../ui.py:1830 ../ui.py:2047 ../ui.py:2261 ../ui.py:2466 ../ui.py:2711
+#: ../managebq.py:89 ../rbbmanager.py:55 ../ui.py:162 ../ui.py:1562 ../ui.py:1857 ../ui.py:2074 ../ui.py:2288 ../ui.py:2493 ../ui.py:2738
 msgid "Cancel"
 msgstr "Zavřít"
 
-#: ../ui.py:2731
+#: ../ui.py:2758
 msgid "Compare case sensitive"
 msgstr "Rozlišovat velikost písmen"
 
-#: ../ui.py:2748
+#: ../ui.py:2775
 msgid "Compare virtual keyboard input as case sensitive"
 msgstr "Rozlišovat velikost písmen při zadání z virtuální klávesnice"
 
-#: ../ui.py:247
+#: ../ui.py:249
 msgid "Compares the parameters of identical programs in the source and target bouquet, and if differences are found, offers them for selection and replacement with the parameters from the source bouquet."
 msgstr "Porovnává parametry stejných programů ve zdrojovém a cílovém přehledu a v případě odlišností je nabídne k výběru a náhradě za parametry ze zdrojového přehledu."
 
-#: ../ui.py:2740
+#: ../ui.py:2767
 msgid "Confirm services moving"
 msgstr "Potvrzovat přesun programů"
 
@@ -270,37 +294,41 @@ msgstr "Potvrzovat přesun programů"
 msgid "Copy predefined 'rbb' file(s) to list"
 msgstr "Kopírovat předdefinované 'rbb' soubor(y) do seznamu"
 
-#: ../ui.py:2048
+#: ../ui.py:2075
 msgid "Copy selected"
 msgstr "Zkopírovat vybrané"
 
-#: ../ui.py:254
+#: ../ui.py:256
 #, python-format
 msgid "Create '%s.rbb' file"
 msgstr "Založit '%s.rbb' soubor"
 
-#: ../ui.py:271
+#: ../ui.py:273
 #, python-format
 msgid "Create TE file '%s-%s.ini' to '/tmp'"
 msgstr "Vytvořit TE soubor '%s-%s.ini' do '/tmp'"
 
-#: ../ui.py:273
+#: ../ui.py:275
 msgid "Create TE files from all bouquets to '/tmp'"
 msgstr "Vytvořit TE soubory pro všechny přehledy do '/tmp'"
 
-#: ../ui.py:259
+#: ../ui.py:261
 msgid "Create a new bouquet with the specified name."
 msgstr "Založit nový přehled se zvoleným názvem."
 
-#: ../ui.py:257
+#: ../ui.py:259
 msgid "Create bouquet from rbb file"
 msgstr "Vytvořit přehled z rbb souboru"
 
-#: ../ui.py:259
+#: ../ui.py:261
 msgid "Create new bouquet"
 msgstr "Založit nový přehled"
 
-#: ../ui.py:2756
+#: ../ui.py:2784
+msgid "Crypted only"
+msgstr "Pouze kodované"
+
+#: ../ui.py:2786
 msgid "Debug info"
 msgstr "Debug info"
 
@@ -308,23 +336,23 @@ msgstr "Debug info"
 msgid "Default"
 msgstr "Standardní"
 
-#: ../ui.py:251
+#: ../ui.py:253
 msgid "Delete one service or more marked services from bouquet."
 msgstr "Odstraňte jeden nebo více vybraných programů z přehledu."
 
-#: ../ui.py:264
+#: ../ui.py:266
 msgid "Delete selected bouquet."
 msgstr "Odstranění zvoleného přehledu."
 
-#: ../ui.py:2745
+#: ../ui.py:2772
 msgid "Display bouquet name"
 msgstr "Zobrazovat název přehledu"
 
-#: ../ui.py:2745
+#: ../ui.py:2772
 msgid "Display bouquet name in the screen header or above the list."
 msgstr "Zobrazovat název přehledu v záhlaví obrazovky nebo nad seznamem."
 
-#: ../ui.py:2741
+#: ../ui.py:2768
 msgid "Display in Channellist context menu"
 msgstr "Zobrazovat v kontextovém menu přehledu programů"
 
@@ -332,23 +360,23 @@ msgstr "Zobrazovat v kontextovém menu přehledu programů"
 msgid "Dotted"
 msgstr "Tečkované"
 
-#: ../ui.py:379
+#: ../ui.py:381
 msgid "E"
 msgstr "E"
 
-#: ../ui.py:2755
+#: ../ui.py:2782
 msgid "Enable menu item for autozap services across bouquet with selected time interval (in second)."
 msgstr "Povolit položku menu pro automatické přepínání programů v přehledu s nastavením časového intervalu (v sekundách)."
 
-#: ../ui.py:2749
+#: ../ui.py:2776
 msgid "Enable menu items for 'rbb' files."
 msgstr "Povoluje položky menu pro 'rbb' soubory."
 
-#: ../ui.py:853 ../ui.py:2201
+#: ../ui.py:855 ../ui.py:2228
 msgid "Enter new bouquet name"
 msgstr "Zadejte název nového přehledu"
 
-#: ../ui.py:1550 ../ui.py:1840 ../ui.py:2054 ../ui.py:2268 ../ui.py:2474
+#: ../ui.py:1577 ../ui.py:1867 ../ui.py:2081 ../ui.py:2295 ../ui.py:2501
 msgid "Epg or Info toggles between EPG and Info text."
 msgstr "Epg a Info přepínají mezi EPG a Info textem."
 
@@ -360,25 +388,25 @@ msgstr "Odstranit"
 msgid "Error"
 msgstr "Chyba"
 
-#: ../ui.py:2737
+#: ../ui.py:2764
 msgid "Fastcans changing 'service type' parameter to 'basic' value."
 msgstr "Fastscan obvykle mění typ programu na základní hodnotu."
 
-#: ../ui.py:732
+#: ../ui.py:734
 #, python-format
 msgid "File %s is empty!"
 msgstr "Soubor %s je prázdný!"
 
-#: ../ui.py:688
+#: ../ui.py:690
 #, python-format
 msgid "File %s.rbb was created."
 msgstr "Soubor '%s' byl založen."
 
-#: ../ui.py:2736
+#: ../ui.py:2763
 msgid "Filter services by orbital position in source"
 msgstr "Filtrovat ve zdroji programy podle orbitální pozice"
 
-#: ../ui.py:613
+#: ../ui.py:615
 #, python-format
 msgid "For %s bouquet of %s was TE file created."
 msgid_plural "For %s bouquets of %s were TE files created."
@@ -386,15 +414,15 @@ msgstr[0] "Pro %s přehled z %s byl TE soubor založen."
 msgstr[1] "Pro %s přehledy z %s byly TE soubory založeny."
 msgstr[2] "Pro %s přehledů z %s byly TE soubory založeny."
 
-#: ../ui.py:175
+#: ../ui.py:177
 msgid "For some operations, a selector on the bouquet is sufficient."
 msgstr "Pro některé operace postačuje kurzor na přehledu."
 
-#: ../ui.py:60
+#: ../ui.py:62
 msgid "HD"
 msgstr "HD"
 
-#: ../ui.py:60
+#: ../ui.py:62
 msgid "HD or 4K/UHD"
 msgstr "HD nebo 4K/UHD"
 
@@ -403,27 +431,27 @@ msgstr "HD nebo 4K/UHD"
 msgid "If You will add to bouquet some missing services (start with '---'), You can then finalize created bouquet with '%s' etc."
 msgstr "Jestliže přidáte do přehledu nějaké chybějící programy (začínají na '----'), můžete vytvořený přehled dokončit pomocí '%s' apod."
 
-#: ../ui.py:2734
+#: ../ui.py:2761
 msgid "In 'Manually replacing' automaticaly toggles between columns when is used 'OK' button."
 msgstr "V 'Ručním nahrazování' přepíná automaticky mezi sloupci po použití tlačítka 'OK'."
 
-#: ../ui.py:2735
+#: ../ui.py:2762
 msgid "In 'Manually replacing' in source services column will be displayed missing services in target column only."
 msgstr "V 'Ručním nahrazování' budou ve zdrojovém sloupci zobrazeny pouze programy chybějící v cílovém sloupci."
 
-#: ../ui.py:2753
+#: ../ui.py:2780
 msgid "In almost all cases should be this option disabled, because TV and Radio service are most used types."
 msgstr "Téměř ve všech případech by měla být tato volba deaktivována, protože nejčastěji používanými typy jsou televizní a rozhlasové služby."
 
-#: ../managebq.py:92 ../ui.py:1833 ../ui.py:2050 ../ui.py:2264
+#: ../managebq.py:92 ../ui.py:1860 ../ui.py:2077 ../ui.py:2291
 msgid "Inversion"
 msgstr "Invertovat"
 
-#: ../ui.py:1838
+#: ../ui.py:1865
 msgid "It can be in most cases useful for bouquets with services gained by Fastscan searching."
 msgstr "Využitelné hlavně pro přehledy používající programy získané z Fastscan vyhledávání."
 
-#: ../ui.py:2740
+#: ../ui.py:2767
 msgid "It will require confirmation for moving selected services in the source bouquet."
 msgstr "Při přemísťování vybraných programů v přehledu bude požadováno porvrzení."
 
@@ -431,100 +459,100 @@ msgstr "Při přemísťování vybraných programů v přehledu bude požadován
 msgid "Manage deleted bouquets"
 msgstr "Správa odstraněných přehledů"
 
-#: ../ui.py:244
+#: ../ui.py:246
 msgid "Manually replace programs in the target bouquet with programs from the source bouquet."
 msgstr "Ruční nahrazování programů v cílovém přehledu programy ze zdrojového přehledu."
 
-#: ../rbbmanager.py:77 ../ui.py:244
+#: ../rbbmanager.py:77 ../ui.py:246
 msgid "Manually replace services"
 msgstr "Ruční nahrazování programů"
 
-#: ../ui.py:2471
+#: ../ui.py:2498
 msgid "Mark service(s) with OK button or use group selection (Ch+/Ch-), move selector to new position and finish with 'Move selected'. Selected service(s) will be moved top new position."
 msgstr "Označte programy pomocí 'OK' nebo skupinového výběru (Ch+/Ch-), přesuňte kurzor na novou pozici a dokončete tlačítkem 'Přesunout vybrané'. Označené programy budou přesunuty nad novou pozici."
 
-#: ../ui.py:2052
+#: ../ui.py:2079
 msgid "Mark services with OK button or use group selection (Ch+/Ch-) and then copy these with 'Copy selected'."
 msgstr "Označte programy pomocí 'OK' nebo skupinového výběru (Ch+/Ch-)  a pak je zkopírujte  tlačítkem 'Zkopírovat vybrané'."
 
-#: ../ui.py:2266
+#: ../ui.py:2293
 msgid "Mark services with OK button or use group selection (Ch+/Ch-) and then remove these with 'Remove selected'."
 msgstr "Označte programy pomocí 'OK' nebo skupinového výběru (Ch+/Ch-) a pak je odstraňte tlačítkem 'Odstranit vybrané'."
 
-#: ../ui.py:1548
+#: ../ui.py:1575
 msgid "Marking can be canceled with key '0'."
 msgstr "Označení může být zrušeno klávesou '0'."
 
-#: ../ui.py:2735
+#: ../ui.py:2762
 msgid "Missing source services for manually replace only"
 msgstr "Pouze chybějící programy ve zdrojích pro ruční nahrazování"
 
-#: ../ui.py:250
+#: ../ui.py:252
 msgid "Move one service or more selected services in bouquet to new position."
 msgstr "Přemístí najednou jeden nebo více vybraných programů v přehledu na novou pozici."
 
-#: ../ui.py:2467
+#: ../ui.py:2494
 msgid "Move selected"
 msgstr "Přesunout vybrané"
 
-#: ../ui.py:250
+#: ../ui.py:252
 msgid "Move selected services in bouquet"
 msgstr "Přesouvat vybrané programy v přehledu"
 
-#: ../ui.py:2754
+#: ../ui.py:2781
 msgid "Move selector to next item"
 msgstr "Přesunout kurzor na další položku"
 
-#: ../plugin.py:36 ../ui.py:2172
+#: ../plugin.py:36 ../ui.py:2199
 msgid "No"
 msgstr "Ne"
 
-#: ../ui.py:423
+#: ../ui.py:425
 msgid "No differences found"
 msgstr "Nenalezeny žádné rozdíly"
 
-#: ../ui.py:747
+#: ../ui.py:749
 #, python-format
 msgid "No item in '%s.rbb' file matches item in selected source bouquet!"
 msgstr "Žádná položka z '%s.rbb' nebyla nalezena ve zdrojovém přehledu!"
 
-#: ../ui.py:634
+#: ../ui.py:636
 msgid "No services in bouquet!"
 msgstr "V přehledu nejsou programy!"
 
-#: ../ui.py:987
+#: ../ui.py:989
 msgid "No services in selected bouquet!"
 msgstr "Ve vybraném přehledu nejsou programy!"
 
-#: ../ui.py:494
+#: ../ui.py:496
 msgid "No services in source bouquet or no differences in bouquets!"
 msgstr "Ve zdrojovém přehledu nejsou programy nebo nejsou odlišnosti!"
 
-#: ../ui.py:979 ../ui.py:1075 ../ui.py:1175
+#: ../ui.py:981 ../ui.py:1077 ../ui.py:1202
 msgid "No services in source bouquet!"
 msgstr "Ve zdrojovém přehledu nejsou programy!"
 
-#: ../ui.py:983
+#: ../ui.py:985
 msgid "No services in target bouquet!"
 msgstr "V cílovém přehledu nejsou programy!"
 
-#: ../ui.py:711
+#: ../ui.py:713
 msgid "No source bouquet is selected!"
 msgstr "Není vybrán žádný zdrojový přehled!"
 
-#: ../ui.py:1742 ../ui.py:1932 ../ui.py:2177 ../ui.py:2390 ../ui.py:2614
+#: ../ui.py:1769 ../ui.py:1959 ../ui.py:2204 ../ui.py:2417 ../ui.py:2641
 msgid "Nothing for processing..."
 msgstr "Není nic ke zpracování..."
 
-#: ../ui.py:2712
+#: ../ui.py:2739
 msgid "OK"
 msgstr "OK"
 
-#: ../ui.py:2732
+#: ../ui.py:2759
 msgid "Omit any control character in service name. Default set 'yes'."
 msgstr "Vynechání případného řídícího znaku v názvu programu. Výchozí nastavení je \"Ano\"."
 
-#: ../ui.py:2733
+#: ../ui.py:2760
 msgid "Omit last char in target names"
 msgstr "Vynechat poslední znak v názvech cíle"
 
@@ -532,80 +560,84 @@ msgstr "Vynechat poslední znak v názvech cíle"
 msgid "On deleted userbouquet press 'Restore' or 'Remove' or mark more deleted bouquets with 'OK' and then use 'Restore' or 'Remove'."
 msgstr "Na smazaném přehledu stiskněte 'Obnovit' nebo 'Odstranit' nebo označte více smazaných přehledů pomocí tlačítka 'OK' a poté použijte 'Obnovit' nebo 'Odstranit'."
 
-#: ../ui.py:2733 ../ui.py:2736 ../ui.py:2738
+#: ../ui.py:2760 ../ui.py:2763 ../ui.py:2765
 msgid "On plugin exit it will be set to 'no' again."
 msgstr "Při ukončení pluginu bude opět nastaveno na 'Ne'."
 
-#: ../ui.py:2743
+#: ../ui.py:2770
 msgid "On plugin start use current bouquet as source or as target"
 msgstr "Při startu pluginu použít aktuální přehled jako zdroj nebo cíl"
 
-#: ../ui.py:246
+#: ../ui.py:248
 msgid "Only the programs from the source bouquet that are missing in the target bouquet are displayed. The user can select these programs and transfer them to the target bouquet all at once."
 msgstr "Ze zdrojového přehledu jsou zobrazeny pouze programy, které v cílovém přehledu chybí. Uživatel může označit tyto programy a najednou přenést do cílového přehledu."
 
-#: ../ui.py:1546
+#: ../ui.py:1573
 msgid "Or toggle with 'Prev/Next', which trying to find a similar name in source."
 msgstr "Nebo přepněte s 'Prev/Next', které se snaží najít podobný název ve zdroji."
 
-#: ../ui.py:59 ../ui.py:79
+#: ../ui.py:2785
+msgid "Orbital position"
+msgstr "Orbitální pozice"
+
+#: ../ui.py:61 ../ui.py:81
 msgid "Original"
 msgstr "Původní"
 
-#: ../ui.py:79
+#: ../ui.py:81
 msgid "Original - reverted"
 msgstr "Původní - opačně"
 
-#: ../ui.py:935
+#: ../ui.py:937
 msgid "Please enter new bouquet name"
 msgstr "Zadejte nový název přehledu"
 
-#: ../ui.py:2738
+#: ../ui.py:2765
 msgid "Plugin will be display in service bouquet services with HD,4K/UHD in service name only."
 msgstr "Plugin bude ve zdroji zobrazovat pouze programy, které mají v názvu HD,4K/UHD."
 
-#: ../ui.py:2741
+#: ../ui.py:2768
 msgid "Plugin will be placed into Channellist menu."
 msgstr "Plugin bude zobrazen v kontextovém menu přehledu programů."
 
-#: ../ui.py:1896
+#: ../ui.py:1923
 msgid "Position"
 msgstr "Pozice"
 
-#: ../ui.py:1839
+#: ../ui.py:1866
 msgid "Possible duplicates will not be marked in list. Check validity with 'Preview' before mark and before 'Refresh selected'."
 msgstr "Případné duplicity nebudou v seznamu označené. Před označením a před 'Aktualizovat vybrané' zkontrolujte platnost programu pomocí 'Náhled'."
 
-#: ../ui.py:2747
+#: ../ui.py:2774
 msgid "Pre-fill first 'n' servicename chars to virtual keyboard"
 msgstr "Předvyplnit prvních 'n' znaků názvu programu do virtuální klávesnice"
 
-#: ../ui.py:1547
+#: ../ui.py:1574
 msgid "Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'."
 msgstr "Připravte nahrazení programu programem ze zdrojového přehledu (oba označte pomocí 'OK') a proveďte tlačítkem 'Nahradit'. Opakujte jak potřebujete. Dokončete pomocí 'Provést a zavřít'."
 
-#: ../ui.py:1676 ../ui.py:1909 ../ui.py:2121 ../ui.py:2336 ../ui.py:2587
+#: ../ui.py:1703 ../ui.py:1936 ../ui.py:2148 ../ui.py:2363 ../ui.py:2614
 msgid "Preview"
 msgstr "Náhled"
 
-#: ../ui.py:2739
+#: ../ui.py:2766
 msgid "Preview on selection"
 msgstr "Náhled při výběru"
 
-#: ../ui.py:2738
+#: ../ui.py:2765
 msgid "Programs with 'HD/4K(UHD)' in name only for source"
 msgstr "Ve zdroji zobrazit pouze jména s 'HD/4K(UHD)'"
 
-#: ../ui.py:1137
+#: ../ui.py:1159
 #, python-format
 msgid "Progress: %s of %s"
 msgstr "Průběh: %s z %s"
 
-#: ../ui.py:1831
+#: ../ui.py:1858
 msgid "Refresh selected"
 msgstr "Aktualizovat vybrané"
 
-#: ../ui.py:247
+#: ../ui.py:249
 msgid "Refresh services in target bouquet"
 msgstr "Aktualizovat programy v cílovém přehledu"
 
@@ -613,16 +645,16 @@ msgstr "Aktualizovat programy v cílovém přehledu"
 msgid "RefreshBouquet"
 msgstr "RefreshBouquet"
 
-#: ../ui.py:1481 ../ui.py:1803 ../ui.py:2017 ../ui.py:2231 ../ui.py:2436
+#: ../ui.py:1508 ../ui.py:1830 ../ui.py:2044 ../ui.py:2258 ../ui.py:2463
 #, python-format
 msgid "RefreshBouquet %s"
 msgstr "RefreshBouquet v. %s"
 
-#: ../ui.py:2709 ../ui.py:2772
+#: ../ui.py:2736 ../ui.py:2808
 msgid "RefreshBouquet Setup"
 msgstr "RefreshBouquet Nastavení"
 
-#: ../ui.py:133
+#: ../ui.py:135
 #, python-format
 msgid "RefreshBouquet v. %s"
 msgstr "RefreshBouquet v. %s"
@@ -631,20 +663,20 @@ msgstr "RefreshBouquet v. %s"
 msgid "Remove"
 msgstr "Odstranit"
 
-#: ../ui.py:264
+#: ../ui.py:266
 #, python-format
 msgid "Remove bouquet '%s'"
 msgstr "Odstranit přehled '%s'"
 
-#: ../ui.py:2142 ../ui.py:2357 ../ui.py:2532
+#: ../ui.py:2169 ../ui.py:2384 ../ui.py:2559
 msgid "Remove from selection (starts with...)"
 msgstr "Odebrat z výběru (začíná na...)"
 
-#: ../ui.py:2262
+#: ../ui.py:2289
 msgid "Remove selected"
 msgstr "Odstranit vybrané"
 
-#: ../ui.py:251
+#: ../ui.py:253
 msgid "Remove selected services in bouquet"
 msgstr "Odstranit vybrané programy z přehledu"
 
@@ -652,16 +684,16 @@ msgstr "Odstranit vybrané programy z přehledu"
 msgid "Rename"
 msgstr "Přejmenovat"
 
-#: ../ui.py:262
+#: ../ui.py:264
 #, python-format
 msgid "Rename bouquet '%s'"
 msgstr "Přejmenovat přehled '%s'"
 
-#: ../ui.py:262
+#: ../ui.py:264
 msgid "Rename selected bouquet."
 msgstr "Přejmenování zvoleného přehledu."
 
-#: ../ui.py:1602
+#: ../ui.py:1629
 msgid "Replace"
 msgstr "Nahradit"
 
@@ -669,15 +701,15 @@ msgstr "Nahradit"
 msgid "Restore"
 msgstr "Obnovit"
 
-#: ../ui.py:2742
+#: ../ui.py:2769
 msgid "Return to previous service on end"
 msgstr "Po skončení návrat na předchozí program"
 
-#: ../ui.py:161
+#: ../ui.py:163
 msgid "Run"
 msgstr "Výběr akce"
 
-#: ../ui.py:277
+#: ../ui.py:279
 msgid "Select action for bouquet:"
 msgstr "Zvolte akci:"
 
@@ -685,7 +717,7 @@ msgstr "Zvolte akci:"
 msgid "Select action:"
 msgstr "Zvolte akci:"
 
-#: ../ui.py:173
+#: ../ui.py:175
 msgid "Select or source or target or source and target bouquets!"
 msgstr "Vyberte zdrojový nebo cílový nebo zdrojový a cílový přehled!"
 
@@ -697,107 +729,107 @@ msgstr "Zvolte rbb soubor"
 msgid "Select rbb file with 'OK' and create bouquet with same name."
 msgstr "Vyberte rbb soubor pomocí 'OK' a vytvořte přehled stejného názvu."
 
-#: ../ui.py:2754
+#: ../ui.py:2781
 msgid "Select/unselect with 'OK' moves the selector to next item in the list."
 msgstr "Označení/odznačení pomocí tlačítka 'OK' přesune kurzor na další položku v seznamu."
 
-#: ../ui.py:986
+#: ../ui.py:988
 msgid "Selected bouquet is empty!"
 msgstr "Vybraný přehled je prázdný!"
 
-#: ../ui.py:79
+#: ../ui.py:81
 msgid "Selected top"
 msgstr "Označené nahoru"
 
-#: ../ui.py:2744
+#: ../ui.py:2771
 msgid "Selector to current bouquet"
 msgstr "Nastavit kurzor na aktuální přehled"
 
-#: ../ui.py:162
+#: ../ui.py:164
 msgid "Set source"
 msgstr "Zdroj"
 
-#: ../ui.py:163
+#: ../ui.py:165
 msgid "Set target"
 msgstr "Cíl"
 
-#: ../ui.py:275
+#: ../ui.py:277
 msgid "Setting various plugin options."
 msgstr "Nastavení různých možností pluginu."
 
-#: ../ui.py:275
+#: ../ui.py:277
 msgid "Settings..."
 msgstr "Nastavení..."
 
-#: ../ui.py:2752
+#: ../ui.py:2779
 msgid "Show full filenames for deleted bouquets"
 msgstr "Zobrazovat plné názvy smazaných přehledů"
 
-#: ../ui.py:2732
+#: ../ui.py:2759
 msgid "Skip 1st nonstandard char in name"
 msgstr "Přeskočit počáteční nestandardní znak v názvu"
 
-#: ../ui.py:1859 ../ui.py:2076 ../ui.py:2290 ../ui.py:2496
+#: ../ui.py:1886 ../ui.py:2103 ../ui.py:2317 ../ui.py:2523
 msgid "Sort bouquet:"
 msgstr "Třídění přehledu:"
 
-#: ../ui.py:1570
+#: ../ui.py:1597
 msgid "Sort source bouquet:"
 msgstr "Třídit zdrojový přehled:"
 
-#: ../ui.py:2473
+#: ../ui.py:2500
 msgid "Sorting has not effect for finaly bouquet sorting."
 msgstr "Třídění nemá vliv na konečné setřídění přehledu."
 
-#: ../ui.py:416 ../ui.py:484
+#: ../ui.py:418 ../ui.py:486
 msgid "Source bouquet is empty !"
 msgstr "Zdrojový přehled je prázdný!"
 
-#: ../ui.py:735 ../ui.py:978 ../ui.py:1067 ../ui.py:1170
+#: ../ui.py:737 ../ui.py:980 ../ui.py:1069 ../ui.py:1197
 msgid "Source bouquet is empty!"
 msgstr "Zdrojový přehled je prázdný!"
 
-#: ../ui.py:168
+#: ../ui.py:170
 msgid "Source bouquet:"
 msgstr "Zdrojový přehled:"
 
-#: ../ui.py:1549
+#: ../ui.py:1576
 msgid "Source can be sorted with 'Menu'."
 msgstr "Zdroj může být tříděn pomocí 'Menu'."
 
-#: ../ui.py:174
+#: ../ui.py:176
 msgid "Source select with 'yellow' button, target with 'blue' button. Selection can be cleared with '0'."
 msgstr "Zdrojový přehled vyberte žlutým tlačítkem, cílový přehled modrým tlačítkem. Výběr můžete zrušit pomocí '0'."
 
-#: ../ui.py:2749
+#: ../ui.py:2776
 msgid "Support for 'rbb' files"
 msgstr "Podpora 'rbb' souborů"
 
-#: ../ui.py:373
+#: ../ui.py:375
 msgid "T"
 msgstr "T"
 
-#: ../ui.py:659
+#: ../ui.py:661
 msgid "TE file was created."
 msgstr "TE soubor byl vytvořen."
 
-#: ../ui.py:2737
+#: ../ui.py:2764
 msgid "Take into account 'service type' in automatic replacing too."
 msgstr "Bere v úvahu i typ programu v automatickém nahrazování."
 
-#: ../ui.py:413
+#: ../ui.py:415
 msgid "Target bouquet is empty !"
 msgstr "Cílový přehled je prázdný!"
 
-#: ../ui.py:982 ../ui.py:1064
+#: ../ui.py:984 ../ui.py:1066
 msgid "Target bouquet is empty!"
 msgstr "Cílový přehled je prázdný!"
 
-#: ../ui.py:169
+#: ../ui.py:171
 msgid "Target bouquet:"
 msgstr "Cílový přehled:"
 
-#: ../ui.py:373
+#: ../ui.py:375
 msgid "Terrestrial"
 msgstr "Pozemní"
 
@@ -806,19 +838,19 @@ msgstr "Pozemní"
 msgid "The path %s already exists."
 msgstr "Cesta %s již existuje."
 
-#: ../ui.py:2742
+#: ../ui.py:2769
 msgid "The service being played before the plugin is started on exit again."
 msgstr "Po skončení pluginu bude přehráván původní program."
 
-#: ../ui.py:1837
+#: ../ui.py:1864
 msgid "This feature looking for differences in service parameters with same names in source and target bouquets. Parameters for marked services will be replaced."
 msgstr "Tato funkce vyhledá odlišnosti v parametrech programů se stejným názvem ve zdrojovém a cílovém přehledu. Parametry označených programů budou nahrazeny."
 
-#: ../ui.py:1545
+#: ../ui.py:1572
 msgid "Toggle source and target bouquets with Bouq +/- ."
 msgstr "Mezi přehledy přepínejte pomocí Ch+/- ."
 
-#: ../ui.py:2751
+#: ../ui.py:2778
 msgid "Transedit file support"
 msgstr "Podpora TransEdit souborů"
 
@@ -826,59 +858,59 @@ msgstr "Podpora TransEdit souborů"
 msgid "Use 'Menu' for predefined 'rbb' files."
 msgstr "Použijte 'Menu' pro předdefinované 'rbb' soubory."
 
-#: ../ui.py:2053 ../ui.py:2267 ../ui.py:2472
+#: ../ui.py:2080 ../ui.py:2294 ../ui.py:2499
 msgid "Use 'Menu' for sorting."
 msgstr "Pro setřídění použijte 'Menu'."
 
-#: ../ui.py:2753
+#: ../ui.py:2780
 msgid "Use all service types"
 msgstr "Použít všechny programové služby"
 
-#: ../ui.py:2750
+#: ../ui.py:2777
 msgid "Use dotted service name for 'rbb' files"
 msgstr "Používat otečkované názvy programů pro 'rbb' soubory"
 
-#: ../ui.py:176
+#: ../ui.py:178
 msgid "Use the context 'menu' or 'green' buttons to select operation."
 msgstr "Použijte kontextové menu nebo zelené tlačítko pro výběr operace."
 
-#: ../ui.py:2737
+#: ../ui.py:2764
 msgid "Using 'service type' in automatic replacing"
 msgstr "Používat 'service type' v automatickém nahrazování"
 
-#: ../ui.py:377
+#: ../ui.py:379
 msgid "W"
 msgstr "W"
 
-#: ../ui.py:2750
+#: ../ui.py:2777
 msgid "When is creating a bouquet from 'rbb' file, dotted names can be compared too. You need then manually remove duplicates. Default set is 'no'."
 msgstr "Při vytváření přehledu z 'rbb' souboru mohou být porovnávány i tečkované názvy programů. Budete ale muset ručně odstraňovat duplicity."
 
-#: ../ui.py:2743
+#: ../ui.py:2770
 msgid "When the plugin is launched, current bouquet can be set as source or target bouquet."
 msgstr "Při startu pluginu může být aktuální přehled nastaven jako zdroj nebo cíl."
 
-#: ../ui.py:2744
+#: ../ui.py:2771
 msgid "When the plugin is launched, the selector will be set in the bouquets list on current bouquet."
 msgstr "Při spuštění pluginu bude kurzor v seznamu přehledů nastaven na aktuálním přehledu."
 
-#: ../ui.py:316
+#: ../ui.py:318
 msgid "Wrong selection!"
 msgstr "Neplatná volba!"
 
-#: ../ui.py:2172
+#: ../ui.py:2199
 msgid "Yes"
 msgstr "Ano"
 
-#: ../ui.py:2174
+#: ../ui.py:2201
 msgid "Yes, add to new bouquet..."
 msgstr "Ano, přidat do nového přehledu..."
 
-#: ../ui.py:2733
+#: ../ui.py:2760
 msgid "You can omit last service name char if provider added it for his planned 're-tuning' and You want use 'Refresh services' for this services too."
 msgstr "Můžete vynechat poslední znak v názvu programu, jestliže ho poskytovatel přidal pro plánované přeladění a chcete pro tyto programy použít 'Aktualizovat programy'."
 
-#: ../ui.py:2736
+#: ../ui.py:2763
 msgid "You can select valid orbital position as filter for display services in source bouquet."
 msgstr "Můžete použít platnou orbitální pozici jako filtr pro zobrazení programů ve zdrojovém přehledu."
 
@@ -886,66 +918,66 @@ msgstr "Můžete použít platnou orbitální pozici jako filtr pro zobrazení p
 msgid "You can try toggle 'Standard/Dotted' service names too."
 msgstr "Můžete zkusit přepnout také mezi 'Standardní/Tečkované' ."
 
-#: ../ui.py:2195
+#: ../ui.py:2222
 msgid "You did not enter the bouquet name!"
 msgstr "Nezadali jste název přehledu!"
 
-#: ../ui.py:59 ../ui.py:79
+#: ../ui.py:61 ../ui.py:81
 msgid "Z-a sort"
 msgstr "Z-a"
 
-#: ../ui.py:147
+#: ../ui.py:149
 msgid "clear selection"
 msgstr "zrušit výběr"
 
-#: ../ui.py:148
+#: ../ui.py:150
 msgid "enable/disable moving bouquet"
 msgstr "povolit/zakázat přesun přehledu"
 
-#: ../ui.py:137 ../ui.py:142
+#: ../ui.py:139 ../ui.py:144
 msgid "exit plugin"
 msgstr "ukončit plugin"
 
-#: ../ui.py:149
+#: ../ui.py:151
 msgid "move item down"
 msgstr "posun dolů"
 
-#: ../ui.py:150
+#: ../ui.py:152
 msgid "move item up"
 msgstr "posun nahoru"
 
-#: ../ui.py:57 ../ui.py:60 ../ui.py:65 ../ui.py:67 ../ui.py:71 ../ui.py:385
+#: ../ui.py:57 ../ui.py:62 ../ui.py:67 ../ui.py:69 ../ui.py:73 ../ui.py:387
 msgid "no"
 msgstr "Ne"
 
-#: ../ui.py:138 ../ui.py:143 ../ui.py:146
+#: ../ui.py:140 ../ui.py:145 ../ui.py:148
 msgid "select action"
 msgstr "výběr akce"
 
-#: ../ui.py:144
+#: ../ui.py:146
 msgid "select source bouquet"
 msgstr "výběr zdrojového přehledu"
 
-#: ../ui.py:145
+#: ../ui.py:147
 msgid "select target bouquet"
 msgstr "výběr cílového přehledu"
 
-#: ../ui.py:67 ../ui.py:1542
+#: ../ui.py:69 ../ui.py:1569
 msgid "source bouquet"
 msgstr "Zdrojový přehled"
 
-#: ../ui.py:67 ../ui.py:1543
+#: ../ui.py:69 ../ui.py:1570
 msgid "target bouquet"
 msgstr "Cílový přehled"
 
-#: ../ui.py:771
+#: ../ui.py:773
 msgid "unknown"
 msgstr "neznámý"
 
-#: ../ui.py:379
+#: ../ui.py:381
 msgid "° E"
 msgstr "° E"
 
-#: ../ui.py:377
+#: ../ui.py:379
 msgid "° W"
 msgstr "° W"

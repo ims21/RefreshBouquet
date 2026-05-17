@@ -4,8 +4,8 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.21"
-#  by ims (c) 2016-2025 ims21@users.sourceforge.net
+VERSION = "2.22"
+#  by ims (c) 2016-2026 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -54,7 +54,9 @@ import socket
 #config.plugins.refreshbouquet.case_sensitive = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.omit_first = ConfigYesNo(default=True)
 #config.plugins.refreshbouquet.debug = ConfigYesNo(default=False)
-config.plugins.refreshbouquet.autozap = ConfigSelection(default="0", choices=[("0", _("no")), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("8", "8"), ("10", "10"), ("15", "15"), ("20", "20")])
+config.plugins.refreshbouquet.autozap = ConfigSelection(default="0", choices=[("0", _("no")), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("8", "8"), ("10", "10"), ("12", "12"), ("15", "15"), ("20", "20"), ("30", "30")])
+config.plugins.refreshbouquet.autozap_cryptedonly = ConfigYesNo(default=False)
+config.plugins.refreshbouquet.autozap_orbital = ConfigSelection(default="all", choices=[("all", _("All")), ("3592", _("0.8W")), ("130", _("13.0E")), ("192", _("19.2E")), ("235", _("23.5E"))])
 config.plugins.refreshbouquet.log = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.mr_sortsource = ConfigSelection(default="0", choices=[("0", _("Original")), ("1", _("A-z sort")), ("2", _("Z-a sort"))])
 config.plugins.refreshbouquet.used_services = ConfigSelection(default="all", choices=[("all", _("no")), ("HD", _("HD")), ("4K", _("4K/UHD")), ("HD4K", _("HD or 4K/UHD"))])
@@ -1128,6 +1130,26 @@ class refreshBouquet(Screen, HelpableScreen):
 # zap services in Bouquet with delay
 ###
 	def zapInBouquet(self):
+		def isOrbitalPosition(refstr, pos):
+			serviceHandler = eServiceCenter.getInstance()
+			ref = eServiceReference(refstr)
+			info = serviceHandler.info(ref)
+			if info:
+				tp = info.getInfoObject(ref, iServiceInformation.sTransponderData)
+				if tp:
+					return str(tp.get("orbital_position", 0)) == pos
+			return False
+
+		def isCryptedService(refstr):
+			ref = eServiceReference(refstr)
+			info = eServiceCenter.getInstance().info(ref)
+			if info:
+				try:
+					return info.isCrypted()
+				except Exception as e:
+					print("[RefreshBouquet] isCrypted error:", e, refstr)
+			return False
+
 		def zapService():
 			if self.servicesInBouquetIndex >= len(self.servicesInBouquet):
 				self.zapTimer.stop()
@@ -1148,6 +1170,11 @@ class refreshBouquet(Screen, HelpableScreen):
 				return
 			self.servicesInBouquet = []
 			self.servicesInBouquet = self.addToBouquetFiltered(item)
+			if cfg.autozap_cryptedonly.value:
+				self.servicesInBouquet = [x for x in self.servicesInBouquet if isCryptedService(x[1])]
+			orbital = cfg.autozap_orbital.value
+			if orbital != "all":
+				self.servicesInBouquet = [x for x in self.servicesInBouquet if isOrbitalPosition(x[1], orbital)]
 			if not len(self.servicesInBouquet):
 				self["info"].setText("%s" % t1)
 				return
@@ -2753,13 +2780,22 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Use all service types"), cfg.allstypes, _("In almost all cases should be this option disabled, because TV and Radio service are most used types.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Move selector to next item"), cfg.move_selector, _("Select/unselect with 'OK' moves the selector to next item in the list.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Autozap accros bouquet"), cfg.autozap, _("Enable menu item for autozap services across bouquet with selected time interval (in second).")))
+		if cfg.autozap.value != "0":
+			refreshBouquetCfglist.append(getConfigListEntry(_("Crypted only"), cfg.autozap_cryptedonly, _("Autozap across bouquet only for encrypted services (skip FTA).")))
+			refreshBouquetCfglist.append(getConfigListEntry(_("Orbital position"), cfg.autozap_orbital, _("Autozap across bouquet only for services on selected orbital position.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Debug info"), cfg.debug))
-		ConfigListScreen.__init__(self, refreshBouquetCfglist, self.session, on_change=self.changedEntry)
+		if "config" in self:
+			self["config"].setList(refreshBouquetCfglist)
+		else:
+			ConfigListScreen.__init__(self, refreshBouquetCfglist, self.session, on_change=self.changedEntry)
 
 	# for summary:
 	def changedEntry(self):
+		cur = self["config"].getCurrent()
 		for x in self.onChangedEntry:
 			x()
+		if cur and cur[1] == cfg.autozap:
+			self.menu()
 	def getCurrentEntry(self):
 		return self["config"].getCurrent()[0]
 	def getCurrentValue(self):
