@@ -232,7 +232,7 @@ class refreshBouquet(Screen, HelpableScreen):
 					menu.append((_("Add selected services to target bouquet"), 1, _("Add one or more selected programs from the source bouquet to the target bouquet at once.")))
 					menu.append((_("Add selected missing services to target bouquet"), 2, _("Only the programs from the source bouquet that are missing in the target bouquet are displayed. The user can select these programs and transfer them to the target bouquet all at once.")))
 					menu.append((_("Refresh services in target bouquet"), 4, _("Compares the parameters of identical programs in the source and target bouquet, and if differences are found, offers them for selection and replacement with the parameters from the source bouquet.")))
-					buttons += ["blue", " ", "yellow", "green"]
+					buttons += ["blue", "", "yellow", "green"]
 		if self["config"].getCurrent():
 			menu.append((_("Move selected services in bouquet") + " '%s'" % bName, 5, _("Move one service or more selected services in bouquet to new position.")))
 			menu.append((_("Remove selected services in bouquet") + " '%s'" % bName, 3, _("Delete one service or more marked services from bouquet.")))
@@ -252,7 +252,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			buttons += [""]
 			if cfg.autozap.value > "0":
 				menu.append((_("Autozap across '%s' bouquet") % bName, 50, _("Automatically switches between programs in the bouquet at the time interval set in Settings.")))
-			buttons += [""]
+				buttons += [""]
 		if cfg.transedit.value and self["config"].getCurrent():
 			name =  self.plainString(self["config"].getCurrent()[0]).decode().replace(' ', '_')
 			menu.append((_("Create TE file '%s-%s.ini' to '/tmp'") % (socket.gethostname().upper(), name), 30))
