@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.22"
+VERSION = "2.23"
 #  by ims (c) 2016-2026 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -51,40 +51,25 @@ from Components.About import GetIPsFromNetworkInterfaces
 import socket
 
 
-#config.plugins.refreshbouquet.case_sensitive = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.omit_first = ConfigYesNo(default=True)
-#config.plugins.refreshbouquet.debug = ConfigYesNo(default=False)
-config.plugins.refreshbouquet.autozap = ConfigSelection(default="0", choices=[("0", _("no")), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("8", "8"), ("10", "10"), ("12", "12"), ("15", "15"), ("20", "20"), ("30", "30")])
+config.plugins.refreshbouquet.autozap = ConfigSelection(default="0", choices=[("0", _("no")), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("8", "8"), ("10", "10"), ("11", "11"), ("12", "12"), ("15", "15"), ("20", "20"), ("30", "30")])
 config.plugins.refreshbouquet.autozap_cryptedonly = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.autozap_orbital = ConfigSelection(default="all", choices=[("all", _("All")), ("3592", _("0.8W")), ("130", _("13.0E")), ("192", _("19.2E")), ("235", _("23.5E"))])
 config.plugins.refreshbouquet.log = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.mr_sortsource = ConfigSelection(default="0", choices=[("0", _("Original")), ("1", _("A-z sort")), ("2", _("Z-a sort"))])
 config.plugins.refreshbouquet.used_services = ConfigSelection(default="all", choices=[("all", _("no")), ("HD", _("HD")), ("4K", _("4K/UHD")), ("HD4K", _("HD or 4K/UHD"))])
-#config.plugins.refreshbouquet.diff = ConfigYesNo(default=False)
-#config.plugins.refreshbouquet.preview = ConfigYesNo(default=False)
-#config.plugins.refreshbouquet.autotoggle = ConfigYesNo(default=True)
-#config.plugins.refreshbouquet.on_end = ConfigYesNo(default=True)
 config.plugins.refreshbouquet.orbital = ConfigSelection(default="x", choices=[("x", _("no")),])
 config.plugins.refreshbouquet.stype = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.current_bouquet = ConfigSelection(default="0", choices=[("0", _("no")), ("source", _("source bouquet")), ("target", _("target bouquet"))])
 config.plugins.refreshbouquet.selector2bouquet = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.bouquet_name = ConfigYesNo(default=True)
-#config.plugins.refreshbouquet.confirm_move = ConfigYesNo(default=True)
 config.plugins.refreshbouquet.ignore_last_char = ConfigSelection(default=None, choices=[(None, _("no")), (".", ".")])
-#choicelist = []
-#for i in range(1, 11, 1):
-#	choicelist.append(("%d" % i))
-#choicelist.append(("15","15"))
-#choicelist.append(("20","20"))
-#config.plugins.refreshbouquet.vk_length = ConfigSelection(default="3", choices=[("0", _("No"))] + choicelist + [("255", _("All"))])
-#config.plugins.refreshbouquet.vk_sensitive = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.sortmenu = ConfigSelection(default="0", choices=[("0", _("Original")), ("1", _("A-z sort")), ("2", _("Z-a sort")), ("3", _("Selected top")), ("4", _("Original - reverted"))])
 config.plugins.refreshbouquet.rbbfiles = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.rbb_dotted = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.deleted_bq_fullname = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.transedit = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.allstypes = ConfigYesNo(default=False)
-#config.plugins.refreshbouquet.move_selector = ConfigYesNo(default=False)
 
 cfg = config.plugins.refreshbouquet
 
@@ -2744,7 +2729,6 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"green": self.save,
-			"ok": self.save,
 			"red": self.exit,
 			"cancel": self.exit
 		}, -2)
@@ -2781,8 +2765,8 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		refreshBouquetCfglist.append(getConfigListEntry(_("Move selector to next item"), cfg.move_selector, _("Select/unselect with 'OK' moves the selector to next item in the list.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Autozap accros bouquet"), cfg.autozap, _("Enable menu item for autozap services across bouquet with selected time interval (in second).")))
 		if cfg.autozap.value != "0":
-			refreshBouquetCfglist.append(getConfigListEntry(_("Crypted only"), cfg.autozap_cryptedonly, _("Autozap across bouquet only for encrypted services (skip FTA).")))
-			refreshBouquetCfglist.append(getConfigListEntry(_("Orbital position"), cfg.autozap_orbital, _("Autozap across bouquet only for services on selected orbital position.")))
+			refreshBouquetCfglist.append(getConfigListEntry(4*" " + _("Crypted only"), cfg.autozap_cryptedonly, _("Autozap across bouquet only for encrypted services (skip FTA).")))
+			refreshBouquetCfglist.append(getConfigListEntry(4*" " + _("Orbital position"), cfg.autozap_orbital, _("Autozap across bouquet only for services on selected orbital position.")))
 		refreshBouquetCfglist.append(getConfigListEntry(_("Debug info"), cfg.debug))
 		if "config" in self:
 			self["config"].setList(refreshBouquetCfglist)
