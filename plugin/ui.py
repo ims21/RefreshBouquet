@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.23"
+VERSION = "2.24"
 #  by ims (c) 2016-2026 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -430,34 +430,36 @@ class refreshBouquet(Screen, HelpableScreen):
 				if self.isNotService(s[1]): # skip all non playable
 					continue
 				s_splited = s[1].split(':') # split service_reference
+				s_name = self.prepareStr(s[0])
+				s_op = s_splited[6][:-4]  # orbital position
+				s_charsOnly = self.charsOnly(s[0])
 				s_core = ":".join((s_splited[3], s_splited[4], s_splited[5], s_splited[6]))
 				if cfg.stype.value: # differences in service type too
 					s_core = ":".join((s_splited[2], s_core))
 				if cfg.orbital.value != "x": # only on selected op
-					if s_splited[6][:-4] != cfg.orbital.value:
+					if s_op != cfg.orbital.value:
 						continue
-				if t_name == self.prepareStr(s[0]): # found services with equal name
-					s_splited = s[1].split(':') # split ref
-					if t_op == s_splited[6][:-4]: # same orbital position only
+				if t_name == s_name: # found services with equal name
+					if t_op == s_op: # same orbital position only
 						if t_core != s_core and not t_splited[10] and not s_splited[10]: # is different ref ([3]-[6])and is not stream
 							length += 1
 							select = True
 							try:
-								tmp = potencialy_duplicity.index(self.charsOnly(s[0])) # same services_name in source = could be duplicity ... set in list as unselected
+								tmp = potencialy_duplicity.index(s_charsOnly) # same services_name in source = could be duplicity ... set in list as unselected
 								if cfg.debug.value:
-									debug("Founded: %s" % self.charsOnly(s[0]))
+									debug("Founded: %s" % s_charsOnly)
 								select = False
 							except:
 								if cfg.debug.value:
-									debug("Unique: %s" % self.charsOnly(s[0]))
+									debug("Unique: %s" % s_charsOnly)
 							# name, [new ref, old ref], index, selected
 							differences.list.append(MySelectionEntryComponent(s[0], [s[1], t[1]], i, select))
 							if cfg.debug.value:
-								debug("Added: %s" % self.charsOnly(s[0]))
-						potencialy_duplicity.append(self.charsOnly(s[0])) # add to list for next check duplicity
+								debug("Added: %s" % s_charsOnly)
+						potencialy_duplicity.append(s_charsOnly) # add to list for next check duplicity
 			i += 1
-			self.l = MySelectionList(differences)
-			self.l.setList(differences)
+		self.l = MySelectionList(differences)
+		self.l.setList(differences)
 		return differences, length
 ###
 # Add missing services to source bouquet or all services to empty bouquet
