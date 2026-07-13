@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.24"
+VERSION = "2.25"
 #  by ims (c) 2016-2026 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -305,7 +305,7 @@ class refreshBouquet(Screen, HelpableScreen):
 
 # get plain string
 	def plainString(self, text):
-		return unicodedata.normalize('NFKD', text).encode('ASCII', 'ignore')
+		return unicodedata.normalize('NFKD', text.replace("/", "-")).encode('ASCII', 'ignore')
 
 
 # set selector to selected bouquet
