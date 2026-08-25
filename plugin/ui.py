@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.28"
+VERSION = "2.29"
 #  by ims (c) 2016-2026 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -64,6 +64,8 @@ config.plugins.refreshbouquet.autozap_count = ConfigSelection(
 )
 config.plugins.refreshbouquet.autozap_user = ConfigText(default="", fixed_size=False)
 config.plugins.refreshbouquet.autozap_passwd = ConfigPassword(default="", fixed_size=False)
+config.plugins.refreshbouquet.autozap_reader = ConfigText(default="", fixed_size=False)
+
 config.plugins.refreshbouquet.log = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.mr_sortsource = ConfigSelection(default="0", choices=[("0", _("Original")), ("1", _("A-z sort")), ("2", _("Z-a sort"))])
 config.plugins.refreshbouquet.used_services = ConfigSelection(default="all", choices=[("all", _("no")), ("HD", _("HD")), ("4K", _("4K/UHD")), ("HD4K", _("HD or 4K/UHD"))])
@@ -1185,10 +1187,11 @@ class refreshBouquet(Screen, HelpableScreen):
 				setOscamLogging(False)
 
 				decoded = set()
+				reader = cfg.autozap_reader.value.strip()
 				try:
 					with open(OSCAM_LOG, "r") as f:
 						for line in f:
-							match = re.search(r"\(ecm\)\s+dvbapiau\s+\([^/]+/[^/]+/([0-9A-Fa-f]+)/[^)]*\): found\b", line)
+							match = re.search(r"\(ecm\)\s+dvbapiau\s+\([^/]+/[^/]+/([0-9A-Fa-f]+)/[^)]*\): found\b.*\bby\s+%s\b" % re.escape(reader), line)
 							if match:
 								decoded.add(int(match.group(1), 16))
 				except IOError as e:
@@ -2882,6 +2885,7 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 			refreshBouquetCfglist.append((4*" " + _("Number of services"), cfg.autozap_count, _("Number of services to autozap from selected start position.")))
 			refreshBouquetCfglist.append((4*" " + _("User"), cfg.autozap_user, _("Oscam WebIf user value.")))
 			refreshBouquetCfglist.append((4*" " + _("Password"), cfg.autozap_passwd, _("Oscam WebIf password value.")))
+			refreshBouquetCfglist.append((4*" " + _("Card reader name"), cfg.autozap_reader, _("OSCam reader name used to verify successful decoding.")))
 		refreshBouquetCfglist.append((_("Debug info"), cfg.debug))
 		if "config" in self:
 			self["config"].setList(refreshBouquetCfglist)
