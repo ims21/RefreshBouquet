@@ -1188,6 +1188,7 @@ class refreshBouquet(Screen, HelpableScreen):
 
 				decoded = set()
 				rejected = set()
+				notFound = {}
 				reader = cfg.autozap_reader.value.strip()
 				try:
 					with open(OSCAM_LOG, "r") as f:
