@@ -1187,13 +1187,24 @@ class refreshBouquet(Screen, HelpableScreen):
 				setOscamLogging(False)
 
 				decoded = set()
+				rejected = set()
 				reader = cfg.autozap_reader.value.strip()
 				try:
 					with open(OSCAM_LOG, "r") as f:
 						for line in f:
-							match = re.search(r"\(ecm\)\s+dvbapiau\s+\([^/]+/[^/]+/([0-9A-Fa-f]+)/[^)]*\): found\b.*\bby\s+%s\b" % re.escape(reader), line)
+							match = re.search(
+								r"\(ecm\)\s+dvbapiau\s+\([^/]+/[^/]+/([0-9A-Fa-f]+)/[^)]*\): (found|not found)\b.*\bby\s+%s\b" % re.escape(reader),
+								line
+							)
 							if match:
-								decoded.add(int(match.group(1), 16))
+								sid = int(match.group(1), 16)
+								if match.group(2) == "not found":
+									notFound[sid] = notFound.get(sid, 0) + 1
+									if notFound[sid] >= 5:
+										rejected.add(sid)
+										decoded.discard(sid)
+								elif sid not in rejected:
+									decoded.add(sid)
 				except IOError as e:
 					print("[RefreshBouquet] OSCam log error:", e)
 
