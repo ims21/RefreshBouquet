@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.25"
+VERSION = "2.27"
 #  by ims (c) 2016-2026 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -24,7 +24,7 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Components.ActionMap import ActionMap, HelpableActionMap
-from Components.config import config, ConfigYesNo, getConfigListEntry, ConfigSelection, NoSave
+from Components.config import config, ConfigYesNo, ConfigSelection, NoSave
 from Components.Label import Label
 from Components.Button import Button
 from Components.Sources.StaticText import StaticText
@@ -50,9 +50,8 @@ from Components.Pixmap import Pixmap
 from Components.About import GetIPsFromNetworkInterfaces
 import socket
 
-
 config.plugins.refreshbouquet.omit_first = ConfigYesNo(default=True)
-config.plugins.refreshbouquet.autozap = ConfigSelection(default="0", choices=[("0", _("no")), ("3", "3"), ("4", "4"), ("5", "5"), ("6", "6"), ("8", "8"), ("10", "10"), ("11", "11"), ("12", "12"), ("15", "15"), ("20", "20"), ("30", "30")])
+config.plugins.refreshbouquet.autozap = ConfigSelection(default="0", choices=[("0", _("no")), ("3", "3s"), ("4", "4s"), ("5", "5s"), ("6", "6s"), ("7", "7s"), ("8", "8s"), ("10", "10s"), ("12", "12s"), ("15", "15s"), ("20", "20s"), ("30", "30s")])
 config.plugins.refreshbouquet.autozap_cryptedonly = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.autozap_orbital = ConfigSelection(default="all", choices=[("all", _("All")), ("3592", _("0.8W")), ("130", _("13.0E")), ("192", _("19.2E")), ("235", _("23.5E"))])
 config.plugins.refreshbouquet.log = ConfigYesNo(default=False)
@@ -79,6 +78,21 @@ RADIO = (2, 10)
 E2 = "/etc/enigma2"
 
 sel_position = None
+
+SID_PATH = "/home/root/"
+SIDS = SID_PATH + "SIDs"
+SIDS_SORTED = SID_PATH + "SIDs_sorted"
+SIDS_NAMES = SID_PATH + "SIDs_names"
+
+COLOR_RED = "ff4040"
+COLOR_GREEN = "40a040"
+COLOR_GRAY = "b0b0b0"
+COLOR_YELLOW = "c0c060"
+COLOR_LIGHTGREEN = "c0ffc0"
+
+def colorText(rrggbb, text):
+	return "\\c00%s%s\\C" % (rrggbb, text)
+
 
 class refreshBouquet(Screen, HelpableScreen):
 	skin = """
@@ -234,11 +248,11 @@ class refreshBouquet(Screen, HelpableScreen):
 					menu.append((_("Refresh services in target bouquet"), 4, _("Compares the parameters of identical programs in the source and target bouquet, and if differences are found, offers them for selection and replacement with the parameters from the source bouquet.")))
 					buttons += ["blue", "", "yellow", "green"]
 		if self["config"].getCurrent():
-			menu.append((_("Move selected services in bouquet") + " '%s'" % bName, 5, _("Move one service or more selected services in bouquet to new position.")))
-			menu.append((_("Remove selected services in bouquet") + " '%s'" % bName, 3, _("Delete one service or more marked services from bouquet.")))
+			menu.append((_("Move selected services in bouquet") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 5, _("Move one service or more selected services in bouquet to new position.")))
+			menu.append((_("Remove selected services in bouquet") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 3, _("Delete one service or more marked services from bouquet.")))
 			buttons += ["6", "8"]
 		if cfg.rbbfiles.value: # rbb for sources only
-			menu.append((_("Create '%s.rbb' file") % bName, 20))
+			menu.append((_("Create '%s.rbb' file") % colorText(COLOR_LIGHTGREEN, bName), 20))
 			buttons += [""]
 			if self.isRbbFile():
 				menu.append((_("Create bouquet from rbb file"), 21))
@@ -246,12 +260,12 @@ class refreshBouquet(Screen, HelpableScreen):
 		menu.append((_("Create new bouquet"), 13, _("Create a new bouquet with the specified name.")))
 		buttons += [""]
 		if self["config"].getCurrent():
-			menu.append((_("Rename bouquet '%s'") % bName, 14, _("Rename selected bouquet.")))
+			menu.append((_("Rename bouquet '%s'") % colorText(COLOR_LIGHTGREEN, bName), 14, _("Rename selected bouquet.")))
 			buttons += ["2"]
-			menu.append((_("Remove bouquet '%s'") % bName, 15, _("Delete selected bouquet.")))
+			menu.append((_("Remove bouquet '%s'") % colorText(COLOR_LIGHTGREEN, bName), 15, _("Delete selected bouquet.")))
 			buttons += [""]
 			if cfg.autozap.value > "0":
-				menu.append((_("Autozap across '%s' bouquet") % bName, 50, _("Automatically switches between programs in the bouquet at the time interval set in Settings.")))
+				menu.append((_("Autozap across '%s' bouquet") % colorText(COLOR_YELLOW, bName), 50, _("Automatically switches between programs in the bouquet at the time interval set in Settings.")))
 				buttons += [""]
 		if cfg.transedit.value and self["config"].getCurrent():
 			name =  self.plainString(self["config"].getCurrent()[0]).decode().replace(' ', '_')
@@ -1116,7 +1130,35 @@ class refreshBouquet(Screen, HelpableScreen):
 ###
 # zap services in Bouquet with delay
 ###
-	def zapInBouquet(self):
+
+	def zapInBouquet(self, keepSIDs=None):
+		if os.path.exists(SIDS) and keepSIDs is None:
+			self.session.openWithCallback(self.zapInBouquet, MessageBox, _("Keep previous files (in %s)?") % SID_PATH, MessageBox.TYPE_YESNO, default=True)
+			return
+		if keepSIDs is False:
+			for filename in (SIDS, SIDS_SORTED, SIDS_NAMES):
+				try:
+					os.remove(filename)
+				except OSError:
+					pass
+
+		def decodedService(): # crypted service with valid video dimensions should be decoded
+			service = self.session.nav.getCurrentService()
+			info = service and service.info()
+			if info:
+				width = info.getInfo(iServiceInformation.sVideoWidth)
+				height = info.getInfo(iServiceInformation.sVideoHeight)
+				crypted = info.getInfo(iServiceInformation.sIsCrypted) == 1
+				if crypted and width > 0 and height > 0:
+					sid = info.getInfo(iServiceInformation.sSID)
+					if sid >= 0:
+						ref = eServiceReference(self.servicesInBouquet[self.servicesInBouquetIndex - 1][1])
+						staticInfo = eServiceCenter.getInstance().info(ref)
+						name = staticInfo.getName(ref) if staticInfo else ""
+						print("[RefreshBouquet] decoded SID: %04X" % sid)
+						return sid, name
+			return None, None
+
 		def isOrbitalPosition(refstr, pos):
 			serviceHandler = eServiceCenter.getInstance()
 			ref = eServiceReference(refstr)
@@ -1127,7 +1169,7 @@ class refreshBouquet(Screen, HelpableScreen):
 					return str(tp.get("orbital_position", 0)) == pos
 			return False
 
-		def isCryptedService(refstr):
+		def isCryptedService(refstr): # box must have an up-to-date lamedb
 			ref = eServiceReference(refstr)
 			info = eServiceCenter.getInstance().info(ref)
 			if info:
@@ -1138,8 +1180,22 @@ class refreshBouquet(Screen, HelpableScreen):
 			return False
 
 		def zapService():
+			if self.servicesInBouquetIndex:
+				sid, name = decodedService()
+				if sid is not None:
+					if sid not in self.decodedSIDs:
+						self.decodedSIDs.append(sid)
+					self.decodedSIDNames[sid] = name
+
 			if self.servicesInBouquetIndex >= len(self.servicesInBouquet):
 				self.zapTimer.stop()
+				with open(SIDS,"w") as f:
+					f.write(",".join("%04X" % sid for sid in self.decodedSIDs))
+				with open(SIDS_SORTED, "w") as f:
+					f.write(",".join("%04X" % sid for sid in sorted(self.decodedSIDs)))
+				with open(SIDS_NAMES, "w") as f:
+					for sid in self.decodedSIDs:
+						f.write("%04X,%s\n" % (sid, self.decodedSIDNames.get(sid, "")))
 				self["info"].setText(self.infotext)
 				self.session.nav.playService(self.playingRef)
 				return
@@ -1167,6 +1223,19 @@ class refreshBouquet(Screen, HelpableScreen):
 				return
 			self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 			self.servicesInBouquetIndex = 0
+			try:
+				with open(SIDS, "r") as f:
+					self.decodedSIDs = [int(x, 16) for x in f.read().strip().split(",") if x]
+			except (IOError, ValueError):
+				self.decodedSIDs = []
+			self.decodedSIDNames = {}
+			try:
+				with open(SIDS_NAMES, "r") as f:
+					for line in f:
+						sid, name = line.rstrip("\n").split(",", 1)
+						self.decodedSIDNames[int(sid, 16)] = name
+			except (IOError, ValueError):
+				pass
 			self.zapTimer = eTimer()
 			self.zapTimer.timeout.get().append(zapService)
 			self.zapTimer.start(0, True)
@@ -2741,35 +2810,35 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 
 	def menu(self):
 		refreshBouquetCfglist = []
-		refreshBouquetCfglist.append(getConfigListEntry(_("Compare case sensitive"), cfg.case_sensitive))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Skip 1st nonstandard char in name"), cfg.omit_first, _("Omit any control character in service name. Default set 'yes'.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Omit last char in target names"), cfg.ignore_last_char, _("You can omit last service name char if provider added it for his planned 're-tuning' and You want use 'Refresh services' for this services too.")+" "+_("On plugin exit it will be set to 'no' again.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Auto toggle in manually replacing"), cfg.autotoggle, _("In 'Manually replacing' automaticaly toggles between columns when is used 'OK' button.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Missing source services for manually replace only"), cfg.diff, _("In 'Manually replacing' in source services column will be displayed missing services in target column only.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Filter services by orbital position in source"), cfg.orbital, _("You can select valid orbital position as filter for display services in source bouquet.")+" "+_("On plugin exit it will be set to 'no' again.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Using 'service type' in automatic replacing"), cfg.stype, _("Take into account 'service type' in automatic replacing too.")+" "+_("Fastcans changing 'service type' parameter to 'basic' value.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Programs with 'HD/4K(UHD)' in name only for source"), cfg.used_services, _("Plugin will be display in service bouquet services with HD,4K/UHD in service name only.")+" "+_("On plugin exit it will be set to 'no' again.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Preview on selection"), cfg.preview, _("Automaticaly preview current service in bouquet list.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Confirm services moving"), cfg.confirm_move, _("It will require confirmation for moving selected services in the source bouquet.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Display in Channellist context menu"), cfg.channel_context_menu, _("Plugin will be placed into Channellist menu.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Return to previous service on end"), cfg.on_end, _("The service being played before the plugin is started on exit again.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("On plugin start use current bouquet as source or as target"), cfg.current_bouquet, _("When the plugin is launched, current bouquet can be set as source or target bouquet.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Selector to current bouquet"), cfg.selector2bouquet, _("When the plugin is launched, the selector will be set in the bouquets list on current bouquet.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Display bouquet name"), cfg.bouquet_name, _("Display bouquet name in the screen header or above the list.")))
-#		refreshBouquetCfglist.append(getConfigListEntry(_("Save log for manual replace"), cfg.log))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Pre-fill first 'n' servicename chars to virtual keyboard"), cfg.vk_length))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Compare virtual keyboard input as case sensitive"), cfg.vk_sensitive))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Support for 'rbb' files"), cfg.rbbfiles, _("Enable menu items for 'rbb' files.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Use dotted service name for 'rbb' files"), cfg.rbb_dotted, _("When is creating a bouquet from 'rbb' file, dotted names can be compared too. You need then manually remove duplicates. Default set is 'no'.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Transedit file support"), cfg.transedit, _("Add items to menu for creating transedit files from bouquets.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Show full filenames for deleted bouquets"), cfg.deleted_bq_fullname, _("'Manage deleted bouquets' will display full filenames instead bouquet names only.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Use all service types"), cfg.allstypes, _("In almost all cases should be this option disabled, because TV and Radio service are most used types.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Move selector to next item"), cfg.move_selector, _("Select/unselect with 'OK' moves the selector to next item in the list.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Autozap accros bouquet"), cfg.autozap, _("Enable menu item for autozap services across bouquet with selected time interval (in second).")))
+		refreshBouquetCfglist.append((_("Compare case sensitive"), cfg.case_sensitive))
+		refreshBouquetCfglist.append((_("Skip 1st nonstandard char in name"), cfg.omit_first, _("Omit any control character in service name. Default set 'yes'.")))
+		refreshBouquetCfglist.append((_("Omit last char in target names"), cfg.ignore_last_char, _("You can omit last service name char if provider added it for his planned 're-tuning' and You want use 'Refresh services' for this services too.")+" "+_("On plugin exit it will be set to 'no' again.")))
+		refreshBouquetCfglist.append((_("Auto toggle in manually replacing"), cfg.autotoggle, _("In 'Manually replacing' automaticaly toggles between columns when is used 'OK' button.")))
+		refreshBouquetCfglist.append((_("Missing source services for manually replace only"), cfg.diff, _("In 'Manually replacing' in source services column will be displayed missing services in target column only.")))
+		refreshBouquetCfglist.append((_("Filter services by orbital position in source"), cfg.orbital, _("You can select valid orbital position as filter for display services in source bouquet.")+" "+_("On plugin exit it will be set to 'no' again.")))
+		refreshBouquetCfglist.append((_("Using 'service type' in automatic replacing"), cfg.stype, _("Take into account 'service type' in automatic replacing too.")+" "+_("Fastcans changing 'service type' parameter to 'basic' value.")))
+		refreshBouquetCfglist.append((_("Programs with 'HD/4K(UHD)' in name only for source"), cfg.used_services, _("Plugin will be display in service bouquet services with HD,4K/UHD in service name only.")+" "+_("On plugin exit it will be set to 'no' again.")))
+		refreshBouquetCfglist.append((_("Preview on selection"), cfg.preview, _("Automaticaly preview current service in bouquet list.")))
+		refreshBouquetCfglist.append((_("Confirm services moving"), cfg.confirm_move, _("It will require confirmation for moving selected services in the source bouquet.")))
+		refreshBouquetCfglist.append((_("Display in Channellist context menu"), cfg.channel_context_menu, _("Plugin will be placed into Channellist menu.")))
+		refreshBouquetCfglist.append((_("Return to previous service on end"), cfg.on_end, _("The service being played before the plugin is started on exit again.")))
+		refreshBouquetCfglist.append((_("On plugin start use current bouquet as source or as target"), cfg.current_bouquet, _("When the plugin is launched, current bouquet can be set as source or target bouquet.")))
+		refreshBouquetCfglist.append((_("Selector to current bouquet"), cfg.selector2bouquet, _("When the plugin is launched, the selector will be set in the bouquets list on current bouquet.")))
+		refreshBouquetCfglist.append((_("Display bouquet name"), cfg.bouquet_name, _("Display bouquet name in the screen header or above the list.")))
+#		refreshBouquetCfglist.append((_("Save log for manual replace"), cfg.log))
+		refreshBouquetCfglist.append((_("Pre-fill first 'n' servicename chars to virtual keyboard"), cfg.vk_length))
+		refreshBouquetCfglist.append((_("Compare virtual keyboard input as case sensitive"), cfg.vk_sensitive))
+		refreshBouquetCfglist.append((_("Support for 'rbb' files"), cfg.rbbfiles, _("Enable menu items for 'rbb' files.")))
+		refreshBouquetCfglist.append((_("Use dotted service name for 'rbb' files"), cfg.rbb_dotted, _("When is creating a bouquet from 'rbb' file, dotted names can be compared too. You need then manually remove duplicates. Default set is 'no'.")))
+		refreshBouquetCfglist.append((_("Transedit file support"), cfg.transedit, _("Add items to menu for creating transedit files from bouquets.")))
+		refreshBouquetCfglist.append((_("Show full filenames for deleted bouquets"), cfg.deleted_bq_fullname, _("'Manage deleted bouquets' will display full filenames instead bouquet names only.")))
+		refreshBouquetCfglist.append((_("Use all service types"), cfg.allstypes, _("In almost all cases should be this option disabled, because TV and Radio service are most used types.")))
+		refreshBouquetCfglist.append((_("Move selector to next item"), cfg.move_selector, _("Select/unselect with 'OK' moves the selector to next item in the list.")))
+		refreshBouquetCfglist.append((_("Autozap accros bouquet"), cfg.autozap, _("Enable menu item for autozap services across bouquet with selected time interval (in second).")))
 		if cfg.autozap.value != "0":
-			refreshBouquetCfglist.append(getConfigListEntry(4*" " + _("Crypted only"), cfg.autozap_cryptedonly, _("Autozap across bouquet only for encrypted services (skip FTA).")))
-			refreshBouquetCfglist.append(getConfigListEntry(4*" " + _("Orbital position"), cfg.autozap_orbital, _("Autozap across bouquet only for services on selected orbital position.")))
-		refreshBouquetCfglist.append(getConfigListEntry(_("Debug info"), cfg.debug))
+			refreshBouquetCfglist.append((4*" " + _("Crypted only"), cfg.autozap_cryptedonly, _("Autozap across bouquet only for encrypted services (skip FTA).")))
+			refreshBouquetCfglist.append((4*" " + _("Orbital position"), cfg.autozap_orbital, _("Autozap across bouquet only for services on selected orbital position.")))
+		refreshBouquetCfglist.append((_("Debug info"), cfg.debug))
 		if "config" in self:
 			self["config"].setList(refreshBouquetCfglist)
 		else:
