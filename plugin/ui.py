@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.27"
+VERSION = "2.28"
 #  by ims (c) 2016-2026 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -24,7 +24,7 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Components.ActionMap import ActionMap, HelpableActionMap
-from Components.config import config, ConfigYesNo, ConfigSelection, NoSave
+from Components.config import config, ConfigYesNo, ConfigSelection, NoSave, ConfigText, ConfigPassword
 from Components.Label import Label
 from Components.Button import Button
 from Components.Sources.StaticText import StaticText
@@ -54,6 +54,16 @@ config.plugins.refreshbouquet.omit_first = ConfigYesNo(default=True)
 config.plugins.refreshbouquet.autozap = ConfigSelection(default="0", choices=[("0", _("no")), ("3", "3s"), ("4", "4s"), ("5", "5s"), ("6", "6s"), ("7", "7s"), ("8", "8s"), ("10", "10s"), ("12", "12s"), ("15", "15s"), ("20", "20s"), ("30", "30s")])
 config.plugins.refreshbouquet.autozap_cryptedonly = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.autozap_orbital = ConfigSelection(default="all", choices=[("all", _("All")), ("3592", _("0.8W")), ("130", _("13.0E")), ("192", _("19.2E")), ("235", _("23.5E"))])
+config.plugins.refreshbouquet.autozap_start = ConfigSelection(
+    default=0,
+    choices=[(str(x), str(x)) for x in range(0, 201, 10)]
+)
+config.plugins.refreshbouquet.autozap_count = ConfigSelection(
+	default="0",
+	choices=[("0", _("All")), ("5", "5")] + [(str(x), str(x)) for x in range(10, 101, 10)]
+)
+config.plugins.refreshbouquet.autozap_user = ConfigText(default="", fixed_size=False)
+config.plugins.refreshbouquet.autozap_passwd = ConfigPassword(default="", fixed_size=False)
 config.plugins.refreshbouquet.log = ConfigYesNo(default=False)
 config.plugins.refreshbouquet.mr_sortsource = ConfigSelection(default="0", choices=[("0", _("Original")), ("1", _("A-z sort")), ("2", _("Z-a sort"))])
 config.plugins.refreshbouquet.used_services = ConfigSelection(default="all", choices=[("all", _("no")), ("HD", _("HD")), ("4K", _("4K/UHD")), ("HD4K", _("HD or 4K/UHD"))])
@@ -79,10 +89,12 @@ E2 = "/etc/enigma2"
 
 sel_position = None
 
-SID_PATH = "/home/root/"
+SID_PATH = "/tmp/"
 SIDS = SID_PATH + "SIDs"
-SIDS_SORTED = SID_PATH + "SIDs_sorted"
 SIDS_NAMES = SID_PATH + "SIDs_names"
+
+OSCAM_LOG = "/var/log/oscam.log"
+OSCAM_WEBIF = "http://127.0.0.1:8081"
 
 COLOR_RED = "ff4040"
 COLOR_GREEN = "40a040"
@@ -1132,32 +1144,20 @@ class refreshBouquet(Screen, HelpableScreen):
 ###
 
 	def zapInBouquet(self, keepSIDs=None):
-		if os.path.exists(SIDS) and keepSIDs is None:
-			self.session.openWithCallback(self.zapInBouquet, MessageBox, _("Keep previous files (in %s)?") % SID_PATH, MessageBox.TYPE_YESNO, default=True)
-			return
-		if keepSIDs is False:
-			for filename in (SIDS, SIDS_SORTED, SIDS_NAMES):
-				try:
-					os.remove(filename)
-				except OSError:
-					pass
+		import re
+		from urllib.request import build_opener, HTTPDigestAuthHandler, HTTPPasswordMgrWithDefaultRealm
 
-		def decodedService(): # crypted service with valid video dimensions should be decoded
-			service = self.session.nav.getCurrentService()
-			info = service and service.info()
-			if info:
-				width = info.getInfo(iServiceInformation.sVideoWidth)
-				height = info.getInfo(iServiceInformation.sVideoHeight)
-				crypted = info.getInfo(iServiceInformation.sIsCrypted) == 1
-				if crypted and width > 0 and height > 0:
-					sid = info.getInfo(iServiceInformation.sSID)
-					if sid >= 0:
-						ref = eServiceReference(self.servicesInBouquet[self.servicesInBouquetIndex - 1][1])
-						staticInfo = eServiceCenter.getInstance().info(ref)
-						name = staticInfo.getName(ref) if staticInfo else ""
-						print("[RefreshBouquet] decoded SID: %04X" % sid)
-						return sid, name
-			return None, None
+		def setOscamLogging(enabled):
+			try:
+				pm = HTTPPasswordMgrWithDefaultRealm()
+				pm.add_password(None, OSCAM_WEBIF, cfg.autozap_user.value, cfg.autozap_passwd.value)
+				opener = build_opener(HTTPDigestAuthHandler(pm))
+				url = OSCAM_WEBIF + "/config.html?part=global&action=execute&disablelog=%d" % (0 if enabled else 1)
+				opener.open(url, timeout=3).read()
+				return True
+			except Exception as e:
+				print("[RefreshBouquet] OSCam logging error:", e)
+				return False
 
 		def isOrbitalPosition(refstr, pos):
 			serviceHandler = eServiceCenter.getInstance()
@@ -1180,30 +1180,58 @@ class refreshBouquet(Screen, HelpableScreen):
 			return False
 
 		def zapService():
-			if self.servicesInBouquetIndex:
-				sid, name = decodedService()
-				if sid is not None:
-					if sid not in self.decodedSIDs:
-						self.decodedSIDs.append(sid)
-					self.decodedSIDNames[sid] = name
-
-			if self.servicesInBouquetIndex >= len(self.servicesInBouquet):
+			if self.servicesInBouquetIndex >= self.servicesInBouquetEnd:
 				self.zapTimer.stop()
+				setOscamLogging(False)
+
+				decoded = set()
+				try:
+					with open(OSCAM_LOG, "r") as f:
+						for line in f:
+							match = re.search(r"\(ecm\)\s+dvbapiau\s+\([^/]+/[^/]+/([0-9A-Fa-f]+)/[^)]*\): found\b", line)
+							if match:
+								decoded.add(int(match.group(1), 16))
+				except IOError as e:
+					print("[RefreshBouquet] OSCam log error:", e)
+
+				positions = {}
+				for pos, (name, refstr) in enumerate(self.servicesInBouquet, 1):
+					try:
+						sid = int(refstr.split(":")[3], 16)
+					except (ValueError, IndexError):
+						continue
+					positions[sid] = pos
+					if sid in decoded:
+						if sid not in self.decodedSIDs:
+							self.decodedSIDs.append(sid)
+						self.decodedSIDNames[sid] = name
+						print("[RefreshBouquet] decoded SID: %04X" % sid)
+
 				with open(SIDS,"w") as f:
 					f.write(",".join("%04X" % sid for sid in self.decodedSIDs))
-				with open(SIDS_SORTED, "w") as f:
-					f.write(",".join("%04X" % sid for sid in sorted(self.decodedSIDs)))
 				with open(SIDS_NAMES, "w") as f:
 					for sid in self.decodedSIDs:
-						f.write("%04X,%s\n" % (sid, self.decodedSIDNames.get(sid, "")))
+						f.write("%03d,%04X,%s\n" % (positions.get(sid, 0), sid, self.decodedSIDNames.get(sid, "")))
+
 				self["info"].setText(self.infotext)
 				self.session.nav.playService(self.playingRef)
 				return
-			self["info"].setText(_("Progress: %s of %s") % (self.servicesInBouquetIndex + 1, len(self.servicesInBouquet)))
+			self["info"].setText(_("Progress: %s of %s, Interval: %ss") % (self.servicesInBouquetIndex + 1, self.servicesInBouquetEnd, cfg.autozap.value))
+
 			self.session.nav.playService(eServiceReference(self.servicesInBouquet[self.servicesInBouquetIndex][1]))
 			self.servicesInBouquetIndex += 1
 			delay = int(cfg.autozap.value) * 1000
 			self.zapTimer.start(delay, True)
+
+		if os.path.exists(SIDS) and keepSIDs is None:
+			self.session.openWithCallback(self.zapInBouquet, MessageBox, _("Keep previous files?"), MessageBox.TYPE_YESNO, default=True)
+			return
+		if keepSIDs is False:
+			for filename in (SIDS, SIDS_NAMES):
+				try:
+					os.remove(filename)
+				except OSError:
+					pass
 
 		bouquet, t1, t2 = self.prepareSingleBouquetOperation()
 		if bouquet:
@@ -1222,7 +1250,9 @@ class refreshBouquet(Screen, HelpableScreen):
 				self["info"].setText("%s" % t1)
 				return
 			self.playingRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-			self.servicesInBouquetIndex = 0
+			self.servicesInBouquetIndex = int(cfg.autozap_start.value)
+			count = int(cfg.autozap_count.value)
+			self.servicesInBouquetEnd = len(self.servicesInBouquet) if count == 0 else min(self.servicesInBouquetIndex + count, len(self.servicesInBouquet))
 			try:
 				with open(SIDS, "r") as f:
 					self.decodedSIDs = [int(x, 16) for x in f.read().strip().split(",") if x]
@@ -1232,10 +1262,20 @@ class refreshBouquet(Screen, HelpableScreen):
 			try:
 				with open(SIDS_NAMES, "r") as f:
 					for line in f:
-						sid, name = line.rstrip("\n").split(",", 1)
+						pos, sid, name = line.rstrip("\n").split(",", 2)
 						self.decodedSIDNames[int(sid, 16)] = name
 			except (IOError, ValueError):
 				pass
+
+			if not setOscamLogging(False):
+				return
+			try:
+				os.remove(OSCAM_LOG)
+			except OSError:
+				pass
+			if not setOscamLogging(True):
+				return
+
 			self.zapTimer = eTimer()
 			self.zapTimer.timeout.get().append(zapService)
 			self.zapTimer.start(0, True)
@@ -2838,6 +2878,10 @@ class refreshBouquetCfg(Screen, ConfigListScreen):
 		if cfg.autozap.value != "0":
 			refreshBouquetCfglist.append((4*" " + _("Crypted only"), cfg.autozap_cryptedonly, _("Autozap across bouquet only for encrypted services (skip FTA).")))
 			refreshBouquetCfglist.append((4*" " + _("Orbital position"), cfg.autozap_orbital, _("Autozap across bouquet only for services on selected orbital position.")))
+			refreshBouquetCfglist.append((4*" " + _("Start position in bouquet"), cfg.autozap_start, _("Start autozap from selected position in bouquet.")))
+			refreshBouquetCfglist.append((4*" " + _("Number of services"), cfg.autozap_count, _("Number of services to autozap from selected start position.")))
+			refreshBouquetCfglist.append((4*" " + _("User"), cfg.autozap_user, _("Oscam WebIf user value.")))
+			refreshBouquetCfglist.append((4*" " + _("Password"), cfg.autozap_passwd, _("Oscam WebIf password value.")))
 		refreshBouquetCfglist.append((_("Debug info"), cfg.debug))
 		if "config" in self:
 			self["config"].setList(refreshBouquetCfglist)
