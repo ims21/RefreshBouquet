@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.29"
+VERSION = "2.30"
 #  by ims (c) 2016-2026 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -1194,17 +1194,18 @@ class refreshBouquet(Screen, HelpableScreen):
 					with open(OSCAM_LOG, "r") as f:
 						for line in f:
 							match = re.search(
-								r"\(ecm\)\s+dvbapiau\s+\([^/]+/[^/]+/([0-9A-Fa-f]+)/[^)]*\): (found|not found)\b.*\bby\s+%s\b" % re.escape(reader),
+								r"\(ecm\)\s+(\S+)\s+\([^/]+/[^/]+/([0-9A-Fa-f]+)/[^)]*\): (found|not found)\b.*\bby\s+%s\b" % re.escape(reader),
 								line
 							)
 							if match:
-								sid = int(match.group(1), 16)
-								if match.group(2) == "not found":
+								client = match.group(1)
+								sid = int(match.group(2), 16)
+								if match.group(3) == "not found" and client == "dvbapiau":
 									notFound[sid] = notFound.get(sid, 0) + 1
 									if notFound[sid] >= 5:
 										rejected.add(sid)
 										decoded.discard(sid)
-								elif sid not in rejected:
+								elif match.group(3) == "found" and sid not in rejected:
 									decoded.add(sid)
 				except IOError as e:
 					print("[RefreshBouquet] OSCam log error:", e)
@@ -1231,7 +1232,9 @@ class refreshBouquet(Screen, HelpableScreen):
 				self["info"].setText(self.infotext)
 				self.session.nav.playService(self.playingRef)
 				return
-			self["info"].setText(_("Progress: %s of %s, Interval: %ss") % (self.servicesInBouquetIndex + 1, self.servicesInBouquetEnd, cfg.autozap.value))
+			remaining = (self.servicesInBouquetEnd - self.servicesInBouquetIndex) * int(cfg.autozap.value)
+			minutes, seconds = divmod(remaining, 60)
+			self["info"].setText(_("Progress: %s of %s, Interval: %ss, Remaining: %02d:%02d") % (self.servicesInBouquetIndex + 1, self.servicesInBouquetEnd, cfg.autozap.value, minutes, seconds))
 
 			self.session.nav.playService(eServiceReference(self.servicesInBouquet[self.servicesInBouquetIndex][1]))
 			self.servicesInBouquetIndex += 1
