@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.31"
+VERSION = "2.32"
 #  by ims (c) 2016-2026 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -265,7 +265,8 @@ class refreshBouquet(Screen, HelpableScreen):
 		if self["config"].getCurrent():
 			menu.append((_("Move selected services in bouquet") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 5, _("Move one service or more selected services in bouquet to new position.")))
 			menu.append((_("Remove selected services in bouquet") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 3, _("Delete one service or more marked services from bouquet.")))
-			buttons += ["6", "8"]
+			menu.append((_("Restore service types in") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 7, _("For services of type 1 in the bouquet, find the same services with a different service type and replace the service reference.")))
+			buttons += ["6", "8", ""]
 		if cfg.rbbfiles.value: # rbb for sources only
 			menu.append((_("Create '%s.rbb' file") % colorText(COLOR_LIGHTGREEN, bName), 20))
 			buttons += [""]
@@ -306,10 +307,12 @@ class refreshBouquet(Screen, HelpableScreen):
 			self.removeServices()
 		elif choice[1] == 4:
 			self.refreshServicesTypes()
-		elif choice[1] == 6:
-			self.refreshServicesParams()
 		elif choice[1] == 5:
 			self.moveServices()
+		elif choice[1] == 6:
+			self.refreshServicesParams()
+		elif choice[1] == 7:
+			self.restoreServicesTypes()
 		elif choice[1] == 10:
 			self.options()
 		elif choice[1] == 13:
@@ -415,12 +418,74 @@ class refreshBouquet(Screen, HelpableScreen):
 			new_choices.append(("%s" % op, "%s" % op_txt))
 		config.plugins.refreshbouquet.orbital = NoSave(ConfigSelection(default="x", choices=new_choices))
 
-# call refreshService as replace		
+# call refreshServiceTypes as replace
 	def refreshServicesTypes(self):
 		self.actualizeServices("type")
 
+# call refreshServiceParams as replace
 	def refreshServicesParams(self):
 		self.actualizeServices("other")
+
+#
+# Try replace service type in bouquet with service types from lamedb
+#
+
+	def restoreServicesTypes(self):
+		setIcon() # icons for selecting
+		bouquet, t1, t2 = self.prepareSingleBouquetOperation()
+		if not bouquet:
+			return
+		target = self.getServices(bouquet[0])
+
+		from Screens.ChannelSelection import service_types_tv, service_types_radio
+
+		serviceHandler = eServiceCenter.getInstance()
+		database = {}
+
+		for service_types in (service_types_tv, service_types_radio):
+			root = eServiceReference("%s ORDER BY name" % service_types)
+			slist = serviceHandler.list(root)
+			if not slist:
+				continue
+
+			for name, refstr in slist.getContent("NS", False):
+				ref = refstr.split(":")
+				if len(ref) < 11 or ref[0] != "1" or ref[2] == "1" or ref[10]:
+					continue
+
+				key = tuple(ref[3:7])
+				database.setdefault(key, {})[refstr] = (name, refstr)
+
+		differences = MySelectionList([])
+
+		for i, t in enumerate(target):
+			refstr = t[1]
+			service = eServiceReference(refstr)
+			if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker | eServiceReference.isGroup | eServiceReference.isNumberedMarker):
+				continue
+
+			ref = refstr.split(":")
+			if len(ref) < 11 or ref[0] != "1" or ref[2] != "1" or ref[10]:
+				continue
+
+			candidates = list(database.get(tuple(ref[3:7]), {}).values())
+			if not candidates:
+				continue
+
+			s = candidates[0]
+			new_ref = s[1].split(":")
+			details = "(%s: %s -> %s" % (_("type"), ref[2], new_ref[2])
+			if len(candidates) > 1:
+				details += ", %s: %s" % (_("also exists"), ", ".join(c[1].split(":")[2] for c in candidates[1:]))
+			if t[0] != s[0]:
+				details += ", %s" % t[0]
+			description = "%s %s" % (s[0], colorText(COLOR_GRAY, details + ")"))
+			differences.list.append(MySelectionEntryComponent(description, [s[1], refstr], i, True))
+
+		if differences.list:
+			self.session.open(refreshBouquetRefreshServices, differences, bouquet, "restore")
+		else:
+			self["info"].setText(_("No differences found"))
 
 #
 # Replace service-reference for services in target with same name as in source
@@ -470,7 +535,7 @@ class refreshBouquet(Screen, HelpableScreen):
 					details = " " + "[%s: %s -> %s" % (_("type"), ref[2], s[1].split(":")[2])
 					if t[0] != s[0]:
 						details += ", %s" % t[0]
-					description = "%s %s" % (s[0], colorText("aaaaaa", details + "]"))
+					description = "%s %s" % (s[0], colorText(COLOR_GRAY, details + "]"))
 					differences.list.append(MySelectionEntryComponent(description, [s[1], t[1]], i, True))
 
 			return differences, len(differences.list)
@@ -523,7 +588,7 @@ class refreshBouquet(Screen, HelpableScreen):
 							for idx, field in zip((2, 3, 4, 5, 6), fields):
 								if t_splited[idx] != s_splited[idx]:
 									changes.append("%s: %s -> %s" % (field, t_splited[idx], s_splited[idx]))
-							description = "%s %s" % (s[0], colorText("aaaaaa", "(%s)" % ", ".join(changes)))
+							description = "%s %s" % (s[0], colorText(COLOR_GRAY, "(%s)" % ", ".join(changes)))
 							differences.list.append(MySelectionEntryComponent(description, [s[1], t[1]], i, select))
 							if cfg.debug.value:
 								debug("Added: %s" % s_charsOnly)
@@ -1030,7 +1095,7 @@ class refreshBouquet(Screen, HelpableScreen):
 					self.getBouquetList()
 
 ###
-# Prepare bouquet and text for operation with one bouquet (moveServices, removeServices)
+# Prepare bouquet and text for operation with one bouquet (moveServices, removeServices, restoreServicesTypes)
 ###
 	def prepareSingleBouquetOperation(self):
 		if self.sourceItem and not self.targetItem or self.sourceItem:
@@ -2020,7 +2085,12 @@ class refreshBouquetRefreshServices(Screen):
 
 		if mode == "type":
 			text = _("Only services with identical SID, TSID, ONID and namespace but different service types are listed. Any differing service name is also displayed for information. Only the service type is replaced.") + " "
+			text += _("This is especially useful for services obtained through FastScan, to keep the same service type across bouquets and avoid duplicate entries in searches such as EPGSearch.") + " "
 			text += _("To change the service name, replace the entire service using 'Manually replace services', then use this function again to adjust the service type.") + " "
+		elif mode == "restore":
+			text = _("For services of type 1 in the bouquet, services that differ only by service type are searched. If found, the service reference is replaced.") + " "
+			text += _("This is the opposite operation to 'Replace service type', used to restore services replaced with FastScan references.") + " "
+			text += _("If multiple service types are found, do not replace them. Remove these duplicates from scanned services (keep only type 1 and one other currently valid type) and then run this function again.") + " "
 		else:
 			text = _("Services with the same name (compared without spaces) and at the same orbital position, but with different service parameters, are listed. Marked services will be replaced.") + " "
 			text += _("Possible duplicates will not be marked in list. Check validity with 'Preview' before mark and before 'Refresh selected'.") + " "
