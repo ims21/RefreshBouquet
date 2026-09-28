@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-28 14:43+0200\n"
-"PO-Revision-Date: 2026-09-28 14:44+0200\n"
+"POT-Creation-Date: 2026-09-28 19:42+0200\n"
+"PO-Revision-Date: 2026-09-28 19:43+0200\n"
 "Last-Translator: ims <ims@openpli.org>\n"
 "Language-Team: PLi\n"
 "Language: cs_CZ\n"
@@ -340,7 +340,7 @@ msgstr "Debug info"
 msgid "Default"
 msgstr "Standardní"
 
-#: ../ui.py:267
+#: ../ui.py:268
 msgid "Delete one service or more marked services from bouquet."
 msgstr "Odstraňte jeden nebo více vybraných programů z přehledu."
 
@@ -419,12 +419,12 @@ msgstr[1] "Pro %s přehledy z %s byly TE soubory založeny."
 msgstr[2] "Pro %s přehledů z %s byly TE soubory založeny."
 
 #: ../ui.py:262
-msgid "For identical services in the source and target bouquets, replace the service type in the target bouquet if it differs."
-msgstr "Porovnává typ programu stejných programů ve zdrojovém a cílovém přehledu a v případě odlišností nabídne programy k výběru a změně typu programu za typ zdrojového přehledu."
+msgid "For identical services in the source (usually created by FastScan) and target bouquets, replace the service type in the target bouquet if it differs."
+msgstr "Porovná typy stejných programů ve zdrojovém (obvykle vytvořeném ve FastScan) a cílovém přehledu a při rozdílech nabídne změnu na typ ze zdrojového přehledu."
 
-#: ../ui.py:268
-msgid "For selected type 1 services, find the same services with a different type and replace the service type with it."
-msgstr "Pro zvolené programy typu 1 najde stejné programy s jiným typem a tento typ programu jimi nahradí."
+#: ../ui.py:266
+msgid "For selected type 1 services (usually from FastScan), find the same services with a different type and replace type 1 with the type found."
+msgstr "Pro programy typu 1 (obvykle z FastScan) najde stejné programy s jiným typem a u zvolených programů nahradí typ 1 nalezeným typem."
 
 #: ../ui.py:263
 msgid "For services in the source and target bouquets with the same name at the same orbital position, replace differing service parameters in the target bouquet."
@@ -507,7 +507,7 @@ msgstr "Označení může být zrušeno klávesou '0'."
 msgid "Missing source services for manually replace only"
 msgstr "Pouze chybějící programy ve zdrojích pro ruční nahrazování"
 
-#: ../ui.py:266
+#: ../ui.py:267
 msgid "Move one service or more selected services in bouquet to new position."
 msgstr "Přemístí najednou jeden nebo více vybraných programů v přehledu na novou pozici."
 
@@ -515,7 +515,7 @@ msgstr "Přemístí najednou jeden nebo více vybraných programů v přehledu n
 msgid "Move selected"
 msgstr "Přesunout vybrané"
 
-#: ../ui.py:266
+#: ../ui.py:267
 msgid "Move selected services in bouquet"
 msgstr "Přesouvat vybrané programy v přehledu"
 
@@ -720,7 +720,7 @@ msgstr "Odebrat z výběru (začíná na...)"
 msgid "Remove selected"
 msgstr "Odstranit vybrané"
 
-#: ../ui.py:267
+#: ../ui.py:268
 msgid "Remove selected services in bouquet"
 msgstr "Odstranit vybrané programy z přehledu"
 
@@ -753,7 +753,7 @@ msgstr "Nahradit typ programů"
 msgid "Restore"
 msgstr "Obnovit"
 
-#: ../ui.py:268
+#: ../ui.py:266
 msgid "Restore service types in"
 msgstr "Obnovit typy programů v"
 

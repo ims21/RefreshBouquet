@@ -259,11 +259,11 @@ class refreshBouquet(Screen, HelpableScreen):
 					menu.append((_("Manually replace services"), 0, _("Manually replace programs in the target bouquet with programs from the source bouquet.")))
 					menu.append((_("Add selected services to target bouquet"), 1, _("Add one or more selected programs from the source bouquet to the target bouquet at once.")))
 					menu.append((_("Add selected missing services to target bouquet"), 2, _("Only the programs from the source bouquet that are missing in the target bouquet are displayed. The user can select these programs and transfer them to the target bouquet all at once.")))
-					menu.append((_("Replace service types"), 4, _("For identical services in the source and target bouquets, replace the service type in the target bouquet if it differs.")))
+					menu.append((_("Replace service types"), 4, _("For identical services in the source (usually created by FastScan) and target bouquets, replace the service type in the target bouquet if it differs.")))
 					menu.append((_("Replace service parameters by name"), 6, _("For services in the source and target bouquets with the same name at the same orbital position, replace differing service parameters in the target bouquet.")))
 					buttons += ["blue", "", "yellow", "green", ""]
 		if self["config"].getCurrent():
-			menu.append((_("Restore service types in") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 7, _("For selected type 1 services, find the same services with a different type and replace the service type with it.")))
+			menu.append((_("Restore service types in") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 7, _("For selected type 1 services (usually from FastScan), find the same services with a different type and replace type 1 with the type found.")))
 			menu.append((_("Move selected services in bouquet") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 5, _("Move one service or more selected services in bouquet to new position.")))
 			menu.append((_("Remove selected services in bouquet") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 3, _("Delete one service or more marked services from bouquet.")))
 			buttons += ["", "6", "8"]

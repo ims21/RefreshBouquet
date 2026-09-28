@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-28 14:43+0200\n"
+"POT-Creation-Date: 2026-09-28 19:42+0200\n"
 "PO-Revision-Date: 2022-04-21 12:13+0200\n"
 "Last-Translator: Frenske <voorzitter@openpli.org>\n"
 "Language-Team: PLi <translators@openpli.org>\n"
@@ -332,7 +332,7 @@ msgstr "Debug informatie"
 msgid "Default"
 msgstr "Standaard"
 
-#: ../ui.py:267
+#: ../ui.py:268
 #, fuzzy
 msgid "Delete one service or more marked services from bouquet."
 msgstr "Selecteer of bron of doel of bron en doel bouquetten!"
@@ -412,11 +412,11 @@ msgstr[0] "Voor %s bouquet van %s werd het TE bestand aangemaakt."
 msgstr[1] "Voor %s bouquetten van %s werd het TE bestand aangemaakt."
 
 #: ../ui.py:262
-msgid "For identical services in the source and target bouquets, replace the service type in the target bouquet if it differs."
+msgid "For identical services in the source (usually created by FastScan) and target bouquets, replace the service type in the target bouquet if it differs."
 msgstr ""
 
-#: ../ui.py:268
-msgid "For selected type 1 services, find the same services with a different type and replace the service type with it."
+#: ../ui.py:266
+msgid "For selected type 1 services (usually from FastScan), find the same services with a different type and replace type 1 with the type found."
 msgstr ""
 
 #: ../ui.py:263
@@ -500,7 +500,7 @@ msgstr "Markeren kan uitgeschakeld worden met de toets '0'."
 msgid "Missing source services for manually replace only"
 msgstr "Ontbrekende bronzenders om enkel handmatig te verplaatsen"
 
-#: ../ui.py:266
+#: ../ui.py:267
 #, fuzzy
 msgid "Move one service or more selected services in bouquet to new position."
 msgstr "Verplaats de geselecteerde zenders in het bouquet"
@@ -509,7 +509,7 @@ msgstr "Verplaats de geselecteerde zenders in het bouquet"
 msgid "Move selected"
 msgstr "Geselecteerde verplaatsen"
 
-#: ../ui.py:266
+#: ../ui.py:267
 msgid "Move selected services in bouquet"
 msgstr "Verplaats de geselecteerde zenders in het bouquet"
 
@@ -715,7 +715,7 @@ msgstr "Verwijder uit de selectie (start met...)"
 msgid "Remove selected"
 msgstr "Verwijderen"
 
-#: ../ui.py:267
+#: ../ui.py:268
 msgid "Remove selected services in bouquet"
 msgstr "Verwijder de selectie uit dit bouquet"
 
@@ -750,7 +750,7 @@ msgstr "Gebruik alle zender types"
 msgid "Restore"
 msgstr "Herstel"
 
-#: ../ui.py:268
+#: ../ui.py:266
 #, fuzzy
 msgid "Restore service types in"
 msgstr "Gebruik alle zender types"

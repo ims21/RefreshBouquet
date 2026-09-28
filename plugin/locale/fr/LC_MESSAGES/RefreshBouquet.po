@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GithubIMS 21\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-28 14:43+0200\n"
+"POT-Creation-Date: 2026-09-28 19:42+0200\n"
 "PO-Revision-Date: 2020-03-01 09:58+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -330,7 +330,7 @@ msgstr "Info débogage"
 msgid "Default"
 msgstr ""
 
-#: ../ui.py:267
+#: ../ui.py:268
 #, fuzzy
 msgid "Delete one service or more marked services from bouquet."
 msgstr "Choisissez ou la source ou la cible ou la source et les bouquets cibles!"
@@ -412,11 +412,11 @@ msgstr[0] "Bouquet ‘%s’ n’a pas été créé!"
 msgstr[1] "Bouquet ‘%s’ n’a pas été créé!"
 
 #: ../ui.py:262
-msgid "For identical services in the source and target bouquets, replace the service type in the target bouquet if it differs."
+msgid "For identical services in the source (usually created by FastScan) and target bouquets, replace the service type in the target bouquet if it differs."
 msgstr ""
 
-#: ../ui.py:268
-msgid "For selected type 1 services, find the same services with a different type and replace the service type with it."
+#: ../ui.py:266
+msgid "For selected type 1 services (usually from FastScan), find the same services with a different type and replace type 1 with the type found."
 msgstr ""
 
 #: ../ui.py:263
@@ -504,7 +504,7 @@ msgstr "Le marquage peut être annulé avec la touche '0'."
 msgid "Missing source services for manually replace only"
 msgstr "Services source manquants pour remplacer manuellement uniquement"
 
-#: ../ui.py:266
+#: ../ui.py:267
 #, fuzzy
 msgid "Move one service or more selected services in bouquet to new position."
 msgstr "Déplacer les services sélectionnés dans bouquet"
@@ -513,7 +513,7 @@ msgstr "Déplacer les services sélectionnés dans bouquet"
 msgid "Move selected"
 msgstr "Déplacer sélectionné"
 
-#: ../ui.py:266
+#: ../ui.py:267
 msgid "Move selected services in bouquet"
 msgstr "Déplacer les services sélectionnés dans bouquet"
 
@@ -726,7 +726,7 @@ msgstr "Supprimer de la sélection (commençant par...)"
 msgid "Remove selected"
 msgstr "Retirer la sélection"
 
-#: ../ui.py:267
+#: ../ui.py:268
 #, fuzzy
 msgid "Remove selected services in bouquet"
 msgstr "Déplacer les services sélectionnés dans bouquet"
@@ -762,7 +762,7 @@ msgstr "Remplacer manuellement les services"
 msgid "Restore"
 msgstr ""
 
-#: ../ui.py:268
+#: ../ui.py:266
 #, fuzzy
 msgid "Restore service types in"
 msgstr "Remplacer manuellement les services"
