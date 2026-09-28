@@ -265,7 +265,7 @@ class refreshBouquet(Screen, HelpableScreen):
 		if self["config"].getCurrent():
 			menu.append((_("Move selected services in bouquet") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 5, _("Move one service or more selected services in bouquet to new position.")))
 			menu.append((_("Remove selected services in bouquet") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 3, _("Delete one service or more marked services from bouquet.")))
-			menu.append((_("Restore service types in") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 7, _("For services of type 1 in the bouquet, find the same services with a different service type and replace the service reference.")))
+			menu.append((_("Restore service types in") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 7, _("For selected type 1 services, find the same services with a different type and replace the service type with it.")))
 			buttons += ["6", "8", ""]
 		if cfg.rbbfiles.value: # rbb for sources only
 			menu.append((_("Create '%s.rbb' file") % colorText(COLOR_LIGHTGREEN, bName), 20))
@@ -476,7 +476,7 @@ class refreshBouquet(Screen, HelpableScreen):
 			new_ref = s[1].split(":")
 			details = "(%s: %s -> %s" % (_("type"), ref[2], new_ref[2])
 			if len(candidates) > 1:
-				details += ", %s: %s" % (_("also exists"), ", ".join(c[1].split(":")[2] for c in candidates[1:]))
+				details += ", %s: %s" % (_("also"), ", ".join(c[1].split(":")[2] for c in candidates[1:]))
 			if t[0] != s[0]:
 				details += ", %s" % t[0]
 			description = "%s %s" % (s[0], colorText(COLOR_GRAY, details + ")"))
@@ -2088,8 +2088,8 @@ class refreshBouquetRefreshServices(Screen):
 			text += _("This is especially useful for services obtained through FastScan, to keep the same service type across bouquets and avoid duplicate entries in searches such as EPGSearch.") + " "
 			text += _("To change the service name, replace the entire service using 'Manually replace services', then use this function again to adjust the service type.") + " "
 		elif mode == "restore":
-			text = _("For services of type 1 in the bouquet, services that differ only by service type are searched. If found, the service reference is replaced.") + " "
-			text += _("This is the opposite operation to 'Replace service type', used to restore services replaced with FastScan references.") + " "
+			text = _("Attempts to find another service type for all services with type 1 and displays the results for confirmation.")
+			text += _("This is basically the opposite operation to 'Replace service type' and tries to change 'FastScan type 1' back to another existing valid service type.") + " "
 			text += _("If multiple service types are found, do not replace them. Remove these duplicates from scanned services (keep only type 1 and one other currently valid type) and then run this function again.") + " "
 		else:
 			text = _("Services with the same name (compared without spaces) and at the same orbital position, but with different service parameters, are listed. Marked services will be replaced.") + " "
