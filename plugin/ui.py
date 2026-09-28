@@ -263,10 +263,10 @@ class refreshBouquet(Screen, HelpableScreen):
 					menu.append((_("Replace service parameters by name"), 6, _("For services in the source and target bouquets with the same name at the same orbital position, replace differing service parameters in the target bouquet.")))
 					buttons += ["blue", "", "yellow", "green", ""]
 		if self["config"].getCurrent():
+			menu.append((_("Restore service types in") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 7, _("For selected type 1 services, find the same services with a different type and replace the service type with it.")))
 			menu.append((_("Move selected services in bouquet") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 5, _("Move one service or more selected services in bouquet to new position.")))
 			menu.append((_("Remove selected services in bouquet") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 3, _("Delete one service or more marked services from bouquet.")))
-			menu.append((_("Restore service types in") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 7, _("For selected type 1 services, find the same services with a different type and replace the service type with it.")))
-			buttons += ["6", "8", ""]
+			buttons += ["", "6", "8"]
 		if cfg.rbbfiles.value: # rbb for sources only
 			menu.append((_("Create '%s.rbb' file") % colorText(COLOR_LIGHTGREEN, bName), 20))
 			buttons += [""]
