@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 refreshBouquet Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-28 19:42+0200\n"
+"POT-Creation-Date: 2026-10-30 08:02+0100\n"
 "PO-Revision-Date: 2022-04-21 12:13+0200\n"
 "Last-Translator: Frenske <voorzitter@openpli.org>\n"
 "Language-Team: PLi <translators@openpli.org>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: ../ui.py:741
+#: ../ui.py:744
 #, python-format
 msgid ""
 "\n"
@@ -28,7 +28,7 @@ msgstr[1] ""
 "\n"
 "Helaas niet voor deze %s lege boequetten:\n"
 
-#: ../ui.py:814
+#: ../ui.py:817
 #, python-format
 msgid ""
 "%s\n"
@@ -37,33 +37,34 @@ msgstr ""
 "%s\n"
 "<N/A> zenders in bronbouquet: %s"
 
-#: ../ui.py:3008
+#: ../ui.py:3064
 msgid "'Manage deleted bouquets' will display full filenames instead bouquet names only."
 msgstr "'Beheer van verwijderde boeketten' toont de volledige bestandsnamen in plaats van alleen de boeketnamen."
 
-#: ../ui.py:1800 ../ui.py:2098 ../ui.py:2312 ../ui.py:2526 ../ui.py:2732
+#: ../ui.py:1828 ../ui.py:2126 ../ui.py:2346 ../ui.py:2582 ../ui.py:2788
 msgid "'Stop' button stops Preview."
 msgstr "'Stop toets' stopt de Preview."
 
-#: ../ui.py:2052
+#: ../ui.py:2080
 msgid "- results"
 msgstr "- resultaat"
 
-#: ../ui.py:1730
+#: ../ui.py:1758
 msgid "- select service for replace with OK"
 msgstr "-  kies de te vervangen zender(s) met 'Ok'"
 
-#: ../ui.py:2274
-msgid "- select service(s) for adding with OK"
-msgstr "- Kies de toe te voegen zender(s) met 'Ok'"
-
-#: ../ui.py:2693
+#: ../ui.py:2749
 msgid "- select service(s) for move with OK"
 msgstr "- kies de te verplaatsen zender(s) met 'Ok'"
 
-#: ../ui.py:2488
+#: ../ui.py:2544
 msgid "- select service(s) for remove with OK"
 msgstr "- kies de te verwijderen zender(s) met 'Ok'"
+
+#: ../ui.py:2304
+#, fuzzy, python-format
+msgid "- select service(s) with OK to %s"
+msgstr "- kies de te verplaatsen zender(s) met 'Ok'"
 
 #: ../ui.py:56
 msgid "0.8W"
@@ -93,7 +94,7 @@ msgstr "A-Z sorteren"
 msgid "Actualize services in bouquets"
 msgstr "Actualiseer de zenders in de boeketten"
 
-#: ../ui.py:3007
+#: ../ui.py:3063
 msgid "Add items to menu for creating transedit files from bouquets."
 msgstr "Voeg items toe aan het menu om trans-edit bestanden te maken van boeketten."
 
@@ -109,7 +110,7 @@ msgstr "Voeg de gemarkeerde ontbrekende zenders toe aan het doelbouquet"
 msgid "Add selected services to target bouquet"
 msgstr "Voeg de gemarkeerde zender(s) toe aan het doelbouquet"
 
-#: ../ui.py:2397 ../ui.py:2612 ../ui.py:2787
+#: ../ui.py:2431 ../ui.py:2668 ../ui.py:2843
 msgid "Add to selection (starts with...)"
 msgstr "Voeg aan selectie toe (start met...)"
 
@@ -117,11 +118,11 @@ msgstr "Voeg aan selectie toe (start met...)"
 msgid "All"
 msgstr "Allemaal"
 
-#: ../ui.py:1909
+#: ../ui.py:1937
 msgid "Apply and close"
 msgstr "Toepassen"
 
-#: ../ui.py:1072
+#: ../ui.py:1075
 msgid "Are You sure to remove bouquet?"
 msgstr "Weet u zeker dat u dit bouquet wilt verwijderen?"
 
@@ -129,42 +130,42 @@ msgstr "Weet u zeker dat u dit bouquet wilt verwijderen?"
 msgid "Are You sure to remove file?"
 msgstr "Weet u zeker dat u dit bestand wilt verwijderen?"
 
-#: ../ui.py:1988
+#: ../ui.py:2016
 #, python-format
 msgid "Are you sure to apply %d change and close?"
 msgid_plural "Are you sure to apply all %d changes and close?"
 msgstr[0] "Weet u zeker dat u wilt afsluiten en de wijziging voor %d verliest?"
 msgstr[1] "Bent u zeker dat u de %d wijzigingen wilt toepassen en afsluiten?"
 
-#: ../ui.py:2033
+#: ../ui.py:2061
 #, python-format
 msgid "Are you sure to close and lost %d change?"
 msgid_plural "Are you sure to close and lost all %d changes?"
 msgstr[0] "Weet u zeker dat u wilt afsluiten en de wijzigingen voor %d verliest?"
 msgstr[1] "Bent u zeker dat u wilt afsluiten en alle %d wijzigingen zult verliezen?"
 
-#: ../ui.py:2226 ../ui.py:2469 ../ui.py:2674 ../ui.py:2935
+#: ../ui.py:2254 ../ui.py:2525 ../ui.py:2730 ../ui.py:2991
 #, python-format
 msgid "Are you sure to close and lost %d selection?"
 msgid_plural "Are you sure to close and lost all %d selections?"
 msgstr[0] "Weet u zeker dat u wilt afsluiten en de %d selectie wilt annuleren?"
 msgstr[1] "Weet u zeker dat u wilt afsluiten en de %d selecties wilt annuleren?"
 
-#: ../ui.py:2428
-#, python-format
+#: ../ui.py:2465
+#, fuzzy, python-format
 msgid "Are you sure to copy this %d service?"
-msgid_plural "Are you sure to copy this %d services?"
+msgid_plural "Are you sure to copy these %d services?"
 msgstr[0] "Wilt u deze %d zender kopiëren?"
 msgstr[1] "Wilt u deze %d zenders kopiëren?"
 
-#: ../ui.py:2864
-#, python-format
+#: ../ui.py:2463 ../ui.py:2920
+#, fuzzy, python-format
 msgid "Are you sure to move this %d service?"
-msgid_plural "Are you sure to move this %d services?"
+msgid_plural "Are you sure to move these %d services?"
 msgstr[0] "Weet je zeker dat je kanaal %d wilt verplaatsen?"
 msgstr[1] "Weet je zeker dat je deze kanalen %d wilt verplaatsen?"
 
-#: ../ui.py:2186
+#: ../ui.py:2214
 #, python-format
 msgid "Are you sure to refresh this %d service?"
 msgid_plural "Are you sure to refresh this %d services?"
@@ -187,7 +188,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../ui.py:2644
+#: ../ui.py:2700
 #, python-format
 msgid "Are you sure to remove this %d service?"
 msgid_plural "Are you sure to remove this %d services?"
@@ -210,46 +211,46 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../ui.py:2091
+#: ../ui.py:2119
 msgid "Attempts to find another service type for all services with type 1 and displays the results for confirmation."
 msgstr ""
 
-#: ../ui.py:2990
+#: ../ui.py:3046
 msgid "Auto toggle in manually replacing"
 msgstr "Wissel automatisch tijdens het handmatig verplaatsen"
 
-#: ../ui.py:284
+#: ../ui.py:285
 msgid "Automatically switches between programs in the bouquet at the time interval set in Settings."
 msgstr ""
 
-#: ../ui.py:2995
+#: ../ui.py:3051
 msgid "Automaticaly preview current service in bouquet list."
 msgstr "Toon een 'auto preview' van de huidige zender in de bouquetlijst."
 
-#: ../ui.py:3011
+#: ../ui.py:3067
 #, fuzzy
 msgid "Autozap accros bouquet"
 msgstr "doelbouquet"
 
-#: ../ui.py:284
+#: ../ui.py:285
 #, python-format
 msgid "Autozap across '%s' bouquet"
 msgstr ""
 
-#: ../ui.py:3013
+#: ../ui.py:3069
 msgid "Autozap across bouquet only for encrypted services (skip FTA)."
 msgstr ""
 
-#: ../ui.py:3014
+#: ../ui.py:3070
 msgid "Autozap across bouquet only for services on selected orbital position."
 msgstr ""
 
-#: ../ui.py:874
+#: ../ui.py:877
 #, python-format
 msgid "Bouquet '%s' was not created!"
 msgstr "Bouquet '%s' is niet gemaakt!"
 
-#: ../ui.py:753
+#: ../ui.py:756
 msgid "Bouquet is empty!"
 msgstr "Het bronbouquet is leeg !"
 
@@ -257,32 +258,32 @@ msgstr "Het bronbouquet is leeg !"
 msgid "Button '6' enable/disable moving bouquet with 'preview' and 'next' buttons."
 msgstr "Met toets '6' (dé)activeer je het verplaatsen van een bouquet met de toetsen 'preview' en 'next'."
 
-#: ../ui.py:396
+#: ../ui.py:399
 msgid "C"
 msgstr "C"
 
-#: ../ui.py:396
+#: ../ui.py:399
 msgid "Cable"
 msgstr "Kabel"
 
-#: ../managebq.py:89 ../rbbmanager.py:55 ../ui.py:175 ../ui.py:1784
-#: ../ui.py:2079 ../ui.py:2304 ../ui.py:2518 ../ui.py:2723 ../ui.py:2968
+#: ../managebq.py:89 ../rbbmanager.py:55 ../ui.py:175 ../ui.py:1812
+#: ../ui.py:2107 ../ui.py:2335 ../ui.py:2574 ../ui.py:2779 ../ui.py:3024
 msgid "Cancel"
 msgstr "Annuleer"
 
-#: ../ui.py:3019
+#: ../ui.py:3075
 msgid "Card reader name"
 msgstr ""
 
-#: ../ui.py:2987
+#: ../ui.py:3043
 msgid "Compare case sensitive"
 msgstr "Vergelijk hoofdlettergevoeligheid"
 
-#: ../ui.py:3004
+#: ../ui.py:3060
 msgid "Compare virtual keyboard input as case sensitive"
 msgstr "Vergelijk de invoer van het virtuele toetsenbord als hoofdlettergevoelig"
 
-#: ../ui.py:2996
+#: ../ui.py:3052
 msgid "Confirm services moving"
 msgstr "Bevestig het verplaatsen van de zender(s)"
 
@@ -290,41 +291,41 @@ msgstr "Bevestig het verplaatsen van de zender(s)"
 msgid "Copy predefined 'rbb' file(s) to list"
 msgstr "Kopieer voorgedefinieerde \"rbb\" bestand(en) naar de lijst"
 
-#: ../ui.py:2305
+#: ../ui.py:2336
 msgid "Copy selected"
 msgstr "Actualiseer"
 
-#: ../ui.py:271
+#: ../ui.py:272
 #, python-format
 msgid "Create '%s.rbb' file"
 msgstr "Maak '%s.rbb' bestand aan"
 
-#: ../ui.py:288
+#: ../ui.py:289
 #, python-format
 msgid "Create TE file '%s-%s.ini' to '/tmp'"
 msgstr "Maak een TE bestand '%s-%s.ini' aan naar '/tmp'"
 
-#: ../ui.py:290
+#: ../ui.py:291
 msgid "Create TE files from all bouquets to '/tmp'"
 msgstr "Maak een TE bestand aan van alle bouquetten naar '/tmp'"
 
-#: ../ui.py:276
+#: ../ui.py:277
 msgid "Create a new bouquet with the specified name."
 msgstr ""
 
-#: ../ui.py:274
+#: ../ui.py:275
 msgid "Create bouquet from rbb file"
 msgstr "Maak een bouquet vanuit een RBB bestand aan"
 
-#: ../ui.py:276
+#: ../ui.py:277
 msgid "Create new bouquet"
 msgstr "Maak een nieuw bouquet aan"
 
-#: ../ui.py:3013
+#: ../ui.py:3069
 msgid "Crypted only"
 msgstr ""
 
-#: ../ui.py:3020
+#: ../ui.py:3076
 msgid "Debug info"
 msgstr "Debug informatie"
 
@@ -332,25 +333,25 @@ msgstr "Debug informatie"
 msgid "Default"
 msgstr "Standaard"
 
-#: ../ui.py:268
+#: ../ui.py:269
 #, fuzzy
 msgid "Delete one service or more marked services from bouquet."
 msgstr "Selecteer of bron of doel of bron en doel bouquetten!"
 
-#: ../ui.py:281
+#: ../ui.py:282
 #, fuzzy
 msgid "Delete selected bouquet."
 msgstr "kies het doelbouquet"
 
-#: ../ui.py:3001
+#: ../ui.py:3057
 msgid "Display bouquet name"
 msgstr "Toon de boeketnaam"
 
-#: ../ui.py:3001
+#: ../ui.py:3057
 msgid "Display bouquet name in the screen header or above the list."
 msgstr "Toon de bouquetnaam in de koptekst van het scherm of bovenaan de lijst."
 
-#: ../ui.py:2997
+#: ../ui.py:3053
 msgid "Display in Channellist context menu"
 msgstr "Toon in het 'zenderlijst context menu'"
 
@@ -358,23 +359,23 @@ msgstr "Toon in het 'zenderlijst context menu'"
 msgid "Dotted"
 msgstr "Gestippeld"
 
-#: ../ui.py:400
+#: ../ui.py:403
 msgid "E"
 msgstr "E"
 
-#: ../ui.py:3011
+#: ../ui.py:3067
 msgid "Enable menu item for autozap services across bouquet with selected time interval (in second)."
 msgstr ""
 
-#: ../ui.py:3005
+#: ../ui.py:3061
 msgid "Enable menu items for 'rbb' files."
 msgstr "Activeer menu items t.b.v. de 'rbb' bestanden."
 
-#: ../ui.py:978 ../ui.py:2458
+#: ../ui.py:981 ../ui.py:2514
 msgid "Enter new bouquet name"
 msgstr "Geef een nieuwe bouquetnaam in"
 
-#: ../ui.py:1799 ../ui.py:2097 ../ui.py:2311 ../ui.py:2525 ../ui.py:2731
+#: ../ui.py:1827 ../ui.py:2125 ../ui.py:2345 ../ui.py:2581 ../ui.py:2787
 msgid "Epg or Info toggles between EPG and Info text."
 msgstr "De EPG of Info toets wisselt tussen de EPG of Info tekst."
 
@@ -386,40 +387,40 @@ msgstr "Verwijder"
 msgid "Error"
 msgstr "Fout"
 
-#: ../ui.py:2993
+#: ../ui.py:3049
 msgid "Fastcans changing 'service type' parameter to 'basic' value."
 msgstr "De FastScan wijzigt de 'service type' parameter naar een 'basis' waarde."
 
-#: ../ui.py:857
+#: ../ui.py:860
 #, python-format
 msgid "File %s is empty!"
 msgstr "Bestand %s is leeg!"
 
-#: ../ui.py:813
+#: ../ui.py:816
 #, python-format
 msgid "File %s.rbb was created."
 msgstr "Het %s.rbb bestand is gemaakt."
 
-#: ../ui.py:2992
+#: ../ui.py:3048
 msgid "Filter services by orbital position in source"
 msgstr "Filter de bronzenders op orbitale positie"
 
-#: ../ui.py:738
+#: ../ui.py:741
 #, python-format
 msgid "For %s bouquet of %s was TE file created."
 msgid_plural "For %s bouquets of %s were TE files created."
 msgstr[0] "Voor %s bouquet van %s werd het TE bestand aangemaakt."
 msgstr[1] "Voor %s bouquetten van %s werd het TE bestand aangemaakt."
 
-#: ../ui.py:262
+#: ../ui.py:263
 msgid "For identical services in the source (usually created by FastScan) and target bouquets, replace the service type in the target bouquet if it differs."
 msgstr ""
 
-#: ../ui.py:266
+#: ../ui.py:267
 msgid "For selected type 1 services (usually from FastScan), find the same services with a different type and replace type 1 with the type found."
 msgstr ""
 
-#: ../ui.py:263
+#: ../ui.py:264
 msgid "For services in the source and target bouquets with the same name at the same orbital position, replace differing service parameters in the target bouquet."
 msgstr ""
 
@@ -440,31 +441,31 @@ msgstr "HD of 4K/UHD"
 msgid "If You will add to bouquet some missing services (start with '---'), You can then finalize created bouquet with '%s' etc."
 msgstr "Als u aan een bouquet enkele ontbrekende zenders toevoegt (beginnend met '---'), dan kunt u het gemaakte bouquet afronden met '%s' etc."
 
-#: ../ui.py:2093
+#: ../ui.py:2121
 msgid "If multiple service types are found, do not replace them. Remove these duplicates from scanned services (keep only type 1 and one other currently valid type) and then run this function again."
 msgstr ""
 
-#: ../ui.py:2990
+#: ../ui.py:3046
 msgid "In 'Manually replacing' automaticaly toggles between columns when is used 'OK' button."
 msgstr "Met 'Handmatig vervangen' wordt automatisch tussen kolommen gewisseld wanneer de 'OK' knop wordt gebruikt."
 
-#: ../ui.py:2991
+#: ../ui.py:3047
 msgid "In 'Manually replacing' in source services column will be displayed missing services in target column only."
 msgstr "Met 'Handmatig vervangen' in de bron zenderkolom zullen alleen ontbrekende diensten in de doel zenderkolom worden weergegeven."
 
-#: ../ui.py:3009
+#: ../ui.py:3065
 msgid "In almost all cases should be this option disabled, because TV and Radio service are most used types."
 msgstr "In vrijwel alle gevallen moet deze optie uitgeschakeld zijn, omdat TV en Radio de meest gebruikte types zijn."
 
-#: ../managebq.py:92 ../ui.py:2082 ../ui.py:2307 ../ui.py:2521
+#: ../managebq.py:92 ../ui.py:2110 ../ui.py:2338 ../ui.py:2577
 msgid "Inversion"
 msgstr "Inverteer"
 
-#: ../ui.py:2996
+#: ../ui.py:3052
 msgid "It will require confirmation for moving selected services in the source bouquet."
 msgstr "Om gekozen zenders in het bronbouquet te verplaatsen dient u dit te bevestigen."
 
-#: ../ui.py:1353
+#: ../ui.py:1356
 msgid "Keep previous files?"
 msgstr ""
 
@@ -480,106 +481,121 @@ msgstr ""
 msgid "Manually replace services"
 msgstr "Handmatig vervangen van de zenders"
 
-#: ../ui.py:2728
+#: ../ui.py:2784
 msgid "Mark service(s) with OK button or use group selection (Ch+/Ch-), move selector to new position and finish with 'Move selected'. Selected service(s) will be moved top new position."
 msgstr "Markeer de zender(s) met 'Ok' of gebruik de groepsselectie (Ch+/Ch-), verplaats de selectie naar de nieuwe locatie en eindig met 'verplaats de selectie'. De geselecteerde zenders zullen bovenaan de nieuwe locatie toegevoegd worden."
 
-#: ../ui.py:2309
+#: ../ui.py:2343
+#, fuzzy
 msgid "Mark services with OK button or use group selection (Ch+/Ch-) and then copy these with 'Copy selected'."
-msgstr "Markeer de zenders met 'Ok' of gebruik de groepsselectie (Ch+/Ch-) en kopieer deze via 'kopieer de selectie'."
+msgstr "Markeer de zenders met 'Ok' of gebruik de groepsselectie (Ch+/Ch-) and verwijder deze vervolgens via 'verwijder de selectie'."
 
-#: ../ui.py:2523
+#: ../ui.py:2341
+#, fuzzy
+msgid "Mark services with OK button or use group selection (Ch+/Ch-) and then move these with 'Move selected'."
+msgstr "Markeer de zenders met 'Ok' of gebruik de groepsselectie (Ch+/Ch-) and verwijder deze vervolgens via 'verwijder de selectie'."
+
+#: ../ui.py:2579
 msgid "Mark services with OK button or use group selection (Ch+/Ch-) and then remove these with 'Remove selected'."
 msgstr "Markeer de zenders met 'Ok' of gebruik de groepsselectie (Ch+/Ch-) and verwijder deze vervolgens via 'verwijder de selectie'."
 
-#: ../ui.py:1797
+#: ../ui.py:1825
 msgid "Marking can be canceled with key '0'."
 msgstr "Markeren kan uitgeschakeld worden met de toets '0'."
 
-#: ../ui.py:2991
+#: ../ui.py:3047
 msgid "Missing source services for manually replace only"
 msgstr "Ontbrekende bronzenders om enkel handmatig te verplaatsen"
 
-#: ../ui.py:267
+#: ../ui.py:268
 #, fuzzy
 msgid "Move one service or more selected services in bouquet to new position."
 msgstr "Verplaats de geselecteerde zenders in het bouquet"
 
-#: ../ui.py:2724
+#: ../ui.py:2336 ../ui.py:2780
 msgid "Move selected"
 msgstr "Geselecteerde verplaatsen"
 
-#: ../ui.py:267
+#: ../ui.py:262
+msgid "Move selected programs from the source bouquet to the end of the target bouquet."
+msgstr ""
+
+#: ../ui.py:268
 msgid "Move selected services in bouquet"
 msgstr "Verplaats de geselecteerde zenders in het bouquet"
 
-#: ../ui.py:3010
+#: ../ui.py:262
+#, fuzzy
+msgid "Move selected services to target bouquet"
+msgstr "Voeg de gemarkeerde zender(s) toe aan het doelbouquet"
+
+#: ../ui.py:3066
 msgid "Move selector to next item"
 msgstr "Verplaats de keuze naar het volgende item"
 
-#: ../plugin.py:36 ../ui.py:2429
+#: ../plugin.py:36 ../ui.py:2466
 msgid "No"
 msgstr "Nee"
 
-#: ../ui.py:488 ../ui.py:509
+#: ../ui.py:491 ../ui.py:512
 msgid "No differences found"
 msgstr "Geen verschil gevonden"
 
-#: ../ui.py:872
+#: ../ui.py:875
 #, python-format
 msgid "No item in '%s.rbb' file matches item in selected source bouquet!"
 msgstr "Geen enkel item in het '%s.rbb'-bestand komt overeen met een item in het gekozen bronbouquet!"
 
-#: ../ui.py:759
+#: ../ui.py:762
 msgid "No services in bouquet!"
 msgstr "Geen zender(s) aanwezig in het bouquet!"
 
-#: ../ui.py:1112
+#: ../ui.py:1115
 msgid "No services in selected bouquet!"
 msgstr "Geen zender(s) aanwezig in het gekozen bouquet!"
 
-#: ../ui.py:619
+#: ../ui.py:622
 msgid "No services in source bouquet or no differences in bouquets!"
 msgstr "Geen zenders in het bronbouquet of beide bouquetten zijn gelijk!"
 
-#: ../ui.py:1104 ../ui.py:1200 ../ui.py:1424
+#: ../ui.py:1107 ../ui.py:1203 ../ui.py:1427 ../ui.py:1455
 msgid "No services in source bouquet!"
 msgstr "Geen zenders in het bronbouquet !"
 
-#: ../ui.py:1108
+#: ../ui.py:1111
 msgid "No services in target bouquet!"
 msgstr "Er zitten geen zenders in het doelbouquet!"
 
-#: ../ui.py:836
+#: ../ui.py:839
 msgid "No source bouquet is selected!"
 msgstr "Er is geen bronbouquet gekozen!"
 
-#: ../ui.py:1991 ../ui.py:2189 ../ui.py:2434 ../ui.py:2647 ../ui.py:2871
+#: ../ui.py:2019 ../ui.py:2217 ../ui.py:2471 ../ui.py:2703 ../ui.py:2927
 msgid "Nothing for processing..."
 msgstr "Niets om te verwerken..."
 
-#: ../ui.py:3016
+#: ../ui.py:3072
 msgid "Number of services"
 msgstr ""
 
-#: ../ui.py:3016
+#: ../ui.py:3072
 #, fuzzy
 msgid "Number of services to autozap from selected start position."
 msgstr "Verplaats de geselecteerde zenders in het bouquet"
 
-#: ../ui.py:2969
+#: ../ui.py:3025
 msgid "OK"
 msgstr "Ok"
 
-#: ../ui.py:3019
+#: ../ui.py:3075
 msgid "OSCam reader name used to verify successful decoding."
 msgstr ""
 
-#: ../ui.py:2988
+#: ../ui.py:3044
 msgid "Omit any control character in service name. Default set 'yes'."
 msgstr "Laat elk speciaal karakter weg in de zendernaam. Standaard is 'ja'."
 
-#: ../ui.py:2989
+#: ../ui.py:3045
 msgid "Omit last char in target names"
 msgstr "Laat het laatste character in de doelnamen weg"
 
@@ -587,15 +603,15 @@ msgstr "Laat het laatste character in de doelnamen weg"
 msgid "On deleted userbouquet press 'Restore' or 'Remove' or mark more deleted bouquets with 'OK' and then use 'Restore' or 'Remove'."
 msgstr "Druk op een eerder verwijderd bouquet op 'Herstellen' of 'Verwijderen' of markeer meer verwijderde bouquetten met 'Ok' en gebruik daarna pas 'Herstellen' of 'Verwijderen'."
 
-#: ../ui.py:2989 ../ui.py:2992 ../ui.py:2994
+#: ../ui.py:3045 ../ui.py:3048 ../ui.py:3050
 msgid "On plugin exit it will be set to 'no' again."
 msgstr "Bij het stoppen van de plug-in zal deze waarde weer op 'nee' gezet worden."
 
-#: ../ui.py:2999
+#: ../ui.py:3055
 msgid "On plugin start use current bouquet as source or as target"
 msgstr "Gebruik het huidige bouquet als bron of als doel zodra de plug-in wordt gestart"
 
-#: ../ui.py:2087
+#: ../ui.py:2115
 msgid "Only services with identical SID, TSID, ONID and namespace but different service types are listed. Any differing service name is also displayed for information. Only the service type is replaced."
 msgstr ""
 
@@ -603,11 +619,11 @@ msgstr ""
 msgid "Only the programs from the source bouquet that are missing in the target bouquet are displayed. The user can select these programs and transfer them to the target bouquet all at once."
 msgstr ""
 
-#: ../ui.py:1795
+#: ../ui.py:1823
 msgid "Or toggle with 'Prev/Next', which trying to find a similar name in source."
 msgstr "Of wissel met 'Vorig / Volgende' om een gelijke naam te vinden in de bron."
 
-#: ../ui.py:3014
+#: ../ui.py:3070
 msgid "Orbital position"
 msgstr ""
 
@@ -619,64 +635,64 @@ msgstr "Origineel"
 msgid "Original - reverted"
 msgstr "Origineel - teruggedraaid"
 
-#: ../ui.py:3018
+#: ../ui.py:3074
 msgid "Oscam WebIf password value."
 msgstr ""
 
-#: ../ui.py:3017
+#: ../ui.py:3073
 msgid "Oscam WebIf user value."
 msgstr ""
 
-#: ../ui.py:3018
+#: ../ui.py:3074
 msgid "Password"
 msgstr ""
 
-#: ../ui.py:1060
+#: ../ui.py:1063
 msgid "Please enter new bouquet name"
 msgstr "Geef de nieuwe bouquetnaam in"
 
-#: ../ui.py:2994
+#: ../ui.py:3050
 msgid "Plugin will be display in service bouquet services with HD,4K/UHD in service name only."
 msgstr "De plug-in zal worden weergegeven in zenderbouquetten met in de zendernaam HD,4K / UHD."
 
-#: ../ui.py:2997
+#: ../ui.py:3053
 msgid "Plugin will be placed into Channellist menu."
 msgstr "Toon deze plug-in ook in het 'zenderlijst context menu'."
 
-#: ../ui.py:2153
+#: ../ui.py:2181
 msgid "Position"
 msgstr "Positie"
 
-#: ../ui.py:2096
+#: ../ui.py:2124
 msgid "Possible duplicates will not be marked in list. Check validity with 'Preview' before mark and before 'Refresh selected'."
 msgstr "Mogelijke duplicaten worden niet in de lijst aangegeven. Check de juistheid van de zender d.m.v. de 'Preview' voordat je het kanaal selecteert en actualiseert."
 
-#: ../ui.py:3003
+#: ../ui.py:3059
 msgid "Pre-fill first 'n' servicename chars to virtual keyboard"
 msgstr "Voeg eerst 'n' zendernaam karakters toe aan het virtuele toetsenbord"
 
-#: ../ui.py:1796
+#: ../ui.py:1824
 msgid "Prepare replacement target's service by service in source bouquet (both select with 'OK') and replace it with 'Replace'. Repeat it as you need. Finish all with 'Apply and close'."
 msgstr "Bereid het vervangen voor met tweemaal drukken van 'Ok', en vervang deze met de blauwe toets 'Vervangen'. Herhaal dit naar behoefte. Beëindig de actie met 'toepassen' en sluiten."
 
-#: ../ui.py:1925 ../ui.py:2166 ../ui.py:2378 ../ui.py:2593 ../ui.py:2844
+#: ../ui.py:1953 ../ui.py:2194 ../ui.py:2412 ../ui.py:2649 ../ui.py:2900
 msgid "Preview"
 msgstr "Voorbeeld"
 
-#: ../ui.py:2995
+#: ../ui.py:3051
 msgid "Preview on selection"
 msgstr "Geef de zender weer tijdens de selectie"
 
-#: ../ui.py:2994
+#: ../ui.py:3050
 msgid "Programs with 'HD/4K(UHD)' in name only for source"
 msgstr "Kanalen met 'HD/4K(UHD)' in de naam enkel voor de bron"
 
-#: ../ui.py:1345
+#: ../ui.py:1348
 #, python-format
 msgid "Progress: %s of %s, Interval: %ss, Remaining: %02d:%02d"
 msgstr ""
 
-#: ../ui.py:2080
+#: ../ui.py:2108
 msgid "Refresh selected"
 msgstr "Selectie actualiseren"
 
@@ -684,12 +700,12 @@ msgstr "Selectie actualiseren"
 msgid "RefreshBouquet"
 msgstr "RefreshBouquet"
 
-#: ../ui.py:1730 ../ui.py:2052 ../ui.py:2274 ../ui.py:2488 ../ui.py:2693
+#: ../ui.py:1758 ../ui.py:2080 ../ui.py:2544 ../ui.py:2749
 #, python-format
 msgid "RefreshBouquet %s"
 msgstr "Actualiseer bouquet %s"
 
-#: ../ui.py:2966 ../ui.py:3042
+#: ../ui.py:3022 ../ui.py:3098
 msgid "RefreshBouquet Setup"
 msgstr "Bouquetactualiseer setup"
 
@@ -698,24 +714,29 @@ msgstr "Bouquetactualiseer setup"
 msgid "RefreshBouquet v. %s"
 msgstr "Actualiseer bouquet v. %s"
 
+#: ../ui.py:2305
+#, fuzzy, python-format
+msgid "RefreshBouquet v.%s %s"
+msgstr "Actualiseer bouquet v. %s"
+
 #: ../managebq.py:91
 msgid "Remove"
 msgstr "Verwijder"
 
-#: ../ui.py:281
+#: ../ui.py:282
 #, python-format
 msgid "Remove bouquet '%s'"
 msgstr "Verwijder bouquet %s"
 
-#: ../ui.py:2399 ../ui.py:2614 ../ui.py:2789
+#: ../ui.py:2433 ../ui.py:2670 ../ui.py:2845
 msgid "Remove from selection (starts with...)"
 msgstr "Verwijder uit de selectie (start met...)"
 
-#: ../ui.py:2519
+#: ../ui.py:2575
 msgid "Remove selected"
 msgstr "Verwijderen"
 
-#: ../ui.py:268
+#: ../ui.py:269
 msgid "Remove selected services in bouquet"
 msgstr "Verwijder de selectie uit dit bouquet"
 
@@ -723,25 +744,25 @@ msgstr "Verwijder de selectie uit dit bouquet"
 msgid "Rename"
 msgstr "Hernoem"
 
-#: ../ui.py:279
+#: ../ui.py:280
 #, python-format
 msgid "Rename bouquet '%s'"
 msgstr "Hernoem bouquet %s"
 
-#: ../ui.py:279
+#: ../ui.py:280
 #, fuzzy
 msgid "Rename selected bouquet."
 msgstr "Beheer de verwijderde bouquetten"
 
-#: ../ui.py:1851
+#: ../ui.py:1879
 msgid "Replace"
 msgstr "Vervangen"
 
-#: ../ui.py:263
+#: ../ui.py:264
 msgid "Replace service parameters by name"
 msgstr ""
 
-#: ../ui.py:262
+#: ../ui.py:263
 #, fuzzy
 msgid "Replace service types"
 msgstr "Gebruik alle zender types"
@@ -750,12 +771,12 @@ msgstr "Gebruik alle zender types"
 msgid "Restore"
 msgstr "Herstel"
 
-#: ../ui.py:266
+#: ../ui.py:267
 #, fuzzy
 msgid "Restore service types in"
 msgstr "Gebruik alle zender types"
 
-#: ../ui.py:2998
+#: ../ui.py:3054
 msgid "Return to previous service on end"
 msgstr "Keer terug naar het laatste kanaal"
 
@@ -763,7 +784,7 @@ msgstr "Keer terug naar het laatste kanaal"
 msgid "Run"
 msgstr "Uitvoeren"
 
-#: ../ui.py:294
+#: ../ui.py:295
 msgid "Select action for bouquet:"
 msgstr "Kies de uit te voeren actie:"
 
@@ -783,11 +804,11 @@ msgstr "Kies het rbb bestand"
 msgid "Select rbb file with 'OK' and create bouquet with same name."
 msgstr "Kies het rbb bestand met 'Ok' en maak een bouquet met identieke naam aan."
 
-#: ../ui.py:3010
+#: ../ui.py:3066
 msgid "Select/unselect with 'OK' moves the selector to next item in the list."
 msgstr "Selecteren/dé-selecteren met 'Ok' verplaatst de selectie naar het volgende item in de lijst."
 
-#: ../ui.py:1111
+#: ../ui.py:1114
 msgid "Selected bouquet is empty!"
 msgstr "Het gekozen bouquet is leeg!"
 
@@ -795,11 +816,15 @@ msgstr "Het gekozen bouquet is leeg!"
 msgid "Selected top"
 msgstr "Kies top"
 
-#: ../ui.py:3000
+#: ../ui.py:3056
 msgid "Selector to current bouquet"
 msgstr "Keuzeschakelaar voor het huidig bouquet"
 
-#: ../ui.py:2095
+#: ../ui.py:2492
+msgid "Services were not added to the target bouquet; the source bouquet was left unchanged."
+msgstr ""
+
+#: ../ui.py:2123
 msgid "Services with the same name (compared without spaces) and at the same orbital position, but with different service parameters, are listed. Marked services will be replaced."
 msgstr ""
 
@@ -811,39 +836,39 @@ msgstr "Als bron instellen"
 msgid "Set target"
 msgstr "Als doel instellen"
 
-#: ../ui.py:292
+#: ../ui.py:293
 msgid "Setting various plugin options."
 msgstr ""
 
-#: ../ui.py:292
+#: ../ui.py:293
 msgid "Settings..."
 msgstr "Instellingen..."
 
-#: ../ui.py:3008
+#: ../ui.py:3064
 msgid "Show full filenames for deleted bouquets"
 msgstr "Toon de volledige bestandsnamen van verwijderde items"
 
-#: ../ui.py:2988
+#: ../ui.py:3044
 msgid "Skip 1st nonstandard char in name"
 msgstr "Negeer het 1e niet standaard karakter in de naam"
 
-#: ../ui.py:2116 ../ui.py:2333 ../ui.py:2547 ../ui.py:2753
+#: ../ui.py:2144 ../ui.py:2367 ../ui.py:2603 ../ui.py:2809
 msgid "Sort bouquet:"
 msgstr "Sorteer het bouquet:"
 
-#: ../ui.py:1819
+#: ../ui.py:1847
 msgid "Sort source bouquet:"
 msgstr "Sorteer het bronbouquet:"
 
-#: ../ui.py:2730
+#: ../ui.py:2786
 msgid "Sorting has not effect for finaly bouquet sorting."
 msgstr "Sorteren heeft geen effect voor het uiteindelijke sorteren van bouquetten."
 
-#: ../ui.py:502 ../ui.py:609
+#: ../ui.py:505 ../ui.py:612
 msgid "Source bouquet is empty !"
 msgstr "Het bronbouquet is leeg !"
 
-#: ../ui.py:860 ../ui.py:1103 ../ui.py:1192 ../ui.py:1419
+#: ../ui.py:863 ../ui.py:1106 ../ui.py:1195 ../ui.py:1422 ../ui.py:1451
 msgid "Source bouquet is empty!"
 msgstr "Het bronbouquet is leeg !"
 
@@ -851,7 +876,7 @@ msgstr "Het bronbouquet is leeg !"
 msgid "Source bouquet:"
 msgstr "Bronbouquet:"
 
-#: ../ui.py:1798
+#: ../ui.py:1826
 msgid "Source can be sorted with 'Menu'."
 msgstr "De bron kan worden gesorteerd met 'Menu'."
 
@@ -859,37 +884,37 @@ msgstr "De bron kan worden gesorteerd met 'Menu'."
 msgid "Source select with 'yellow' button, target with 'blue' button. Selection can be cleared with '0'."
 msgstr "Selecteer de bron met de 'gele' toets, het doel met de 'blauwe' toets. De selectie kan worden gewist met '0'."
 
-#: ../ui.py:3015
+#: ../ui.py:3071
 #, fuzzy
 msgid "Start autozap from selected position in bouquet."
 msgstr "Verplaats de geselecteerde zenders in het bouquet"
 
-#: ../ui.py:3015
+#: ../ui.py:3071
 #, fuzzy
 msgid "Start position in bouquet"
 msgstr "Kies de uit te voeren actie:"
 
-#: ../ui.py:3005
+#: ../ui.py:3061
 msgid "Support for 'rbb' files"
 msgstr "Ondersteuning voor 'rbb' bestanden"
 
-#: ../ui.py:394
+#: ../ui.py:397
 msgid "T"
 msgstr "T"
 
-#: ../ui.py:784
+#: ../ui.py:787
 msgid "TE file was created."
 msgstr "TE bestand is gemaakt."
 
-#: ../ui.py:2993
+#: ../ui.py:3049
 msgid "Take into account 'service type' in automatic replacing too."
 msgstr "Houd ook rekening met het 'type zender' bij automatische vervanging."
 
-#: ../ui.py:499
+#: ../ui.py:502
 msgid "Target bouquet is empty !"
 msgstr "Het doelbouquet is leeg!"
 
-#: ../ui.py:1107 ../ui.py:1189
+#: ../ui.py:1110 ../ui.py:1192
 msgid "Target bouquet is empty!"
 msgstr "Het doelbouquet is leeg !"
 
@@ -897,7 +922,7 @@ msgstr "Het doelbouquet is leeg !"
 msgid "Target bouquet:"
 msgstr "Doelbouquet:"
 
-#: ../ui.py:394
+#: ../ui.py:397
 msgid "Terrestrial"
 msgstr "Terrestrial"
 
@@ -906,27 +931,27 @@ msgstr "Terrestrial"
 msgid "The path %s already exists."
 msgstr "Het path %s bestaat al."
 
-#: ../ui.py:2998
+#: ../ui.py:3054
 msgid "The service being played before the plugin is started on exit again."
 msgstr "De zender die speelt voor de start van de plug-in start opnieuw na het afsluiten."
 
-#: ../ui.py:2092
+#: ../ui.py:2120
 msgid "This is basically the opposite operation to 'Replace service type' and tries to change 'FastScan type 1' back to another existing valid service type."
 msgstr ""
 
-#: ../ui.py:2088
+#: ../ui.py:2116
 msgid "This is especially useful for services obtained through FastScan, to keep the same service type across bouquets and avoid duplicate entries in searches such as EPGSearch."
 msgstr ""
 
-#: ../ui.py:2089
+#: ../ui.py:2117
 msgid "To change the service name, replace the entire service using 'Manually replace services', then use this function again to adjust the service type."
 msgstr ""
 
-#: ../ui.py:1794
+#: ../ui.py:1822
 msgid "Toggle source and target bouquets with Bouq +/- ."
 msgstr "Wissel tussen bron en doelbouquet met Bouq +/- ."
 
-#: ../ui.py:3007
+#: ../ui.py:3063
 msgid "Transedit file support"
 msgstr "Trans-edit bestandsondersteuning"
 
@@ -934,15 +959,15 @@ msgstr "Trans-edit bestandsondersteuning"
 msgid "Use 'Menu' for predefined 'rbb' files."
 msgstr "Gebruik 'Menu' voor voorgedefinieerde 'rbb' bestanden."
 
-#: ../ui.py:2310 ../ui.py:2524 ../ui.py:2729
+#: ../ui.py:2344 ../ui.py:2580 ../ui.py:2785
 msgid "Use 'Menu' for sorting."
 msgstr "Gebruik 'Menu' om te sorteren."
 
-#: ../ui.py:3009
+#: ../ui.py:3065
 msgid "Use all service types"
 msgstr "Gebruik alle zender types"
 
-#: ../ui.py:3006
+#: ../ui.py:3062
 msgid "Use dotted service name for 'rbb' files"
 msgstr "Gebruik zendernamen met stippellijn voor 'rbb' bestanden"
 
@@ -950,47 +975,47 @@ msgstr "Gebruik zendernamen met stippellijn voor 'rbb' bestanden"
 msgid "Use the context 'menu' or 'green' buttons to select operation."
 msgstr "Gebruik het context 'menu' of de groene toets om de bewerking te kiezen."
 
-#: ../ui.py:3017
+#: ../ui.py:3073
 msgid "User"
 msgstr ""
 
-#: ../ui.py:2993
+#: ../ui.py:3049
 msgid "Using 'service type' in automatic replacing"
 msgstr "Gebruik 'zender type' bij de automatische vervanging"
 
-#: ../ui.py:398
+#: ../ui.py:401
 msgid "W"
 msgstr "W"
 
-#: ../ui.py:3006
+#: ../ui.py:3062
 msgid "When is creating a bouquet from 'rbb' file, dotted names can be compared too. You need then manually remove duplicates. Default set is 'no'."
 msgstr "Bij het maken van een bouquet uit het 'rbb'-bestand kunnen ook namen met stippellijnen worden vergeleken. U moet duplicaten dan handmatig verwijderen. Standaard staat dit ingesteld op 'nee'."
 
-#: ../ui.py:2999
+#: ../ui.py:3055
 msgid "When the plugin is launched, current bouquet can be set as source or target bouquet."
 msgstr "Gebruik het huidige bouquet als bron of als doel zodra de plug-in wordt gestart."
 
-#: ../ui.py:3000
+#: ../ui.py:3056
 msgid "When the plugin is launched, the selector will be set in the bouquets list on current bouquet."
 msgstr "Wanneer de plug-in gestart wordt zal de keuze worden ingesteld in de bouquettenlijst van het huidige bouquet."
 
-#: ../ui.py:337
+#: ../ui.py:340
 msgid "Wrong selection!"
 msgstr "Verkeerde keuze!"
 
-#: ../ui.py:2429
+#: ../ui.py:2466
 msgid "Yes"
 msgstr "Ja"
 
-#: ../ui.py:2431
+#: ../ui.py:2468
 msgid "Yes, add to new bouquet..."
 msgstr "Ja, voeg aan het nieuwe bouquet toe..."
 
-#: ../ui.py:2989
+#: ../ui.py:3045
 msgid "You can omit last service name char if provider added it for his planned 're-tuning' and You want use 'Refresh services' for this services too."
 msgstr "U kunt het laatste zendernaam karakter weglaten indien de provider deze heeft toegevoegd voor zijn geplande 'her-tuning' en u 'Ververs de zenders' ook wilt gebruiken."
 
-#: ../ui.py:2992
+#: ../ui.py:3048
 msgid "You can select valid orbital position as filter for display services in source bouquet."
 msgstr "U kunt een geldige orbital positie kiezen als filter om zenders in het bronbouquet te tonen."
 
@@ -998,7 +1023,7 @@ msgstr "U kunt een geldige orbital positie kiezen als filter om zenders in het b
 msgid "You can try toggle 'Standard/Dotted' service names too."
 msgstr "U kunt proberen om te schakelen tussen 'Standaard / Gestippelde' zendernamen."
 
-#: ../ui.py:2452
+#: ../ui.py:2508
 msgid "You did not enter the bouquet name!"
 msgstr "U heeft geen bouquetnaam ingegeven!"
 
@@ -1006,7 +1031,11 @@ msgstr "U heeft geen bouquetnaam ingegeven!"
 msgid "Z-a sort"
 msgstr "Z-A sorteren"
 
-#: ../ui.py:479
+#: ../ui.py:2303
+msgid "add to"
+msgstr ""
+
+#: ../ui.py:482
 msgid "also"
 msgstr ""
 
@@ -1030,7 +1059,12 @@ msgstr "verplaats item naar beneden"
 msgid "move item up"
 msgstr "verplaats item naar boven"
 
-#: ../ui.py:54 ../ui.py:71 ../ui.py:72 ../ui.py:74 ../ui.py:77 ../ui.py:406
+#: ../ui.py:2303
+#, fuzzy
+msgid "move to"
+msgstr "verplaats item naar beneden"
+
+#: ../ui.py:54 ../ui.py:71 ../ui.py:72 ../ui.py:74 ../ui.py:77 ../ui.py:409
 msgid "no"
 msgstr "nee"
 
@@ -1046,26 +1080,26 @@ msgstr "kies het doelbouquet"
 msgid "select target bouquet"
 msgstr "kies het doelbouquet"
 
-#: ../ui.py:74 ../ui.py:1791
+#: ../ui.py:74 ../ui.py:1819
 msgid "source bouquet"
 msgstr "bronbouquet"
 
-#: ../ui.py:74 ../ui.py:1792
+#: ../ui.py:74 ../ui.py:1820
 msgid "target bouquet"
 msgstr "doelbouquet"
 
-#: ../ui.py:477 ../ui.py:535
+#: ../ui.py:480 ../ui.py:538
 msgid "type"
 msgstr ""
 
-#: ../ui.py:896
+#: ../ui.py:899
 msgid "unknown"
 msgstr "onbekend"
 
-#: ../ui.py:400
+#: ../ui.py:403
 msgid "° E"
 msgstr "° E"
 
-#: ../ui.py:398
+#: ../ui.py:401
 msgid "° W"
 msgstr "° W"

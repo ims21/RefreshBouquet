@@ -2337,8 +2337,10 @@ class refreshBouquetCopyServices(Screen):
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = Button(_("Inversion"))
 
-		action_text = _("move these with 'Move selected'.") if self.move_source else _("copy these with 'Copy selected'.")
-		text = _("Mark services with OK button or use group selection (Ch+/Ch-) and then ") + action_text + " "
+		if self.move_source:
+			text = _("Mark services with OK button or use group selection (Ch+/Ch-) and then move these with 'Move selected'.") + " "
+		else:
+			text = _("Mark services with OK button or use group selection (Ch+/Ch-) and then copy these with 'Copy selected'.") + " "
 		text += _("Use 'Menu' for sorting.") + " "
 		text += _("Epg or Info toggles between EPG and Info text.") + " "
 		text += _("'Stop' button stops Preview.")
