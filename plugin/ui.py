@@ -4,7 +4,7 @@ from . import _, ngettext
 
 #
 #  Refresh Bouquet - Plugin E2 for OpenPLi
-VERSION = "2.32"
+VERSION = "2.33"
 #  by ims (c) 2016-2026 ims21@users.sourceforge.net
 #
 #  This program is free software; you can redistribute it and/or
@@ -259,9 +259,10 @@ class refreshBouquet(Screen, HelpableScreen):
 					menu.append((_("Manually replace services"), 0, _("Manually replace programs in the target bouquet with programs from the source bouquet.")))
 					menu.append((_("Add selected services to target bouquet"), 1, _("Add one or more selected programs from the source bouquet to the target bouquet at once.")))
 					menu.append((_("Add selected missing services to target bouquet"), 2, _("Only the programs from the source bouquet that are missing in the target bouquet are displayed. The user can select these programs and transfer them to the target bouquet all at once.")))
+					menu.append((_("Move selected services to target bouquet"), 16, _("Move selected programs from the source bouquet to the end of the target bouquet.")))
 					menu.append((_("Replace service types"), 4, _("For identical services in the source (usually created by FastScan) and target bouquets, replace the service type in the target bouquet if it differs.")))
 					menu.append((_("Replace service parameters by name"), 6, _("For services in the source and target bouquets with the same name at the same orbital position, replace differing service parameters in the target bouquet.")))
-					buttons += ["blue", "", "yellow", "green", ""]
+					buttons += ["blue", "", "yellow", "", "green", ""]
 		if self["config"].getCurrent():
 			menu.append((_("Restore service types in") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 7, _("For selected type 1 services (usually from FastScan), find the same services with a different type and replace type 1 with the type found.")))
 			menu.append((_("Move selected services in bouquet") + " '%s'" % colorText(COLOR_LIGHTGREEN, bName), 5, _("Move one service or more selected services in bouquet to new position.")))
@@ -321,6 +322,8 @@ class refreshBouquet(Screen, HelpableScreen):
 			self.renameBouquet()
 		elif choice[1] == 15:
 			self.removeBouquetFromList()
+		elif choice[1] == 16:
+			self.moveServicesToTarget()
 		elif choice[1] == 18:
 			self.ManageDeletedBouquets()
 		elif choice[1] == 20:
@@ -1436,6 +1439,31 @@ class refreshBouquet(Screen, HelpableScreen):
 			self.l.setList(data)
 			self.session.open(refreshBouquetCopyServices, data, self.targetItem)
 
+
+###
+# Move selected services (by user) from source bouquet to target bouquet
+###
+	def moveServicesToTarget(self):
+		data = MySelectionList([])
+		if self.sourceItem and self.targetItem:
+			source = self.getServices(self.sourceItem[0])
+			if not len(source):
+				self["info"].setText(_("Source bouquet is empty!"))
+				return
+			new = self.addToBouquetFiltered(source)
+			if not len(new):
+				self["info"].setText(_("No services in source bouquet!"))
+				return
+			for nr, item in enumerate(new, 1):
+				data.list.append(MySelectionEntryComponent(item[0], item[1], nr, False))
+			self.l = MySelectionList(data)
+			self.l.setList(data)
+			self.session.open(
+				refreshBouquetCopyServices, data, self.targetItem,
+				move_source=self.sourceItem[1]
+			)
+
+
 # returns all services from bouquet (without notes atc ...)
 
 	def addToBouquetFiltered(self, source):
@@ -2262,16 +2290,19 @@ class refreshBouquetCopyServices(Screen):
 		<widget name="info" position="5,380" zPosition="2" size="705,120" valign="center" halign="left" font="Regular;20" foregroundColor="#00c0c0c0"/>
 	</screen>"""
 
-	def __init__(self, session, slist, target, missing=None, parent=None):
+	def __init__(self, session, slist, target, missing=None, parent=None, move_source=None):
 		self.skin = refreshBouquetCopyServices.skin
 		Screen.__init__(self, session, parent=None)
 		self.session = session
 		self.missing = missing
 		self.parent = parent
+		self.move_source = move_source
 
 		(self.target_bouquetname, self.target) = target
 		name = addBouqetName(self.target_bouquetname)
-		self.setTitle(_("RefreshBouquet %s" % _("- select service(s) for adding with OK")) + name)
+		action = _("move to") if self.move_source else _("add to")
+		title = _("- select service(s) with OK to %s") % action
+		self.setTitle(_("RefreshBouquet v.%s %s") % (VERSION, title + name))
 
 		self["Service"] = ServiceEvent()
 		self["TransponderInfo"] = ServiceEvent()
@@ -2302,11 +2333,12 @@ class refreshBouquetCopyServices(Screen):
 			})
 
 		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("Copy selected"))
+		self["key_green"] = Button(_("Move selected") if self.move_source else _("Copy selected"))
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = Button(_("Inversion"))
 
-		text =_("Mark services with OK button or use group selection (Ch+/Ch-) and then copy these with 'Copy selected'.") + " "
+		action_text = _("move these with 'Move selected'.") if self.move_source else _("copy these with 'Copy selected'.")
+		text = _("Mark services with OK button or use group selection (Ch+/Ch-) and then ") + action_text + " "
 		text += _("Use 'Menu' for sorting.") + " "
 		text += _("Epg or Info toggles between EPG and Info text.") + " "
 		text += _("'Stop' button stops Preview.")
@@ -2425,7 +2457,10 @@ class refreshBouquetCopyServices(Screen):
 	def copyCurrentEntries(self):
 		nr_items = len(self.list.getSelectionsList())
 		if nr_items:
-			text = ngettext("Are you sure to copy this %d service?", "Are you sure to copy this %d services?", nr_items) % nr_items
+			if self.move_source:
+				text = ngettext("Are you sure to move this %d service?", "Are you sure to move these %d services?", nr_items) % nr_items
+			else:
+				text = ngettext("Are you sure to copy this %d service?", "Are you sure to copy these %d services?", nr_items) % nr_items
 			olist = [(_("Yes"), True), (_("No"), False)]
 			if self.missing: # for 'Add selected missing services to target bouquet' only 
 				olist.append((_("Yes, add to new bouquet..."), "new"))
@@ -2443,7 +2478,26 @@ class refreshBouquetCopyServices(Screen):
 				if mutableList:
 					for item in data:
 						new = eServiceReference(item[1])
-						if not mutableList.addService(new):
+						mutableList.addService(new)
+					mutableList.flushChanges()
+
+					if self.move_source:
+						tlist = serviceHandler.list(self.target)
+						target_refs = set(ref for name, ref in tlist.getContent("NS", False)) if tlist else set()
+						if not all(item[1] in target_refs for item in data):
+							self.session.open(
+								MessageBox,
+								_("Services were not added to the target bouquet; the source bouquet was left unchanged."),
+								MessageBox.TYPE_INFO,
+								timeout=5
+							)
+							return
+
+						slist = serviceHandler.list(self.move_source)
+						mutableList = slist.startEdit() if slist else None
+						if mutableList:
+							for item in data:
+								mutableList.removeService(eServiceReference(item[1]))
 							mutableList.flushChanges()
 			self.close()
 		elif answer == "new":
